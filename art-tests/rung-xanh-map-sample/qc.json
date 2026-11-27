@@ -1,0 +1,407 @@
+{
+ "items": [
+  {
+   "prop": "cay_soi",
+   "seed": 728102,
+   "bg_estimate": [
+    161.0,
+    160.0,
+    160.0
+   ],
+   "clean_info": {
+    "specks_removed": 0,
+    "hole_px_filled": 88,
+    "core_px_solidified": 443638,
+    "edge_px_despilled": 1713,
+    "edge_px_pink_rehued": 3509
+   },
+   "qc_before_clean": {
+    "core_solid_pct": 0.546,
+    "core_holes": 1,
+    "stray_islands": 0,
+    "specks_lt50px": 0,
+    "touch_frame_edge": false,
+    "edge_cast_pct": 0.701,
+    "edge_spill_only_pct": 0.18,
+    "edge_pink_hue_pct": 0.585,
+    "edge_chroma_dE_median": 6.54,
+    "sharpness": 2059.15,
+    "size": [
+     1024,
+     1024
+    ],
+    "grey_halo_pct": 0.188
+   },
+   "qc": {
+    "core_solid_pct": 99.999,
+    "core_holes": 0,
+    "stray_islands": 0,
+    "specks_lt50px": 0,
+    "touch_frame_edge": false,
+    "edge_cast_pct": 0.0,
+    "edge_spill_only_pct": 0.0,
+    "edge_pink_hue_pct": 0.0,
+    "edge_chroma_dE_median": 7.86,
+    "sharpness": 2085.8,
+    "size": [
+     1024,
+     1024
+    ],
+    "grey_halo_pct": 0.619
+   },
+   "pass": {
+    "core_solid": true,
+    "core_holes": true,
+    "stray_islands": true,
+    "not_touching_frame_edge": true,
+    "edge_cast": true,
+    "edge_chroma_dE": true,
+    "grey_halo": true
+   },
+   "all_pass": true,
+   "opaque_components": 1,
+   "size_cropped": [
+    882,
+    1020
+   ]
+  },
+  {
+   "prop": "tang_da_reu",
+   "seed": 728102,
+   "bg_estimate": [
+    160.0,
+    163.0,
+    165.0
+   ],
+   "clean_info": {
+    "specks_removed": 0,
+    "hole_px_filled": 39,
+    "core_px_solidified": 384821,
+    "edge_px_despilled": 1245,
+    "edge_px_pink_rehued": 1363
+   },
+   "qc_before_clean": {
+    "core_solid_pct": 2.16,
+    "core_holes": 1,
+    "stray_islands": 0,
+    "specks_lt50px": 3,
+    "touch_frame_edge": false,
+    "edge_cast_pct": 0.364,
+    "edge_spill_only_pct": 0.246,
+    "edge_pink_hue_pct": 0.185,
+    "edge_chroma_dE_median": 3.6,
+    "sharpness": 1094.51,
+    "size": [
+     1024,
+     1024
+    ],
+    "grey_halo_pct": 4.887
+   },
+   "qc": {
+    "core_solid_pct": 99.987,
+    "core_holes": 0,
+    "stray_islands": 0,
+    "specks_lt50px": 3,
+    "touch_frame_edge": false,
+    "edge_cast_pct": 0.0,
+    "edge_spill_only_pct": 0.0,
+    "edge_pink_hue_pct": 0.0,
+    "edge_chroma_dE_median": 8.86,
+    "sharpness": 1109.03,
+    "size": [
+     1024,
+     1024
+    ],
+    "grey_halo_pct": 1.277
+   },
+   "pass": {
+    "core_solid": true,
+    "core_holes": true,
+    "stray_islands": true,
+    "not_touching_frame_edge": true,
+    "edge_cast": true,
+    "edge_chroma_dE": true,
+    "grey_halo": true
+   },
+   "all_pass": true,
+   "opaque_components": 4,
+   "size_cropped": [
+    853,
+    713
+   ]
+  },
+  {
+   "prop": "cot_da_co",
+   "seed": 728101,
+   "bg_estimate": [
+    195.0,
+    194.0,
+    195.0
+   ],
+   "clean_info": {
+    "specks_removed": 0,
+    "hole_px_filled": 79,
+    "core_px_solidified": 471700,
+    "edge_px_despilled": 1556,
+    "edge_px_pink_rehued": 1815
+   },
+   "qc_before_clean": {
+    "core_solid_pct": 1.082,
+    "core_holes": 2,
+    "stray_islands": 0,
+    "specks_lt50px": 0,
+    "touch_frame_edge": false,
+    "edge_cast_pct": 0.709,
+    "edge_spill_only_pct": 0.435,
+    "edge_pink_hue_pct": 0.381,
+    "edge_chroma_dE_median": 4.4,
+    "sharpness": 3106.64,
+    "size": [
+     1024,
+     1024
+    ],
+    "grey_halo_pct": 2.402
+   },
+   "qc": {
+    "core_solid_pct": 99.996,
+    "core_holes": 0,
+    "stray_islands": 0,
+    "specks_lt50px": 0,
+    "touch_frame_edge": false,
+    "edge_cast_pct": 0.0,
+    "edge_spill_only_pct": 0.0,
+    "edge_pink_hue_pct": 0.0,
+    "edge_chroma_dE_median": 7.56,
+    "sharpness": 3147.05,
+    "size": [
+     1024,
+     1024
+    ],
+    "grey_halo_pct": 0.474
+   },
+   "pass": {
+    "core_solid": true,
+    "core_holes": true,
+    "stray_islands": true,
+    "not_touching_frame_edge": true,
+    "edge_cast": true,
+    "edge_chroma_dE": true,
+    "grey_halo": true
+   },
+   "all_pass": true,
+   "opaque_components": 4,
+   "size_cropped": [
+    695,
+    1024
+   ]
+  },
+  {
+   "prop": "bui_cay",
+   "seed": 728104,
+   "bg_estimate": [
+    182.0,
+    182.0,
+    182.0
+   ],
+   "clean_info": {
+    "specks_removed": 0,
+    "hole_px_filled": 1,
+    "core_px_solidified": 597117,
+    "edge_px_despilled": 1366,
+    "edge_px_pink_rehued": 1257
+   },
+   "qc_before_clean": {
+    "core_solid_pct": 2.196,
+    "core_holes": 0,
+    "stray_islands": 0,
+    "specks_lt50px": 0,
+    "touch_frame_edge": false,
+    "edge_cast_pct": 0.238,
+    "edge_spill_only_pct": 0.166,
+    "edge_pink_hue_pct": 0.136,
+    "edge_chroma_dE_median": 8.68,
+    "sharpness": 7630.99,
+    "size": [
+     1024,
+     1024
+    ],
+    "grey_halo_pct": 0.653
+   },
+   "qc": {
+    "core_solid_pct": 100.0,
+    "core_holes": 0,
+    "stray_islands": 0,
+    "specks_lt50px": 0,
+    "touch_frame_edge": false,
+    "edge_cast_pct": 0.0,
+    "edge_spill_only_pct": 0.0,
+    "edge_pink_hue_pct": 0.0,
+    "edge_chroma_dE_median": 10.68,
+    "sharpness": 7720.7,
+    "size": [
+     1024,
+     1024
+    ],
+    "grey_halo_pct": 0.401
+   },
+   "pass": {
+    "core_solid": true,
+    "core_holes": true,
+    "stray_islands": true,
+    "not_touching_frame_edge": true,
+    "edge_cast": true,
+    "edge_chroma_dE": true,
+    "grey_halo": true
+   },
+   "all_pass": true,
+   "opaque_components": 1,
+   "size_cropped": [
+    1010,
+    921
+   ]
+  },
+  {
+   "prop": "khom_hoa",
+   "seed": 728101,
+   "bg_estimate": [
+    179.0,
+    178.0,
+    179.0
+   ],
+   "clean_info": {
+    "specks_removed": 0,
+    "hole_px_filled": 487,
+    "core_px_solidified": 493967,
+    "edge_px_despilled": 2903,
+    "edge_px_pink_rehued": 2687
+   },
+   "qc_before_clean": {
+    "core_solid_pct": 4.794,
+    "core_holes": 6,
+    "stray_islands": 0,
+    "specks_lt50px": 0,
+    "touch_frame_edge": false,
+    "edge_cast_pct": 9.326,
+    "edge_spill_only_pct": 8.868,
+    "edge_pink_hue_pct": 0.908,
+    "edge_chroma_dE_median": 8.25,
+    "sharpness": 4792.95,
+    "size": [
+     1024,
+     1024
+    ],
+    "grey_halo_pct": 2.588
+   },
+   "qc": {
+    "core_solid_pct": 99.953,
+    "core_holes": 0,
+    "stray_islands": 0,
+    "specks_lt50px": 0,
+    "touch_frame_edge": false,
+    "edge_cast_pct": 0.017,
+    "edge_spill_only_pct": 0.0,
+    "edge_pink_hue_pct": 0.017,
+    "edge_chroma_dE_median": 15.78,
+    "sharpness": 4857.46,
+    "size": [
+     1024,
+     1024
+    ],
+    "grey_halo_pct": 2.729
+   },
+   "pass": {
+    "core_solid": true,
+    "core_holes": true,
+    "stray_islands": true,
+    "not_touching_frame_edge": true,
+    "edge_cast": true,
+    "edge_chroma_dE": false,
+    "grey_halo": true
+   },
+   "all_pass": false,
+   "opaque_components": 12,
+   "size_cropped": [
+    921,
+    970
+   ]
+  },
+  {
+   "prop": "da_cong_dich_chuyen",
+   "seed": 728105,
+   "bg_estimate": [
+    172.0,
+    174.0,
+    175.0
+   ],
+   "clean_info": {
+    "specks_removed": 0,
+    "hole_px_filled": 13,
+    "core_px_solidified": 545999,
+    "edge_px_despilled": 1591,
+    "edge_px_pink_rehued": 1969
+   },
+   "qc_before_clean": {
+    "core_solid_pct": 4.56,
+    "core_holes": 0,
+    "stray_islands": 0,
+    "specks_lt50px": 0,
+    "touch_frame_edge": false,
+    "edge_cast_pct": 1.342,
+    "edge_spill_only_pct": 0.859,
+    "edge_pink_hue_pct": 0.698,
+    "edge_chroma_dE_median": 4.43,
+    "sharpness": 3775.6,
+    "size": [
+     1024,
+     1024
+    ],
+    "grey_halo_pct": 2.424
+   },
+   "qc": {
+    "core_solid_pct": 99.998,
+    "core_holes": 0,
+    "stray_islands": 0,
+    "specks_lt50px": 0,
+    "touch_frame_edge": false,
+    "edge_cast_pct": 0.026,
+    "edge_spill_only_pct": 0.0,
+    "edge_pink_hue_pct": 0.026,
+    "edge_chroma_dE_median": 5.48,
+    "sharpness": 3819.67,
+    "size": [
+     1024,
+     1024
+    ],
+    "grey_halo_pct": 2.535
+   },
+   "pass": {
+    "core_solid": true,
+    "core_holes": true,
+    "stray_islands": true,
+    "not_touching_frame_edge": true,
+    "edge_cast": true,
+    "edge_chroma_dE": true,
+    "grey_halo": true
+   },
+   "all_pass": true,
+   "opaque_components": 1,
+   "size_cropped": [
+    965,
+    994
+   ]
+  }
+ ],
+ "thresholds": {
+  "core_solid_pct_min": 99.0,
+  "core_holes_max": 0,
+  "stray_islands_max": 0,
+  "touch_frame_edge": false,
+  "edge_cast_pct_max": 3.0,
+  "edge_chroma_dE_median_max": 12.0,
+  "palette_dE_mean_max": 8.0,
+  "shape_change_pct_max": 4.0,
+  "anchor_shift_px_max": 2,
+  "sharpness_ratio_min": 0.98,
+  "grey_halo_pct_max": 3.0
+ }
+}

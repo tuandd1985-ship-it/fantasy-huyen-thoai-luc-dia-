@@ -1,0 +1,127 @@
+{
+ "model": "sd_xl_base_1.0.safetensors",
+ "sampler": "dpmpp_2m karras",
+ "steps": 28,
+ "cfg": 6.5,
+ "size": "1024x1024",
+ "tile": {
+  "txt2img_seed": 728001,
+  "inpaint_seed": 728002,
+  "seconds": [
+   18.1,
+   21.1
+  ],
+  "prompt": "seamless tileable top-down game texture, lush forest grass ground with small clover patches and tiny flowers, soft hand painted style, even lighting, no shadows from objects, no objects, high detail",
+  "negative": "objects, trees, rocks, characters, perspective, horizon, sky, text, seams, vignette, border, frame, blurry, photo"
+ },
+ "props": {
+  "cay_soi_s728101": {
+   "prompt": "single round leafy oak tree with thick brown trunk and lush green crown, hand painted fantasy rpg game asset, three-quarter top-down view, soft cel shading, vibrant colors, clean dark outline, centered, full object visible, simple background, plain light grey background",
+   "negative": "text, watermark, logo, frame, border, multiple objects, scenery, landscape, ground plane, cast shadow, gradient background, colored background, cropped, blurry, photo, realistic, 3d render",
+   "seed": 728101,
+   "seconds": 18.1
+  },
+  "cay_soi_s728102": {
+   "prompt": "single round leafy oak tree with thick brown trunk and lush green crown, hand painted fantasy rpg game asset, three-quarter top-down view, soft cel shading, vibrant colors, clean dark outline, centered, full object visible, simple background, plain light grey background",
+   "negative": "text, watermark, logo, frame, border, multiple objects, scenery, landscape, ground plane, cast shadow, gradient background, colored background, cropped, blurry, photo, realistic, 3d render",
+   "seed": 728102,
+   "seconds": 18.1
+  },
+  "tang_da_reu_s728101": {
+   "prompt": "single mossy boulder, grey stone covered with green moss, hand painted fantasy rpg game asset, three-quarter top-down view, soft cel shading, vibrant colors, clean dark outline, centered, full object visible, simple background, plain light grey background",
+   "negative": "text, watermark, logo, frame, border, multiple objects, scenery, landscape, ground plane, cast shadow, gradient background, colored background, cropped, blurry, photo, realistic, 3d render",
+   "seed": 728101,
+   "seconds": 16.8
+  },
+  "tang_da_reu_s728102": {
+   "prompt": "single mossy boulder, grey stone covered with green moss, hand painted fantasy rpg game asset, three-quarter top-down view, soft cel shading, vibrant colors, clean dark outline, centered, full object visible, simple background, plain light grey background",
+   "negative": "text, watermark, logo, frame, border, multiple objects, scenery, landscape, ground plane, cast shadow, gradient background, colored background, cropped, blurry, photo, realistic, 3d render",
+   "seed": 728102,
+   "seconds": 18.0
+  },
+  "cot_da_co_s728101": {
+   "prompt": "single ancient broken stone ruin pillar with carved runes and ivy, hand painted fantasy rpg game asset, three-quarter top-down view, soft cel shading, vibrant colors, clean dark outline, centered, full object visible, simple background, plain light grey background",
+   "negative": "text, watermark, logo, frame, border, multiple objects, scenery, landscape, ground plane, cast shadow, gradient background, colored background, cropped, blurry, photo, realistic, 3d render",
+   "seed": 728101,
+   "seconds": 16.9
+  },
+  "cot_da_co_s728102": {
+   "prompt": "single ancient broken stone ruin pillar with carved runes and ivy, hand painted fantasy rpg game asset, three-quarter top-down view, soft cel shading, vibrant colors, clean dark outline, centered, full object visible, simple background, plain light grey background",
+   "negative": "text, watermark, logo, frame, border, multiple objects, scenery, landscape, ground plane, cast shadow, gradient background, colored background, cropped, blurry, photo, realistic, 3d render",
+   "seed": 728102,
+   "seconds": 16.5
+  },
+  "bui_cay_s728101": {
+   "prompt": "single round green leafy bush shrub, hand painted fantasy rpg game asset, three-quarter top-down view, soft cel shading, vibrant colors, clean dark outline, centered, full object visible, simple background, plain light grey background",
+   "negative": "text, watermark, logo, frame, border, multiple objects, scenery, landscape, ground plane, cast shadow, gradient background, colored background, cropped, blurry, photo, realistic, 3d render",
+   "seed": 728101,
+   "seconds": 18.2
+  },
+  "bui_cay_s728102": {
+   "prompt": "single round green leafy bush shrub, hand painted fantasy rpg game asset, three-quarter top-down view, soft cel shading, vibrant colors, clean dark outline, centered, full object visible, simple background, plain light grey background",
+   "negative": "text, watermark, logo, frame, border, multiple objects, scenery, landscape, ground plane, cast shadow, gradient background, colored background, cropped, blurry, photo, realistic, 3d render",
+   "seed": 728102,
+   "seconds": 16.5
+  },
+  "khom_hoa_s728101": {
+   "prompt": "single small clump of colorful wildflowers, yellow white and pink flowers with green leaves, hand painted fantasy rpg game asset, three-quarter top-down view, soft cel shading, vibrant colors, clean dark outline, centered, full object visible, simple background, plain light grey background",
+   "negative": "text, watermark, logo, frame, border, multiple objects, scenery, landscape, ground plane, cast shadow, gradient background, colored background, cropped, blurry, photo, realistic, 3d render",
+   "seed": 728101,
+   "seconds": 19.6
+  },
+  "khom_hoa_s728102": {
+   "prompt": "single small clump of colorful wildflowers, yellow white and pink flowers with green leaves, hand painted fantasy rpg game asset, three-quarter top-down view, soft cel shading, vibrant colors, clean dark outline, centered, full object visible, simple background, plain light grey background",
+   "negative": "text, watermark, logo, frame, border, multiple objects, scenery, landscape, ground plane, cast shadow, gradient background, colored background, cropped, blurry, photo, realistic, 3d render",
+   "seed": 728102,
+   "seconds": 18.0
+  },
+  "da_cong_dich_chuyen_s728101": {
+   "prompt": "single magic teleport portal stone circle, ancient standing stones ring with glowing cyan runes on a round stone platform, hand painted fantasy rpg game asset, three-quarter top-down view, soft cel shading, vibrant colors, clean dark outline, centered, full object visible, simple background, plain light grey background",
+   "negative": "text, watermark, logo, frame, border, multiple objects, scenery, landscape, ground plane, cast shadow, gradient background, colored background, cropped, blurry, photo, realistic, 3d render",
+   "seed": 728101,
+   "seconds": 18.0
+  },
+  "da_cong_dich_chuyen_s728102": {
+   "prompt": "single magic teleport portal stone circle, ancient standing stones ring with glowing cyan runes on a round stone platform, hand painted fantasy rpg game asset, three-quarter top-down view, soft cel shading, vibrant colors, clean dark outline, centered, full object visible, simple background, plain light grey background",
+   "negative": "text, watermark, logo, frame, border, multiple objects, scenery, landscape, ground plane, cast shadow, gradient background, colored background, cropped, blurry, photo, realistic, 3d render",
+   "seed": 728102,
+   "seconds": 18.0
+  },
+  "da_cong_dich_chuyen_s728103": {
+   "prompt": "one isolated round stone teleport platform, circular carved stone disc with a ring of glowing cyan runes, a few short standing stones around its rim, magical cyan light rising from the center, one object only, hand painted fantasy rpg game asset, three-quarter top-down view, soft cel shading, vibrant colors, clean dark outline, centered, full object visible, simple background, plain light grey background",
+   "negative": "text, watermark, logo, frame, border, multiple objects, scenery, landscape, ground plane, cast shadow, gradient background, colored background, cropped, blurry, photo, realistic, 3d render, sprite sheet, set of items, collection, many pieces, grid, tree trunk",
+   "seed": 728103,
+   "seconds": 18.0
+  },
+  "da_cong_dich_chuyen_s728104": {
+   "prompt": "one isolated round stone teleport platform, circular carved stone disc with a ring of glowing cyan runes, a few short standing stones around its rim, magical cyan light rising from the center, one object only, hand painted fantasy rpg game asset, three-quarter top-down view, soft cel shading, vibrant colors, clean dark outline, centered, full object visible, simple background, plain light grey background",
+   "negative": "text, watermark, logo, frame, border, multiple objects, scenery, landscape, ground plane, cast shadow, gradient background, colored background, cropped, blurry, photo, realistic, 3d render, sprite sheet, set of items, collection, many pieces, grid, tree trunk",
+   "seed": 728104,
+   "seconds": 16.6
+  },
+  "da_cong_dich_chuyen_s728105": {
+   "prompt": "one isolated round stone teleport platform, circular carved stone disc with a ring of glowing cyan runes, a few short standing stones around its rim, magical cyan light rising from the center, one object only, hand painted fantasy rpg game asset, three-quarter top-down view, soft cel shading, vibrant colors, clean dark outline, centered, full object visible, simple background, plain light grey background",
+   "negative": "text, watermark, logo, frame, border, multiple objects, scenery, landscape, ground plane, cast shadow, gradient background, colored background, cropped, blurry, photo, realistic, 3d render, sprite sheet, set of items, collection, many pieces, grid, tree trunk",
+   "seed": 728105,
+   "seconds": 19.5
+  },
+  "bui_cay_s728103": {
+   "prompt": "one isolated low round leafy bush, dense green foliage ball sitting on the ground, no trunk, small game prop, one object only, hand painted fantasy rpg game asset, three-quarter top-down view, soft cel shading, vibrant colors, clean dark outline, centered, full object visible, simple background, plain light grey background",
+   "negative": "text, watermark, logo, frame, border, multiple objects, scenery, landscape, ground plane, cast shadow, gradient background, colored background, cropped, blurry, photo, realistic, 3d render, sprite sheet, set of items, collection, many pieces, grid, tree trunk",
+   "seed": 728103,
+   "seconds": 18.1
+  },
+  "bui_cay_s728104": {
+   "prompt": "one isolated low round leafy bush, dense green foliage ball sitting on the ground, no trunk, small game prop, one object only, hand painted fantasy rpg game asset, three-quarter top-down view, soft cel shading, vibrant colors, clean dark outline, centered, full object visible, simple background, plain light grey background",
+   "negative": "text, watermark, logo, frame, border, multiple objects, scenery, landscape, ground plane, cast shadow, gradient background, colored background, cropped, blurry, photo, realistic, 3d render, sprite sheet, set of items, collection, many pieces, grid, tree trunk",
+   "seed": 728104,
+   "seconds": 18.0
+  },
+  "bui_cay_s728105": {
+   "prompt": "one isolated low round leafy bush, dense green foliage ball sitting on the ground, no trunk, small game prop, one object only, hand painted fantasy rpg game asset, three-quarter top-down view, soft cel shading, vibrant colors, clean dark outline, centered, full object visible, simple background, plain light grey background",
+   "negative": "text, watermark, logo, frame, border, multiple objects, scenery, landscape, ground plane, cast shadow, gradient background, colored background, cropped, blurry, photo, realistic, 3d render, sprite sheet, set of items, collection, many pieces, grid, tree trunk",
+   "seed": 728105,
+   "seconds": 19.6
+  }
+ }
+}
