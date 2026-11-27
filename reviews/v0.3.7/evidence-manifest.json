@@ -3,12 +3,12 @@
   "source_review": "FANTASY_PROJECT_REVIEW.md",
   "published": {
     "static-audit.json": {
-      "bytes": 15510,
-      "sha256": "d4303148de69e3bdd39703217703d5bb1d37f533ff8116faf808d506860d72e4"
+      "bytes": 15042,
+      "sha256": "a6b95b3b4d5342f70f9a0618b4e2c98648a8bc4c36e8b038863e126d26ded8b7"
     },
     "production-http.json": {
-      "bytes": 1033,
-      "sha256": "d4e5851d9c1c891e06618339f788f8425c41106f07089a75f8d5237edf87e2ce"
+      "bytes": 993,
+      "sha256": "ba8b0e38d737903477a0dbdc06e7288def96796a5dd627b4bbdc353e58445bec"
     },
     "review-tests.json": {
       "bytes": 36955,
@@ -23,16 +23,16 @@
       "sha256": "db0343378ce6299b635cb42734f63fdf36d5c8521bc4ce161a497222831025e1"
     },
     "comfy-api-check.json": {
-      "bytes": 3330,
-      "sha256": "384265ee04fefda0c625c8dde8015b0b26c6a5b3076a7f9db3ff4b094d0b9251"
+      "bytes": 3210,
+      "sha256": "267ef6c4c80bb7dc9b59eddadc6c73560769d467acdfd805e7e1d27abcdf6078"
     },
     "round3-verification.json": {
-      "bytes": 278,
-      "sha256": "004346e3c5550b69179cfd9201b175fe96bcbc517ad83ec1406b0a3c8f1a0f81"
+      "bytes": 269,
+      "sha256": "1432229e7214357ad263b480a55449c727e60121d96cbecce22eac39c46e95a4"
     },
     "playwright-package.json": {
-      "bytes": 263,
-      "sha256": "6d09a2a27543fbe472554dd2dce8cdac848d58ce2ebefc1a941e50b6bcb9083b"
+      "bytes": 257,
+      "sha256": "ea5f10ee9ecf22e713caf7db8de9d3c8690f6a27b6e0b0a52051769a636e17e5"
     },
     "landscape-create.png": {
       "bytes": 219652,
@@ -77,5 +77,6 @@
       "sha256": "706fbeb0f35cfc536531995749fd2d3f2df349b1752d032568ef40bdc0e2aacf"
     }
   },
-  "test_script_adaptations": "Only package import and repository paths made portable; T14 skips when production capture is absent; game source unchanged."
+  "test_script_adaptations": "Only package import and repository paths made portable; T14 skips when production capture is absent; game source unchanged.",
+  "published_hash_definition": "SHA-256 of committed Git blob bytes (text normalized to LF by Git); a Windows checkout may materialize CRLF, so compare git show, not unchecked working-tree text bytes."
 }
