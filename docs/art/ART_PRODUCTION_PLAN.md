@@ -5,7 +5,8 @@ Trạng thái: **PROPOSED, chờ phê duyệt**, trừ 2 điểm đã chốt dư
 **ĐÃ DUYỆT 2026-11-28** (căn cứ SPEC mục 1b + ART_DIRECTION.md, commit 243c0fa):
 1. Sprite giai đoạn mẫu làm 4 hướng: vẽ thật xuống/lên, trái/phải bằng lật ngang. Chuẩn 8 hướng xét lại khi làm animation nhân vật chính thức.
 2. Quái/boss chính thức chibi-fantasy đồng bộ hero; boss to và dữ hơn hẳn quái thường trong cùng phong cách.
-Phạm vi: Claude phụ trách đồ họa và GAME-ART-CORE (`C:\AI\GAME-ART-CORE`). Codex phụ trách code, GAME-CORE và kiểm thử. Không commit/push/deploy. Không đụng tới SANEI.
+Phạm vi: Claude phụ trách đồ họa và GAME-ART-CORE (`C:\AI\GAME-ART-CORE`). Codex phụ trách code, GAME-CORE và kiểm thử. Không đụng tới SANEI.
+QUY TRÌNH CHUNG (Do chốt 2026-11-28 — thay dòng "Không commit/push/deploy" cũ, Luna sửa trực tiếp theo đối chiếu): làm xong việc gì thì đẩy thành phẩm lên GitHub repo này rồi báo cáo Luna; Luna test, tích hợp và ra việc tiếp theo. Quy trình này áp dụng cho cả Claude, Codex và Luna.
 
 ## 1. Nghiên cứu Skill (vòng 2)
 
@@ -126,7 +127,7 @@ Chạy sau mỗi ảnh, ghi `qc.json` và **contact sheet trên 4 nền** (đen,
 | Bước | Việc | Cài / tải | Đầu ra để Do duyệt |
 |---|---|---|---|
 | **A** | Dựng GAME-ART-CORE: vendor skill, venv riêng, viết `sprite-matte-clean` + `art-qc`, workflow trên SDXL hiện có | khoảng 80 MB pip | **Trước/sau làm sạch viền 6 hero hiện có** + QC báo cáo |
-| **B** | Tải Animagine XL 4.0 + ControlNet OpenPose (+ LoRA icon) | khoảng 9 GB | **Bộ ảnh mẫu phong cách** (4 hướng: vẽ xuống/lên + lật): 1 hero (Kiếm Sĩ Nam) có turnaround, 3 dáng chính, chạy 8 khung rig; Goblin + Sói + Slime + Goblin Cung Thủ theo `MONSTER_DESIGN_RUNG_XANH.md`; Chúa Sói; 1 góc Rừng Xanh (tile + 6 vật thể); 6 icon (3 skill, 2 đồ, 1 ngọc); 1 khung panel viền vàng. Có so sánh "SDXL không skill" với "GAME-ART-CORE" |
+| **B** | Tải Animagine XL 4.0 + ControlNet OpenPose (+ LoRA icon) | khoảng 9 GB | **Bộ ảnh mẫu phong cách** (4 hướng: vẽ xuống/lên + lật): 1 hero (Kiếm Sĩ Nam) có turnaround, 3 dáng chính, chạy 8 khung rig; Goblin + Sói + Slime + Goblin Cung Thủ theo `MONSTER_DESIGN_RUNG_XANH.md`; Chúa Sói; 1 góc Rừng Xanh (tile + 6 vật thể); 6 icon (3 skill, 2 đồ, 1 ngọc); 1 khung panel viền vàng. Có so sánh "SDXL không skill" với "GAME-ART-CORE". **PHẦN QUÁI RỪNG XANH TRONG BƯỚC B: TẠM HOÃN** (Do/Luna chốt 2026-11-28) — Codex đang sản xuất lô mẫu SDXL theo MONSTER_DESIGN_RUNG_XANH; chờ Luna đánh giá chất lượng lô đó rồi mới quyết có làm lại bằng Animagine hay không. Bước A triển khai trước |
 | C (tùy chọn) | FLUX.2 klein 4B: đo VRAM/thời gian, so với ControlNet | khoảng 12,5 GB | Bảng so sánh nhất quán |
 | D | Sản xuất hàng loạt theo ASSET_INVENTORY, Rừng Xanh trước | — | Theo từng gói |
 | — | Bàn giao asset cho **Codex** tích hợp (manifest, atlas, nạp theo map) | — | Claude không sửa `index.html` |

@@ -79,10 +79,22 @@ Prompt: "giant chibi alpha wolf boss, much bigger and more majestic than a norma
 wolf, dark charcoal-grey fur, long mane, glowing green rune markings on shoulder
 and hip, scar across left eye, glowing green eyes, bared fangs, menacing"
 
+## 6. Pháp Sư Goblin (quái phép đánh xa — có trong DATA, bổ sung 2026-11-28)
+
+- Dáng: gầy và cao hơn Goblin thường một chút; đội mũ lông vũ; mặt nạ xương đeo trên trán.
+- Màu: da xanh lá đậm; áo choàng tím nâu rách; khăn quàng cổ cam (dấu hiệu chung của họ Goblin).
+- Vũ khí: trượng gỗ buộc đầu lâu nhỏ phát sáng xanh lá — nguồn phép của nó.
+- Tính cách: ranh mãnh, đứng xa bắn phép — quái phép đầu tiên người chơi gặp.
+
+Prompt: "chibi goblin shaman, dark green skin, long pointy ears, bone mask on
+forehead, feather headdress, tattered purple-brown robe, orange neck scarf,
+holding a wooden staff topped with a small green glowing skull"
+
 ## Quy ước đặt tên file (cho Codex)
 
 - `monster_slime`, `monster_goblin`, `monster_wolf`, `monster_goblin_archer`,
-  `boss_wolf_lord` — mỗi con 2 seed (`_s2` cho seed thứ hai), `_raw.png` và
-  `_cut.png`, thư mục `art-tests/monsters-rung-xanh/`, kèm `INFO.md`.
+  `monster_goblin_shaman`, `boss_wolf_lord` — mỗi con 2 seed (`_s2` cho seed thứ
+  hai), `_raw.png` và `_cut.png`, thư mục `art-tests/monsters-rung-xanh/`, kèm
+  `INFO.md`.
 - Các map sau làm theo đúng khuôn này: mô tả dáng + màu + dấu hiệu riêng +
   tính cách, rồi mới viết prompt tiếng Anh.
