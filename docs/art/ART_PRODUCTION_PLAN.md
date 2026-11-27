@@ -126,7 +126,7 @@ Chạy sau mỗi ảnh, ghi `qc.json` và **contact sheet trên 4 nền** (đen,
 
 | Bước | Việc | Cài / tải | Đầu ra để Do duyệt |
 |---|---|---|---|
-| **A** | Dựng GAME-ART-CORE: vendor skill, venv riêng, viết `sprite-matte-clean` + `art-qc`, workflow trên SDXL hiện có | khoảng 80 MB pip | **Trước/sau làm sạch viền 6 hero hiện có** + QC báo cáo |
+| **A** | Dựng GAME-ART-CORE: vendor skill, venv riêng, viết `sprite-matte-clean` + `art-qc`, workflow trên SDXL hiện có | khoảng 80 MB pip | **Trước/sau làm sạch viền 6 hero hiện có** + QC báo cáo. **A1 (làm sạch viền 6 hero): ĐÃ XONG 2026-11-28, chờ Luna đánh giá** (xem mục 10). Phần còn lại của A (vendor skill, venv riêng, workflow) chưa làm |
 | **B** | Tải Animagine XL 4.0 + ControlNet OpenPose (+ LoRA icon) | khoảng 9 GB | **Bộ ảnh mẫu phong cách** (4 hướng: vẽ xuống/lên + lật): 1 hero (Kiếm Sĩ Nam) có turnaround, 3 dáng chính, chạy 8 khung rig; Goblin + Sói + Slime + Goblin Cung Thủ theo `MONSTER_DESIGN_RUNG_XANH.md`; Chúa Sói; 1 góc Rừng Xanh (tile + 6 vật thể); 6 icon (3 skill, 2 đồ, 1 ngọc); 1 khung panel viền vàng. Có so sánh "SDXL không skill" với "GAME-ART-CORE". **PHẦN QUÁI RỪNG XANH TRONG BƯỚC B: TẠM HOÃN** (Do/Luna chốt 2026-11-28) — Codex đang sản xuất lô mẫu SDXL theo MONSTER_DESIGN_RUNG_XANH; chờ Luna đánh giá chất lượng lô đó rồi mới quyết có làm lại bằng Animagine hay không. Bước A triển khai trước |
 | C (tùy chọn) | FLUX.2 klein 4B: đo VRAM/thời gian, so với ControlNet | khoảng 12,5 GB | Bảng so sánh nhất quán |
 | D | Sản xuất hàng loạt theo ASSET_INVENTORY, Rừng Xanh trước | — | Theo từng gói |
@@ -136,3 +136,41 @@ Chạy sau mỗi ảnh, ghi `qc.json` và **contact sheet trên 4 nền** (đen,
 - Lộ vùng đen ở biên dưới Rừng Xanh khi spawn (ảnh `02_ingame_spawn_black_void.jpg`).
 - Bản đóng gói 10 MB: khi thêm khoảng 1.500 khung, cần atlas WebP và nạp theo map, không nhúng hết vào một file.
 - DATA có 23 quái, GDD liệt kê thêm vài họ chưa có. Cần chốt danh sách trước khi Claude vẽ.
+- Sau khi Luna duyệt bước A1: thay dữ liệu k2–k7 trong `assets-data-1.js` bằng `art-tests/hero-edge-clean/cleaned_webp_q90/*.webp`. Claude không sửa file này.
+
+## 10. Kết quả bước A1: làm sạch viền 6 hero (2026-11-28)
+
+**Phạm vi:** chỉ 6 sprite toàn thân k2–k7 đang dùng trong game. Không vẽ lại, không dùng model AI, không tải gì, không cài gì (chạy bằng numpy/Pillow/scipy có sẵn trong venv ComfyUI, chỉ đọc). Dải chuyển động k13–k18 **không xử lý**, vì đã xếp vào nhóm THAY trong GAME_ART_REVIEW.
+
+**Thành phẩm:** `art-tests/hero-edge-clean/`
+- `original/`: 6 file WebP gốc, trích nguyên byte từ `assets-data-1.js` (có SHA-256 trong `qc_report.json`)
+- `cleaned_webp_q90/`: bản đề xuất đưa vào game (WebP q90, alpha 100)
+- `cleaned_png/`: bản gốc lossless để lưu trữ và chỉnh tiếp
+- `compare/`: ảnh trước/sau trên 4 nền (tối, sáng, cỏ, màu map), phóng ×4 ở 3 đoạn viền, và 1 ảnh tổng ở cỡ trong game (150 px)
+- `qc_report.json`; `tools/hero_edge_clean.py`, `tools/hero_edge_compare.py` (chạy lại được)
+
+**Cách làm** (chỉ đụng **dải viền**: pixel có alpha từng phần + pixel đặc cách vùng trong suốt ≤ 2,5 px):
+1. Xóa các đốm gần trong suốt tách rời (alpha ≤ 16, nhỏ hơn 50 px). Đây là quầng magenta mờ còn sót lại sau khi tách nền, mỗi hero có 441–591 đốm.
+2. Khử ánh magenta theo **màu tham chiếu cục bộ**: lượng ánh tím cho phép lấy từ vùng ruột đặc gần đó. Nhờ vậy tóc, áo và pha lê vốn màu tím (Pháp Sư) vẫn giữ nguyên. Sau đó bù lại độ sáng bằng một lượng trung tính.
+3. Làm tròn alpha 250–254 ở vùng ruột lên 255. Đây chỉ là nhiễu nén WebP, mắt không thấy khác.
+
+**Kết quả kiểm thử tự động:**
+
+| Hero | Viền còn ánh tím vượt ngưỡng: trước | sau (PNG) | sau (WebP q90, đo sau khi giải nén) | Chỉ số cũ (bản đánh giá v0.3.7) | Đốm quầng | Pixel đổi ngoài dải viền | Độ lệch RGB TB trong dải viền | Dung lượng |
+|---|---:|---:|---:|---|---|---:|---:|---|
+| Kiếm Sĩ Nam | 68,78 % | 0 % | 0,04 % | 51,57 → 0 % | 480 → 0 | 0 | 16,5 | 90 → 79 KB |
+| Kiếm Sĩ Nữ | 68,87 % | 0 % | 0,06 % | 57,35 → 0 % | 578 → 0 | 0 | 16,8 | 97 → 85 KB |
+| Pháp Sư Nam | 71,22 % | 0 % | 0,02 % | 61,51 → 0 % | 591 → 0 | 0 | 17,1 | 87 → 76 KB |
+| Pháp Sư Nữ | 46,91 % | 0 % | 0 % | 94,89 → 25,28 % | 544 → 0 | 0 | 10,1 | 99 → 88 KB |
+| Cung Thủ Nam | 69,15 % | 0 % | 0,09 % | 59,22 → 0,49 % | 486 → 0 | 0 | 17,9 | 98 → 85 KB |
+| Cung Thủ Nữ | 66,46 % | 0 % | 0,02 % | 45,58 → 0 % | 441 → 0 | 0 | 16,8 | 91 → 80 KB |
+
+- **Vùng ruột nhân vật giữ nguyên tuyệt đối**: 0 pixel đổi màu ngoài dải viền. Hình dáng (alpha) chỉ đổi ở các đốm quầng bị xóa và các pixel nhiễu 250–254.
+- Kiểm tra bằng mắt (Claude, trên ảnh compare): viền tím/hồng quanh giáp, áo choàng, ống tên và cung không còn; outline thành nâu đen hoặc xám đen trung tính. Ở cỡ trong game (150 px) màu sắc và ngoại hình không thấy khác.
+- Pháp Sư Nữ còn 25 % theo chỉ số cũ là **đúng thiết kế**: outline tóc của nhân vật này vốn tím đậm (chân dung k10 không qua tách nền cũng như vậy). Chỉ số mới, có so với màu tham chiếu, đo được 0 %.
+
+**Vấn đề còn tồn tại:**
+- Outline ở mép trước đây hơi ánh tím, nay thành **xám đen trung tính**, không phải nâu đen như phần outline bên trong. Ở cỡ phóng ×4 trên nền tối nhìn ra được, ở cỡ chơi thì không thấy. Nếu Luna muốn, có thể pha thêm màu outline lấy từ bên trong.
+- Bản WebP q90 là nén mất dữ liệu. Ánh tím sau khi giải nén còn 0–0,09 %, vẫn dưới ngưỡng. Nếu cần tuyệt đối thì dùng PNG.
+- Chưa tích hợp vào game (việc của Codex sau khi Luna duyệt). Chưa thử trên iPhone thật.
+- Dải chuyển động k13–k18 vẫn còn viền tím và mảnh lọt khung, sẽ xử lý khi làm lại animation.
