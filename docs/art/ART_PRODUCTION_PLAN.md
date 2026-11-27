@@ -126,7 +126,7 @@ Chạy sau mỗi ảnh, ghi `qc.json` và **contact sheet trên 4 nền** (đen,
 
 | Bước | Việc | Cài / tải | Đầu ra để Do duyệt |
 |---|---|---|---|
-| **A** | Dựng GAME-ART-CORE: vendor skill, venv riêng, viết `sprite-matte-clean` + `art-qc`, workflow trên SDXL hiện có | khoảng 80 MB pip | **Trước/sau làm sạch viền 6 hero hiện có** + QC báo cáo. **A1 (làm sạch viền 6 hero): ĐÃ XONG 2026-11-28, chờ Luna đánh giá** (xem mục 10). Phần còn lại của A (vendor skill, venv riêng, workflow) chưa làm |
+| **A** | Dựng GAME-ART-CORE: vendor skill, venv riêng, viết `sprite-matte-clean` + `art-qc`, workflow trên SDXL hiện có | khoảng 80 MB pip | **Trước/sau làm sạch viền 6 hero hiện có** + QC báo cáo. **A (sprite-matte-clean + art-qc tối thiểu, CPU, BiRefNet có sẵn) cho 6 hero: ĐÃ XONG 2026-11-28, chờ Luna đánh giá**. Kết quả ở `art-tests/hero-matte-clean/REPORT.md` (thay thế lượt thử A1 ở mục 10). Lượt này Luna giao phạm vi tối thiểu nên không làm phần vendor skill, venv riêng, workflow |
 | **B** | Tải Animagine XL 4.0 + ControlNet OpenPose (+ LoRA icon) | khoảng 9 GB | **Bộ ảnh mẫu phong cách** (4 hướng: vẽ xuống/lên + lật): 1 hero (Kiếm Sĩ Nam) có turnaround, 3 dáng chính, chạy 8 khung rig; Goblin + Sói + Slime + Goblin Cung Thủ theo `MONSTER_DESIGN_RUNG_XANH.md`; Chúa Sói; 1 góc Rừng Xanh (tile + 6 vật thể); 6 icon (3 skill, 2 đồ, 1 ngọc); 1 khung panel viền vàng. Có so sánh "SDXL không skill" với "GAME-ART-CORE". **PHẦN QUÁI RỪNG XANH TRONG BƯỚC B: TẠM HOÃN** (Do/Luna chốt 2026-11-28) — Codex đang sản xuất lô mẫu SDXL theo MONSTER_DESIGN_RUNG_XANH; chờ Luna đánh giá chất lượng lô đó rồi mới quyết có làm lại bằng Animagine hay không. Bước A triển khai trước |
 | C (tùy chọn) | FLUX.2 klein 4B: đo VRAM/thời gian, so với ControlNet | khoảng 12,5 GB | Bảng so sánh nhất quán |
 | D | Sản xuất hàng loạt theo ASSET_INVENTORY, Rừng Xanh trước | — | Theo từng gói |
@@ -139,6 +139,8 @@ Chạy sau mỗi ảnh, ghi `qc.json` và **contact sheet trên 4 nền** (đen,
 - Sau khi Luna duyệt bước A1: thay dữ liệu k2–k7 trong `assets-data-1.js` bằng `art-tests/hero-edge-clean/cleaned_webp_q90/*.webp`. Claude không sửa file này.
 
 ## 10. Kết quả bước A1: làm sạch viền 6 hero (2026-11-28)
+
+> **Đã được thay thế** bởi bước A đầy đủ: `art-tests/hero-matte-clean/` (thêm BiRefNet, làm đặc lõi alpha, xử lý chi tiết mảnh như dây cung, chấm QC theo ngưỡng mục 7). Khi tích hợp, dùng bản `hero-matte-clean/cleaned/*_lossless.webp`, không dùng bản A1 dưới đây.
 
 **Phạm vi:** chỉ 6 sprite toàn thân k2–k7 đang dùng trong game. Không vẽ lại, không dùng model AI, không tải gì, không cài gì (chạy bằng numpy/Pillow/scipy có sẵn trong venv ComfyUI, chỉ đọc). Dải chuyển động k13–k18 **không xử lý**, vì đã xếp vào nhóm THAY trong GAME_ART_REVIEW.
 
