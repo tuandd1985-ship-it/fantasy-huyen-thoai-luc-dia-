@@ -1,0 +1,469 @@
+{
+  "baseline": "02ec5850e865f834321143e86adf4fadb3c62964",
+  "tracked_files": {
+    "PROJECT_HANDOVER.md": {
+      "bytes": 12482,
+      "sha256": "257ab75eab937d16cad19092162afe5bc9218276baa74ba75ee5b31cffb0e035"
+    },
+    "README.md": {
+      "bytes": 2103,
+      "sha256": "a49e00c9f48383d3cc074d25d61ca54f0c40693a4809f841aeaa841c866b58ec"
+    },
+    "assets-data-1.js": {
+      "bytes": 2848986,
+      "sha256": "09a35d8eaef7796f8dc2abdc82ec90c25d6c45625c52c014cd6ecac899a0d04a"
+    },
+    "assets-data-2.js": {
+      "bytes": 1565396,
+      "sha256": "531287e62d48002f9e5b791dc56da65b1736be700ffd0007aab7c14f01f34d82"
+    },
+    "cloudflare/deploy_game.py": {
+      "bytes": 1249,
+      "sha256": "487dade6a64b1a5fa6a01245079d7fc6e34e68754cb8950cddd04c498bddd7c8"
+    },
+    "cloudflare/worker.js": {
+      "bytes": 1023,
+      "sha256": "ee0a32de3fb218bd3f17ad23be975ba2c895bec0a7168a403aa5a92f5a5edcb3"
+    },
+    "docs/ARCHITECTURE.md": {
+      "bytes": 2760,
+      "sha256": "13c36d10e1b11d6730046ed95a10e3ae94b7e05a1d21861729b2e96524906e13"
+    },
+    "docs/ART_DIRECTION.md": {
+      "bytes": 6511,
+      "sha256": "7eb4c3d582b37741037a4ad1b71449e35d6cdc782aeb0f6d248fa3c83b4c27e7"
+    },
+    "docs/BALANCE.md": {
+      "bytes": 2898,
+      "sha256": "e01fa2839ca96b5c7a1bc04088ed839d3023b980f4cdca64b3a038b03ee9cc3a"
+    },
+    "docs/CHANGELOG.md": {
+      "bytes": 8408,
+      "sha256": "1852d0a2317b3780d103015dcfcf2bcb80f055d74de87c5f24ec15a68da21556"
+    },
+    "docs/GDD.md": {
+      "bytes": 11638,
+      "sha256": "20b0e0ac8cd33bd6807724b22eb90b1f64ece337df2da1c718854f81751dfb37"
+    },
+    "docs/HUD_V2.md": {
+      "bytes": 2127,
+      "sha256": "1f5b8cebf77a38047a737b65a9873863e8f8004db2f2e183aa04e05b778639ef"
+    },
+    "docs/PROGRESS.md": {
+      "bytes": 3673,
+      "sha256": "e275fc3e81c5ffd738baa80a1fbdfd61a76c9287e9bcf98848026bf442a90590"
+    },
+    "docs/ROADMAP.md": {
+      "bytes": 2399,
+      "sha256": "5e73c2a06ae7245e4d55d2d809ad7b231e374f2f86504e5e1b7fde5fda000efc"
+    },
+    "docs/SPEC.md": {
+      "bytes": 24605,
+      "sha256": "144263412f1687b528863f9bb612b37978c4b6d0c2333962bc02eca8bbc7b44b"
+    },
+    "index.html": {
+      "bytes": 322265,
+      "sha256": "1a11e11433497fd6678d637fe50a28be1c47128ef6df898aba8a14f8f53ff095"
+    }
+  },
+  "source_lines": 4402,
+  "scripts": {
+    "local": [
+      {
+        "index": 1,
+        "src": null,
+        "chars": 14,
+        "sha256": "7cc6122a5caad82db5ca3f1ff3f69e73d63676a3fc417d2f7a39b1c4aa4dcc4a",
+        "syntax_exit": 0,
+        "error": "",
+        "file": "C:\\Users\\Do Tuan\\Documents\\Codex\\2026-11-28\\h-y-c-i-t-h\\fantasy-rpg-review\\evidence\\extracted-scripts\\local-01.js"
+      },
+      {
+        "index": 2,
+        "src": "assets-data-1.js",
+        "chars": 2848970,
+        "sha256": "70dfe8bb1b2ea74b4d2818085fe2963db547d3e544ba028393184705060605ad",
+        "syntax_exit": 0,
+        "error": "",
+        "file": "C:\\Users\\Do Tuan\\Documents\\Codex\\2026-11-28\\h-y-c-i-t-h\\fantasy-rpg-review\\evidence\\extracted-scripts\\local-02.js"
+      },
+      {
+        "index": 3,
+        "src": "assets-data-2.js",
+        "chars": 1565391,
+        "sha256": "66bc9a798c462f03be87aad7a409847285cd2490fdcda183aacd037a47db6b13",
+        "syntax_exit": 0,
+        "error": "",
+        "file": "C:\\Users\\Do Tuan\\Documents\\Codex\\2026-11-28\\h-y-c-i-t-h\\fantasy-rpg-review\\evidence\\extracted-scripts\\local-03.js"
+      },
+      {
+        "index": 4,
+        "src": null,
+        "chars": 50,
+        "sha256": "af57d2fdef823a8c9cc8d35b1d51057c1aabeada45d948b7a5d19355f626ef97",
+        "syntax_exit": 0,
+        "error": "",
+        "file": "C:\\Users\\Do Tuan\\Documents\\Codex\\2026-11-28\\h-y-c-i-t-h\\fantasy-rpg-review\\evidence\\extracted-scripts\\local-04.js"
+      },
+      {
+        "index": 5,
+        "src": null,
+        "chars": 51,
+        "sha256": "d609c970a8c7ae84ad87fcd54667bf810366e6057668a04379747a4f31c5f167",
+        "syntax_exit": 0,
+        "error": "",
+        "file": "C:\\Users\\Do Tuan\\Documents\\Codex\\2026-11-28\\h-y-c-i-t-h\\fantasy-rpg-review\\evidence\\extracted-scripts\\local-05.js"
+      },
+      {
+        "index": 6,
+        "src": null,
+        "chars": 48,
+        "sha256": "354a76538e200a0f1cc33a08dc47ed0126b6ba33ae27f4f7d90b977c4c5adc99",
+        "syntax_exit": 0,
+        "error": "",
+        "file": "C:\\Users\\Do Tuan\\Documents\\Codex\\2026-11-28\\h-y-c-i-t-h\\fantasy-rpg-review\\evidence\\extracted-scripts\\local-06.js"
+      },
+      {
+        "index": 7,
+        "src": null,
+        "chars": 42281,
+        "sha256": "16b20fc84e29b9ce5360150c701ccd7d0af771520686aef5df06ca59f30df0e9",
+        "syntax_exit": 0,
+        "error": "",
+        "file": "C:\\Users\\Do Tuan\\Documents\\Codex\\2026-11-28\\h-y-c-i-t-h\\fantasy-rpg-review\\evidence\\extracted-scripts\\local-07.js"
+      },
+      {
+        "index": 8,
+        "src": null,
+        "chars": 9748,
+        "sha256": "0d7865a4a2c859db31357b73e4fe04f7cea38a79c730daf2f0e548cdb4f77521",
+        "syntax_exit": 0,
+        "error": "",
+        "file": "C:\\Users\\Do Tuan\\Documents\\Codex\\2026-11-28\\h-y-c-i-t-h\\fantasy-rpg-review\\evidence\\extracted-scripts\\local-08.js"
+      },
+      {
+        "index": 9,
+        "src": null,
+        "chars": 36713,
+        "sha256": "69b2506dd0411ea7129f31ae0976752289185224bfeecb9b47e2e8d4f08f207c",
+        "syntax_exit": 0,
+        "error": "",
+        "file": "C:\\Users\\Do Tuan\\Documents\\Codex\\2026-11-28\\h-y-c-i-t-h\\fantasy-rpg-review\\evidence\\extracted-scripts\\local-09.js"
+      },
+      {
+        "index": 10,
+        "src": null,
+        "chars": 32593,
+        "sha256": "e24656b1984a176fd51a6b317bf6da6675d595e8cbf80556d8b9539804635676",
+        "syntax_exit": 0,
+        "error": "",
+        "file": "C:\\Users\\Do Tuan\\Documents\\Codex\\2026-11-28\\h-y-c-i-t-h\\fantasy-rpg-review\\evidence\\extracted-scripts\\local-10.js"
+      },
+      {
+        "index": 11,
+        "src": null,
+        "chars": 47191,
+        "sha256": "ae75ede3ff6c22f43eb2122b0a3d31543774826d37dc2b662a5acd571b229646",
+        "syntax_exit": 0,
+        "error": "",
+        "file": "C:\\Users\\Do Tuan\\Documents\\Codex\\2026-11-28\\h-y-c-i-t-h\\fantasy-rpg-review\\evidence\\extracted-scripts\\local-11.js"
+      },
+      {
+        "index": 12,
+        "src": null,
+        "chars": 17255,
+        "sha256": "98a8af7835bb4a42b5a41786d58d2859621953c46f0d10aa3567bc44a8c6f1a6",
+        "syntax_exit": 0,
+        "error": "",
+        "file": "C:\\Users\\Do Tuan\\Documents\\Codex\\2026-11-28\\h-y-c-i-t-h\\fantasy-rpg-review\\evidence\\extracted-scripts\\local-12.js"
+      },
+      {
+        "index": 13,
+        "src": null,
+        "chars": 48197,
+        "sha256": "a113d6619b6acd620e588bccc35b1050481e9716a3f81b3fb4c3753212d2c5c8",
+        "syntax_exit": 0,
+        "error": "",
+        "file": "C:\\Users\\Do Tuan\\Documents\\Codex\\2026-11-28\\h-y-c-i-t-h\\fantasy-rpg-review\\evidence\\extracted-scripts\\local-13.js"
+      }
+    ],
+    "production": [
+      {
+        "index": 1,
+        "src": null,
+        "chars": 8870289,
+        "sha256": "285d3d00c339a2378963aa6a5ff9bd0d0c30a122caa77c54bdce958b3f08f291",
+        "syntax_exit": 0,
+        "error": "",
+        "file": "C:\\Users\\Do Tuan\\Documents\\Codex\\2026-11-28\\h-y-c-i-t-h\\fantasy-rpg-review\\evidence\\extracted-scripts\\production-01.js"
+      },
+      {
+        "index": 2,
+        "src": null,
+        "chars": 9748,
+        "sha256": "0d7865a4a2c859db31357b73e4fe04f7cea38a79c730daf2f0e548cdb4f77521",
+        "syntax_exit": 0,
+        "error": "",
+        "file": "C:\\Users\\Do Tuan\\Documents\\Codex\\2026-11-28\\h-y-c-i-t-h\\fantasy-rpg-review\\evidence\\extracted-scripts\\production-02.js"
+      },
+      {
+        "index": 3,
+        "src": null,
+        "chars": 36713,
+        "sha256": "69b2506dd0411ea7129f31ae0976752289185224bfeecb9b47e2e8d4f08f207c",
+        "syntax_exit": 0,
+        "error": "",
+        "file": "C:\\Users\\Do Tuan\\Documents\\Codex\\2026-11-28\\h-y-c-i-t-h\\fantasy-rpg-review\\evidence\\extracted-scripts\\production-03.js"
+      },
+      {
+        "index": 4,
+        "src": null,
+        "chars": 32593,
+        "sha256": "e24656b1984a176fd51a6b317bf6da6675d595e8cbf80556d8b9539804635676",
+        "syntax_exit": 0,
+        "error": "",
+        "file": "C:\\Users\\Do Tuan\\Documents\\Codex\\2026-11-28\\h-y-c-i-t-h\\fantasy-rpg-review\\evidence\\extracted-scripts\\production-04.js"
+      },
+      {
+        "index": 5,
+        "src": null,
+        "chars": 47191,
+        "sha256": "ae75ede3ff6c22f43eb2122b0a3d31543774826d37dc2b662a5acd571b229646",
+        "syntax_exit": 0,
+        "error": "",
+        "file": "C:\\Users\\Do Tuan\\Documents\\Codex\\2026-11-28\\h-y-c-i-t-h\\fantasy-rpg-review\\evidence\\extracted-scripts\\production-05.js"
+      },
+      {
+        "index": 6,
+        "src": null,
+        "chars": 17255,
+        "sha256": "98a8af7835bb4a42b5a41786d58d2859621953c46f0d10aa3567bc44a8c6f1a6",
+        "syntax_exit": 0,
+        "error": "",
+        "file": "C:\\Users\\Do Tuan\\Documents\\Codex\\2026-11-28\\h-y-c-i-t-h\\fantasy-rpg-review\\evidence\\extracted-scripts\\production-06.js"
+      },
+      {
+        "index": 7,
+        "src": null,
+        "chars": 48197,
+        "sha256": "a113d6619b6acd620e588bccc35b1050481e9716a3f81b3fb4c3753212d2c5c8",
+        "syntax_exit": 0,
+        "error": "",
+        "file": "C:\\Users\\Do Tuan\\Documents\\Codex\\2026-11-28\\h-y-c-i-t-h\\fantasy-rpg-review\\evidence\\extracted-scripts\\production-07.js"
+      }
+    ],
+    "exact_matches": [
+      {
+        "local": 8,
+        "production": 2
+      },
+      {
+        "local": 9,
+        "production": 3
+      },
+      {
+        "local": 10,
+        "production": 4
+      },
+      {
+        "local": 11,
+        "production": 5
+      },
+      {
+        "local": 12,
+        "production": 6
+      },
+      {
+        "local": 13,
+        "production": 7
+      }
+    ]
+  },
+  "assets": [
+    {
+      "key": "k0",
+      "bytes": 72498,
+      "width": 800,
+      "height": 800,
+      "mode": "RGB",
+      "decoded_rgba_bytes": 2560000,
+      "sha256": "e754e4e7116101e6b807d811b24c03363de7d52338042d68910f2921ce9f4f6b"
+    },
+    {
+      "key": "k1",
+      "bytes": 619270,
+      "width": 1920,
+      "height": 1280,
+      "mode": "RGB",
+      "decoded_rgba_bytes": 9830400,
+      "sha256": "3025256fe6a0fddfb3a7ae0e9c71738e1e9ef87777023cdabc95c434dde839fa"
+    },
+    {
+      "key": "k2",
+      "bytes": 92482,
+      "width": 515,
+      "height": 640,
+      "mode": "RGBA",
+      "decoded_rgba_bytes": 1318400,
+      "sha256": "85d8045f467062b4e818dfaf21db45c99372b6701f888ae29e704a58b192c612"
+    },
+    {
+      "key": "k3",
+      "bytes": 99310,
+      "width": 572,
+      "height": 640,
+      "mode": "RGBA",
+      "decoded_rgba_bytes": 1464320,
+      "sha256": "56abcf1b0f5d3909dd43d065741b3f7c1f6911e10b670b0c3237237571095e0f"
+    },
+    {
+      "key": "k4",
+      "bytes": 88786,
+      "width": 555,
+      "height": 640,
+      "mode": "RGBA",
+      "decoded_rgba_bytes": 1420800,
+      "sha256": "8695fd7e07728bff03a9e3686ebe7aeb4f3dcf3da87acb054ad3bc252289cca4"
+    },
+    {
+      "key": "k5",
+      "bytes": 101452,
+      "width": 569,
+      "height": 640,
+      "mode": "RGBA",
+      "decoded_rgba_bytes": 1456640,
+      "sha256": "4018af983412440e1e314d5ebcdf984e2dff7b65986431d013699e0796e66569"
+    },
+    {
+      "key": "k6",
+      "bytes": 100538,
+      "width": 501,
+      "height": 640,
+      "mode": "RGBA",
+      "decoded_rgba_bytes": 1282560,
+      "sha256": "0255f4fe3527abe78ea258eacd83196ec8e962618bd22d0ca5383de60fa307b8"
+    },
+    {
+      "key": "k7",
+      "bytes": 93164,
+      "width": 502,
+      "height": 640,
+      "mode": "RGBA",
+      "decoded_rgba_bytes": 1285120,
+      "sha256": "b692a0c2ef9ed04679fee1f6a8e85f4f644c3ca7ac5d08f8de64b74ccb81f640"
+    },
+    {
+      "key": "k8",
+      "bytes": 67418,
+      "width": 800,
+      "height": 800,
+      "mode": "RGB",
+      "decoded_rgba_bytes": 2560000,
+      "sha256": "77465c6d4f625509e272b2bb53bc2249462cbdbc9a83cd2fa9da126b0cdbe8d7"
+    },
+    {
+      "key": "k9",
+      "bytes": 82416,
+      "width": 800,
+      "height": 800,
+      "mode": "RGB",
+      "decoded_rgba_bytes": 2560000,
+      "sha256": "54dae980a325131196a07a99152990a917161abf32a69831fa184441f903be06"
+    },
+    {
+      "key": "k10",
+      "bytes": 71170,
+      "width": 800,
+      "height": 800,
+      "mode": "RGB",
+      "decoded_rgba_bytes": 2560000,
+      "sha256": "23ff4dfd38b50c1f00ef9467c0987ee8ac5848f18c41f178070ff5c096cbbe4b"
+    },
+    {
+      "key": "k11",
+      "bytes": 77424,
+      "width": 800,
+      "height": 800,
+      "mode": "RGB",
+      "decoded_rgba_bytes": 2560000,
+      "sha256": "b1b0766b610b959ffe4b5cab3b4738a5d1c8fae8fb562bd021a787ae83b3e7b8"
+    },
+    {
+      "key": "k12",
+      "bytes": 74426,
+      "width": 800,
+      "height": 800,
+      "mode": "RGB",
+      "decoded_rgba_bytes": 2560000,
+      "sha256": "e08ed8b056bb116c5c03c36e223c1f356e3e3acccdadb854493ae897b6d405b9"
+    },
+    {
+      "key": "k13",
+      "bytes": 250964,
+      "width": 2520,
+      "height": 500,
+      "mode": "RGBA",
+      "decoded_rgba_bytes": 5040000,
+      "sha256": "abc728d56f5d09d4e3ce756f19751eefd32b63eea607449b391c9e63fbd7233b"
+    },
+    {
+      "key": "k14",
+      "bytes": 244986,
+      "width": 2520,
+      "height": 500,
+      "mode": "RGBA",
+      "decoded_rgba_bytes": 5040000,
+      "sha256": "ab8354fe1e1a98b170ad1ff469834b6281729a861e5fd2d2e9b6a95bad435ad0"
+    },
+    {
+      "key": "k15",
+      "bytes": 282818,
+      "width": 2520,
+      "height": 500,
+      "mode": "RGBA",
+      "decoded_rgba_bytes": 5040000,
+      "sha256": "ce0a772232be0b4b9ea209356d7701d08953e9827d81bc3c1269cc5d0f897e63"
+    },
+    {
+      "key": "k16",
+      "bytes": 322294,
+      "width": 2520,
+      "height": 500,
+      "mode": "RGBA",
+      "decoded_rgba_bytes": 5040000,
+      "sha256": "1103f76a7839b3130e082a039a3e5ecf7ceee2a725d29c9e5c20979385ee234e"
+    },
+    {
+      "key": "k17",
+      "bytes": 292978,
+      "width": 2520,
+      "height": 500,
+      "mode": "RGBA",
+      "decoded_rgba_bytes": 5040000,
+      "sha256": "cd4ceb9be9594b3e56b1b8a9b0c09c09b4b50c4ae43e1f7a973e28ffd5d13f2e"
+    },
+    {
+      "key": "k18",
+      "bytes": 275822,
+      "width": 2520,
+      "height": 500,
+      "mode": "RGBA",
+      "decoded_rgba_bytes": 5040000,
+      "sha256": "a8b5e51198153fbb4393df054c97704079856e312c5ac2943ad07cb477e33d26"
+    }
+  ],
+  "asset_decoded_rgba_total": 63658240,
+  "asset_file_total": 4736647,
+  "production_bytes": 10164614,
+  "production_gzip_estimate": 7493087,
+  "local_combined_gzip_estimate": 3409534,
+  "missing_referenced_documents": [
+    "TEST_REPORT.md",
+    "GAP_ANALYSIS.md",
+    "DESIGN-V2.md",
+    "reference-zip/assets/Concept.png",
+    "docs/TEST_REPORT.md"
+  ],
+  "first_game_script_equal_after_asset_uri_normalization": true,
+  "normalized_first_script_sha256": "16b20fc84e29b9ce5360150c701ccd7d0af771520686aef5df06ca59f30df0e9"
+}

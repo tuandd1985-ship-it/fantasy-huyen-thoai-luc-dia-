@@ -1,0 +1,353 @@
+{
+  "started": "2026-11-27T16:32:51.904Z",
+  "transport": "file:// (documented local mode); HTTP localhost attempted but unreachable in this execution environment",
+  "cases": [
+    {
+      "id": "T01-initial-load",
+      "created": false,
+      "paused": true,
+      "roster": 0,
+      "loadedHeroSheets": 6,
+      "loadedHeroArt": 6
+    },
+    {
+      "id": "T02-name-A",
+      "check": {
+        "ok": false,
+        "hint": "Tên phải từ 2 đến 14 ký tự (đang nhập 1).",
+        "cls": "bad"
+      },
+      "startDisabled": true
+    },
+    {
+      "id": "T02-name-Bad<>",
+      "check": {
+        "ok": false,
+        "hint": "Tên chỉ gồm chữ cái, số và khoảng trắng — không dùng ký tự đặc biệt.",
+        "cls": "bad"
+      },
+      "startDisabled": true
+    },
+    {
+      "id": "T02-name-ValidHero",
+      "check": {
+        "ok": true,
+        "hint": "Tên hợp lệ — sẵn sàng lên đường!",
+        "cls": "ok"
+      },
+      "startDisabled": false
+    },
+    {
+      "id": "T03-six-variants",
+      "variants": [
+        {
+          "classId": "swordsman",
+          "gender": "male",
+          "created": true,
+          "roster": 1,
+          "paused": false,
+          "stats": {
+            "hp": 385,
+            "mp": 100,
+            "atk": 35
+          },
+          "sheetLoaded": true
+        },
+        {
+          "classId": "swordsman",
+          "gender": "female",
+          "created": true,
+          "roster": 1,
+          "paused": false,
+          "stats": {
+            "hp": 385,
+            "mp": 100,
+            "atk": 35
+          },
+          "sheetLoaded": true
+        },
+        {
+          "classId": "mage",
+          "gender": "male",
+          "created": true,
+          "roster": 1,
+          "paused": false,
+          "stats": {
+            "hp": 200,
+            "mp": 253,
+            "atk": 48
+          },
+          "sheetLoaded": true
+        },
+        {
+          "classId": "mage",
+          "gender": "female",
+          "created": true,
+          "roster": 1,
+          "paused": false,
+          "stats": {
+            "hp": 200,
+            "mp": 253,
+            "atk": 48
+          },
+          "sheetLoaded": true
+        },
+        {
+          "classId": "archer",
+          "gender": "male",
+          "created": true,
+          "roster": 1,
+          "paused": false,
+          "stats": {
+            "hp": 260,
+            "mp": 150,
+            "atk": 40
+          },
+          "sheetLoaded": true
+        },
+        {
+          "classId": "archer",
+          "gender": "female",
+          "created": true,
+          "roster": 1,
+          "paused": false,
+          "stats": {
+            "hp": 260,
+            "mp": 150,
+            "atk": 40
+          },
+          "sheetLoaded": true
+        }
+      ]
+    },
+    {
+      "id": "T04-panels",
+      "checks": [
+        {
+          "panel": "char",
+          "auto": false,
+          "open": {
+            "current": "char",
+            "paused": true,
+            "auto": false,
+            "input": {
+              "jx": 0,
+              "jy": 0
+            },
+            "panels": 1
+          },
+          "closed": {
+            "paused": false,
+            "auto": false
+          }
+        },
+        {
+          "panel": "bag",
+          "auto": false,
+          "open": {
+            "current": "bag",
+            "paused": true,
+            "auto": false,
+            "input": {
+              "jx": 0,
+              "jy": 0
+            },
+            "panels": 1
+          },
+          "closed": {
+            "paused": false,
+            "auto": false
+          }
+        },
+        {
+          "panel": "equip",
+          "auto": false,
+          "open": {
+            "current": "equip",
+            "paused": true,
+            "auto": false,
+            "input": {
+              "jx": 0,
+              "jy": 0
+            },
+            "panels": 1
+          },
+          "closed": {
+            "paused": false,
+            "auto": false
+          }
+        },
+        {
+          "panel": "skill",
+          "auto": false,
+          "open": {
+            "current": "skill",
+            "paused": true,
+            "auto": false,
+            "input": {
+              "jx": 0,
+              "jy": 0
+            },
+            "panels": 1
+          },
+          "closed": {
+            "paused": false,
+            "auto": false
+          }
+        },
+        {
+          "panel": "settings",
+          "auto": false,
+          "open": {
+            "current": "settings",
+            "paused": true,
+            "auto": false,
+            "input": {
+              "jx": 0,
+              "jy": 0
+            },
+            "panels": 0
+          },
+          "closed": {
+            "paused": false,
+            "auto": false
+          }
+        },
+        {
+          "panel": "char",
+          "auto": true,
+          "open": {
+            "current": "char",
+            "paused": true,
+            "auto": true,
+            "input": {
+              "jx": 0,
+              "jy": 0
+            },
+            "panels": 1
+          },
+          "closed": {
+            "paused": false,
+            "auto": true
+          }
+        },
+        {
+          "panel": "bag",
+          "auto": true,
+          "open": {
+            "current": "bag",
+            "paused": true,
+            "auto": true,
+            "input": {
+              "jx": 0,
+              "jy": 0
+            },
+            "panels": 1
+          },
+          "closed": {
+            "paused": false,
+            "auto": true
+          }
+        },
+        {
+          "panel": "equip",
+          "auto": true,
+          "open": {
+            "current": "equip",
+            "paused": true,
+            "auto": true,
+            "input": {
+              "jx": 0,
+              "jy": 0
+            },
+            "panels": 1
+          },
+          "closed": {
+            "paused": false,
+            "auto": true
+          }
+        },
+        {
+          "panel": "skill",
+          "auto": true,
+          "open": {
+            "current": "skill",
+            "paused": true,
+            "auto": true,
+            "input": {
+              "jx": 0,
+              "jy": 0
+            },
+            "panels": 1
+          },
+          "closed": {
+            "paused": false,
+            "auto": true
+          }
+        },
+        {
+          "panel": "settings",
+          "auto": true,
+          "open": {
+            "current": "settings",
+            "paused": true,
+            "auto": true,
+            "input": {
+              "jx": 0,
+              "jy": 0
+            },
+            "panels": 0
+          },
+          "closed": {
+            "paused": false,
+            "auto": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "T05-big-map-pause",
+      "overlayVisible": true,
+      "paused": false,
+      "currentPanel": null
+    }
+  ],
+  "console": [
+    {
+      "type": "exception",
+      "message": "Cannot set properties of null (setting 'src')",
+      "stack": "TypeError: Cannot set properties of null (setting 'src')\n    at file:///C:/Users/Do%20Tuan/Documents/Codex/2026-11-28/h-y-c-i-t-h/fantasy-rpg-review/repository/index.html:554:119"
+    }
+  ],
+  "requests": [
+    {
+      "url": "file:///C:/Users/Do%20Tuan/Documents/Codex/2026-11-28/h-y-c-i-t-h/fantasy-rpg-review/repository/__ASSET_k0__",
+      "failure": {
+        "errorText": "net::ERR_FILE_NOT_FOUND"
+      }
+    },
+    {
+      "url": "file:///C:/Users/Do%20Tuan/Documents/Codex/2026-11-28/h-y-c-i-t-h/fantasy-rpg-review/repository/__ASSET_k1__",
+      "failure": {
+        "errorText": "net::ERR_FILE_NOT_FOUND"
+      }
+    },
+    {
+      "url": "https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap",
+      "failure": {
+        "errorText": "net::ERR_FAILED"
+      }
+    },
+    {
+      "url": "file:///C:/Users/Do%20Tuan/Documents/Codex/2026-11-28/h-y-c-i-t-h/fantasy-rpg-review/repository/__ASSET_k0__",
+      "failure": {
+        "errorText": "net::ERR_FILE_NOT_FOUND"
+      }
+    }
+  ],
+  "browser": "147.0.7727.139",
+  "fatal": {
+    "message": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#bigMapClose')\u001b[22m\n\u001b[2m    - locator resolved to <button class=\"icon-btn\" id=\"bigMapClose\" aria-label=\"Đóng bản đồ\">✕</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - element is outside of the viewport\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - element is outside of the viewport\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    56 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - element is outside of the viewport\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n",
+    "stack": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#bigMapClose')\u001b[22m\n\u001b[2m    - locator resolved to <button class=\"icon-btn\" id=\"bigMapClose\" aria-label=\"Đóng bản đồ\">✕</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - element is outside of the viewport\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - element is outside of the viewport\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    56 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - element is outside of the viewport\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n    at C:\\Users\\Do Tuan\\Documents\\Codex\\2026-11-28\\h-y-c-i-t-h\\fantasy-rpg-review\\review-tests.cjs:43:38"
+  }
+}

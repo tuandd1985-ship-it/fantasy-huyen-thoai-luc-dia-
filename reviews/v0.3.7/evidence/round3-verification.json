@@ -1,0 +1,10 @@
+{
+  "original_package_versions_unchanged": true,
+  "packages_checked": 86,
+  "four_rgba_pngs_pass": true,
+  "round1_original_bytes_unchanged": true,
+  "torch": "2.14.1+cu130",
+  "cuda": "13.0",
+  "gpu": "NVIDIA GeForce RTX 2070 SUPER",
+  "cuda_matrix_test_pass": true
+}

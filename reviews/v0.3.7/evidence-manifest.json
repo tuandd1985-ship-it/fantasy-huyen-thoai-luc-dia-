@@ -1,0 +1,81 @@
+{
+  "baseline": "02ec5850e865f834321143e86adf4fadb3c62964",
+  "source_review": "FANTASY_PROJECT_REVIEW.md",
+  "published": {
+    "static-audit.json": {
+      "bytes": 15510,
+      "sha256": "d4303148de69e3bdd39703217703d5bb1d37f533ff8116faf808d506860d72e4"
+    },
+    "production-http.json": {
+      "bytes": 1033,
+      "sha256": "d4e5851d9c1c891e06618339f788f8425c41106f07089a75f8d5237edf87e2ce"
+    },
+    "review-tests.json": {
+      "bytes": 36955,
+      "sha256": "88f3c1a79c0b2ec0456099aba453fbd28e8d641969fb37238e9f3ba55d9e01ba"
+    },
+    "first-run-bigmap-failure.json": {
+      "bytes": 11309,
+      "sha256": "b56d18a44d7fc376e746054a5045e4999572c0bbe04259cdaa6cd4bf2739fdee"
+    },
+    "stall-reproduction.json": {
+      "bytes": 47065,
+      "sha256": "db0343378ce6299b635cb42734f63fdf36d5c8521bc4ce161a497222831025e1"
+    },
+    "comfy-api-check.json": {
+      "bytes": 3330,
+      "sha256": "384265ee04fefda0c625c8dde8015b0b26c6a5b3076a7f9db3ff4b094d0b9251"
+    },
+    "round3-verification.json": {
+      "bytes": 278,
+      "sha256": "004346e3c5550b69179cfd9201b175fe96bcbc517ad83ec1406b0a3c8f1a0f81"
+    },
+    "playwright-package.json": {
+      "bytes": 263,
+      "sha256": "6d09a2a27543fbe472554dd2dce8cdac848d58ce2ebefc1a941e50b6bcb9083b"
+    },
+    "landscape-create.png": {
+      "bytes": 219652,
+      "sha256": "ce794d63fec72a5dfce7699e73af666b02f29b5046ea11c63f271fb01221493e"
+    },
+    "landscape-game.png": {
+      "bytes": 247273,
+      "sha256": "637fdc3bd730dce20caabc62bddf494dd6645bca2b94be04ee8e809fa0359116"
+    },
+    "big-map-unpaused.png": {
+      "bytes": 57979,
+      "sha256": "e509238c072f08b4a2d00c567e790339e7e7635067dabe68fe68ede1faa456bf"
+    },
+    "portrait-rotated.png": {
+      "bytes": 260303,
+      "sha256": "e768d2180df5914d88288be8426096789475efbf104ab3fe3f5da5837d7fd7ed"
+    },
+    "portrait-game.png": {
+      "bytes": 261207,
+      "sha256": "72d408fdab6e8766b3704b5bef9719959b1954679be374a736ea0c5fb0c36332"
+    },
+    "production-captured-create.png": {
+      "bytes": 219584,
+      "sha256": "86ce6d8146db0ab847daf8a588213b49a427b59ef427d7f44c615e2687ea5cb2"
+    },
+    "stall-seed-109.png": {
+      "bytes": 252615,
+      "sha256": "0d8868f735ea1f9c808183012786d4476dfe14f49fad6c9ff0eec4dc98111a23"
+    },
+    "stall-seed-130.png": {
+      "bytes": 239923,
+      "sha256": "15557ae4b828651fc891fc61c8cf1ef3d6bae55ae3d1b00307f380ccab18800a"
+    }
+  },
+  "retained_local_only": {
+    "playwright-trace.zip": {
+      "bytes": 31474273,
+      "sha256": "055c83f3025d87c313a42efb110fa9e0b74c0389320030e677dd04025854bcec"
+    },
+    "production.html": {
+      "bytes": 10164614,
+      "sha256": "706fbeb0f35cfc536531995749fd2d3f2df349b1752d032568ef40bdc0e2aacf"
+    }
+  },
+  "test_script_adaptations": "Only package import and repository paths made portable; T14 skips when production capture is absent; game source unchanged."
+}

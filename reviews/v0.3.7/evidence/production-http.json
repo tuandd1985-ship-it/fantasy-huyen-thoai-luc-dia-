@@ -1,0 +1,40 @@
+{
+  "Status": 200,
+  "Headers": {
+    "Date": [
+      "Fri, 27 Nov 2026 16:25:08 GMT"
+    ],
+    "Transfer-Encoding": [
+      "chunked"
+    ],
+    "Connection": [
+      "keep-alive"
+    ],
+    "Cache-Control": [
+      "no-store"
+    ],
+    "X-Content-Type-Options": [
+      "nosniff"
+    ],
+    "Report-To": [
+      "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=qDbXwMo%2BZ0ZLyNPDfqorUosco64L5lLGrnk8peHD2YHduKtJD2zlCEo%2F3SpGRZmhD%2BV8dwTqYtxU7Cf3FEUiOFLCXsmkAjTFmN7FzpD5RQkF9Ya4EEI6rm8Y4Ze9IO2nEOm%2BM6JBpZOHpNKLIwrILcgdzgIiZmIGVrZdMQRGWCa%2BQd0%3D\"}]}"
+    ],
+    "Nel": [
+      "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}"
+    ],
+    "Server": [
+      "cloudflare"
+    ],
+    "CF-RAY": [
+      "a6127cb1d990511e-KIX"
+    ],
+    "Alt-Svc": [
+      "h3=\":443\""
+    ],
+    "Content-Type": [
+      "text/html; charset=utf-8"
+    ]
+  },
+  "Bytes": 10164614,
+  "UTC": "2026-11-27T16:25:10.2031854Z"
+}
