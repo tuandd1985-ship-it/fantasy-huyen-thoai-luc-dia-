@@ -18,7 +18,7 @@ Tiêu chuẩn hình ảnh và animation. SPEC.md ưu tiên cao nhất; mục nà
 ## PHONG CÁCH NHÂN VẬT: CHIBI TOÀN BỘ (Do chốt 2026-11-27 22:10 — THAY THẾ hướng bán hiện thực cho riêng phần nhân vật người chơi)
 - Nhân vật người chơi vẽ kiểu **CHIBI ĐẸP** ở MỌI nơi xuất hiện: sprite trong sân LẪN chân dung (màn hình chọn/tạo nhân vật, HUD, panel). Đầu to, tỉ lệ dễ thương, giáp/vũ khí/kiểu tóc vẽ rõ và sắc nét, màu tươi nổi bật trên nền map, nhìn là phân biệt được phái + giới tính ngay.
 - Chân dung bán hiện thực đã vẽ ở các vòng trước (Kiếm Sĩ/Pháp Sư) KHÔNG còn là chuẩn — phải vẽ lại chibi đồng bộ cả 6 biến thể ở vòng hình ảnh kế tiếp.
-- Quái/boss/map giữ phong cách Fantasy như Concept.png, nhưng tông màu/độ sáng phải hài hòa với nhân vật chibi (nhân vật luôn nổi bật nhất khung hình). Nếu sau này Do muốn quái cũng chibi thì chốt riêng.
+- QUÁI/BOSS CHÍNH THỨC CHIBI-FANTASY (Do chốt 2026-11-28 — thay dòng cũ "quái/boss giữ phong cách Fantasy như Concept.png"): quái và boss vẽ **chibi-fantasy đồng bộ với nhân vật người chơi** (đầu to, viền đậm, màu tươi, tông hài hòa, nhân vật chính vẫn nổi bật nhất khung hình). Lý do: pipeline ComfyUI vòng 3 cho kết quả chibi đẹp và ăn nhập; hướng bán hiện thực ra kiểu poster, lệch tông cạnh hero chibi. Boss vẫn phải TO và DỮ hơn hẳn quái thường trong cùng phong cách (tỉ lệ lớn, chi tiết phát sáng như rune, sẹo, mắt phát sáng). Map/môi trường vẫn theo định hướng chất lượng Concept.png; Concept.png vẫn là tham chiếu chất lượng + giao diện tổng thể.
 
 ## Nhân vật
 - 6 biến thể (3 phái × Nam/Nữ), mỗi biến thể: chân dung chi tiết + sprite trong sân đồng bộ (cùng giáp/vũ khí/màu chủ đạo).

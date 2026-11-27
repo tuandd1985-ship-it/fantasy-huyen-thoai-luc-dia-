@@ -12,6 +12,7 @@ Khởi tạo: 2026-11-27. Chủ dự án: Do (Tony Đỗ). Người thực hiệ
 ## 1b. Quyết định của Do ngày 2026-11-27 (sau báo cáo đối chiếu zip — BAO-CAO-DOI-CHIEU-ZIP.md)
 - DUYỆT kế hoạch 5 bước trong báo cáo đối chiếu. Các đề xuất PROPOSED của bộ zip được duyệt theo kế hoạch, gồm: bảng % rơi đồ đảm bảo từ boss theo map, danh sách 10 ô trang bị cụ thể, nâng cấp thất bại không phá đồ (MVP), tùy chọn AUTO chi tiết, chuẩn sprite 8 hướng, lưu IndexedDB có schema/migration, mục tiêu hiệu năng + bài test dài, dock icon ở TRÊN GIỮA theo Concept.png (riêng vị trí icon này đã bị HUD V2 thay thế cùng ngày — xem mục 6d-bis: 5 icon tròn trên PHẢI cạnh minimap).
 - NGOẠI LỆ DUY NHẤT: KHÔNG khóa tính năng theo cấp kiểu Lv3 AUTO/shop, Lv5 rèn, Lv10 skill phụ, Lv12 khảm, Lv18 ghép ngọc — GIỮ MỞ như SPEC gốc (AUTO, cửa hàng, lò rèn, skill phụ, khảm/ghép ngọc dùng được không chờ mốc cấp; chỉ skill CHÍNH vẫn mở theo Lv1/8/15/25 như mục 2).
+- BỔ SUNG 2026-11-28 (Do chốt, từ đề xuất PROPOSED của bộ tài liệu GAME-ART-CORE): chuẩn sprite 8 hướng ở trên được GIÃN cho giai đoạn mẫu — sprite làm 4 hướng (2 hướng vẽ thật: xuống/lên; trái/phải lật ngang), di chuyển 8 hướng vẫn do engine đảm nhiệm; chuẩn 8 hướng đầy đủ chỉ xét lại khi làm bộ animation nhân vật chính thức. Cùng ngày: quái/boss chính thức chuyển sang chibi-fantasy (xem ART_DIRECTION.md).
 
 ## 2. Nhân vật
 - 3 phái, mỗi phái bộ 4 skill RIÊNG (tổng 12 skill), mở khoá theo cấp Lv1 / Lv8 / Lv15 / Lv25, mỗi skill có icon + hiệu ứng riêng, có hồi chiêu + tốn mana:
