@@ -1,0 +1,108 @@
+{
+  "frames": {
+    "death_008": {
+      "frame": {
+        "x": 640,
+        "y": 2,
+        "w": 318,
+        "h": 228
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 44,
+        "y": 166,
+        "w": 318,
+        "h": 228
+      },
+      "sourceSize": {
+        "w": 560,
+        "h": 460
+      },
+      "pivot": {
+        "x": 0.6518,
+        "y": 0.7717
+      },
+      "duration": 83
+    },
+    "death_013": {
+      "frame": {
+        "x": 2,
+        "y": 2,
+        "w": 317,
+        "h": 230
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 24,
+        "y": 183,
+        "w": 317,
+        "h": 230
+      },
+      "sourceSize": {
+        "w": 560,
+        "h": 460
+      },
+      "pivot": {
+        "x": 0.6518,
+        "y": 0.7717
+      },
+      "duration": 83
+    },
+    "death_014": {
+      "frame": {
+        "x": 321,
+        "y": 2,
+        "w": 317,
+        "h": 230
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 24,
+        "y": 183,
+        "w": 317,
+        "h": 230
+      },
+      "sourceSize": {
+        "w": 560,
+        "h": 460
+      },
+      "pivot": {
+        "x": 0.6518,
+        "y": 0.7717
+      },
+      "duration": 83
+    }
+  },
+  "animations": {
+    "death": [
+      "death_008",
+      "death_013",
+      "death_014"
+    ]
+  },
+  "meta": {
+    "app": "https://rigby2d.com",
+    "version": "rigby-snapshot/1",
+    "image": "kiemsi_nam_anim-1.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 960,
+      "h": 234
+    },
+    "scale": "1",
+    "frameTags": [
+      {
+        "name": "death",
+        "from": 0,
+        "to": 2,
+        "direction": "forward"
+      }
+    ],
+    "related_multi_packs": [
+      "kiemsi_nam_anim-0.json"
+    ]
+  }
+}

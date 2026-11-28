@@ -1,0 +1,93 @@
+{
+ "idle": {
+  "frames": 19,
+  "frame_size": [
+   322,
+   364
+  ],
+  "edge_alpha_pct_max": 0.0,
+  "opaque_components_max": 2,
+  "feet_y_min_max": [
+   338,
+   338
+  ]
+ },
+ "walk": {
+  "frames": 10,
+  "frame_size": [
+   322,
+   364
+  ],
+  "edge_alpha_pct_max": 0.0,
+  "opaque_components_max": 10,
+  "feet_y_min_max": [
+   337,
+   339
+  ]
+ },
+ "run": {
+  "frames": 6,
+  "frame_size": [
+   322,
+   364
+  ],
+  "edge_alpha_pct_max": 0.0,
+  "opaque_components_max": 9,
+  "feet_y_min_max": [
+   339,
+   343
+  ]
+ },
+ "attack": {
+  "frames": 8,
+  "frame_size": [
+   560,
+   460
+  ],
+  "edge_alpha_pct_max": 0.0,
+  "opaque_components_max": 9,
+  "feet_y_min_max": [
+   351,
+   352
+  ]
+ },
+ "skill": {
+  "frames": 13,
+  "frame_size": [
+   560,
+   460
+  ],
+  "edge_alpha_pct_max": 0.0,
+  "opaque_components_max": 14,
+  "feet_y_min_max": [
+   351,
+   352
+  ]
+ },
+ "hit": {
+  "frames": 6,
+  "frame_size": [
+   560,
+   460
+  ],
+  "edge_alpha_pct_max": 0.0,
+  "opaque_components_max": 18,
+  "feet_y_min_max": [
+   351,
+   358
+  ]
+ },
+ "death": {
+  "frames": 15,
+  "frame_size": [
+   560,
+   460
+  ],
+  "edge_alpha_pct_max": 0.0,
+  "opaque_components_max": 13,
+  "feet_y_min_max": [
+   -1,
+   411
+  ]
+ }
+}
