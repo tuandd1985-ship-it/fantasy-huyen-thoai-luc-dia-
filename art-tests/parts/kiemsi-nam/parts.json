@@ -1,0 +1,430 @@
+{
+  "canvas": {
+    "width": 768,
+    "height": 640,
+    "baselineY": 620,
+    "origin": "top-left"
+  },
+  "rig": {
+    "sides": "anatomical; left is on viewer's right in the rest pose",
+    "coordinates": "integer pixels in the shared 768x640 canvas",
+    "composition": "source-over by ascending z, place every layer at (0,0) in rest pose",
+    "bbox": "half-open [left,top,right,bottom] pixel bounds",
+    "pivotApplication": "rotate around each pivot in rest canvas coordinates; propagate parent transforms down the tree"
+  },
+  "reference": {
+    "path": "art-tests/hero-edge-clean/cleaned_webp_q90/hero-swordsman-male.webp",
+    "sha256": "b96ad67a0ec52e48a94a824f241995cf02c1d491d6e70f60a4478c374b8764c5"
+  },
+  "assembled": "assembled.png",
+  "sha256Assembled": "c05fc99aac92c1119fc910cf589e66dab0d7dc8fa980832ee3c2eefad43b6b20",
+  "parts": [
+    {
+      "id": "cape",
+      "file": "cape.png",
+      "z": 0,
+      "parent": "torso",
+      "joint": "cape-root",
+      "pivot": {
+        "x": 410,
+        "y": 398
+      },
+      "bbox": [
+        224,
+        383,
+        596,
+        601
+      ]
+    },
+    {
+      "id": "leg_l_thigh",
+      "file": "leg_l_thigh.png",
+      "z": 1,
+      "parent": "torso",
+      "joint": "left-hip",
+      "pivot": {
+        "x": 456,
+        "y": 530
+      },
+      "bbox": [
+        426,
+        507,
+        495,
+        571
+      ]
+    },
+    {
+      "id": "leg_l_shin",
+      "file": "leg_l_shin.png",
+      "z": 2,
+      "parent": "leg_l_thigh",
+      "joint": "left-knee",
+      "pivot": {
+        "x": 461,
+        "y": 556
+      },
+      "bbox": [
+        433,
+        543,
+        493,
+        603
+      ]
+    },
+    {
+      "id": "leg_l_foot",
+      "file": "leg_l_foot.png",
+      "z": 3,
+      "parent": "leg_l_shin",
+      "joint": "left-ankle",
+      "pivot": {
+        "x": 464,
+        "y": 592
+      },
+      "bbox": [
+        439,
+        581,
+        509,
+        621
+      ]
+    },
+    {
+      "id": "leg_r_thigh",
+      "file": "leg_r_thigh.png",
+      "z": 4,
+      "parent": "torso",
+      "joint": "right-hip",
+      "pivot": {
+        "x": 374,
+        "y": 530
+      },
+      "bbox": [
+        334,
+        505,
+        405,
+        571
+      ]
+    },
+    {
+      "id": "leg_r_shin",
+      "file": "leg_r_shin.png",
+      "z": 5,
+      "parent": "leg_r_thigh",
+      "joint": "right-knee",
+      "pivot": {
+        "x": 369,
+        "y": 555
+      },
+      "bbox": [
+        337,
+        544,
+        401,
+        606
+      ]
+    },
+    {
+      "id": "leg_r_foot",
+      "file": "leg_r_foot.png",
+      "z": 6,
+      "parent": "leg_r_shin",
+      "joint": "right-ankle",
+      "pivot": {
+        "x": 370,
+        "y": 595
+      },
+      "bbox": [
+        339,
+        580,
+        405,
+        621
+      ]
+    },
+    {
+      "id": "torso",
+      "file": "torso.png",
+      "z": 7,
+      "parent": null,
+      "joint": "root",
+      "pivot": {
+        "x": 412,
+        "y": 524
+      },
+      "bbox": [
+        313,
+        379,
+        510,
+        564
+      ]
+    },
+    {
+      "id": "arm_l_upper",
+      "file": "arm_l_upper.png",
+      "z": 8,
+      "parent": "torso",
+      "joint": "left-shoulder",
+      "pivot": {
+        "x": 477,
+        "y": 430
+      },
+      "bbox": [
+        470,
+        397,
+        541,
+        470
+      ]
+    },
+    {
+      "id": "arm_l_forearm",
+      "file": "arm_l_forearm.png",
+      "z": 9,
+      "parent": "arm_l_upper",
+      "joint": "left-elbow",
+      "pivot": {
+        "x": 517,
+        "y": 464
+      },
+      "bbox": [
+        498,
+        454,
+        552,
+        536
+      ]
+    },
+    {
+      "id": "arm_r_upper",
+      "file": "arm_r_upper.png",
+      "z": 10,
+      "parent": "torso",
+      "joint": "right-shoulder",
+      "pivot": {
+        "x": 358,
+        "y": 426
+      },
+      "bbox": [
+        290,
+        397,
+        367,
+        475
+      ]
+    },
+    {
+      "id": "arm_r_forearm",
+      "file": "arm_r_forearm.png",
+      "z": 11,
+      "parent": "arm_r_upper",
+      "joint": "right-elbow",
+      "pivot": {
+        "x": 326,
+        "y": 451
+      },
+      "bbox": [
+        285,
+        440,
+        349,
+        488
+      ]
+    },
+    {
+      "id": "head",
+      "file": "head.png",
+      "z": 12,
+      "parent": "torso",
+      "joint": "neck",
+      "pivot": {
+        "x": 412,
+        "y": 396
+      },
+      "bbox": [
+        226,
+        10,
+        591,
+        412
+      ]
+    },
+    {
+      "id": "hand_r_sword",
+      "file": "hand_r_sword.png",
+      "z": 13,
+      "parent": "arm_r_forearm",
+      "joint": "right-wrist",
+      "pivot": {
+        "x": 315,
+        "y": 452
+      },
+      "bbox": [
+        113,
+        105,
+        333,
+        544
+      ]
+    }
+  ],
+  "jointOverlapCheck": {
+    "windowPx": 47,
+    "anglesDeg": [
+      -20,
+      0,
+      20
+    ],
+    "jointOverlapsPx": [
+      {
+        "id": "cape",
+        "rest": 1638,
+        "rotated": {
+          "-20": 1646,
+          "20": 1669
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "leg_l_thigh",
+        "rest": 2128,
+        "rotated": {
+          "-20": 2086,
+          "20": 2083
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "leg_l_shin",
+        "rest": 1149,
+        "rotated": {
+          "-20": 1148,
+          "20": 1191
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "leg_l_foot",
+        "rest": 726,
+        "rotated": {
+          "-20": 749,
+          "20": 765
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "leg_r_thigh",
+        "rest": 2178,
+        "rotated": {
+          "-20": 2122,
+          "20": 2163
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "leg_r_shin",
+        "rest": 1102,
+        "rotated": {
+          "-20": 1119,
+          "20": 1137
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "leg_r_foot",
+        "rest": 918,
+        "rotated": {
+          "-20": 977,
+          "20": 940
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "arm_l_upper",
+        "rest": 239,
+        "rotated": {
+          "-20": 249,
+          "20": 296
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "arm_l_forearm",
+        "rest": 301,
+        "rotated": {
+          "-20": 322,
+          "20": 296
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "arm_r_upper",
+        "rest": 579,
+        "rotated": {
+          "-20": 562,
+          "20": 603
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "arm_r_forearm",
+        "rest": 872,
+        "rotated": {
+          "-20": 887,
+          "20": 854
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "head",
+        "rest": 1414,
+        "rotated": {
+          "-20": 1426,
+          "20": 1411
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "hand_r_sword",
+        "rest": 1002,
+        "rotated": {
+          "-20": 936,
+          "20": 1051
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      }
+    ]
+  },
+  "imageGen": {
+    "core": {
+      "file": "exec-143e583f-4ce0-4996-9524-63596e50bc92.png",
+      "grid": [
+        2,
+        2
+      ],
+      "prompt": "Square image on a strict invisible 2x2 grid. Top left = complete original character's oversized face, peach skin, same cheerful mouth and enormous blue eyes, blue hair, entire silver helmet with straight ridged center plate and RED plume. Include only head and a very short flesh neck stub concealed under chin, no arms and no body or collar. Head faces very slightly viewer right, the original image is the overriding reference. Top right = complete single RED cape facing toward viewer with cape fabric flaring out toward both corners at bottom, narrow at nape, exact cape design with simple low red folds, a dark red inner face, no bulky collar or pauldrons. Bottom left = BODY ONLY, silver breastplate with inset gold corner details, ribbed raised silver neckline, taper waist with dark brown belt and silver angled plate hip skirt over hips, closed shapes with unobstructed sides. No arms, feet or shoulders, no head. Bottom right must be entirely empty transparent. Keep all three separated with generous margins, each centered only in its cell. The torso and cape are straight and upright.",
+      "sha256": "0b7b2f139bc91bad2d76cc91d34296bacf9f2d5df0b7f49c963055785c64f02f"
+    },
+    "arms": {
+      "file": "exec-39467392-10f1-466d-aa1e-41033bef6184.png",
+      "grid": [
+        3,
+        2
+      ],
+      "prompt": "Landscape 3:2 image, exactly five complete cutouts placed in a strict invisible game atlas 3 columns 2 rows, no overlaps. Match each gauntlet and shoulder pad to source character. Row 1 left = LEFT upper arm (viewer-right in the reference), shoulder pad with gold trim and silver rounded plates, tapered slightly toward viewer right at elbow, black flexible undersuit cap concealable behind adjacent armor. Row 1 middle = LEFT forearm from elbow to wrist plus entire empty curled relaxed left glove, narrow layered silver vambrace. Points slightly down-right with knuckles at bottom. Row 1 right = RIGHT upper arm (viewer-left in original), silver gold-trim shoulder pauldron and upper sleeve slightly down-left with rounded joint. Row 2 far left = RIGHT forearm, armored elbow to wrist bracer, strictly NO glove or hand, descending diagonally down-left at about 18 degrees, with round midtone hidden wrist stub. Row 2 middle = one very important unified full silver sword and armored RIGHT glove gripping leather handle. Whole blade tip extends almost vertically up-left about 25 degrees from vertical, broad straight smooth silver blade, gold crossguard below blade and above glove, brown leather grip and gold pommel below hand, gauntlet located just under guard at about 81 percent of whole item height, small attached wrist stub to the viewer right of fist. No blade curvature. No arm beyond the wrist. Sword can be drawn shorter relative to its width to fit along a diagonal within its assigned cell. Sixth cell must be entirely empty. Do not introduce other hands, weapons or clothes.",
+      "sha256": "f5b10c017e838afd6494d626d54d9dde379e9569cc8c74a1c1b98674e05d6ab1"
+    },
+    "legs": {
+      "file": "exec-73bd01f1-f8e8-4a1b-b196-4dd51de0e11c.png",
+      "grid": [
+        3,
+        2
+      ],
+      "prompt": "Landscape 3:2 image, exactly six separate complete silver steel armor leg pieces in a perfectly aligned 3 column 2 row atlas. Match the black undersuit, silver steel highlights and narrow gold edging of current character. Row 1 is CHARACTER'S LEFT, facing slightly viewer right. Left cell = thigh alone, short chunky leg section with plate on front over dark fabric, solid rounded joint overlap at hip and knee, no hip skirt, near vertical. Middle cell = shin alone including SILVER knee plate and tapered silver greave, rounded ankle stub; no shoe or foot. Right cell = left low armored FOOT alone, silver chibi boot toe aiming slightly viewer right, a stub up to the ankle for hidden overlap, no calf. Row 2 is CHARACTER'S RIGHT. Left cell = right thigh alone, upper leg with silver plate over dark undersuit, solid rounded stubs at both ends. Middle cell = right shin alone with defined silver knee plate, ankle stub, no boot or foot. Right cell = right low armored FOOT and silver toe, aimed slightly toward viewer; short ankle overlap, no calf. All six pieces straight upright with readable large cool silver highlights, no full leg, keep gap between cell contents.",
+      "sha256": "ec01aa8a4ec812a93c391e03c429a5330a2de58fe92efb914c240ac61b0d30db"
+    }
+  }
+}
