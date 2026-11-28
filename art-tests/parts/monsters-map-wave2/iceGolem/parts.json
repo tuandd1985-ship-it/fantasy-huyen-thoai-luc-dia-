@@ -1,0 +1,201 @@
+{
+  "canvas": [
+    768,
+    640
+  ],
+  "baselineY": 620,
+  "groundTouch": [
+    "leg_l",
+    "leg_r"
+  ],
+  "artBottomY": 620,
+  "origin": "top-left",
+  "rig": {
+    "sides": "anatomical; left is on viewer's right in the rest pose",
+    "coordinates": "integer pixels in the shared 768x640 canvas",
+    "composition": "source-over by ascending z, place every layer at (0,0) in rest pose",
+    "bbox": "half-open [left,top,right,bottom] pixel bounds",
+    "pivotApplication": "rotate around each pivot in rest canvas coordinates; propagate parent transforms down the tree"
+  },
+  "reference": {
+    "path": "reference.png",
+    "sha256": "ca831d08846d1589e0d6e4fe025af35ba6c7f017090774f06dab64f535fd2fa5"
+  },
+  "assembled": "assembled.png",
+  "sha256Assembled": "a48fa9512c555b386917f2183837c4e100c660821de936f64ba162379232c3ca",
+  "parts": [
+    {
+      "id": "leg_r",
+      "file": "leg_r.png",
+      "z": 0,
+      "parent": "body",
+      "joint": "right-hip",
+      "pivot": {
+        "x": 295,
+        "y": 441
+      },
+      "bbox": [
+        189,
+        401,
+        379,
+        621
+      ]
+    },
+    {
+      "id": "leg_l",
+      "file": "leg_l.png",
+      "z": 1,
+      "parent": "body",
+      "joint": "left-hip",
+      "pivot": {
+        "x": 491,
+        "y": 461
+      },
+      "bbox": [
+        387,
+        400,
+        574,
+        621
+      ]
+    },
+    {
+      "id": "body",
+      "file": "body.png",
+      "z": 2,
+      "parent": null,
+      "joint": "root",
+      "pivot": {
+        "x": 391,
+        "y": 399
+      },
+      "bbox": [
+        199,
+        188,
+        582,
+        536
+      ]
+    },
+    {
+      "id": "arm_r",
+      "file": "arm_r.png",
+      "z": 3,
+      "parent": "body",
+      "joint": "right-shoulder",
+      "pivot": {
+        "x": 283,
+        "y": 354
+      },
+      "bbox": [
+        79,
+        284,
+        376,
+        594
+      ]
+    },
+    {
+      "id": "arm_l",
+      "file": "arm_l.png",
+      "z": 4,
+      "parent": "body",
+      "joint": "left-shoulder",
+      "pivot": {
+        "x": 511,
+        "y": 354
+      },
+      "bbox": [
+        418,
+        284,
+        713,
+        594
+      ]
+    },
+    {
+      "id": "head",
+      "file": "head.png",
+      "z": 5,
+      "parent": "body",
+      "joint": "neck",
+      "pivot": {
+        "x": 388,
+        "y": 288
+      },
+      "bbox": [
+        247,
+        111,
+        521,
+        340
+      ]
+    }
+  ],
+  "jointOverlapCheck": {
+    "windowPx": 47,
+    "anglesDeg": [
+      -20,
+      0,
+      20
+    ],
+    "jointOverlapsPx": [
+      {
+        "id": "leg_r",
+        "rest": 313,
+        "rotated": {
+          "-20": 406,
+          "20": 204
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "leg_l",
+        "rest": 2098,
+        "rotated": {
+          "-20": 2157,
+          "20": 2107
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "arm_r",
+        "rest": 2209,
+        "rotated": {
+          "-20": 2209,
+          "20": 2209
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "arm_l",
+        "rest": 2209,
+        "rotated": {
+          "-20": 2209,
+          "20": 2209
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "head",
+        "rest": 2101,
+        "rotated": {
+          "-20": 2097,
+          "20": 2105
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      }
+    ]
+  },
+  "imageGen": {
+    "atlas": {
+      "file": "exec-ffd8b3ab-d3e9-4483-a75d-9f818e063312.png",
+      "grid": [
+        3,
+        2
+      ],
+      "prompt": "Use case: stylized-concept. Create a drawing atlas of separate animation pieces of reference image 1, this exact chibi game monster. Image 2 is the map background reference for contrast and hue context ONLY, draw no scenery. Each piece in its own strictly regular invisible 3 columns by 2 rows cell. Paint independent whole components and short hidden overlap stubs at joints. Use strong ink outlines, opaque cel shading, detailed saturated fantasy game shapes, slightly elevated front three-quarter orthographic. Generous transparent margins between every piece, no floor, border, shadow or labels. Genuine transparent backdrop. Organize body parts exactly in the following reading order:\n1. angular chibi glacier golem head only with navy dark rock and cyan eyes, ice crest.\n2. massive glacier torso only, broad upper half, large icy crystal projections and bright lilac rune core, no head or limbs.\n3. left whole huge heavy icy arm including fist, angled down-right.\n4. right whole huge heavy icy arm including fist, angled down-left.\n5. left chunky squat navy crystal golem leg and foot.\n6. right chunky squat navy crystal golem leg and foot.",
+      "sha256": "1343650455f73ef4ba723aad8c703f9a75a1d8f5b7167618fe539373b4449a45"
+    }
+  }
+}

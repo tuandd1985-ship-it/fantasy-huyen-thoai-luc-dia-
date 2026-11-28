@@ -1,0 +1,309 @@
+{
+  "canvas": [
+    768,
+    640
+  ],
+  "baselineY": 620,
+  "groundTouch": [
+    "leg_r_near_2",
+    "leg_l_near_2"
+  ],
+  "artBottomY": 620,
+  "origin": "top-left",
+  "rig": {
+    "sides": "anatomical; left is on viewer's right in the rest pose",
+    "coordinates": "integer pixels in the shared 768x640 canvas",
+    "composition": "source-over by ascending z, place every layer at (0,0) in rest pose",
+    "bbox": "half-open [left,top,right,bottom] pixel bounds",
+    "pivotApplication": "rotate around each pivot in rest canvas coordinates; propagate parent transforms down the tree"
+  },
+  "reference": {
+    "path": "reference.png",
+    "sha256": "1d34d581c3dc33c0a8961b164ac532f3a74a1154ee04ba40adeb4285db2f2ca2"
+  },
+  "assembled": "assembled.png",
+  "sha256Assembled": "eecb7315dc19e89a7dffed994ecef414e0070a9bdeb98587d7fc27bbdc62bf9d",
+  "parts": [
+    {
+      "id": "leg_r_far_1",
+      "file": "leg_r_far_1.png",
+      "z": 0,
+      "parent": "body",
+      "joint": "leg_r_far_1",
+      "pivot": {
+        "x": 364,
+        "y": 341
+      },
+      "bbox": [
+        55,
+        265,
+        433,
+        505
+      ]
+    },
+    {
+      "id": "leg_l_far_1",
+      "file": "leg_l_far_1.png",
+      "z": 1,
+      "parent": "body",
+      "joint": "leg_l_far_1",
+      "pivot": {
+        "x": 421,
+        "y": 340
+      },
+      "bbox": [
+        355,
+        265,
+        720,
+        505
+      ]
+    },
+    {
+      "id": "leg_r_far_2",
+      "file": "leg_r_far_2.png",
+      "z": 2,
+      "parent": "body",
+      "joint": "leg_r_far_2",
+      "pivot": {
+        "x": 385,
+        "y": 345
+      },
+      "bbox": [
+        53,
+        303,
+        443,
+        550
+      ]
+    },
+    {
+      "id": "leg_l_far_2",
+      "file": "leg_l_far_2.png",
+      "z": 3,
+      "parent": "body",
+      "joint": "leg_l_far_2",
+      "pivot": {
+        "x": 372,
+        "y": 344
+      },
+      "bbox": [
+        324,
+        303,
+        714,
+        550
+      ]
+    },
+    {
+      "id": "leg_r_near_1",
+      "file": "leg_r_near_1.png",
+      "z": 4,
+      "parent": "body",
+      "joint": "leg_r_near_1",
+      "pivot": {
+        "x": 361,
+        "y": 425
+      },
+      "bbox": [
+        65,
+        349,
+        428,
+        609
+      ]
+    },
+    {
+      "id": "leg_l_near_1",
+      "file": "leg_l_near_1.png",
+      "z": 5,
+      "parent": "body",
+      "joint": "leg_l_near_1",
+      "pivot": {
+        "x": 420,
+        "y": 425
+      },
+      "bbox": [
+        346,
+        349,
+        702,
+        609
+      ]
+    },
+    {
+      "id": "leg_r_near_2",
+      "file": "leg_r_near_2.png",
+      "z": 6,
+      "parent": "body",
+      "joint": "leg_r_near_2",
+      "pivot": {
+        "x": 372,
+        "y": 422
+      },
+      "bbox": [
+        119,
+        354,
+        434,
+        621
+      ]
+    },
+    {
+      "id": "leg_l_near_2",
+      "file": "leg_l_near_2.png",
+      "z": 7,
+      "parent": "body",
+      "joint": "leg_l_near_2",
+      "pivot": {
+        "x": 413,
+        "y": 425
+      },
+      "bbox": [
+        350,
+        354,
+        669,
+        621
+      ]
+    },
+    {
+      "id": "body",
+      "file": "body.png",
+      "z": 8,
+      "parent": null,
+      "joint": "root",
+      "pivot": {
+        "x": 386,
+        "y": 392
+      },
+      "bbox": [
+        208,
+        168,
+        566,
+        527
+      ]
+    },
+    {
+      "id": "head",
+      "file": "head.png",
+      "z": 9,
+      "parent": "body",
+      "joint": "neck",
+      "pivot": {
+        "x": 384,
+        "y": 426
+      },
+      "bbox": [
+        245,
+        360,
+        529,
+        567
+      ]
+    }
+  ],
+  "jointOverlapCheck": {
+    "windowPx": 47,
+    "anglesDeg": [
+      -20,
+      0,
+      20
+    ],
+    "jointOverlapsPx": [
+      {
+        "id": "leg_r_far_1",
+        "rest": 2074,
+        "rotated": {
+          "-20": 2075,
+          "20": 2089
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "leg_l_far_1",
+        "rest": 2068,
+        "rotated": {
+          "-20": 2101,
+          "20": 2062
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "leg_r_far_2",
+        "rest": 2206,
+        "rotated": {
+          "-20": 2209,
+          "20": 2201
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "leg_l_far_2",
+        "rest": 2204,
+        "rotated": {
+          "-20": 2196,
+          "20": 2205
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "leg_r_near_1",
+        "rest": 2176,
+        "rotated": {
+          "-20": 2183,
+          "20": 2204
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "leg_l_near_1",
+        "rest": 2187,
+        "rotated": {
+          "-20": 2209,
+          "20": 2193
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "leg_r_near_2",
+        "rest": 1562,
+        "rotated": {
+          "-20": 1599,
+          "20": 1565
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "leg_l_near_2",
+        "rest": 1741,
+        "rotated": {
+          "-20": 1738,
+          "20": 1796
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "head",
+        "rest": 2209,
+        "rotated": {
+          "-20": 2209,
+          "20": 2209
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      }
+    ]
+  },
+  "imageGen": {
+    "atlas": {
+      "file": "exec-7a7ea608-44f9-4c59-a8bb-9ccdfa0a3434.png",
+      "grid": [
+        3,
+        2
+      ],
+      "prompt": "Use case: stylized-concept. Create a drawing atlas of separate animation pieces of reference image 1, this exact chibi game monster. Image 2 is the map background reference for contrast and hue context ONLY, draw no scenery. Each piece in its own strictly regular invisible 3 columns by 2 rows cell. Paint independent whole components and short hidden overlap stubs at joints. Use strong ink outlines, opaque cel shading, detailed saturated fantasy game shapes, slightly elevated front three-quarter orthographic. Generous transparent margins between every piece, no floor, border, shadow or labels. Genuine transparent backdrop. Organize body parts exactly in the following reading order:\n1. eyed chibi venom spider head with upper jaw and green venom fangs, neck overlap, purple chitin.\n2. central compact rounded abdomen body with back plates, purple color and violet markings, no head or legs.\n3. one articulated near leg extends down-right from the INNER upper-left root; full purple leg with broad upper section and point at outer end.\n4. one articulated far leg extends down-right with darker purple shading, no foot separation.\n5. one mirrored near leg extends down-left from the inner upper-right root.\n6. one mirrored far leg extends down-left, dark purple.",
+      "sha256": "905d559f0f41eabcfc7d5f78801dcaba505c3f3317f92fefe7a7aca0431d470d"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+[
+  {
+    "desktopFile": "hang1.png",
+    "repoFile": "art-tests/maps-anh-do/map/hang1.png",
+    "sha256": "e7b437d05dfe5e5b84ebfe9037745dd35892a644f128558e157a17f84f280e7c"
+  },
+  {
+    "desktopFile": "hang2.png",
+    "repoFile": "art-tests/maps-anh-do/map/hang2.png",
+    "sha256": "e7a6c7443a7acce41c942e406004c9cae049aa5f0e953893ce991027358c28fc"
+  },
+  {
+    "desktopFile": "hang3.png",
+    "repoFile": "art-tests/maps-anh-do/map/hang3.png",
+    "sha256": "807e89904bd93a74e3ce9a646217c6154325c08cf3923edfd7855c3d8a0975e7"
+  },
+  {
+    "desktopFile": "boss bang.png",
+    "repoFile": "art-tests/maps-anh-do/map/boss_bang.png",
+    "sha256": "d93fec55f306e9f611b53122489e661b76f9c74db04b5bc38ad2f33fc4ada822"
+  },
+  {
+    "desktopFile": "bosslua.png",
+    "repoFile": "art-tests/maps-anh-do/map/bosslua.png",
+    "sha256": "72968d144071010d177a5918f537e28f178948dc3c6d8e913af46783069fdc96"
+  }
+]

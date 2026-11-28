@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Thử quái trên map · Huyền Thoại Lục Địa</title>
+<link rel="stylesheet" href="preview.css">
+<script defer src="scene-data.js"></script>
+<script defer src="rig-data.js"></script>
+<script defer src="preview.js"></script>
+</head>
+<body>
+<main>
+  <header><div><h1>Thử quái trên map</h1><p>Xem chuyển động của các mảnh trên ảnh map của anh Do.</p></div></header>
+  <section class="controls" aria-label="Điều khiển">
+    <label>Chọn map <select id="maps"></select></label>
+    <button id="motion" type="button" aria-pressed="true">Tạm dừng</button>
+    <button id="anchors" type="button" aria-pressed="false">Hiện điểm neo</button>
+    <button id="attack" type="button">Thử động tác</button>
+  </section>
+  <canvas id="scene" width="1402" height="1122" role="img" aria-label="Sân thử quái"></canvas>
+  <div class="caption"><p id="roster"></p><p id="note" role="status">Đang nạp ảnh…</p></div>
+</main>
+</body>
+</html>
