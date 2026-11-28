@@ -3,6 +3,16 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+    <!-- v0.9.0 — TRUE FULLSCREEN iOS: PWA standalone + landscape thật của hệ
+         thống (KHÔNG giả lập xoay bằng CSS). Máy chủ phục vụ 2 đường dẫn
+         /manifest.webmanifest (display standalone, orientation landscape)
+         và /apple-touch-icon.png; bản dựng chỉ khai báo đúng đường dẫn. -->
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="theme-color" content="#14263D" />
     <meta name="color-scheme" content="light dark" />
     <link rel="icon" href="data:," />
     <title>Game Đánh Quái Fantasy</title>
@@ -27,8 +37,10 @@
         }
       }
       *{ box-sizing:border-box; }
-      html,body{ margin:0; padding:0; }
-      body{ font-family:"Be Vietnam Pro",system-ui,sans-serif; color:var(--ink); background:radial-gradient(1200px 500px at 50% -120px, var(--bg2), transparent), var(--bg); min-height:100vh; }
+      /* v0.9.0 — khoá cuộn / zoom ngoài ý muốn: sân khấu phủ kín viewport
+         thật, trang không cuộn, không nảy cuộn (overscroll) */
+      html,body{ margin:0; padding:0; height:100%; overflow:hidden; overscroll-behavior:none; }
+      body{ font-family:"Be Vietnam Pro",system-ui,sans-serif; color:var(--ink); background:#060B14; min-height:100dvh; touch-action:none; }
       button{ font-family:inherit; cursor:pointer; }
       button, [role="button"]{ min-height:2.25rem; }
       .wrap{ max-width:none; margin:0; padding:0; height:100%; display:flex; flex-direction:column; }
@@ -92,6 +104,12 @@
       .arena-msg.show{ display:flex; }
       .arena-scrim{ position:absolute; inset:0; background:rgba(5,8,6,.35); display:none; z-index:11; }
       .arena-scrim.show{ display:block; }
+      /* Hộp thoại TƯƠNG TÁC (cổng / NPC): lớp mờ chỉ phủ thị giác, KHÔNG
+         chặn chạm — joystick / sân vẫn dùng được để đi khỏi vùng (hộp tự
+         đóng) và người chơi có nút ✕ đóng ngay, không bị kẹt như trước */
+      .arena-scrim.soft{ pointer-events:none; }
+      .msg-x{ position:absolute; top:8px; right:8px; width:34px; height:34px; min-height:34px; border-radius:50%; border:1.5px solid #D5AC60; background:#294C70; color:#F5E8CA; font-size:15px; font-weight:900; display:flex; align-items:center; justify-content:center; padding:0; z-index:2; line-height:1; box-shadow:0 3px 10px rgba(0,0,0,.45); }
+      .msg-x:active{ transform:scale(.9); }
       .arena-msg h2{ margin:0; color:#ffe9a8; font-size:26px; font-weight:900; text-shadow:0 2px 10px rgba(0,0,0,.7); }
       .arena-msg p{ margin:0; color:#f0e8cf; font-size:14px; max-width:440px; }
       .big-btn{ background:linear-gradient(180deg,var(--gold2),var(--gold)); color:#fff; border:none; border-radius:12px; font-weight:800; font-size:15px; padding:11px 22px; box-shadow:0 4px 14px rgba(0,0,0,.4); }
@@ -204,6 +222,12 @@
       .arena-wrap .auto-btn{ background:rgba(12,14,10,.66); backdrop-filter:blur(3px); color:#f0e8cf; border-color:rgba(238,194,106,.5); }
       .arena-wrap .auto-btn.on{ background:var(--btn); color:#fff; }
       .arena-wrap .fight-pad{ position:absolute; right:calc(10px + env(safe-area-inset-right)); bottom:calc(10px + env(safe-area-inset-bottom)); z-index:6; }
+      /* Màn hình NGANG THẤP (điện thoại landscape ~390–520px cao): cụm
+         292×292 nguyên cỡ chiếm gần hết chiều cao, vươn lên sát minimap
+         và đè lên vùng chiến đấu — thu đồng đều cả cụm (giữ nguyên hình
+         học vòng cung, các nút không chồng nhau) theo chiều cao khung */
+      @media (max-height:540px){ .arena-wrap .fight-pad{ transform:scale(.82); transform-origin:bottom right; } .arena-wrap .joy{ transform:scale(.88); transform-origin:bottom left; } }
+      @media (max-height:440px){ .arena-wrap .fight-pad{ transform:scale(.7); transform-origin:bottom right; } .arena-wrap .joy{ transform:scale(.8); transform-origin:bottom left; } }
       .arena-wrap .toasts{ left:50%; transform:translateX(-50%); bottom:18px; align-items:center; max-width:52%; width:max-content; }
       #minimap{ position:absolute; top:calc(10px + env(safe-area-inset-top)); right:calc(10px + env(safe-area-inset-right)); z-index:8; width:148px; height:100px; border-radius:10px; border:1px solid rgba(238,194,106,.55); background:rgba(8,10,8,.55); cursor:pointer; }
       .bigmap-back{ position:fixed; inset:0; background:rgba(5,8,5,.35); display:none; align-items:center; justify-content:center; z-index:70; padding:14px; }
@@ -248,58 +272,25 @@
           radial-gradient(600px 420px at 88% 108%, rgba(38,70,86,.45), transparent 60%),
           linear-gradient(180deg, #0a130e 0%, #132619 48%, #081009 100%);
       }
-      /* ===== TỰ XOAY HÌNH 90° KHI KHUNG ĐANG DỌC =====
-         Webview trong app KHÔNG tự xoay theo máy nên cách khóa cũ (phủ màn
-         hình bắt xoay ngang) làm người chơi kẹt hẳn. Cách mới: khi khung
-         hiển thị đang dọc, JS bật body.rot → toàn bộ game trong #rotRoot
-         tự xoay 90° bằng CSS transform, đổi width/height cho nhau và căn
-         giữa tuyệt đối. Người chơi chỉ cần xoay máy cầm ngang là hình
-         đúng chiều, chơi ngay trong app — không cần Safari, không phụ
-         thuộc khóa xoay của hệ điều hành. Khung đã ngang thì không
-         transform, hiển thị bình thường. Tọa độ chạm được quy đổi lại
-         trong JS (xem localPoint) nên joystick / nút / chạm chọn nhân
-         vật vẫn đúng vị trí ngón tay. */
-      #rotRoot{ position:relative; width:100%; height:100dvh; }
-      body.rot{ overflow:hidden; background:#060806; }
-      body.rot #rotRoot{
-        position:fixed; left:50%; top:50%;
-        width:100vh; height:100vw; width:100dvh; height:100dvw;
-        transform:translate(-50%,-50%) rotate(90deg);
-        transform-origin:50% 50%;
-      }
-      body.rot .wrap{ height:100%; }
-      /* Các kích thước vw/vh của cửa sổ vốn tính theo khung vật lý (đang
-         dọc) — khi đã tự xoay phải tính theo khung ngang thật của #rotRoot */
-      body.rot .panel{ width:min(700px,86%); max-height:84%; }
-      body.rot .modal{ max-height:84%; width:min(520px,86%); }
-      body.rot .roster-card, body.rot .settings-card{ width:min(680px,86%); max-height:84%; }
-      body.rot .bigmap-card{ width:min(680px,86%); max-height:84%; }
-      body.rot #bigMap{ width:auto; height:calc(100dvw - 172px); max-width:100%; }
-      body.rot .scene-panel{ width:min(302px,34%); max-height:calc(100% - 150px); }
-      body.rot .intro-title .t-main{ font-size:clamp(34px,7.5dvh,58px); }
-      body.rot .intro-title .t-sub{ font-size:clamp(15px,3.4dvh,24px); }
-      /* Media query dọc của khung vật lý vẫn khớp khi đã tự xoay — khôi
-         phục bố cục ngang cho sân khấu tạo nhân vật + pad đánh trong trận */
-      body.rot .scene-title{ display:block; }
-      body.rot .scene-panel{ top:calc(50px + env(safe-area-inset-top)); left:auto; right:calc(10px + env(safe-area-inset-right)); bottom:auto; }
-      body.rot .scene-bottom{ flex-wrap:nowrap; }
-      body.rot .scene-name-block{ flex-basis:auto; order:0; }
-      body.rot .scene-start{ margin:0 0 24px; }
-      /* Cụm vòng cung v0.6.0 là hộp CỐ ĐỊNH 292×292, mọi nút bên trong đều
-         position:absolute theo tọa độ trong hộp (các hàng bọc display:contents
-         nên hộp không có nội dung in-flow). TUYỆT ĐỐI không để width:auto ở
-         chế độ tự xoay: hộp sẽ co về 0px, neo right đẩy toàn bộ nút Đánh /
-         skill / bình / AUTO ra ngoài mép sân và bị overflow:hidden cắt mất
-         (lỗi "không thấy nút nào" trên iPhone dọc + Safari, bản v0.6.0). */
-      body.rot .arena-wrap .fight-pad{ width:292px; height:292px; }
-      /* Sân tự xoay chỉ cao bằng chiều NGANG vật lý của máy (~390px): hộp
-         cụm 292px gần chạm đỉnh sân, hàng trên của cụm (AUTO + buff 2) đụng
-         đúng chồng minimap + chip màn ở góc phải và bị che mất một phần.
-         Chỉ ở chế độ tự xoay mới dời chip màn sang trái, dưới thanh HP/MP
-         (vùng trống — chip nhiệm vụ ở đó đang ẩn tại khung vật lý ≤560px,
-         và top 140px vẫn chừa đủ chỗ khi nó hiện ở máy lớn hơn) để góc
-         phải trả trọn cho cụm nút. Khung ngang thật giữ nguyên vị trí cũ. */
-      body.rot .arena-wrap .arena-top{ top:calc(140px + env(safe-area-inset-top)); left:calc(10px + env(safe-area-inset-left)); right:auto; justify-content:flex-start; }
+      /* ===== v0.9.0 — SÂN KHẤU FULLSCREEN THẬT (ĐÃ XOÁ XOAY CSS 90°) =====
+         Không còn cơ chế body.rot / transform rotate giả lập landscape:
+         game dùng landscape THẬT của hệ thống. #stageRoot phủ kín viewport
+         thật (kích thước pixel do fitStage() gán theo visualViewport),
+         canvas vẽ tràn mép-tới-mép; HUD/panel lùi vào vùng an toàn bằng
+         env(safe-area-inset-*). Viewport đang DỌC thật → lớp phủ
+         #rotateHint nhắc xoay máy (game tạm dừng phía sau). */
+      #stageRoot{ position:fixed; left:0; top:0; width:100dvw; height:100dvh; overflow:hidden; background:#060B14; }
+      #rotateHint{ position:fixed; inset:0; z-index:300; display:none; align-items:center; justify-content:center; background:rgba(6,11,20,.9); padding:24px calc(20px + env(safe-area-inset-right)) 24px calc(20px + env(safe-area-inset-left)); }
+      @media (orientation:portrait) and (max-width:900px){ #rotateHint{ display:flex; } }
+      .rh-box{ text-align:center; color:#F5E8CA; max-width:320px; }
+      .rh-box p{ margin:10px 0 0; font-size:17px; font-weight:800; line-height:1.45; }
+      .rh-box .rh-sub{ font-size:13px; font-weight:600; color:#C7B489; }
+      .rh-phone{ width:44px; height:74px; margin:0 auto; border:3px solid #D5AC60; border-radius:10px; position:relative; animation:rhTurn 2.2s ease-in-out infinite; }
+      .rh-phone::after{ content:''; position:absolute; left:50%; bottom:5px; transform:translateX(-50%); width:14px; height:3px; border-radius:2px; background:#D5AC60; }
+      @keyframes rhTurn{ 0%,30%{ transform:rotate(0deg);} 65%,100%{ transform:rotate(90deg);} }
+      @media (prefers-reduced-motion: reduce){ .rh-phone{ animation:none; transform:rotate(90deg); } }
+      /* Đồng hồ FPS nhỏ (bật/tắt trong Cài đặt, mặc định tắt) */
+      #fpsMeter{ position:absolute; left:50%; transform:translateX(-50%); bottom:calc(14px + env(safe-area-inset-bottom)); z-index:9; background:rgba(10,20,36,.72); border:1px solid rgba(213,172,96,.55); color:#F5E8CA; border-radius:999px; font-size:11px; font-weight:800; padding:3px 10px; pointer-events:none; font-variant-numeric:tabular-nums; }
       .panel h3{ margin:0 0 10px; font-size:15px; font-weight:800; }
       .panel h4{ margin:16px 0 8px; font-size:13px; font-weight:800; color:var(--gold); text-transform:uppercase; letter-spacing:.04em; }
       .muted{ color:var(--ink-soft); font-size:12.5px; }
@@ -612,6 +603,191 @@
       @media (max-width:640px){
         .controls{ flex-wrap:wrap; }
       }
+
+      /* =====================================================================
+         v0.9.0 — DESIGN SYSTEM CHIBI FANTASY (ghi đè toàn bộ bảng màu cũ)
+         Panel nền #14263D · khung #294C70 · viền vàng kim #D5AC60 · chữ
+         chính #F5E8CA · nút xác nhận xanh ngọc/lá · nút đóng tròn dấu X.
+         Khối này nằm CUỐI stylesheet nên thắng mọi quy tắc cũ cùng độ ưu
+         tiên — dữ liệu/logic game không đổi, chỉ thay áo giao diện.
+         ===================================================================== */
+      .panel, .modal, .bigmap-card, .settings-card{
+        --ink:#F5E8CA; --ink-soft:#C7B489; --line:rgba(213,172,96,.42);
+        --panel:#14263D; --panel2:rgba(41,76,112,.5); --gold:#D5AC60; --gold2:#E8C87E;
+        --gold-soft:rgba(213,172,96,.18); --btn:#1E9E74; --btn-ink:#fff; --good:#2FBF8F; --bad:#FF7A6B; --gold-d:#D5AC60;
+        background:linear-gradient(180deg,#182C47,#14263D 30%); color:#F5E8CA;
+        border:1.5px solid rgba(213,172,96,.85); border-radius:16px;
+        box-shadow:0 18px 50px rgba(0,0,0,.55), inset 0 0 0 1px rgba(41,76,112,.6);
+      }
+      .panel{ width:min(880px,94%); max-height:92%; }
+      .roster-card{ --ink:#F5E8CA; --ink-soft:#C7B489; --line:rgba(213,172,96,.42); --panel2:rgba(41,76,112,.5); --gold:#D5AC60; --gold2:#E8C87E; --gold-soft:rgba(213,172,96,.18); --btn:#1E9E74; --btn-ink:#fff; --bad:#FF7A6B; }
+      /* Hiệu ứng mở cửa sổ 150–250ms */
+      @keyframes winIn{ from{ opacity:0; transform:translate(-50%,-50%) scale(.965);} to{ opacity:1; transform:translate(-50%,-50%) scale(1);} }
+      @keyframes fadeIn{ from{ opacity:0; transform:scale(.97);} to{ opacity:1; transform:scale(1);} }
+      .panel.active{ animation:winIn .2s ease; }
+      .modal-back.show .modal{ animation:fadeIn .2s ease; }
+      .bigmap-back.show .bigmap-card, .settings-back.show .settings-card{ animation:fadeIn .2s ease; }
+      @media (prefers-reduced-motion: reduce){ .panel.active, .modal-back.show .modal, .bigmap-back.show .bigmap-card, .settings-back.show .settings-card{ animation:none; } }
+      /* Popup chi tiết trang bị mở TỪ TRONG panel (Túi đồ / Trang bị) nên
+         phải nổi TRÊN panel (z 95) và lớp mờ (z 94) — giá trị cũ z 60 làm
+         popup bị panel che khuất, không bấm khảm/nâng cấp được */
+      .modal-back{ z-index:120; }
+      /* Nút đóng: hình tròn, viền vàng, dấu X rõ */
+      .sheet-x{ width:34px; height:34px; min-height:34px; background:#294C70; border:1.5px solid #D5AC60; color:#F5E8CA; font-size:15px; box-shadow:0 3px 10px rgba(0,0,0,.45); }
+      .sheet-x:hover{ background:#35597F; }
+      /* HUD chiến đấu: áo navy + viền vàng kim, giữ bố cục V3 */
+      .hud-overlay{ background:rgba(16,32,54,.78); border-color:rgba(213,172,96,.65); }
+      .hud-overlay .portrait{ border-color:#D5AC60; border-radius:50%; }
+      .hud-overlay .icon-btn{ background:rgba(41,76,112,.75); border-color:rgba(213,172,96,.5); }
+      .quest-chip, .map-chip{ background:rgba(16,32,54,.72); border-color:rgba(213,172,96,.55); }
+      .hud-ico .ico-c{ background:rgba(16,32,54,.78); border-color:rgba(213,172,96,.7); }
+      .hud-ico.on .ico-c{ background:rgba(30,158,116,.85); box-shadow:0 0 0 2px rgba(213,172,96,.5), 0 0 14px rgba(213,172,96,.4); }
+      #minimap{ border-color:rgba(213,172,96,.65); }
+      .arena-wrap .joy{ background:radial-gradient(circle at 50% 42%, rgba(41,76,112,.55), rgba(13,26,43,.6)); border-color:rgba(213,172,96,.55); }
+      .joy-thumb{ background:linear-gradient(180deg,#E8C87E,#B98A3E); }
+      .skill-btn, .sup-btn{ background:rgba(16,32,54,.85); border-color:rgba(213,172,96,.6); }
+      .pot-btn{ background:rgba(16,32,54,.85); }
+      .auto-btn{ background:rgba(16,32,54,.75); border-color:rgba(213,172,96,.55); }
+      .arena-wrap .auto-btn{ background:rgba(16,32,54,.75); border-color:rgba(213,172,96,.55); }
+      .arena-wrap .auto-btn.on, .auto-btn.on{ background:#1E9E74; }
+      .arena-msg{ background:rgba(16,32,54,.94); border-color:rgba(213,172,96,.8); }
+      .arena-msg h2{ color:#FFE9A8; }
+      .scene-panel{ background:rgba(16,32,54,.8); border-color:rgba(213,172,96,.6); }
+      .toast{ background:rgba(13,26,43,.88); border-left-color:#D5AC60; }
+      .dock-btn{ background:rgba(16,32,54,.82); border-color:rgba(213,172,96,.55); }
+      /* Nút xác nhận xanh ngọc trong panel */
+      .btn-primary, .plus-btn, .act-btn, .play-btn{ background:#1E9E74; }
+      .plus-btn:disabled, .act-btn:disabled{ background:rgba(41,76,112,.6); color:#8FA3B8; }
+
+      /* ===== THANH ĐIỀU HƯỚNG DỌC TRONG PANEL LỚN (v0.9.0) =====
+         PanelManager gắn .panel-nav + bọc nội dung vào .panel-body:
+         chuyển panel trực tiếp, không đóng/mở chồng. */
+      .panel.has-nav{ padding:0; overflow:hidden; }
+      .panel.has-nav.active{ display:flex; }
+      .settings-card.has-nav{ display:flex; padding:0; overflow:hidden; width:min(880px,94%); max-height:92%; }
+      .panel-nav{ flex:0 0 auto; width:88px; background:#0E1E33; border-right:1.5px solid rgba(213,172,96,.5); display:flex; flex-direction:column; gap:5px; padding:14px 8px; overflow-y:auto; }
+      .pnav-btn{ display:flex; flex-direction:column; align-items:center; gap:4px; padding:8px 2px 7px; border:1.5px solid transparent; border-radius:12px; background:transparent; color:#C7B489; font-size:10.5px; font-weight:800; min-height:58px; }
+      .pnav-btn .pnav-ic{ width:40px; height:40px; border-radius:50%; border:1.5px solid rgba(213,172,96,.5); background:rgba(41,76,112,.55); display:flex; align-items:center; justify-content:center; color:#F5E8CA; }
+      .pnav-btn .pnav-ic svg{ width:20px; height:20px; }
+      .pnav-btn.on{ background:rgba(213,172,96,.16); border-color:rgba(213,172,96,.75); color:#FFE9A8; }
+      .pnav-btn.on .pnav-ic{ background:#1E9E74; border-color:#E8C87E; }
+      .pnav-btn:active{ transform:scale(.94); }
+      .panel-body{ flex:1 1 auto; min-width:0; min-height:0; overflow-y:auto; padding:16px; position:relative; }
+      @media (max-width:640px){ .panel-nav{ width:66px; padding:10px 5px; } .pnav-btn{ font-size:9px; min-height:52px; } .pnav-btn .pnav-ic{ width:34px; height:34px; } }
+
+      /* ===== NHÂN VẬT: hero toàn thân trên bệ sáng + chỉ số GỌN ===== */
+      .char-top{ display:flex; gap:14px; align-items:flex-start; }
+      .char-fig{ position:relative; flex:0 0 auto; width:132px; height:172px; margin:0; display:flex; align-items:flex-end; justify-content:center; }
+      .char-fig img{ position:relative; z-index:1; max-width:100%; max-height:100%; object-fit:contain; filter:drop-shadow(0 6px 10px rgba(0,0,0,.45)); }
+      .pedestal{ position:absolute; left:50%; bottom:2px; transform:translateX(-50%); width:104px; height:26px; border-radius:50%; background:radial-gradient(ellipse at center, rgba(120,200,255,.75) 0%, rgba(64,140,230,.35) 55%, transparent 72%); box-shadow:0 0 22px rgba(96,180,255,.5); }
+      .pedestal.big{ width:190px; height:44px; }
+      .char-head{ flex:1 1 auto; min-width:0; display:flex; gap:11px; align-items:flex-start; }
+      .char-head img#charPortrait{ width:58px; height:58px; border-radius:50%; object-fit:cover; border:2px solid #D5AC60; flex:0 0 auto; }
+      .char-head-main{ flex:1 1 auto; min-width:0; }
+      .char-head-main h3{ margin:2px 0 8px; }
+      /* Bảng chỉ số gọn: 2 cột dòng kẻ mờ, KHÔNG ô hộp lớn từng chỉ số */
+      .stat-grid{ grid-template-columns:repeat(2,1fr); gap:0 22px; margin-top:6px; }
+      .stat-cell{ background:transparent; border:none; border-bottom:1px dashed rgba(213,172,96,.3); border-radius:0; padding:5px 2px; display:flex; align-items:baseline; justify-content:space-between; gap:8px; }
+      .stat-cell small{ display:inline; font-size:12px; }
+      .stat-cell b{ font-size:14.5px; white-space:nowrap; }
+      @media (max-width:560px){ .stat-grid{ grid-template-columns:1fr; } .char-fig{ width:104px; height:140px; } }
+
+      /* ===== TRANG BỊ: hero giữa, slot 2 bên, tab % riêng ===== */
+      .equip-tabs, .bag-tabs{ display:flex; gap:7px; margin-bottom:11px; flex-wrap:wrap; }
+      .eq-tab, .bag-tab{ border:1.5px solid rgba(213,172,96,.5); background:rgba(41,76,112,.45); color:#C7B489; border-radius:999px; font-weight:800; font-size:12.5px; padding:7px 15px; min-height:38px; }
+      .eq-tab.on, .bag-tab.on{ background:linear-gradient(180deg,#E8C87E,#C79A45); color:#3A2A05; border-color:#E8C87E; }
+      .equip-stage{ display:grid; grid-template-columns:96px 1fr 96px; gap:8px; align-items:center; max-width:520px; margin:0 auto; }
+      .equip-col{ display:flex; flex-direction:column; gap:10px; }
+      .equip-col .slot-box{ min-height:96px; background:rgba(41,76,112,.4); }
+      .equip-fig{ width:100%; height:230px; }
+      @media (max-width:560px){ .equip-stage{ grid-template-columns:78px 1fr 78px; } .equip-fig{ height:190px; } }
+
+      /* ===== KỸ NĂNG: danh sách trái + chi tiết phải ===== */
+      .skill-layout{ display:flex; gap:14px; align-items:flex-start; }
+      .skill-list{ flex:1 1 auto; min-width:0; }
+      .skill-detail{ flex:0 0 252px; width:252px; background:rgba(14,30,51,.65); border:1.5px solid rgba(213,172,96,.5); border-radius:13px; padding:13px; position:sticky; top:0; }
+      .skill-row-item{ cursor:pointer; width:100%; text-align:left; color:var(--ink); font-family:inherit; }
+      .skill-row-item.sel{ border-color:#D5AC60; background:rgba(213,172,96,.16); box-shadow:0 0 0 1px rgba(213,172,96,.5); }
+      .skill-row-item.locked{ opacity:.75; }
+      .skill-row-item .a-ic{ position:relative; }
+      .sk-lock{ position:absolute; right:-5px; bottom:-5px; width:17px; height:17px; border-radius:50%; background:#294C70; border:1px solid #D5AC60; color:#FFE9A8; display:flex; align-items:center; justify-content:center; }
+      .sk-lock svg{ width:10px; height:10px; }
+      .sd-head{ display:flex; gap:11px; align-items:center; margin-bottom:8px; }
+      .sd-ic{ position:relative; width:56px; height:56px; border-radius:13px; background:rgba(41,76,112,.55); border:1.5px solid rgba(213,172,96,.6); display:flex; align-items:center; justify-content:center; color:var(--gold); flex:0 0 auto; }
+      .sd-ic svg{ width:30px; height:30px; }
+      .sd-ic img{ position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:44px; height:44px; object-fit:contain; pointer-events:none; }
+      .sd-head b{ font-size:16px; display:block; }
+      .sd-rows{ font-size:13px; line-height:1.5; }
+      .sd-rows .sd-r{ display:flex; justify-content:space-between; gap:10px; padding:4px 0; border-bottom:1px dashed rgba(213,172,96,.28); }
+      .sd-rows .sd-r span{ color:var(--ink-soft); font-weight:600; }
+      .sd-rows .sd-r b{ white-space:nowrap; }
+      .sd-desc{ font-size:12.5px; color:var(--ink-soft); line-height:1.55; margin:9px 0; }
+      .sd-up{ width:100%; border:none; border-radius:11px; background:#1E9E74; color:#fff; font-weight:900; font-size:14px; padding:11px; min-height:44px; }
+      .sd-up:disabled{ background:rgba(41,76,112,.6); color:#8FA3B8; }
+      @media (max-width:640px){ .skill-layout{ flex-direction:column; } .skill-detail{ flex:none; width:100%; position:static; } }
+
+      /* ===== TÚI ĐỒ: lưới 8 cột + chi tiết phải ===== */
+      .bag-meta{ display:flex; gap:14px; align-items:center; font-size:12.5px; font-weight:700; color:var(--ink-soft); margin:-4px 0 9px; }
+      .bag-gold{ color:#E8C87E; font-weight:900; }
+      .bag-layout{ display:flex; gap:14px; align-items:flex-start; }
+      .bag-grid-wrap{ flex:1 1 auto; min-width:0; }
+      .bag-grid{ grid-template-columns:repeat(8,1fr); gap:6px; }
+      .bag-grid .item-cell, .bag-grid .gem-cell{ position:relative; padding:6px 2px; min-height:52px; justify-content:center; border-radius:10px; background:rgba(41,76,112,.35); }
+      .bag-grid .item-cell svg, .bag-grid .gem-cell svg{ width:24px; height:24px; }
+      .bag-grid .item-cell.sel, .bag-grid .gem-cell.sel{ border-color:#FFE9A8; box-shadow:0 0 0 2px rgba(255,233,168,.65), 0 0 14px rgba(213,172,96,.5); }
+      .bag-grid .bag-empty-cell{ min-height:52px; border:1.5px dashed rgba(213,172,96,.22); border-radius:10px; background:rgba(20,38,61,.35); }
+      .i-qty{ position:absolute; right:3px; bottom:2px; font-size:10.5px; font-weight:900; color:#FFE9A8; text-shadow:0 1px 3px rgba(0,0,0,.8); }
+      .i-uplv{ position:absolute; left:3px; top:2px; font-size:9.5px; font-weight:900; color:#E8C87E; text-shadow:0 1px 3px rgba(0,0,0,.8); }
+      .bag-detail{ flex:0 0 238px; width:238px; background:rgba(14,30,51,.65); border:1.5px solid rgba(213,172,96,.5); border-radius:13px; padding:13px; position:sticky; top:0; min-height:200px; }
+      .bd-ic{ width:64px; height:64px; border-radius:13px; background:rgba(41,76,112,.55); border:2px solid rgba(213,172,96,.6); display:flex; align-items:center; justify-content:center; margin-bottom:9px; }
+      .bd-ic svg{ width:36px; height:36px; }
+      .bd-ic .item-art{ width:46px; height:46px; }
+      .bag-detail h4{ margin:0 0 3px; font-size:15.5px; color:#F5E8CA; text-transform:none; letter-spacing:0; }
+      .bd-sub{ font-size:12px; font-weight:700; margin-bottom:8px; }
+      .bd-rows{ font-size:13px; }
+      .bd-rows .sd-r{ display:flex; justify-content:space-between; gap:10px; padding:4px 0; border-bottom:1px dashed rgba(213,172,96,.28); }
+      .bd-rows .sd-r span{ color:var(--ink-soft); font-weight:600; }
+      .bd-actions{ display:flex; flex-direction:column; gap:7px; margin-top:11px; }
+      .bd-actions button{ border-radius:11px; font-weight:800; font-size:13.5px; padding:10px; min-height:42px; border:1px solid var(--line); }
+      .bd-note{ font-size:12px; color:var(--ink-soft); line-height:1.5; margin-top:9px; }
+      @media (max-width:700px){ .bag-layout{ flex-direction:column; } .bag-detail{ flex:none; width:100%; position:static; } .bag-grid{ grid-template-columns:repeat(6,1fr); } }
+      @media (max-width:460px){ .bag-grid{ grid-template-columns:repeat(5,1fr); } }
+
+      /* ===== CHỌN NHÂN VẬT: cảnh làng toàn màn hình ===== */
+      .roster-back, body.in-gate .roster-back{ background:linear-gradient(180deg, rgba(8,17,30,.38) 0%, rgba(8,17,30,.55) 55%, rgba(6,12,22,.86) 100%), url(__A.k0) center 30%/cover no-repeat #0A1420; padding:0; overflow:hidden; }
+      .roster-scene{ position:relative; width:100%; height:100%; display:flex; flex-direction:column; padding:calc(10px + env(safe-area-inset-top)) calc(14px + env(safe-area-inset-right)) calc(12px + env(safe-area-inset-bottom)) calc(14px + env(safe-area-inset-left)); color:#F5E8CA; }
+      .roster-top{ display:flex; align-items:center; justify-content:space-between; gap:10px; }
+      .roster-top h2{ margin:0; font-size:19px; font-weight:900; color:#FFE9A8; text-shadow:0 2px 8px rgba(0,0,0,.65); letter-spacing:.02em; }
+      .roster-top-btns{ display:flex; gap:6px; }
+      .roster-top .icon-btn{ background:rgba(16,32,54,.8); border-color:rgba(213,172,96,.6); color:#F5E8CA; }
+      .roster-main{ flex:1 1 auto; min-height:0; display:flex; gap:14px; align-items:stretch; margin-top:8px; }
+      .roster-list{ flex:0 0 252px; width:252px; display:flex; flex-direction:column; gap:9px; overflow-y:auto; padding:2px; }
+      .roster-item{ cursor:pointer; background:rgba(16,32,54,.82); border-color:rgba(213,172,96,.45); backdrop-filter:blur(4px); }
+      .roster-item.active{ border-color:#E8C87E; background:rgba(24,44,71,.92); box-shadow:0 0 0 2px rgba(232,200,126,.45), 0 0 18px rgba(213,172,96,.35); }
+      .roster-item img{ border-radius:50%; border:2px solid rgba(213,172,96,.65); }
+      .roster-empty{ background:rgba(16,32,54,.7); border-color:rgba(213,172,96,.5); color:#E8C87E; backdrop-filter:blur(4px); }
+      .roster-stage{ flex:1 1 auto; min-width:0; position:relative; display:flex; align-items:flex-end; justify-content:center; }
+      .roster-stage img{ position:relative; z-index:1; max-height:100%; max-width:100%; object-fit:contain; filter:drop-shadow(0 10px 16px rgba(0,0,0,.5)); animation:heroFloat 3.2s ease-in-out infinite; }
+      @keyframes heroFloat{ 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(-7px);} }
+      @media (prefers-reduced-motion: reduce){ .roster-stage img{ animation:none; } }
+      .roster-stage .pedestal{ bottom:6px; }
+      .roster-info{ flex:0 0 262px; width:262px; align-self:center; background:rgba(16,32,54,.88); border:1.5px solid rgba(213,172,96,.75); border-radius:15px; padding:14px; backdrop-filter:blur(5px); box-shadow:0 14px 34px rgba(0,0,0,.5); max-height:100%; overflow-y:auto; }
+      .roster-info h3{ margin:0 0 2px; font-size:19px; color:#FFE9A8; }
+      .roster-info .ri-sub{ font-size:12.5px; font-weight:700; color:#C7B489; margin-bottom:9px; }
+      .roster-info .ri-row{ display:flex; justify-content:space-between; gap:10px; font-size:13px; padding:4px 0; border-bottom:1px dashed rgba(213,172,96,.28); }
+      .roster-info .ri-row span{ color:#C7B489; font-weight:600; }
+      .roster-play{ width:100%; margin-top:13px; border:none; border-radius:13px; background:linear-gradient(180deg,#E8C87E,#C79A45); color:#3A2A05; font-weight:900; font-size:17px; padding:14px; box-shadow:0 6px 18px rgba(0,0,0,.45); min-height:52px; }
+      .roster-play:active{ transform:scale(.97); }
+      .roster-del{ display:block; margin:9px auto 0; border:1.5px solid rgba(255,122,107,.6); background:transparent; color:#FF9A8A; font-weight:800; font-size:12.5px; border-radius:10px; padding:7px 16px; min-height:38px; }
+      .roster-del.armed{ background:#C23B2E; color:#fff; border-color:#C23B2E; }
+      @media (max-width:700px){
+        .roster-main{ flex-wrap:wrap; overflow-y:auto; }
+        .roster-list{ flex:1 1 100%; width:auto; flex-direction:row; overflow-x:auto; overflow-y:hidden; }
+        .roster-list .roster-item{ flex:0 0 218px; }
+        .roster-list .roster-empty{ flex:0 0 218px; }
+        .roster-stage{ flex:1 1 46%; min-height:210px; }
+        .roster-info{ flex:1 1 46%; width:auto; }
+      }
     </style>
   </head>
   <body>
@@ -650,16 +826,16 @@
       </defs>
     </svg>
 
-    <!-- #rotRoot bọc toàn bộ game: khi khung đang dọc, body.rot xoay cả
-         khối này 90° (xem CSS ở trên) nên mọi màn hình đều tự xoay theo -->
-    <div id="rotRoot">
+    <!-- #stageRoot bọc toàn bộ game: sân khấu fullscreen thật, phủ kín
+         viewport (v0.9.0 — không còn xoay CSS giả lập) -->
+    <div id="stageRoot">
     <div class="wrap">
       <!-- ====== ARENA ====== -->
       <section class="arena-wrap" id="arenaWrap">
         <canvas id="game"></canvas>
       <!-- Trên trái (GDD): chân dung + tên + cấp + HP/mana -->
       <div class="hud-overlay">
-        <img class="portrait" id="hudPortrait" data-akey="k0" alt="Chân dung nhân vật" />
+        <img class="portrait" id="hudPortrait" data-akey="k1" alt="Chân dung nhân vật" />
         <div class="hud-main">
           <div class="hud-name"><span id="hudName">Kiếm Sĩ</span> <span class="lv-badge" id="hudLv">Lv 1</span></div>
           <div class="bar hp"><i id="barHp" style="width:100%"></i><span id="barHpTxt"></span></div>
@@ -680,33 +856,35 @@
         <div class="boss-bar" id="bossBar"><div class="bb-name" id="bossName"></div><div class="bb-track"><div class="bb-fill" id="bossFill"></div></div></div>
         <div class="quest-chip" id="questChip"><span class="q-tag">NHIỆM VỤ</span><span id="questTxt">Chính tuyến: khám phá Rừng Xanh</span></div>
         <div class="hud-icons" id="hudIcons" aria-label="Menu chức năng">
-          <button class="hud-ico" data-panel="char" aria-label="Nhân vật"><span class="ico-c"><img class="btn-art" data-akey="k1" alt="" onerror="this.style.display='none'"><svg><use href="#i-user"/></svg></span><span class="ico-label">Nhân vật</span><span class="badge" id="charBadge" style="display:none">0</span></button>
-          <button class="hud-ico" data-panel="bag" aria-label="Túi đồ"><span class="ico-c"><img class="btn-art" data-akey="k2" alt="" onerror="this.style.display='none'"><svg><use href="#i-bag"/></svg></span><span class="ico-label">Túi đồ</span><span class="badge" id="bagBadge" style="display:none">0</span></button>
-          <button class="hud-ico" data-panel="equip" aria-label="Trang bị"><span class="ico-c"><img class="btn-art" data-akey="k3" alt="" onerror="this.style.display='none'"><svg><use href="#i-shield"/></svg></span><span class="ico-label">Trang bị</span></button>
-          <button class="hud-ico" data-panel="skill" aria-label="Kỹ năng"><span class="ico-c"><img class="btn-art" data-akey="k4" alt="" onerror="this.style.display='none'"><svg><use href="#i-bolt"/></svg></span><span class="ico-label">Kỹ năng</span></button>
-          <button class="hud-ico" data-panel="settings" aria-label="Cài đặt"><span class="ico-c"><img class="btn-art" data-akey="k5" alt="" onerror="this.style.display='none'"><svg><use href="#i-gear"/></svg></span><span class="ico-label">Cài đặt</span></button>
+          <button class="hud-ico" data-panel="char" aria-label="Nhân vật"><span class="ico-c"><img class="btn-art" data-akey="k2" alt="" onerror="this.style.display='none'"><svg><use href="#i-user"/></svg></span><span class="ico-label">Nhân vật</span><span class="badge" id="charBadge" style="display:none">0</span></button>
+          <button class="hud-ico" data-panel="bag" aria-label="Túi đồ"><span class="ico-c"><img class="btn-art" data-akey="k3" alt="" onerror="this.style.display='none'"><svg><use href="#i-bag"/></svg></span><span class="ico-label">Túi đồ</span><span class="badge" id="bagBadge" style="display:none">0</span></button>
+          <button class="hud-ico" data-panel="equip" aria-label="Trang bị"><span class="ico-c"><img class="btn-art" data-akey="k4" alt="" onerror="this.style.display='none'"><svg><use href="#i-shield"/></svg></span><span class="ico-label">Trang bị</span></button>
+          <button class="hud-ico" data-panel="skill" aria-label="Kỹ năng"><span class="ico-c"><img class="btn-art" data-akey="k5" alt="" onerror="this.style.display='none'"><svg><use href="#i-bolt"/></svg></span><span class="ico-label">Kỹ năng</span></button>
+          <button class="hud-ico" data-panel="settings" aria-label="Cài đặt"><span class="ico-c"><img class="btn-art" data-akey="k6" alt="" onerror="this.style.display='none'"><svg><use href="#i-gear"/></svg></span><span class="ico-label">Cài đặt</span></button>
         </div>
         <canvas id="minimap" width="296" height="200" aria-label="Bản đồ nhỏ — chạm để phóng to"></canvas>
         <div class="joy" id="joy" aria-label="Cần điều khiển di chuyển 8 hướng"><div class="joy-thumb" id="joyThumb"></div></div>
         <div class="fight-pad">
           <div class="util-row">
-            <div class="sup-unit util-pot-hp"><button class="pot-btn pot-hp" id="btnPotHp" aria-label="Uống bình máu"><img class="btn-art" data-akey="k6" alt="" onerror="this.style.display='none'"><svg><use href="#i-potion"/></svg><span class="pot-n" id="potHpN">3</span></button><span class="s-name">Bình máu</span></div>
-            <div class="sup-unit util-pot-mp"><button class="pot-btn pot-mp" id="btnPotMp" aria-label="Uống bình mana"><img class="btn-art" data-akey="k7" alt="" onerror="this.style.display='none'"><svg><use href="#i-potion"/></svg><span class="pot-n" id="potMpN">2</span></button><span class="s-name">Bình mana</span></div>
-            <button class="auto-btn" id="btnAuto" aria-label="Bật tắt chế độ tự đánh"><img class="btn-art" data-akey="k8" alt="" onerror="this.style.display='none'"><small id="autoState" class="auto-state">Đang tắt</small></button>
+            <div class="sup-unit util-pot-hp"><button class="pot-btn pot-hp" id="btnPotHp" aria-label="Uống bình máu"><img class="btn-art" data-akey="k7" alt="" onerror="this.style.display='none'"><svg><use href="#i-potion"/></svg><span class="pot-n" id="potHpN">3</span></button><span class="s-name">Bình máu</span></div>
+            <div class="sup-unit util-pot-mp"><button class="pot-btn pot-mp" id="btnPotMp" aria-label="Uống bình mana"><img class="btn-art" data-akey="k8" alt="" onerror="this.style.display='none'"><svg><use href="#i-potion"/></svg><span class="pot-n" id="potMpN">2</span></button><span class="s-name">Bình mana</span></div>
+            <button class="auto-btn" id="btnAuto" aria-label="Bật tắt chế độ tự đánh"><img class="btn-art" data-akey="k9" alt="" onerror="this.style.display='none'"><small id="autoState" class="auto-state">Đang tắt</small></button>
           </div>
           <div class="support-row" id="supportBtns"></div>
           <div class="main-row">
             <div id="skillBtns"></div>
             <div class="skill-unit atk-unit">
-              <button class="atk-btn" id="btnAtk" aria-label="Đánh thường"><img class="btn-art" data-akey="k9" alt="" onerror="this.style.display='none'"><svg><use href="#i-sword"/></svg></button>
+              <button class="atk-btn" id="btnAtk" aria-label="Đánh thường"><img class="btn-art" data-akey="k10" alt="" onerror="this.style.display='none'"><svg><use href="#i-sword"/></svg></button>
               <span class="s-name">Đánh</span>
             </div>
           </div>
         </div>
         <div class="exp-edge"><div class="bar exp"><i id="barExp" style="width:0%"></i></div></div>
+        <div id="fpsMeter" style="display:none">-- FPS</div>
         <div class="toasts" id="toasts"></div>
         <div class="arena-scrim" id="arenaScrim"></div>
         <div class="arena-msg" id="arenaMsg">
+          <button class="msg-x" id="msgClose" aria-label="Đóng hộp thoại" style="display:none">✕</button>
           <h2 id="msgTitle">Hoàn thành màn!</h2>
           <p id="msgText"></p>
           <button class="big-btn" id="msgBtn">Màn tiếp theo</button>
@@ -716,51 +894,83 @@
       <!-- Lớp mờ sau các cửa sổ panel -->
       <div class="sheet-back" id="sheetBack"></div>
 
-      <!-- Panel: Nhân vật -->
+      <!-- Panel: Nhân vật (v0.9.0 — hero toàn thân + bảng chỉ số GỌN) -->
       <section class="panel" id="panel-char">
-        <img id="charPortrait" data-akey="k0" alt="Chân dung nhân vật" style="width:86px;height:86px;border-radius:14px;object-fit:cover;border:2px solid var(--gold2);box-shadow:0 0 0 3px var(--gold-soft);float:left;margin:0 12px 8px 0" />
-        <h3 id="charTitle">Nhân vật</h3>
-        <div class="points-bar">
-          <span class="points-chip">Điểm thân thể: <span id="attrPts">0</span></span>
-          <button class="btn-ghost" id="btnRecreate" style="border:1px solid var(--line); border-radius:999px; font-weight:800; font-size:12.5px; padding:5px 12px;">Danh sách nhân vật</button>
+        <div class="char-top">
+          <figure class="char-fig"><span class="pedestal" aria-hidden="true"></span><img id="charHeroImg" data-akey="k11" alt="Nhân vật toàn thân" /></figure>
+          <div class="char-head">
+            <img id="charPortrait" data-akey="k1" alt="Chân dung nhân vật" />
+            <div class="char-head-main">
+              <h3 id="charTitle">Nhân vật</h3>
+              <div class="points-bar">
+                <span class="points-chip">Điểm thân thể còn lại: <span id="attrPts">0</span></span>
+                <button class="btn-ghost" id="btnRecreate" style="border:1px solid var(--line); border-radius:999px; font-weight:800; font-size:12.5px; padding:5px 12px;">Danh sách nhân vật</button>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="stat-grid" id="statGrid"></div>
         <h4>Cộng điểm thân thể</h4>
         <div id="allocRows"></div>
       </section>
 
-      <!-- Panel: Kỹ năng -->
+      <!-- Panel: Kỹ năng (v0.9.0 — chọn bên trái, chi tiết bên phải) -->
       <section class="panel" id="panel-skill">
         <h3>Kỹ năng</h3>
         <div class="points-bar">
           <span class="points-chip">Điểm skill: <span id="skillPts">0</span></span>
           <span class="points-chip">Điểm thân thể: <span id="attrPts2">0</span></span>
         </div>
-        <h4>Kỹ năng chính — nâng bằng điểm skill</h4>
-        <div id="mainSkillRows"></div>
-        <h4>Kỹ năng phụ — hỗ trợ</h4>
-        <p class="muted" style="margin:0 0 8px">Skill <b>bị động</b> luôn có hiệu lực trong trận và không có nút bấm trên HUD — nâng bậc ngay tại đây.</p>
-        <div id="supSkillRows"></div>
+        <div class="skill-layout">
+          <div class="skill-list">
+            <h4>Kỹ năng chính</h4>
+            <div id="mainSkillRows"></div>
+            <h4>Kỹ năng phụ — hỗ trợ</h4>
+            <div id="supSkillRows"></div>
+          </div>
+          <div class="skill-detail" id="skillDetail"></div>
+        </div>
+        <p class="muted" style="margin:8px 0 0">Skill <b>bị động</b> luôn có hiệu lực trong trận và không có nút bấm trên HUD — nâng bậc ngay tại cột chi tiết.</p>
       </section>
 
-      <!-- Panel: Trang bị -->
+      <!-- Panel: Trang bị (v0.9.0 — hero giữa, 4 slot quanh, % sang tab riêng) -->
       <section class="panel" id="panel-equip">
         <h3>Trang bị</h3>
-        <div class="equip-row" id="equipRow"></div>
-        <p class="muted">Chạm vào món đang mặc để xem chi tiết, nâng cấp hoặc khảm / tháo ngọc.</p>
-        <h4>Chỉ số % theo nguồn</h4>
-        <table class="cmp-table" id="pctTable"></table>
-        <p class="muted">Công thức chung: <b>Chỉ số cuối = Gốc × (1 + tổng %) + cộng thẳng</b>. % đến từ trang bị, ngọc khảm và skill phụ bị động.</p>
+        <div class="equip-tabs" role="tablist" aria-label="Tab trang bị">
+          <button class="eq-tab on" data-eqtab="gear" role="tab">Trang bị</button>
+          <button class="eq-tab" data-eqtab="pct" role="tab">% theo nguồn</button>
+        </div>
+        <div id="eqTabGear">
+          <div class="equip-stage">
+            <div class="equip-col" id="equipColL"></div>
+            <figure class="char-fig equip-fig"><span class="pedestal" aria-hidden="true"></span><img id="equipHeroImg" data-akey="k11" alt="Nhân vật toàn thân" /></figure>
+            <div class="equip-col" id="equipColR"></div>
+          </div>
+          <p class="muted">Chạm vào món đang mặc để xem chi tiết, thay thế, nâng cấp hoặc khảm / tháo ngọc.</p>
+        </div>
+        <div id="eqTabPct" style="display:none">
+          <table class="cmp-table" id="pctTable"></table>
+          <p class="muted">Công thức chung: <b>Chỉ số cuối = Gốc × (1 + tổng %) + cộng thẳng</b>. % đến từ trang bị, ngọc khảm và skill phụ bị động.</p>
+        </div>
       </section>
 
-      <!-- Panel: Túi đồ -->
+      <!-- Panel: Túi đồ (v0.9.0 — lưới 8×5 = 40 ô, tab lọc, chi tiết cột phải) -->
       <section class="panel" id="panel-bag">
-        <h3>Túi đồ <span class="muted" id="bagCount"></span></h3>
-        <div class="inv-grid" id="invGrid"></div>
-        <p class="muted" id="bagEmpty">Túi đang trống. Đánh quái để nhặt trang bị rơi — đồ hiếm có viền màu: <span class="rc-rare"><b>Hiếm</b></span>, <span class="rc-epic"><b>Sử thi</b></span>, <span class="rc-legend"><b>Huyền thoại</b></span>.</p>
-        <h4>Ngọc khảm <span class="muted" id="gemCount"></span></h4>
-        <div class="inv-grid" id="gemGrid"></div>
-        <p class="muted">Chạm vào một viên ngọc để <b>ghép 3 viên cùng loại + cùng cấp → 1 viên cấp cao hơn</b>. Khảm / tháo ngọc: mở chi tiết trang bị rồi chọn lỗ khảm. Ngọc cộng chỉ số % — xem mục “Chỉ số % theo nguồn” ở cửa sổ Trang bị.</p>
+        <h3>Túi đồ</h3>
+        <div class="bag-meta"><span id="bagCount"></span><span class="bag-gold" id="bagGold"></span></div>
+        <div class="bag-tabs" role="tablist" aria-label="Lọc túi đồ">
+          <button class="bag-tab on" data-bagtab="all" role="tab">Tất cả</button>
+          <button class="bag-tab" data-bagtab="equip" role="tab">Trang bị</button>
+          <button class="bag-tab" data-bagtab="gem" role="tab">Ngọc</button>
+          <button class="bag-tab" data-bagtab="item" role="tab">Vật phẩm</button>
+        </div>
+        <div class="bag-layout">
+          <div class="bag-grid-wrap">
+            <div class="inv-grid bag-grid" id="invGrid"></div>
+            <p class="muted" id="bagEmpty">Túi đang trống. Đánh quái để nhặt trang bị rơi — đồ hiếm có viền màu: <span class="rc-rare"><b>Hiếm</b></span>, <span class="rc-epic"><b>Sử thi</b></span>, <span class="rc-legend"><b>Huyền thoại</b></span>. Ngọc: <b>ghép 3 viên cùng loại + cùng cấp → 1 viên cấp cao hơn</b>.</p>
+          </div>
+          <div class="bag-detail" id="bagDetail"></div>
+        </div>
       </section>
 
       <!-- Panel: Bản đồ & Dịch chuyển (v0.8.0 — 17 map liên thông, đi lại tự do) -->
@@ -848,7 +1058,7 @@
 
     <!-- ====== MÀN HÌNH CHỜ LOAD / GIỚI THIỆU ====== -->
     <div class="intro-back" id="introBack" role="status" aria-label="Đang tải game">
-      <img class="intro-art" data-akey="k10" alt="Ba anh hùng chibi đối đầu quái vật trên thảo nguyên" />
+      <img class="intro-art" data-akey="k12" alt="Ba anh hùng chibi đối đầu quái vật trên thảo nguyên" />
       <div class="intro-shade"></div>
       <div class="intro-box">
         <h1 class="intro-title"><span class="t-main">FANTASY</span><span class="t-sub">HUYỀN THOẠI LỤC ĐỊA</span></h1>
@@ -857,18 +1067,25 @@
       </div>
     </div>
 
-    <!-- ====== DANH SÁCH NHÂN VẬT ====== -->
+    <!-- ====== CHỌN NHÂN VẬT (v0.9.0 — nền làng toàn màn hình: slot TRÁI,
+         hero toàn thân GIỮA trên bệ sáng, thông tin PHẢI, nút VÀO GAME) ====== -->
     <div class="roster-back" id="rosterBack">
-      <div class="roster-card">
-        <div class="roster-head">
+      <div class="roster-scene">
+        <div class="roster-top">
           <h2>Chọn nhân vật</h2>
-          <span style="display:flex;gap:6px">
+          <span class="roster-top-btns">
             <button class="icon-btn" id="btnSettings2" aria-label="Cài đặt"><svg style="width:19px;height:19px"><use href="#i-gear"/></svg></button>
             <button class="icon-btn" id="btnRosterClose" aria-label="Đóng danh sách nhân vật" style="display:none">✕</button>
           </span>
         </div>
-        <p class="muted" style="margin:0 0 10px">Tối đa 3 nhân vật trên máy này — mỗi nhân vật có tiến trình riêng: cấp, đồ, ngọc, vàng, map và điểm cộng.</p>
-        <div class="roster-list" id="rosterList"></div>
+        <div class="roster-main">
+          <div class="roster-list" id="rosterList"></div>
+          <div class="roster-stage" id="rosterStage">
+            <span class="pedestal big" aria-hidden="true"></span>
+            <img id="rosterHeroImg" data-akey="k11" alt="Nhân vật đang chọn" />
+          </div>
+          <div class="roster-info" id="rosterInfo"></div>
+        </div>
       </div>
     </div>
 
@@ -884,6 +1101,7 @@
         <div class="set-row"><span>Hiệu ứng skill</span><button class="tgl" id="setFx" aria-label="Bật tắt hiệu ứng skill"></button></div>
         <div class="set-row"><span>Rung màn hình</span><button class="tgl" id="setShake" aria-label="Bật tắt rung màn hình"></button></div>
         <div class="set-row"><span>Số sát thương bay</span><button class="tgl" id="setDmg" aria-label="Bật tắt số sát thương"></button></div>
+        <div class="set-row"><span>Hiện đồng hồ FPS</span><button class="tgl" id="setFps" aria-label="Bật tắt đồng hồ FPS"></button></div>
         <h4 class="set-h">Âm thanh</h4>
         <div class="set-row"><span>Nhạc nền</span><button class="tgl" id="setBgmOn" aria-label="Bật tắt nhạc nền"></button></div>
         <div class="set-row"><span>Âm lượng nhạc nền</span><input type="range" id="setBgmVol" min="0" max="100" step="1"></div>
@@ -893,7 +1111,8 @@
         <h4 class="set-h">Khác</h4>
         <div class="set-row"><span>Rung máy khi đánh boss / lên cấp</span><button class="tgl" id="setVib" aria-label="Bật tắt rung máy"></button></div>
         <p class="muted" style="margin:10px 0 0">Cài đặt áp dụng ngay. Mức đồ hoạ Thấp giảm mạnh hạt hiệu ứng để máy yếu chơi mượt.</p>
-        <p class="muted" style="margin:10px 0 0">Phiên bản <b id="gameVersion">v0.8.0</b> — Nhật ký cập nhật:</p>
+        <p class="muted" style="margin:10px 0 0">Phiên bản <b id="gameVersion">v0.9.0</b> — Nhật ký cập nhật:</p>
+        <p class="muted" style="margin:4px 0 0">v0.9.0 — Giao diện mới phong cách Chibi Fantasy, toàn màn hình thật trên iOS, bỏ xoay giả lập.</p>
         <p class="muted" style="margin:4px 0 0">v0.8.0 — Thế giới 17 map liên thông, làng tân thủ có NPC và nhiệm vụ, dịch chuyển tự do giữa các map.</p>
         <p class="muted" style="margin:4px 0 0">v0.7.2 — Cả 6 hero chuyển động bằng animation bộ phận; icon áo/giày theo bậc cấp trong túi đồ.</p>
         <p class="muted" style="margin:4px 0 0">v0.7.1 — Thống nhất bộ icon phẳng: skill, bị động, map, minimap và báo chiêu boss.</p>
@@ -950,7 +1169,17 @@
         <div class="kb-rows" id="kbRows"></div>
       </div>
     </div>
-    </div><!-- /#rotRoot -->
+    </div><!-- /#stageRoot -->
+
+    <!-- v0.9.0 — Lớp phủ nhắc xoay máy khi viewport đang DỌC thật (game
+         tạm dừng phía sau nhờ Orient.portrait trong vòng lặp chính) -->
+    <div id="rotateHint" role="alert" aria-label="Xoay ngang điện thoại để chơi">
+      <div class="rh-box">
+        <div class="rh-phone" aria-hidden="true"></div>
+        <p>Xoay ngang điện thoại để chơi</p>
+        <p class="rh-sub">Game chơi ở chế độ ngang. Trò chơi đang tạm dừng — xoay máy ngang là chơi tiếp ngay.</p>
+      </div>
+    </div>
 
 <script src="assets-data-1.js"></script>
 <script src="assets-data-2.js"></script>
@@ -990,70 +1219,47 @@
      LỚP GIAO DIỆN · UI — tạo nhân vật, HUD, panel, popup.
    ===================================================================== */
 
-/* ===== TỰ XOAY HÌNH KHI KHUNG ĐANG DỌC (body.rot) =====
-   Khung hiển thị dọc (webview trong app không tự xoay theo máy) thì bật
-   body.rot: CSS xoay #rotRoot 90° + hoán đổi width/height, người chơi
-   xoay máy cầm ngang là hình đúng chiều. Khung ngang thì tắt, chơi như
-   thường. Nghe theo matchMedia nên máy thật tự xoay được (trình duyệt)
-   cũng chuyển đúng trạng thái. */
-const Rot = {
-  mq: window.matchMedia('(orientation: portrait) and (max-width: 860px)'),
-  on: false,
+/* ===== v0.9.0 — HƯỚNG MÀN HÌNH THẬT (ĐÃ XOÁ XOAY CSS 90°) =====
+   Không còn body.rot / transform rotate giả lập landscape và không còn
+   remapping tọa độ chạm theo phép quay. Game dùng landscape THẬT của hệ
+   thống: viewport đang dọc thật → CSS hiện lớp phủ #rotateHint nhắc xoay
+   máy, JS đặt Orient.portrait để vòng lặp chính tạm dừng game phía sau.
+   Người chơi xoay máy ngang (hệ thống tự xoay thật) là chơi tiếp. */
+const Orient = {
+  mq: window.matchMedia('(orientation: portrait) and (max-width: 900px)'),
+  portrait: false,
   apply() {
-    const on = this.mq.matches;
-    const has = document.body.classList.contains('rot');
-    if (on === this.on && on === has) { fitStage(); return; }
-    this.on = on;
-    document.body.classList.toggle('rot', on);
+    this.portrait = this.mq.matches;
     fitStage();
     if (typeof resize === 'function') setTimeout(() => { fitStage(); resize(); }, 60);
   }
 };
 
 /* Quy đổi điểm chạm (clientX/clientY của PointerEvent) về tọa độ cục bộ
-   của phần tử. Khi KHÔNG xoay: trừ offset của rect như thường. Khi ĐÃ
-   xoay 90° (body.rot), getBoundingClientRect trả về khung bao sau xoay
-   (width/height đã hoán đổi) nên phải quy đổi theo phép quay +90°:
-   localX = clientY - rect.top, localY = rect.right - clientX.
-   Mọi điểm chạm qua canvas (chọn nhân vật, chạm nhặt đồ) và joystick
-   đều đi qua hàm này / cùng công thức để khớp đúng vị trí ngón tay. */
+   của phần tử: trừ offset của rect — không còn phép quay nào phải bù. */
 function localPoint(elm, clientX, clientY) {
   const r = elm.getBoundingClientRect();
-  if (Rot.on) return { x: clientY - r.top, y: r.right - clientX, rect: r };
   return { x: clientX - r.left, y: clientY - r.top, rect: r };
 }
 
-/* ===== KÍCH THƯỚC SÂN KHẤU = VÙNG NHÌN THẤY THẬT (v0.5.7) =====
-   Lỗi anh Do gặp trên iPhone: 100dvh/100dvw trong webview app KHÔNG
-   khớp vùng hiển thị thật (đơn vị vẫn tính cả phần bị thanh công cụ
-   của app che) → sân khấu to hơn khung nhìn: nút skill + minimap ở
-   mép bị cắt, thừa 1 dải lạ dọc mép sân. Nay đo bằng
-   window.visualViewport (vùng nhìn thấy thật của webview), fallback
-   innerWidth/innerHeight khi không có, và gán kích thước pixel tường
-   minh cho #rotRoot: không xoay → đúng vw×vh; tự xoay 90° → hoán đổi
-   vw/vh và neo tâm sân khấu vào đúng tâm vùng nhìn thấy (kể cả offset
-   của visualViewport). fitStage được gọi lại mỗi lần resize /
-   visualViewport thay đổi nên sân luôn phủ kín đúng vùng nhìn. */
+/* ===== KÍCH THƯỚC SÂN KHẤU = VÙNG NHÌN THẤY THẬT =====
+   Đo bằng window.visualViewport (vùng nhìn thấy thật của webview),
+   fallback innerWidth/innerHeight khi không có, và gán kích thước pixel
+   tường minh cho #stageRoot để sân luôn phủ kín đúng vùng nhìn, canvas
+   vẽ tràn mép-tới-mép. fitStage được gọi lại mỗi lần resize /
+   orientationchange / visualViewport thay đổi nên canvas, camera, HUD
+   và tọa độ cảm ứng luôn tính lại theo khung thật. */
 function visibleSize() {
   const vv = window.visualViewport;
   if (vv) return { w: vv.width, h: vv.height, ox: vv.offsetLeft || 0, oy: vv.offsetTop || 0 };
   return { w: window.innerWidth, h: window.innerHeight, ox: 0, oy: 0 };
 }
 function fitStage() {
-  const root = document.getElementById('rotRoot');
+  const root = document.getElementById('stageRoot');
   if (!root) return;
   const v = visibleSize();
-  if (Rot.on) {
-    root.style.width = Math.round(v.h) + 'px';
-    root.style.height = Math.round(v.w) + 'px';
-    root.style.left = Math.round(v.ox + v.w / 2) + 'px';
-    root.style.top = Math.round(v.oy + v.h / 2) + 'px';
-  } else {
-    root.style.width = Math.round(v.w) + 'px';
-    root.style.height = Math.round(v.h) + 'px';
-    root.style.left = '';
-    root.style.top = '';
-  }
+  root.style.width = Math.round(v.w) + 'px';
+  root.style.height = Math.round(v.h) + 'px';
 }
 
 /* =====================================================================
@@ -1066,35 +1272,35 @@ function fitStage() {
    đúng 1 dòng literal vào đây.
    ===================================================================== */
 const ASSETS = {
-  intro: __A.k10,
+  intro: __A.k12,
   hero: {
     'swordsman-male': __A.k11,
-    'swordsman-female': __A.k12,
-    'mage-male': __A.k13,
-    'mage-female': __A.k14,
-    'archer-male': __A.k15,
-    'archer-female': __A.k16,
+    'swordsman-female': __A.k13,
+    'mage-male': __A.k14,
+    'mage-female': __A.k15,
+    'archer-male': __A.k16,
+    'archer-female': __A.k17,
   },
   portrait: {
-    'swordsman-male': __A.k0,
-    'swordsman-female': __A.k17,
-    'mage-male': __A.k18,
-    'mage-female': __A.k19,
-    'archer-male': __A.k20,
-    'archer-female': __A.k21,
+    'swordsman-male': __A.k1,
+    'swordsman-female': __A.k18,
+    'mage-male': __A.k19,
+    'mage-female': __A.k20,
+    'archer-male': __A.k21,
+    'archer-female': __A.k22,
   },
   anim: {
-    'swordsman-male': __A.k22,
-    'swordsman-female': __A.k23,
+    'swordsman-male': __A.k23,
+    'swordsman-female': __A.k24,
     /* Pháp Sư (nam + nữ): dải chuyển động MỚI của Claude (v0.5.4) —
        2520×500, 6 ô 420×500 [idle1, idle2, run1, run2, cast1, cast2],
        đã QC: mỗi ô đúng 1 nhân vật, alpha mép 0%, chân thẳng hàng.
        Dải cũ bị lỗi dính hình nhân vật bên cạnh khi cắt khung (ngừng dùng
        từ v0.4.0) nay được thay hẳn bằng dải mới này. */
-    'mage-male': __A.k24,
-    'mage-female': __A.k25,
-    'archer-male': __A.k26,
-    'archer-female': __A.k27,
+    'mage-male': __A.k25,
+    'mage-female': __A.k26,
+    'archer-male': __A.k27,
+    'archer-female': __A.k28,
   },
   /* v0.7.0 — DẢI ANIMATION THEO TỪNG SKILL của Kiếm Sĩ Nam (Claude dựng
      từ dáng chính, Luna QC đạt): ô 768×640, chân ở y=620 trong ô. dur =
@@ -1104,12 +1310,12 @@ const ASSETS = {
   skillAnim: {
     'swordsman-male': {
       skills: [
-        { src: __A.k28, dur: [60, 90, 50, 110, 120, 90] },
-        { src: __A.k29, dur: [80, 70, 70, 70, 70, 90, 100] },
-        { src: __A.k30, dur: [60, 140, 90, 60, 160, 120, 100] },
-        { src: __A.k31, dur: [90, 100, 160, 220, 80, 140, 110] },
+        { src: __A.k29, dur: [60, 90, 50, 110, 120, 90] },
+        { src: __A.k30, dur: [80, 70, 70, 70, 70, 90, 100] },
+        { src: __A.k31, dur: [60, 140, 90, 60, 160, 120, 100] },
+        { src: __A.k32, dur: [90, 100, 160, 220, 80, 140, 110] },
       ],
-      idle: { src: __A.k32, dur: [600, 600] },
+      idle: { src: __A.k33, dur: [600, 600] },
     },
   },
   /* v0.7.2 — DẢI ANIMATION BỘ PHẬN (assets/anim2/) cho CẢ 6 HERO: cùng
@@ -1121,33 +1327,33 @@ const ASSETS = {
      đánh thường của tất cả giữ đường vẽ cũ. */
   partsAnim: {
     'swordsman-male': {
-      idle: { src: __A.k33, dur: [600, 600] },
-      run: { src: __A.k34, dur: [90, 90, 90, 90, 90, 90] },
+      idle: { src: __A.k34, dur: [600, 600] },
+      run: { src: __A.k35, dur: [90, 90, 90, 90, 90, 90] },
     },
     'swordsman-female': {
-      idle: { src: __A.k35, dur: [600, 600] },
-      run: { src: __A.k36, dur: [90, 90, 90, 90, 90, 90] },
-      skill1: { src: __A.k37, dur: [60, 90, 90, 50, 110, 120, 90, 90] },
+      idle: { src: __A.k36, dur: [600, 600] },
+      run: { src: __A.k37, dur: [90, 90, 90, 90, 90, 90] },
+      skill1: { src: __A.k38, dur: [60, 90, 90, 50, 110, 120, 90, 90] },
     },
     'mage-male': {
-      idle: { src: __A.k38, dur: [600, 600] },
-      run: { src: __A.k39, dur: [90, 90, 90, 90, 90, 90] },
-      skill1: { src: __A.k40, dur: [70, 110, 130, 60, 140, 120, 100] },
+      idle: { src: __A.k39, dur: [600, 600] },
+      run: { src: __A.k40, dur: [90, 90, 90, 90, 90, 90] },
+      skill1: { src: __A.k41, dur: [70, 110, 130, 60, 140, 120, 100] },
     },
     'mage-female': {
-      idle: { src: __A.k41, dur: [600, 600] },
-      run: { src: __A.k42, dur: [90, 90, 90, 90, 90, 90] },
-      skill1: { src: __A.k43, dur: [70, 110, 130, 60, 140, 120, 100] },
+      idle: { src: __A.k42, dur: [600, 600] },
+      run: { src: __A.k43, dur: [90, 90, 90, 90, 90, 90] },
+      skill1: { src: __A.k44, dur: [70, 110, 130, 60, 140, 120, 100] },
     },
     'archer-male': {
-      idle: { src: __A.k44, dur: [600, 600] },
-      run: { src: __A.k45, dur: [90, 90, 90, 90, 90, 90] },
-      skill1: { src: __A.k46, dur: [70, 120, 140, 160, 50, 120, 100] },
+      idle: { src: __A.k45, dur: [600, 600] },
+      run: { src: __A.k46, dur: [90, 90, 90, 90, 90, 90] },
+      skill1: { src: __A.k47, dur: [70, 120, 140, 160, 50, 120, 100] },
     },
     'archer-female': {
-      idle: { src: __A.k47, dur: [600, 600] },
-      run: { src: __A.k48, dur: [90, 90, 90, 90, 90, 90] },
-      skill1: { src: __A.k49, dur: [70, 120, 140, 160, 50, 120, 100] },
+      idle: { src: __A.k48, dur: [600, 600] },
+      run: { src: __A.k49, dur: [90, 90, 90, 90, 90, 90] },
+      skill1: { src: __A.k50, dur: [70, 120, 140, 160, 50, 120, 100] },
     },
   },
   /* v0.7.2 — ICON TRANG BỊ THEO BẬC (assets/equip/): 48 file 96px, khóa
@@ -1155,97 +1361,97 @@ const ASSETS = {
      theo NHÂN VẬT ĐANG CHƠI và bậc cấp món (1–19→lv1, 20–39→lv20,
      40–59→lv40, 60+→lv60). Thuần hiển thị — không đổi dữ liệu/chỉ số. */
   equip: {
-    'swordsman-male-armor-lv1': __A.k50,
-    'swordsman-male-armor-lv20': __A.k51,
-    'swordsman-male-armor-lv40': __A.k52,
-    'swordsman-male-armor-lv60': __A.k53,
-    'swordsman-male-boots-lv1': __A.k54,
-    'swordsman-male-boots-lv20': __A.k55,
-    'swordsman-male-boots-lv40': __A.k56,
-    'swordsman-male-boots-lv60': __A.k57,
-    'swordsman-female-armor-lv1': __A.k58,
-    'swordsman-female-armor-lv20': __A.k59,
-    'swordsman-female-armor-lv40': __A.k60,
-    'swordsman-female-armor-lv60': __A.k61,
-    'swordsman-female-boots-lv1': __A.k62,
-    'swordsman-female-boots-lv20': __A.k63,
-    'swordsman-female-boots-lv40': __A.k64,
-    'swordsman-female-boots-lv60': __A.k65,
-    'mage-male-armor-lv1': __A.k66,
-    'mage-male-armor-lv20': __A.k67,
-    'mage-male-armor-lv40': __A.k68,
-    'mage-male-armor-lv60': __A.k69,
-    'mage-male-boots-lv1': __A.k70,
-    'mage-male-boots-lv20': __A.k71,
-    'mage-male-boots-lv40': __A.k72,
-    'mage-male-boots-lv60': __A.k73,
-    'mage-female-armor-lv1': __A.k74,
-    'mage-female-armor-lv20': __A.k75,
-    'mage-female-armor-lv40': __A.k76,
-    'mage-female-armor-lv60': __A.k77,
-    'mage-female-boots-lv1': __A.k78,
-    'mage-female-boots-lv20': __A.k79,
-    'mage-female-boots-lv40': __A.k80,
-    'mage-female-boots-lv60': __A.k81,
-    'archer-male-armor-lv1': __A.k82,
-    'archer-male-armor-lv20': __A.k83,
-    'archer-male-armor-lv40': __A.k84,
-    'archer-male-armor-lv60': __A.k85,
-    'archer-male-boots-lv1': __A.k86,
-    'archer-male-boots-lv20': __A.k87,
-    'archer-male-boots-lv40': __A.k88,
-    'archer-male-boots-lv60': __A.k89,
-    'archer-female-armor-lv1': __A.k90,
-    'archer-female-armor-lv20': __A.k91,
-    'archer-female-armor-lv40': __A.k92,
-    'archer-female-armor-lv60': __A.k93,
-    'archer-female-boots-lv1': __A.k94,
-    'archer-female-boots-lv20': __A.k95,
-    'archer-female-boots-lv40': __A.k96,
-    'archer-female-boots-lv60': __A.k97,
+    'swordsman-male-armor-lv1': __A.k51,
+    'swordsman-male-armor-lv20': __A.k52,
+    'swordsman-male-armor-lv40': __A.k53,
+    'swordsman-male-armor-lv60': __A.k54,
+    'swordsman-male-boots-lv1': __A.k55,
+    'swordsman-male-boots-lv20': __A.k56,
+    'swordsman-male-boots-lv40': __A.k57,
+    'swordsman-male-boots-lv60': __A.k58,
+    'swordsman-female-armor-lv1': __A.k59,
+    'swordsman-female-armor-lv20': __A.k60,
+    'swordsman-female-armor-lv40': __A.k61,
+    'swordsman-female-armor-lv60': __A.k62,
+    'swordsman-female-boots-lv1': __A.k63,
+    'swordsman-female-boots-lv20': __A.k64,
+    'swordsman-female-boots-lv40': __A.k65,
+    'swordsman-female-boots-lv60': __A.k66,
+    'mage-male-armor-lv1': __A.k67,
+    'mage-male-armor-lv20': __A.k68,
+    'mage-male-armor-lv40': __A.k69,
+    'mage-male-armor-lv60': __A.k70,
+    'mage-male-boots-lv1': __A.k71,
+    'mage-male-boots-lv20': __A.k72,
+    'mage-male-boots-lv40': __A.k73,
+    'mage-male-boots-lv60': __A.k74,
+    'mage-female-armor-lv1': __A.k75,
+    'mage-female-armor-lv20': __A.k76,
+    'mage-female-armor-lv40': __A.k77,
+    'mage-female-armor-lv60': __A.k78,
+    'mage-female-boots-lv1': __A.k79,
+    'mage-female-boots-lv20': __A.k80,
+    'mage-female-boots-lv40': __A.k81,
+    'mage-female-boots-lv60': __A.k82,
+    'archer-male-armor-lv1': __A.k83,
+    'archer-male-armor-lv20': __A.k84,
+    'archer-male-armor-lv40': __A.k85,
+    'archer-male-armor-lv60': __A.k86,
+    'archer-male-boots-lv1': __A.k87,
+    'archer-male-boots-lv20': __A.k88,
+    'archer-male-boots-lv40': __A.k89,
+    'archer-male-boots-lv60': __A.k90,
+    'archer-female-armor-lv1': __A.k91,
+    'archer-female-armor-lv20': __A.k92,
+    'archer-female-armor-lv40': __A.k93,
+    'archer-female-armor-lv60': __A.k94,
+    'archer-female-boots-lv1': __A.k95,
+    'archer-female-boots-lv20': __A.k96,
+    'archer-female-boots-lv40': __A.k97,
+    'archer-female-boots-lv60': __A.k98,
   },
   /* v0.7.0 — DẢI GOBLIN CẬN CHIẾN (cùng lô Claude): ô 768×640, chân
      y=620; nhân vật trong ô cao 500px. idle lặp, attack phát từ lúc ra
      đòn, hit phát khi trúng đòn (nếu không giữa đòn của chính nó). */
   gobAnim: {
-    idle: { src: __A.k98, dur: [500, 500] },
-    attack: { src: __A.k99, dur: [80, 120, 140, 60, 140, 100] },
-    hit: { src: __A.k100, dur: [90, 110, 120] },
+    idle: { src: __A.k99, dur: [500, 500] },
+    attack: { src: __A.k100, dur: [80, 120, 140, 60, 140, 100] },
+    hit: { src: __A.k101, dur: [90, 110, 120] },
   },
   /* Quái Rừng Xanh vẽ bằng ẢNH THẬT (v0.4.0) — khóa = type quái trong CONFIG */
   monster: {
-    'slime': __A.k101,
-    'goblin': __A.k102,
-    'wolf': __A.k103,
-    'goblinArcher': __A.k104,
-    'goblinShaman': __A.k105,
-    'wolfLord': __A.k106,
+    'slime': __A.k102,
+    'goblin': __A.k103,
+    'wolf': __A.k104,
+    'goblinArcher': __A.k105,
+    'goblinShaman': __A.k106,
+    'wolfLord': __A.k107,
   },
   /* Prop Rừng Xanh (v0.4.0) — khóa = PROP_DEFS.image ở lớp engine */
   prop: {
-    'oak': __A.k107,
-    'pillar': __A.k108,
-    'boulder': __A.k109,
-    'bush': __A.k110,
-    'flowers': __A.k111,
-    'portalPlatform': __A.k112,
-    'portalBack': __A.k113,
+    'oak': __A.k108,
+    'pillar': __A.k109,
+    'boulder': __A.k110,
+    'bush': __A.k111,
+    'flowers': __A.k112,
+    'portalPlatform': __A.k113,
+    'portalBack': __A.k114,
   },
   /* Tile nền liền mạch riêng cho mặt đất Rừng Xanh (v0.4.0) */
   ground: {
-    'forestTile': __A.k114,
+    'forestTile': __A.k115,
     /* Rừng Xanh vẽ 2 lớp (v0.5.6): map-rung-xanh.webp = LỚP NỀN ĐÃ GỠ TÁN
        (vẽ làm nền thế giới); bản ĐẦY ĐỦ chỉ dùng cho minimap / bản đồ lớn;
        mask thang xám (trắng = vùng bị tán che) phục vụ làm mờ tán cây. */
-    'forestMap': __A.k115,
-    'forestMapFull': __A.k116,
-    'forestMask': __A.k117,
+    'forestMap': __A.k116,
+    'forestMapFull': __A.k117,
+    'forestMask': __A.k118,
   },
   /* v0.8.0 — TRANH NỀN 14 MAP MỚI (assets/maps2/): khóa = id map trong
      MAPS17. Thảo Nguyên 2 dùng lại tranh Rừng Xanh ở trên (forestMap);
      Đầm Lầy Độc + Lâu Đài Bóng Đêm chưa có tranh (trạng thái Sắp mở). */
   mapImg: {
-    'lang': __A.k118,
+    'lang': __A.k0,
     'tn1': __A.k119,
     'tnbang': __A.k120,
     'bang1': __A.k121,
@@ -1311,15 +1517,15 @@ const ASSETS = {
     'ct-s1': __A.k168, 'ct-s2': __A.k169,
     'ct-s3': __A.k170, 'ct-s4': __A.k171,
     'ct-b1': __A.k172, 'ct-b2': __A.k173,
-    'sys-attack': __A.k9,
-    'sys-potion-hp': __A.k6,
-    'sys-potion-mp': __A.k7,
-    'sys-auto': __A.k8,
-    'nav-character': __A.k1,
-    'nav-bag': __A.k2,
-    'nav-equip': __A.k3,
-    'nav-skills': __A.k4,
-    'nav-settings': __A.k5,
+    'sys-attack': __A.k10,
+    'sys-potion-hp': __A.k7,
+    'sys-potion-mp': __A.k8,
+    'sys-auto': __A.k9,
+    'nav-character': __A.k2,
+    'nav-bag': __A.k3,
+    'nav-equip': __A.k4,
+    'nav-skills': __A.k5,
+    'nav-settings': __A.k6,
   },
   /* Bộ ICON PHẲNG của Codex (v0.7.1) — 42 file WebP 96px nền TRONG SUỐT ở
      assets/icons2/, đặt tên family-id. Đây là hệ icon HIỂN THỊ chính cho
@@ -1373,66 +1579,66 @@ const ASSETS = {
 };
 /* Danh sách phẳng MỌI file ảnh (toàn literal) — dùng để preload màn chờ */
 const ASSET_FILES = [
-  __A.k10,
-  __A.k11, __A.k12,
-  __A.k13, __A.k14,
-  __A.k15, __A.k16,
-  __A.k0, __A.k17,
-  __A.k18, __A.k19,
-  __A.k20, __A.k21,
-  __A.k22, __A.k23,
-  __A.k24, __A.k25,
-  __A.k26, __A.k27,
-  __A.k32, __A.k28,
-  __A.k29, __A.k30,
-  __A.k31,
-  __A.k98, __A.k99,
-  __A.k100,
-  __A.k33, __A.k34,
-  __A.k35, __A.k36,
-  __A.k37,
-  __A.k38, __A.k39,
-  __A.k40,
-  __A.k41, __A.k42,
-  __A.k43,
-  __A.k44, __A.k45,
-  __A.k46,
-  __A.k47, __A.k48,
-  __A.k49,
-  __A.k50, __A.k51,
-  __A.k52, __A.k53,
-  __A.k54, __A.k55,
-  __A.k56, __A.k57,
-  __A.k58, __A.k59,
-  __A.k60, __A.k61,
-  __A.k62, __A.k63,
-  __A.k64, __A.k65,
-  __A.k66, __A.k67,
-  __A.k68, __A.k69,
-  __A.k70, __A.k71,
-  __A.k72, __A.k73,
-  __A.k74, __A.k75,
-  __A.k76, __A.k77,
-  __A.k78, __A.k79,
-  __A.k80, __A.k81,
-  __A.k82, __A.k83,
-  __A.k84, __A.k85,
-  __A.k86, __A.k87,
-  __A.k88, __A.k89,
-  __A.k90, __A.k91,
-  __A.k92, __A.k93,
-  __A.k94, __A.k95,
-  __A.k96, __A.k97,
-  __A.k101, __A.k102,
-  __A.k103, __A.k104,
-  __A.k105, __A.k106,
-  __A.k107, __A.k108,
-  __A.k109, __A.k110,
-  __A.k111, __A.k112,
-  __A.k113,
+  __A.k12,
+  __A.k11, __A.k13,
+  __A.k14, __A.k15,
+  __A.k16, __A.k17,
+  __A.k1, __A.k18,
+  __A.k19, __A.k20,
+  __A.k21, __A.k22,
+  __A.k23, __A.k24,
+  __A.k25, __A.k26,
+  __A.k27, __A.k28,
+  __A.k33, __A.k29,
+  __A.k30, __A.k31,
+  __A.k32,
+  __A.k99, __A.k100,
+  __A.k101,
+  __A.k34, __A.k35,
+  __A.k36, __A.k37,
+  __A.k38,
+  __A.k39, __A.k40,
+  __A.k41,
+  __A.k42, __A.k43,
+  __A.k44,
+  __A.k45, __A.k46,
+  __A.k47,
+  __A.k48, __A.k49,
+  __A.k50,
+  __A.k51, __A.k52,
+  __A.k53, __A.k54,
+  __A.k55, __A.k56,
+  __A.k57, __A.k58,
+  __A.k59, __A.k60,
+  __A.k61, __A.k62,
+  __A.k63, __A.k64,
+  __A.k65, __A.k66,
+  __A.k67, __A.k68,
+  __A.k69, __A.k70,
+  __A.k71, __A.k72,
+  __A.k73, __A.k74,
+  __A.k75, __A.k76,
+  __A.k77, __A.k78,
+  __A.k79, __A.k80,
+  __A.k81, __A.k82,
+  __A.k83, __A.k84,
+  __A.k85, __A.k86,
+  __A.k87, __A.k88,
+  __A.k89, __A.k90,
+  __A.k91, __A.k92,
+  __A.k93, __A.k94,
+  __A.k95, __A.k96,
+  __A.k97, __A.k98,
+  __A.k102, __A.k103,
+  __A.k104, __A.k105,
+  __A.k106, __A.k107,
+  __A.k108, __A.k109,
+  __A.k110, __A.k111,
+  __A.k112, __A.k113,
   __A.k114,
   __A.k115,
-  __A.k116, __A.k117, __A.k216,
+  __A.k116,
+  __A.k117, __A.k118, __A.k216,
   __A.k217, __A.k218, __A.k219,
   __A.k220, __A.k221, __A.k222,
   __A.k223, __A.k224, __A.k225,
@@ -1504,10 +1710,10 @@ const ASSET_FILES = [
   __A.k166, __A.k167,
   __A.k168, __A.k169, __A.k170, __A.k171,
   __A.k172, __A.k173,
-  __A.k9, __A.k6, __A.k7,
-  __A.k8,
-  __A.k1, __A.k2, __A.k3,
-  __A.k4, __A.k5,
+  __A.k10, __A.k7, __A.k8,
+  __A.k9,
+  __A.k2, __A.k3, __A.k4,
+  __A.k5, __A.k6,
   __A.k174, __A.k175,
   __A.k176, __A.k177,
   __A.k178, __A.k179,
@@ -1532,7 +1738,7 @@ const ASSET_FILES = [
   /* v0.8.0: tranh 14 map mới + dải quái biome + 2 file lưới va chạm JSON
      (JSON không phải ảnh: bộ nạp preload bỏ qua lỗi như ảnh hỏng, còn dữ
      liệu lưới được fetch riêng ở loadCollisionData) */
-  __A.k118, __A.k119,
+  __A.k0, __A.k119,
   __A.k120, __A.k121, __A.k122,
   __A.k123, __A.k124,
   __A.k125, __A.k126,
@@ -1564,7 +1770,7 @@ function icon2Img(id) {
 }
 
 /* Phiên bản game hiện tại — hiển thị trong panel Cài đặt */
-const GAME_VERSION = 'v0.8.0';
+const GAME_VERSION = 'v0.9.0';
 
 /* =====================================================================
    VẬT THỂ TÁCH LỚP RỪNG XANH (v0.5.6) — dữ liệu từ layers.json của
@@ -1998,13 +2204,13 @@ let P = Save.load();
 const MAX_CHARS = 3;
 const Roster = {
   chars: [], active: -1,
-  settings: { quality: 'high', fxSkills: true, shake: true, dmgNums: true, bgmVol: 45, bgmOn: true, sfxVol: 85, sfxOn: true, muteAll: false, vibrate: true },
+  settings: { quality: 'high', fxSkills: true, shake: true, dmgNums: true, bgmVol: 45, bgmOn: true, sfxVol: 85, sfxOn: true, muteAll: false, vibrate: true, showFps: false },
 };
 let uiPause = false;   // mở danh sách nhân vật / cài đặt → tạm dừng trận đấu
 
 /* Trạng thái tạm thời của trận đấu */
 const hero = {
-  x: 120, z: 0.5, zTarget: 0.5, r: 14, face: 1, hp: 1, mp: 1,
+  x: 120, y: 120, z: 0.5, zTarget: 0.5, r: 14, face: 1, hp: 1, mp: 1,
   vx: 0, vy: 0, faceS: 1, _atkBuf: false,
   atkCd: 0, swingT: 0, hurtT: 0, walkPh: 0, moving: false, dead: false,
   poisonT: 0, poisonDps: 0, poisonTick: 0, slowT: 0, slowPct: 0,
@@ -3121,8 +3327,54 @@ const Sprites = {
      633–634/640, quái chạm cạnh dưới. */
   heroFeet: {},    /* key -> đệm px của ảnh tĩnh (theo chiều cao gốc) */
   animFeet: {},    /* key -> mảng đệm px theo từng ô 420×500 */
+  animBox: {},     /* key -> mảng {top, feet} THẬT từng ô của dải 420×500 (đo từ alpha lúc nạp) */
   monFeet: {},     /* type -> đệm px của ảnh quái */
   _feetCv: null,
+  /* Đo khung bao THẬT (hàng alpha trên cùng + hàng chân dưới cùng) của
+     TỪNG Ô trong 1 dải ngang — cùng ngưỡng như measureFeet (hàng có ≥3
+     điểm alpha > 40). Nền tảng của việc CHUẨN HOÁ KÍCH THƯỚC: các dải
+     khác nhau chứa hình người cao khác nhau (dải bộ phận ~586px, dải
+     key-pose Kiếm Sĩ Nam ~476px, dải cũ 420×500 ~437–488px) — vẽ theo
+     hằng số đoán sẵn từng làm nhân vật đứng/chạy một cỡ, đánh một cỡ. */
+  measureCellsBox(img, cellW) {
+    try {
+      const W = img.naturalWidth, H = img.naturalHeight;
+      if (!W || !H || !cellW) return null;
+      const c = this._feetCv || (this._feetCv = document.createElement('canvas'));
+      c.width = W; c.height = H;
+      const g = c.getContext('2d', { willReadFrequently: true });
+      g.clearRect(0, 0, W, H); g.drawImage(img, 0, 0);
+      const data = g.getImageData(0, 0, W, H).data;
+      const cells = Math.max(1, Math.round(W / cellW));
+      const rowHas = (y, x0, x1) => {
+        let cnt = 0;
+        for (let x = x0; x < x1; x += 2) { if (data[(y * W + x) * 4 + 3] > 40) { cnt++; if (cnt >= 3) return true; } }
+        return false;
+      };
+      const out = [];
+      for (let ci = 0; ci < cells; ci++) {
+        const x0 = ci * cellW, x1 = Math.min(W, x0 + cellW);
+        let top = -1, feet = -1;
+        for (let y = 0; y < H; y++) { if (rowHas(y, x0, x1)) { top = y; break; } }
+        for (let y = H - 1; y >= 0; y--) { if (rowHas(y, x0, x1)) { feet = y; break; } }
+        out.push(top < 0 || feet <= top ? null : { top, feet });
+      }
+      return out;
+    } catch (e) { return null; }
+  },
+  /* Khung chuẩn của 1 DẢI 768×640 từ số đo từng ô: refH = TRUNG VỊ chiều
+     cao hình (feet − top) các ô — khung hiệu ứng vươn cao bất thường
+     (đại kiếm Địa Chấn/Thiên Kiếm) không kéo cả dải nhỏ lại; feet = hàng
+     chân sâu nhất để mọi khung chạm đất như nhau. */
+  stripBox(img) {
+    const cells = this.measureCellsBox(img, 768);
+    if (!cells) return null;
+    const hs = [], feet = Math.max(...cells.map(c => c ? c.feet : 0));
+    for (const c of cells) if (c) hs.push(c.feet - c.top);
+    if (!hs.length) return null;
+    hs.sort((a, b) => a - b);
+    return { refH: hs[Math.floor(hs.length / 2)], feet };
+  },
   measureFeet(img, cellW) {
     try {
       const W = img.naturalWidth, H = img.naturalHeight;
@@ -3174,6 +3426,7 @@ const Sprites = {
         strip.onload = () => {
           this.heroAnim[k] = strip;
           const af = this.measureFeet(strip, this.ANIM_CELL_W); if (af) this.animFeet[k] = af;
+          const ab = this.measureCellsBox(strip, this.ANIM_CELL_W); if (ab) this.animBox[k] = ab;
           for (const [tn, col] of [['red', '#ff3b2d'], ['green', '#57c96e']]) {
             const c = document.createElement('canvas'); c.width = strip.naturalWidth; c.height = strip.naturalHeight;
             const g2 = c.getContext('2d'); g2.drawImage(strip, 0, 0);
@@ -3328,6 +3581,7 @@ const Sprites = {
   _loadStrip(src, tintStore, prefix) {
     const img = new Image();
     img.onload = () => {
+      img._box = Sprites.stripBox(img);   /* khung chuẩn hoá kích thước của dải (heroStripDraw dùng) */
       for (const [tn, col] of [['red', '#ff3b2d'], ['green', '#57c96e']]) {
         const c = document.createElement('canvas'); c.width = img.naturalWidth; c.height = img.naturalHeight;
         const g2 = c.getContext('2d'); g2.drawImage(img, 0, 0);
@@ -3383,9 +3637,19 @@ const Sprites = {
     const TS = tintStore || this.ksAnimTint;
     const baseA = ctx.globalAlpha;
     const CW = 768, CH = 640;
-    const cellH = height * CH / 476;
-    const dw = cellH * CW / CH;
-    const dy = -cellH * 620 / CH;
+    /* CHUẨN HOÁ KÍCH THƯỚC THEO SỐ ĐO THẬT của chính dải đang vẽ (img._box
+       đo từ alpha lúc nạp): tỉ lệ k sao cho chiều cao hình người THẬT của
+       dải = đúng `height`, neo theo hàng chân thật của dải. Trước đây mọi
+       dải đều bị ép theo hằng số 476px của dải Kiếm Sĩ Nam trong khi dải
+       bộ phận cao ~586px → đứng/chạy to ~129px còn đánh thường (dải cũ)
+       chỉ 105px, nhân vật cứ to nhỏ theo trạng thái. Chưa đo được (ảnh
+       vừa nạp) → rơi về hằng số cũ 476/620 như trước. */
+    const box = entry.img._box;
+    const refH = box ? box.refH : 476, feetY = box ? box.feet : 620;
+    const k = height / refH;
+    const cellH = CH * k;
+    const dw = CW * k;
+    const dy = -feetY * k;
     const sx = fi * CW;
     let bob = 0;
     if (h.reviveT > 0) bob += h.reviveT * height * 0.3;
@@ -3439,7 +3703,7 @@ const Sprites = {
     const src = ASSETS.mapImg[id]; if (!src) return;
     this._mapImgLoading = id;
     const img = new Image();
-    img.onload = () => { this.mapImgs[id] = img; if (this._mapImgLoading === id) this._mapImgLoading = null; };
+    img.onload = () => { this.mapImgs[id] = img; if (this._mapImgLoading === id) this._mapImgLoading = null; if (typeof Minimap !== 'undefined') Minimap.draw(); };
     img.onerror = () => { if (this._mapImgLoading === id) this._mapImgLoading = null; };
     img.src = src;
   },
@@ -3563,10 +3827,20 @@ const Sprites = {
     const CW = this.ANIM_CELL_W, CH = this.ANIM_CELL_H;
     const fi = this.animFrame(h, t), sx = fi * CW;
     /* v0.5.5: đệm chân RIÊNG TỪNG KHUNG — hàng chân thật của khung đang
-       vẽ chạm đúng điểm đất, chuyển khung không còn nhấp nhô/lơ lửng */
+       vẽ chạm đúng điểm đất, chuyển khung không còn nhấp nhô/lơ lửng.
+       NÂNG CẤP ĐỒNG NHẤT KÍCH THƯỚC: chuẩn hoá theo khung bao THẬT của
+       khung đang vẽ (animBox: top + feet đo từ alpha) — chiều cao hình
+       người của MỌI khung = đúng `height` và chân chạm đất, thay vì chỉ
+       neo chân như trước (đỉnh đầu từng khung cao thấp khác nhau tới
+       ~10% nên đứng/đánh vẫn lệch cỡ so với dải bộ phận). Chưa đo được
+       → rơi về cách neo chân cũ. */
+    const bxA = (this.animBox[k] && this.animBox[k][fi]) || null;
     const padA = (this.animFeet[k] && this.animFeet[k][fi]) || 0;
-    const hFull = height * CH / Math.max(1, CH - padA);
-    const w = hFull * CW / CH;
+    const topA = bxA ? bxA.top : 0, feetA = bxA ? bxA.feet : (CH - 1 - padA);
+    const sA = height / Math.max(1, feetA - topA);
+    const hFull = CH * sA;
+    const w = CW * sA;
+    const dyA = -feetA * sA;
     let bob = 0;
     if (h.reviveT > 0) bob += h.reviveT * height * 0.3;
     /* Nhún thân khi chạy: đều và nhẹ, cùng pha với nhịp bước theo quãng
@@ -3583,9 +3857,9 @@ const Sprites = {
     const fxA = h.faceS === undefined ? (h.face || 1) : h.faceS;
     if (!h.dead && !(h.castT > 0) && h.leanS) ctx.rotate(h.leanS);
     ctx.scale(fxA, 1 - 0.04 * (h.turnSq || 0));
-    ctx.drawImage(strip, sx, 0, CW, CH, -w / 2, -height, w, hFull);
-    if (h.poisonT > 0 && this.heroAnimTint[k + '-green']) { ctx.globalAlpha = baseA * 0.30; ctx.drawImage(this.heroAnimTint[k + '-green'], sx, 0, CW, CH, -w / 2, -height, w, hFull); ctx.globalAlpha = baseA; }
-    if (h.hurtT > 0 && this.heroAnimTint[k + '-red']) { ctx.globalAlpha = baseA * Math.min(0.5, h.hurtT * 2.2); ctx.drawImage(this.heroAnimTint[k + '-red'], sx, 0, CW, CH, -w / 2, -height, w, hFull); ctx.globalAlpha = baseA; }
+    ctx.drawImage(strip, sx, 0, CW, CH, -w / 2, dyA, w, hFull);
+    if (h.poisonT > 0 && this.heroAnimTint[k + '-green']) { ctx.globalAlpha = baseA * 0.30; ctx.drawImage(this.heroAnimTint[k + '-green'], sx, 0, CW, CH, -w / 2, dyA, w, hFull); ctx.globalAlpha = baseA; }
+    if (h.hurtT > 0 && this.heroAnimTint[k + '-red']) { ctx.globalAlpha = baseA * Math.min(0.5, h.hurtT * 2.2); ctx.drawImage(this.heroAnimTint[k + '-red'], sx, 0, CW, CH, -w / 2, dyA, w, hFull); ctx.globalAlpha = baseA; }
     ctx.restore();
     return true;
   },
@@ -4273,7 +4547,7 @@ function toggleFullscreen() {
   setTimeout(resize, 120);
 }
 function resize() {
-  /* v0.5.7: ép #rotRoot về đúng vùng nhìn thấy thật TRƯỚC khi đo sân,
+  /* Ép #stageRoot về đúng vùng nhìn thấy thật TRƯỚC khi đo sân,
      để canvas + HUD luôn khớp khung hình webview cấp */
   if (typeof fitStage === 'function') fitStage();
   const wrap = document.getElementById('arenaWrap');
@@ -4284,6 +4558,10 @@ function resize() {
   if (!h || h < 200) h = Math.max(300, visibleSize().h - 92);
   DPR = Math.min(2, window.devicePixelRatio || 1);
   canvas.width = Math.round(w * DPR); canvas.height = Math.round(h * DPR);
+  /* Gán CẢ width lẫn height tường minh: backing store và khung hiển thị
+     luôn khớp 1:1 — lệch nhau là canvas bị trình duyệt kéo giãn, hình
+     vừa phóng to vừa mờ nhoè (đã gặp trên webview điện thoại) */
+  canvas.style.width = w + 'px';
   canvas.style.height = h + 'px';
   ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
   W = w; H = h;
@@ -4620,6 +4898,7 @@ function spawnMonster(forceType, opts) {
    cổng / mở panel của NPC — đứng yên trên bệ KHÔNG tự chuyển. Rời vùng
    thì hộp tự đóng. Đổi mục tiêu khi đang đứng giữa 2 vùng kề nhau. */
 let interactTarget = null;   // { key, kind:'portal'|'npc', ... }
+let interactDismissedKey = '';   // key mục tiêu người chơi đã bấm ✕ đóng — không tự bật lại khi còn đứng trong vùng
 function updatePortal() {
   if (!P.created || hero.dead || stageState !== 'fighting') { setInteract(null); return; }
   let tgt = null;
@@ -4638,7 +4917,9 @@ function setInteract(tgt) {
   const key = tgt ? tgt.key : '';
   if ((interactTarget && interactTarget.key || '') === key) return;
   interactTarget = tgt;
-  if (!tgt) { if (UI.msgIsInteract) UI.hideMsg(); return; }
+  if (!tgt) { interactDismissedKey = ''; if (UI.msgIsInteract) UI.hideMsg(); return; }
+  if (key === interactDismissedKey) return;   // người chơi đã chủ động đóng hộp của mục tiêu này — tôn trọng, không bật lại
+  interactDismissedKey = '';
   if (tgt.kind === 'portal') {
     UI.showInteract('Cổng Dịch Chuyển', 'Cổng đá hai chiều — sang ' + tgt.name + '. Quái ở đó hồi sinh liên tục, đi lúc nào cũng được.', 'Sang ' + tgt.name, () => travelTo(tgt.to, tgt.link));
   } else {
@@ -5236,7 +5517,7 @@ function updateMonster(m, dt) {
 let mmTimer = 0;
 function update(dt) {
   frameNo++;
-  if (uiPause) { timeNow += dt; return; }
+  if (uiPause || Orient.portrait) { timeNow += dt; return; }   /* v0.9.0: viewport dọc thật → tạm dừng sau lớp phủ nhắc xoay */
   timeNow += dt;
   const st = heroStats();
   if (!P.created) { updateCamera(dt); return; }
@@ -5507,10 +5788,14 @@ function draw() {
     }
     ctx.restore();
   }
-  /* Quầng sáng ấm quanh nhân vật — điểm nhấn thị giác */
+  /* Quầng sáng ấm quanh nhân vật — điểm nhấn thị giác. CHỈ vẽ khi tọa độ
+     hero hữu hạn: createRadialGradient văng lỗi với giá trị NaN (hero chưa
+     được đặt vào map ở những khung đầu) và từng làm chết cả vòng lặp. */
+  if (isFinite(hero.x) && isFinite(hero.y)) {
   const hg = ctx.createRadialGradient(hero.x, hero.y - 12, 8, hero.x, hero.y - 12, 130);
   hg.addColorStop(0, 'rgba(255,240,190,.14)'); hg.addColorStop(1, 'rgba(255,240,190,0)');
   ctx.fillStyle = hg; ctx.fillRect(hero.x - 130, hero.y - 142, 260, 260);
+  }
   /* Danh sách vẽ theo chiều sâu (y chân) */
   const list = [];
   for (const o of obstacles) {
@@ -5772,11 +6057,38 @@ function drawDrop(d) {
 }
 
 let lastTs = 0;
+let fpsAcc = 0, fpsN = 0, fpsT = 0;
+let sizeWatchT = 0;
 function loop(ts) {
+  /* Đăng ký khung KẾ TIẾP ngay đầu vòng: một khung hình văng lỗi bất ngờ
+     không còn giết chết vòng lặp vĩnh viễn (trước đây rAF nằm ở cuối —
+     chỉ 1 lỗi vẽ là game đứng hình, chỉ còn UI nổi trên nền trống). */
+  requestAnimationFrame(loop);
   const dt = Math.min(0.05, (ts - lastTs) / 1000 || 0.016);
   lastTs = ts; frameDt = dt;
+  /* Watchdog kích thước sân: webview trong app đổi khung (xoay máy,
+     thanh công cụ trượt) KHÔNG phải lúc nào cũng bắn sự kiện resize —
+     canvas giữ kích thước cũ bị kéo giãn → map phóng to + mờ nhoè.
+     Kiểm tra rẻ mỗi ~0.4s: lệch >2px thì resize() đồng bộ lại ngay. */
+  sizeWatchT += dt;
+  if (sizeWatchT > 0.4) {
+    sizeWatchT = 0;
+    if (!document.body.classList.contains('in-gate')) {
+      const wrap = document.getElementById('arenaWrap');
+      if (wrap && wrap.clientWidth > 0 && wrap.clientHeight > 0 &&
+          (Math.abs(wrap.clientWidth - W) > 2 || Math.abs(wrap.clientHeight - H) > 2)) resize();
+    }
+  }
   update(dt); draw();
-  requestAnimationFrame(loop);
+  /* v0.9.0 — đồng hồ FPS (chỉ hiện khi bật trong Cài đặt, mặc định tắt):
+     trung bình trượt 0.5s, để nghiệm thu hiệu năng trên máy thật */
+  const fm = document.getElementById('fpsMeter');
+  if (fm) {
+    if (Roster.settings.showFps) {
+      fpsAcc += dt; fpsN++; fpsT += dt;
+      if (fpsT >= 0.5) { fm.style.display = ''; fm.textContent = Math.round(fpsN / Math.max(0.001, fpsAcc)) + ' FPS'; fpsAcc = 0; fpsN = 0; fpsT = 0; }
+    } else if (fm.style.display !== 'none') fm.style.display = 'none';
+  }
 }
 
 /* =====================================================================
@@ -5792,7 +6104,9 @@ const Minimap = {
     let bgImg = null;
     if (md.forest) bgImg = Sprites.mapArtFull || Sprites.mapArt;
     else if (Sprites.mapImgs[md.id]) bgImg = Sprites.mapImgs[md.id];
-    if (bgImg) c.drawImage(bgImg, 0, 0, w, h);
+    /* Chỉ vẽ khi ảnh đã tải XONG thật (naturalWidth > 0): tránh khung
+       minimap hiện ảnh dở dang / sai nguồn trong lúc tranh đang nạp */
+    if (bgImg && bgImg.naturalWidth > 0) c.drawImage(bgImg, 0, 0, w, h);
     if (curZones) {
       /* Vòng vùng: an toàn (vàng) · boss (đỏ) · tinh anh (cam) */
       c.lineWidth = 1.4;
@@ -6306,18 +6620,31 @@ const UI = {
   showMsg(title, text, btn) {
     this.msgAction = null; this.msgIsInteract = false;
     el('msgTitle').textContent = title; el('msgText').textContent = text; el('msgBtn').textContent = btn;
+    el('msgClose').style.display = 'none';
     el('arenaMsg').classList.add('show');
-    const sc = el('arenaScrim'); if (sc) sc.classList.add('show');
+    const sc = el('arenaScrim'); if (sc) { sc.classList.add('show'); sc.classList.remove('soft'); }
   },
   /* Hộp thoại TƯƠNG TÁC (cổng / NPC — v0.8.0): nút bấm chạy action thay
-     cho luồng qua màn cũ; rời vùng tương tác thì setInteract tự đóng */
+     cho luồng qua màn cũ; rời vùng tương tác thì setInteract tự đóng.
+     Người chơi cũng đóng NGAY được bằng nút ✕ tròn (msgClose) — hộp có
+     ✕ riêng và lớp mờ KHÔNG chặn joystick (class soft) nên đi khỏi
+     vùng là hộp tự đóng, không còn cảnh mở hộp là kẹt cứng. */
   showInteract(title, text, btn, action) {
     this.msgAction = action; this.msgIsInteract = true;
     el('msgTitle').textContent = title; el('msgText').textContent = text; el('msgBtn').textContent = btn;
+    el('msgClose').style.display = '';
     el('arenaMsg').classList.add('show');
-    const sc = el('arenaScrim'); if (sc) sc.classList.add('show');
+    const sc = el('arenaScrim'); if (sc) { sc.classList.add('show'); sc.classList.add('soft'); }
   },
-  hideMsg() { this.msgAction = null; this.msgIsInteract = false; el('arenaMsg').classList.remove('show'); const sc = el('arenaScrim'); if (sc) sc.classList.remove('show'); },
+  hideMsg() { this.msgAction = null; this.msgIsInteract = false; el('arenaMsg').classList.remove('show'); const sc = el('arenaScrim'); if (sc) { sc.classList.remove('show'); sc.classList.remove('soft'); } },
+  /* Đóng hộp tương tác theo ý người chơi (nút ✕ / phím Esc): ghi nhớ
+     mục tiêu vừa đóng để setInteract không bật lại ngay khi hero còn
+     đứng trong vùng; rời vùng hoặc đổi mục tiêu là hết ghi nhớ */
+  dismissInteract() {
+    if (!this.msgIsInteract) return;
+    interactDismissedKey = interactTarget ? interactTarget.key : '';
+    this.hideMsg();
+  },
 
   /* ----- Panel do PanelManager quản lý chung (HUD V2): mở/đóng/chuyển panel, tạm dừng trận ----- */
   openSheet(name) { PanelManager.open(name); },
@@ -6461,6 +6788,9 @@ const UI = {
     const st = heroStats(), c = cls();
     el('charTitle').textContent = (P.name ? P.name + ' — ' : '') + c.name + ' (' + (P.gender === 'female' ? 'Nữ' : 'Nam') + ') · Lv ' + P.level;
     el('charPortrait').src = ASSETS.portrait[P.classId + '-' + P.gender];
+    /* v0.9.0: hero TOÀN THÂN ở panel Nhân vật + panel Trang bị */
+    el('charHeroImg').src = ASSETS.hero[P.classId + '-' + P.gender];
+    el('equipHeroImg').src = ASSETS.hero[P.classId + '-' + P.gender];
     el('attrPts').textContent = P.attrPoints;
     el('attrPts2').textContent = P.attrPoints;
     el('skillPts').textContent = P.skillPoints;
@@ -6490,8 +6820,9 @@ const UI = {
     el('pctTable').innerHTML = '<tr><th>Nguồn %</th><th>ATK</th><th>DEF</th><th>HP</th><th>Crit</th><th>Tốc độ</th></tr>' +
       pctRow('Trang bị', k => st.pct[k].gear) + pctRow('Ngọc khảm', k => st.pct[k].gems) + pctRow('Skill phụ', k => st.pct[k].skill) +
       pctRow('<b>Tổng</b>', k => st.pctTotal(k));
-    /* Đồ đang mặc */
-    el('equipRow').innerHTML = '';
+    /* Đồ đang mặc — v0.9.0: 4 slot bố trí QUANH hero toàn thân (Vũ khí +
+       Áo giáp bên trái, Giày + Nhẫn bên phải), giữ nguyên 4 slot hiện có */
+    el('equipColL').innerHTML = ''; el('equipColR').innerHTML = '';
     for (const slot of Object.keys(CONFIG.itemSlots)) {
       const it = P.equipped[slot], meta = CONFIG.itemSlots[slot];
       const b = document.createElement('button');
@@ -6504,58 +6835,199 @@ const UI = {
       } else {
         b.innerHTML = '<span style="color:var(--ink-soft)">' + icon(meta.icon) + '</span><span class="s-name">Trống</span><span class="s-slot">' + meta.label + '</span>';
       }
-      el('equipRow').appendChild(b);
+      (slot === 'weapon' || slot === 'armor' ? el('equipColL') : el('equipColR')).appendChild(b);
     }
-    /* Skill chính + phụ */
+    /* Skill chính + phụ — v0.9.0: danh sách CHỌN bên trái, chi tiết +
+       nút Nâng cấp ở cột PHẢI (renderSkillDetail). Skill chưa mở có biểu
+       tượng khoá + cấp yêu cầu; thông số skill giữ nguyên như cũ. */
     const skillRow = (sk, i, isSup) => {
       const lv = isSup ? P.supportLv[i] : P.skillLv[i];
       const locked = !isSup && P.level < sk.unlock;
-      const row = document.createElement('div'); row.className = 'skill-row-item';
-      let desc = sk.desc;
-      if (!isSup) desc += ' · Hồi chiêu ' + skillCd(i, sk).toFixed(1) + 's · ' + sk.mp + ' mana';
-      row.innerHTML = '<span class="a-ic"><img src="' + ASSETS.icons2[SKILL_ICON2[sk.id]] + '" alt="" onerror="this.style.display=\'none\'">' + icon(sk.icon) + '</span><span class="a-main"><b>' + sk.name + ' <span class="chip ' + (locked ? 'todo' : 'doing') + '">' + (locked ? 'Chưa mở khoá' : 'Cấp ' + lv + '/' + CONFIG.skillUpgrade.max) + '</span>' + (isSup ? '<span class="chip todo">' + (sk.type === 'active' ? 'Chủ động' : 'Bị động') + '</span>' : '') + '</b><small>' + (locked ? 'Mở khoá ở Lv ' + sk.unlock + '. ' : '') + desc + '</small></span>';
-      const btn = document.createElement('button'); btn.className = 'plus-btn'; btn.textContent = '+'; btn.setAttribute('aria-label', 'Nâng cấp ' + sk.name);
-      btn.disabled = locked || P.skillPoints <= 0 || lv >= CONFIG.skillUpgrade.max;
-      btn.addEventListener('click', () => {
-        if (P.skillPoints <= 0 || lv >= CONFIG.skillUpgrade.max) return;
-        if (isSup) P.supportLv[i]++; else P.skillLv[i]++;
-        P.skillPoints--; Save.persist(); UI.renderChar(); UI.buildSkillBtns(); UI.buildSupportBtns();
-        UI.toast('Đã nâng <b>' + sk.name + '</b> lên cấp ' + (lv + 1) + '!');
-      });
-      row.appendChild(btn);
+      const sel = UI.skillSel && UI.skillSel.sup === isSup && UI.skillSel.idx === i;
+      const row = document.createElement('button'); row.type = 'button';
+      row.className = 'skill-row-item' + (sel ? ' sel' : '') + (locked ? ' locked' : '');
+      row.innerHTML = '<span class="a-ic"><img src="' + ASSETS.icons2[SKILL_ICON2[sk.id]] + '" alt="" onerror="this.style.display=\'none\'">' + icon(sk.icon) + (locked ? '<span class="sk-lock"><svg><use href="#i-lock"/></svg></span>' : '') + '</span><span class="a-main"><b>' + sk.name + ' <span class="chip ' + (locked ? 'todo' : 'doing') + '">' + (locked ? 'Mở ở Lv ' + sk.unlock : 'Cấp ' + lv + '/' + CONFIG.skillUpgrade.max) + '</span>' + (isSup ? '<span class="chip todo">' + (sk.type === 'active' ? 'Chủ động' : 'Bị động') + '</span>' : '') + '</b><small>' + sk.desc + '</small></span>';
+      row.addEventListener('click', () => { UI.skillSel = { sup: isSup, idx: i }; UI.renderChar(); });
       return row;
     };
     el('mainSkillRows').innerHTML = '';
     cls().skills.forEach((sk, i) => el('mainSkillRows').appendChild(skillRow(sk, i, false)));
     el('supSkillRows').innerHTML = '';
     cls().support.forEach((sp, i) => el('supSkillRows').appendChild(skillRow(sp, i, true)));
+    UI.renderSkillDetail();
   },
 
-  /* ----- Túi đồ & ngọc ----- */
+  /* v0.9.0 — Cột chi tiết kỹ năng (phải): cấp hiện tại/tối đa, sát thương,
+     mana, hồi chiêu, mô tả; nút Nâng cấp chỉ bấm được khi đủ điều kiện
+     (đúng cơ chế cũ: tốn 1 điểm skill, khoá theo Lv mở, trần cấp max) */
+  skillSel: { sup: false, idx: 0 },
+  renderSkillDetail() {
+    const box = el('skillDetail'); if (!box) return;
+    const sel = UI.skillSel || { sup: false, idx: 0 };
+    const sk = sel.sup ? cls().support[sel.idx] : cls().skills[sel.idx];
+    if (!sk) { box.innerHTML = '<p class="muted">Chạm một kỹ năng để xem chi tiết.</p>'; return; }
+    const i = sel.idx, isSup = sel.sup;
+    const lv = isSup ? P.supportLv[i] : P.skillLv[i];
+    const locked = !isSup && P.level < sk.unlock;
+    const max = CONFIG.skillUpgrade.max;
+    let rows = '<div class="sd-r"><span>Cấp</span><b>' + lv + ' / ' + max + '</b></div>';
+    if (!isSup) {
+      if (sk.mult) rows += '<div class="sd-r"><span>Sát thương</span><b>' + Math.round(sk.mult * 100) + '% ATK</b></div>';
+      rows += '<div class="sd-r"><span>Hồi chiêu</span><b>' + skillCd(i, sk).toFixed(1) + ' giây</b></div>';
+      rows += '<div class="sd-r"><span>Mana</span><b>' + sk.mp + '</b></div>';
+      if (locked) rows += '<div class="sd-r"><span>Mở khoá</span><b>Lv ' + sk.unlock + '</b></div>';
+      else if (lv < max) rows += '<div class="sd-r"><span>Cấp kế tiếp</span><b>Hồi chiêu ' + (sk.cd * (1 - CONFIG.skillUpgrade.cdPerLv * lv)).toFixed(1) + 's</b></div>';
+    } else {
+      rows += '<div class="sd-r"><span>Loại</span><b>' + (sk.type === 'active' ? 'Chủ động' : 'Bị động') + '</b></div>';
+    }
+    box.innerHTML = '<div class="sd-head"><span class="sd-ic"><img src="' + ASSETS.icons2[SKILL_ICON2[sk.id]] + '" alt="" onerror="this.style.display=\'none\'">' + icon(sk.icon) + '</span><span><b>' + sk.name + '</b><span class="chip ' + (locked ? 'todo' : 'doing') + '">' + (locked ? 'Chưa mở khoá' : 'Cấp ' + lv + '/' + max) + '</span></span></div>' +
+      '<div class="sd-rows">' + rows + '</div>' +
+      '<p class="sd-desc">' + (locked ? 'Mở khoá ở Lv ' + sk.unlock + '. ' : '') + sk.desc + '</p>';
+    const btn = document.createElement('button');
+    btn.className = 'sd-up';
+    btn.textContent = locked ? 'Mở khoá ở Lv ' + sk.unlock : (lv >= max ? 'Đã đạt cấp tối đa' : 'Nâng cấp (1 điểm skill)');
+    btn.disabled = locked || P.skillPoints <= 0 || lv >= max;
+    btn.addEventListener('click', () => {
+      if (P.skillPoints <= 0 || lv >= max) return;
+      if (isSup) P.supportLv[i]++; else P.skillLv[i]++;
+      P.skillPoints--; Save.persist(); UI.renderChar(); UI.buildSkillBtns(); UI.buildSupportBtns();
+      UI.toast('Đã nâng <b>' + sk.name + '</b> lên cấp ' + (lv + 1) + '!');
+    });
+    box.appendChild(btn);
+    if (!locked && lv < max && P.skillPoints <= 0) {
+      const n = document.createElement('p'); n.className = 'bd-note'; n.textContent = 'Chưa có điểm skill — lên cấp để nhận thêm điểm.';
+      box.appendChild(n);
+    }
+  },
+
+  /* ----- Túi đồ & ngọc — v0.9.0: lưới 8 cột × 5 hàng = 40 ô, tab lọc
+     Tất cả / Trang bị / Ngọc / Vật phẩm; ô chỉ hiện icon + số lượng + viền
+     phẩm chất; chạm ô → chi tiết ở cột PHẢI với nút hành động đúng chức
+     năng hiện có (Trang bị / Bán / Ghép / Sử dụng). Không tự bán/xoá. --- */
+  bagTab: 'all', bagSel: null,
   renderBag() {
-    el('bagCount').textContent = '(' + P.bag.length + '/' + CONFIG.bagCap + ' món)';
-    el('bagEmpty').style.display = P.bag.length ? 'none' : '';
+    const tab = UI.bagTab || 'all';
+    el('bagCount').textContent = 'Dung lượng túi: ' + P.bag.length + '/' + CONFIG.bagCap + ' món · Ngọc: ' + P.gems.length + ' viên';
+    el('bagGold').textContent = 'Vàng: ' + fmt(P.gold);
+    document.querySelectorAll('.bag-tab').forEach(x => x.classList.toggle('on', x.dataset.bagtab === tab));
+    /* Gom ngọc theo (loại + cấp) thành 1 ô có số lượng */
+    const gemGroups = [];
+    for (const g of P.gems) {
+      const gr = gemGroups.find(x => x.type === g.type && x.tier === g.tier);
+      if (gr) { gr.count++; } else gemGroups.push({ type: g.type, tier: g.tier, count: 1, first: g });
+    }
+    const entries = [];
+    if (tab === 'all' || tab === 'equip') for (const it of P.bag) entries.push({ kind: 'item', ref: it, key: null });
+    if (tab === 'all' || tab === 'gem') for (const gr of gemGroups) entries.push({ kind: 'gem', ref: gr, key: 'gem:' + gr.type + ':' + gr.tier });
+    if (tab === 'all' || tab === 'item') {
+      entries.push({ kind: 'potion', ref: 'hp', key: 'pot:hp' });
+      entries.push({ kind: 'potion', ref: 'mp', key: 'pot:mp' });
+    }
+    el('bagEmpty').style.display = entries.length ? 'none' : '';
     const grid = el('invGrid'); grid.innerHTML = '';
-    for (const it of P.bag) {
-      const meta = CONFIG.itemSlots[it.slot];
-      const b = document.createElement('button');
-      b.className = 'item-cell r-' + CONFIG.rarities[it.rarity].css + (it.isNew ? ' new-drop' : '');
-      b.innerHTML = '<span style="color:' + rarityColor(it.rarity) + '">' + itemIconHTML(it) + '</span><span class="i-name">' + it.name + '</span>' +
-        '<span class="i-up">' + (it.up > 0 ? '+' + it.up : 'Mới') + '</span>';
-      b.addEventListener('click', () => UI.openItem(it, 'bag'));
+    for (const en of entries) {
+      const b = document.createElement('button'); b.type = 'button';
+      const sel = UI.bagSel && UI.bagSel.kind === en.kind && (en.key ? UI.bagSel.key === en.key : UI.bagSel.ref === en.ref);
+      if (en.kind === 'item') {
+        const it = en.ref;
+        b.className = 'item-cell r-' + CONFIG.rarities[it.rarity].css + (it.isNew ? ' new-drop' : '') + (sel ? ' sel' : '');
+        b.title = it.name;
+        b.innerHTML = '<span style="color:' + rarityColor(it.rarity) + '">' + itemIconHTML(it) + '</span>' + (it.up > 0 ? '<span class="i-uplv">+' + it.up + '</span>' : '');
+      } else if (en.kind === 'gem') {
+        const gt = CONFIG.gems.types[en.ref.type];
+        b.className = 'gem-cell' + (sel ? ' sel' : '');
+        b.style.borderColor = gt.color;
+        b.title = Gems.label(en.ref.first);
+        b.innerHTML = '<span style="color:' + gt.color + '">' + icon('i-gem') + '</span><span class="i-qty">' + en.ref.count + '</span>';
+      } else {
+        const isHp = en.ref === 'hp';
+        b.className = 'item-cell' + (sel ? ' sel' : '');
+        b.title = isHp ? 'Bình máu' : 'Bình mana';
+        b.innerHTML = '<span style="color:' + (isHp ? '#e0483e' : '#2f7fd0') + '">' + icon('i-potion') + '</span><span class="i-qty">' + (isHp ? P.potions.hp : P.potions.mp) + '</span>';
+      }
+      b.addEventListener('click', () => { UI.bagSel = en; UI.renderBag(); });
       grid.appendChild(b);
     }
-    el('gemCount').textContent = '(' + P.gems.length + ' viên — chạm vào ngọc để ghép 3 viên cùng loại+cấp thành cấp cao hơn)';
-    const gg = el('gemGrid'); gg.innerHTML = '';
-    for (const g of P.gems) {
-      const gt = CONFIG.gems.types[g.type];
-      const b = document.createElement('button'); b.className = 'gem-cell';
-      b.style.borderColor = gt.color;
-      b.innerHTML = '<span style="color:' + gt.color + '">' + icon('i-gem') + '</span><span class="i-name">' + Gems.label(g) + '</span><span class="i-up">Ghép ↑</span>';
-      b.addEventListener('click', () => { if (Gems.tryMerge(g)) { Save.persist(); UI.renderBag(); } });
-      gg.appendChild(b);
-    }
+    /* Lấp ô trống tới đủ 40 ô (8×5); nhiều đồ hơn thì tròn lên bội số 8 */
+    const total = Math.max(40, Math.ceil(entries.length / 8) * 8);
+    for (let i = entries.length; i < total; i++) { const d = document.createElement('div'); d.className = 'bag-empty-cell'; grid.appendChild(d); }
     el('bagBadge').textContent = P.bag.length; el('bagBadge').style.display = P.bag.length ? '' : 'none';
+    UI.renderBagDetail();
+  },
+  renderBagDetail() {
+    const box = el('bagDetail'); if (!box) return;
+    const sel = UI.bagSel;
+    if (!sel) { box.innerHTML = '<p class="muted" style="margin:4px 0">Chạm vào một món trong lưới để xem chi tiết tại đây: chỉ số, phẩm chất và các nút Trang bị / Bán / Ghép / Sử dụng.</p>'; return; }
+    if (sel.kind === 'item') {
+      const it = sel.ref;
+      if (!P.bag.includes(it)) { UI.bagSel = null; box.innerHTML = '<p class="muted" style="margin:4px 0">Món đồ đã thay đổi — chạm một món khác nhé.</p>'; return; }
+      const r = CONFIG.rarities[it.rarity], meta = CONFIG.itemSlots[it.slot];
+      const sIt = Items.effStats(it);
+      let rows = '';
+      for (const k of Object.keys(sIt)) rows += '<div class="sd-r"><span>' + Items.statLabel(k) + '</span><b>' + sIt[k] + Items.statSuffix(k) + '</b></div>';
+      if (it.pct) for (const [k, v] of Object.entries(it.pct)) rows += '<div class="sd-r"><span>% ' + Items.statLabel(k) + '</span><b>+' + (v * 100).toFixed(1) + '%</b></div>';
+      if (it.sockets) rows += '<div class="sd-r"><span>Lỗ khảm</span><b>' + it.sockets + ' lỗ</b></div>';
+      box.innerHTML = '<div class="bd-ic ia-wrap" style="color:' + rarityColor(it.rarity) + ';border-color:' + rarityColor(it.rarity) + '">' + itemIconHTML(it) + '</div>' +
+        '<h4>' + it.name + (it.up > 0 ? ' <span style="color:var(--gold)">+' + it.up + '</span>' : '') + '</h4>' +
+        '<div class="bd-sub"><span class="rc-' + r.css + '">' + r.name + '</span> · ' + meta.label + ' · Cấp đồ ' + it.il + '</div>' +
+        '<div class="bd-rows">' + rows + '</div>';
+      const acts = document.createElement('div'); acts.className = 'bd-actions';
+      const bEq = document.createElement('button'); bEq.className = 'btn-primary'; bEq.textContent = 'Trang bị';
+      bEq.addEventListener('click', () => {
+        const old = P.equipped[it.slot];
+        P.bag = P.bag.filter(x => x !== it);
+        if (old) P.bag.push(old);
+        P.equipped[it.slot] = it; it.isNew = false;
+        Save.persist(); UI.bagSel = null; UI.renderBag(); UI.renderChar(); UI.refreshHUD();
+        UI.toast('Đã mặc <b>' + it.name + '</b>');
+      });
+      const bFull = document.createElement('button'); bFull.className = 'btn-ghost'; bFull.textContent = 'Nâng cấp & khảm ngọc';
+      bFull.addEventListener('click', () => UI.openItem(it, 'bag'));
+      const bSell = document.createElement('button'); bSell.className = 'btn-danger'; bSell.textContent = 'Bán (' + fmt(Items.sellValue(it)) + ' vàng)';
+      bSell.addEventListener('click', () => {
+        if (bSell.dataset.armed) {
+          for (const g of it.gems || []) P.gems.push(g);
+          P.gold += Items.sellValue(it);
+          P.bag = P.bag.filter(x => x !== it);
+          Save.persist(); UI.bagSel = null; UI.renderBag(); UI.renderChar(); UI.refreshHUD();
+          UI.toast('Đã bán <b>' + it.name + '</b> (ngọc khảm đã trả về túi).');
+        } else {
+          bSell.dataset.armed = '1'; bSell.textContent = 'Chạm nữa để BÁN THẬT';
+          setTimeout(() => { delete bSell.dataset.armed; bSell.textContent = 'Bán (' + fmt(Items.sellValue(it)) + ' vàng)'; }, 2600);
+        }
+      });
+      acts.appendChild(bEq); acts.appendChild(bFull); acts.appendChild(bSell);
+      box.appendChild(acts);
+      return;
+    }
+    if (sel.kind === 'gem') {
+      const gr = sel.ref, gt = CONFIG.gems.types[gr.type];
+      const same = P.gems.filter(g => g.type === gr.type && g.tier === gr.tier).length;
+      box.innerHTML = '<div class="bd-ic" style="color:' + gt.color + ';border-color:' + gt.color + '">' + icon('i-gem') + '</div>' +
+        '<h4>' + Gems.label(gr.first) + '</h4>' +
+        '<div class="bd-sub">Ngọc khảm · đang có ' + same + ' viên</div>' +
+        '<div class="bd-rows"><div class="sd-r"><span>' + Items.statLabel(gt.stat) + '</span><b>+' + CONFIG.gems.tierValues[gr.tier] + '%</b></div></div>' +
+        '<p class="bd-note">Ghép 3 viên cùng loại + cùng cấp thành 1 viên cấp cao hơn. Khảm ngọc: mở một trang bị rồi chọn lỗ khảm.</p>';
+      const acts = document.createElement('div'); acts.className = 'bd-actions';
+      const bM = document.createElement('button'); bM.className = 'btn-primary'; bM.textContent = 'Ghép 3 → cấp ' + (gr.tier + 1);
+      bM.disabled = same < 3 || !CONFIG.gems.tierValues[gr.tier + 1];
+      bM.addEventListener('click', () => { if (Gems.tryMerge(gr.first)) { Save.persist(); UI.bagSel = null; UI.renderBag(); } });
+      acts.appendChild(bM);
+      box.appendChild(acts);
+      return;
+    }
+    /* Vật phẩm: bình máu / bình mana */
+    const isHp = sel.ref === 'hp';
+    box.innerHTML = '<div class="bd-ic" style="color:' + (isHp ? '#e0483e' : '#2f7fd0') + '">' + icon('i-potion') + '</div>' +
+      '<h4>' + (isHp ? 'Bình máu' : 'Bình mana') + '</h4>' +
+      '<div class="bd-sub">Vật phẩm · đang có ' + (isHp ? P.potions.hp : P.potions.mp) + ' bình</div>' +
+      '<p class="bd-note">' + (isHp ? 'Hồi một phần HP ngay khi dùng — trong trận bấm nút Bình máu cạnh cụm skill.' : 'Hồi một phần mana ngay khi dùng — trong trận bấm nút Bình mana cạnh cụm skill.') + ' Mua thêm ở Cửa hàng trong Làng Khởi Đầu.</p>';
+    const acts = document.createElement('div'); acts.className = 'bd-actions';
+    const bU = document.createElement('button'); bU.className = 'btn-primary'; bU.textContent = 'Sử dụng';
+    bU.disabled = (isHp ? P.potions.hp : P.potions.mp) <= 0;
+    bU.addEventListener('click', () => { usePotion(sel.ref); UI.renderBag(); });
+    acts.appendChild(bU);
+    box.appendChild(acts);
   },
 
   /* ----- Popup trang bị ----- */
@@ -6781,45 +7253,82 @@ const UI = {
     b.style.display = Roster.chars.length ? '' : 'none';
     el('savedCount').textContent = Roster.chars.length;
   },
+  /* v0.9.0 — CHỌN NHÂN VẬT: slot TRÁI (avatar tròn + tên/nghề/cấp), hero
+     TOÀN THÂN ở giữa trên bệ sáng, thông tin PHẢI (tên/nghề/cấp/khu vực/
+     chỉ số cơ bản) + nút VÀO GAME lớn; Xoá nhỏ, bấm 2 lần mới xoá thật.
+     Luồng chọn/tạo/xoá giữ nguyên cơ chế cũ. */
+  rosterSel: -1,
   renderRoster() {
     /* Chưa có nhân vật đang chơi → đang ở MÀN HÌNH VÀO GAME riêng (body.in-gate ẩn hẳn sân) */
     document.body.classList.toggle('in-gate', !P.created);
     el('btnRosterClose').style.display = (P.created || this.rosterOverCreate) ? '' : 'none';
+    if (UI.rosterSel < 0 || UI.rosterSel >= Roster.chars.length) UI.rosterSel = Roster.active >= 0 ? Roster.active : 0;
     const list = el('rosterList'); list.innerHTML = '';
     for (let i = 0; i < MAX_CHARS; i++) {
       const ch = Roster.chars[i];
       if (!ch) {
         const b = document.createElement('button');
-        b.className = 'roster-empty'; b.textContent = '＋ Ô trống — Tạo nhân vật mới';
+        b.className = 'roster-empty'; b.textContent = '＋ Tạo nhân vật mới';
         b.addEventListener('click', () => { el('rosterBack').classList.remove('show'); UI.openCreate(); });
         list.appendChild(b);
         continue;
       }
       const cc = CONFIG.classes[ch.classId];
       const item = document.createElement('div');
-      item.className = 'roster-item' + (Roster.active === i ? ' active' : '');
+      item.className = 'roster-item' + (UI.rosterSel === i ? ' active' : '');
+      item.setAttribute('role', 'button');
       item.innerHTML = '<img src="' + ASSETS.portrait[ch.classId + '-' + ch.gender] + '" alt="">' +
-        '<div class="roster-info"><div class="r-name">' + esc(ch.name) + '</div><div class="r-sub">' + cc.name + ' · ' + (ch.gender === 'female' ? 'Nữ' : 'Nam') + ' · Lv ' + ch.level + ' · ' + mapDef(ch.mapId || 'lang').name + ' · ' + fmt(ch.gold) + ' vàng</div></div>';
-      const btns = document.createElement('div'); btns.className = 'roster-btns';
-      const play = document.createElement('button'); play.className = 'play-btn'; play.textContent = Roster.active === i ? 'Đang chơi' : 'Chơi tiếp';
-      play.addEventListener('click', () => UI.selectChar(i));
-      const del = document.createElement('button'); del.className = 'del-btn'; del.textContent = 'Xoá';
-      del.addEventListener('click', () => {
-        if (del.dataset.armed) {
-          Roster.chars.splice(i, 1);
-          if (Roster.active === i) { Roster.active = -1; P = Save.load(); resetSkillStates(); startStage(); }
-          else if (Roster.active > i) Roster.active--;
-          Save.persist(); UI.renderRoster(); UI.refreshAll();
-          UI.toast('Đã xoá nhân vật.');
-        } else {
-          del.dataset.armed = '1'; del.classList.add('armed'); del.textContent = 'Chạm nữa để XOÁ HẲNG';
-          setTimeout(() => { delete del.dataset.armed; del.classList.remove('armed'); del.textContent = 'Xoá'; }, 2600);
-        }
-      });
-      btns.appendChild(play); btns.appendChild(del);
-      item.appendChild(btns);
+        '<div class="roster-info-x"><div class="r-name">' + esc(ch.name) + '</div><div class="r-sub">' + cc.name + ' · Lv ' + ch.level + '</div></div>';
+      item.addEventListener('click', () => { UI.rosterSel = i; UI.renderRoster(); });
       list.appendChild(item);
     }
+    /* Sân khấu giữa + cột thông tin phải */
+    const stage = el('rosterStage'), info = el('rosterInfo');
+    const ch = Roster.chars[UI.rosterSel];
+    if (!ch) {
+      stage.style.visibility = 'hidden';
+      info.innerHTML = '<h3>Chưa có nhân vật</h3><div class="ri-sub">Tạo nhân vật mới để bắt đầu hành trình — tối đa ' + MAX_CHARS + ' nhân vật trên máy này, mỗi nhân vật có tiến trình riêng.</div>';
+      const b = document.createElement('button'); b.className = 'roster-play'; b.textContent = 'Tạo nhân vật';
+      b.addEventListener('click', () => { el('rosterBack').classList.remove('show'); UI.openCreate(); });
+      info.appendChild(b);
+      return;
+    }
+    stage.style.visibility = '';
+    el('rosterHeroImg').src = ASSETS.hero[ch.classId + '-' + ch.gender];
+    const cc = CONFIG.classes[ch.classId], g = cc.growth, lv = ch.level;
+    /* Chỉ số cơ bản = gốc phái + tăng trưởng theo cấp (đúng công thức gốc
+       của heroStats, chưa tính trang bị/ngọc của nhân vật đó) */
+    const bAtk = Math.round(cc.base.atk + g.atk * (lv - 1)), bDef = Math.round(cc.base.def + g.def * (lv - 1));
+    const bHp = Math.round(cc.base.hp + g.hp * (lv - 1)), bMp = Math.round(cc.base.mp + g.mp * (lv - 1));
+    info.innerHTML = '<h3>' + esc(ch.name) + '</h3>' +
+      '<div class="ri-sub">' + cc.name + ' (' + (ch.gender === 'female' ? 'Nữ' : 'Nam') + ') · Lv ' + lv + (Roster.active === UI.rosterSel ? ' · Đang chơi' : '') + '</div>' +
+      '<div class="ri-row"><span>Khu vực hiện tại</span><b>' + mapDef(ch.mapId || 'lang').name + '</b></div>' +
+      '<div class="ri-row"><span>Vàng</span><b>' + fmt(ch.gold) + '</b></div>' +
+      '<div class="ri-row"><span>HP</span><b>' + fmt(bHp) + '</b></div>' +
+      '<div class="ri-row"><span>Mana</span><b>' + fmt(bMp) + '</b></div>' +
+      '<div class="ri-row"><span>Tấn công</span><b>' + fmt(bAtk) + '</b></div>' +
+      '<div class="ri-row"><span>Phòng thủ</span><b>' + fmt(bDef) + '</b></div>' +
+      '<div class="ri-row"><span>Chí mạng</span><b>' + cc.base.crit.toFixed(1) + '%</b></div>' +
+      '<div class="ri-row"><span>Tốc chạy</span><b>' + fmt(cc.base.speed) + '</b></div>';
+    const play = document.createElement('button'); play.className = 'roster-play'; play.textContent = 'Vào game';
+    const selIdx = UI.rosterSel;
+    play.addEventListener('click', () => UI.selectChar(selIdx));
+    info.appendChild(play);
+    const del = document.createElement('button'); del.className = 'roster-del'; del.textContent = 'Xoá nhân vật';
+    del.addEventListener('click', () => {
+      if (del.dataset.armed) {
+        Roster.chars.splice(selIdx, 1);
+        if (Roster.active === selIdx) { Roster.active = -1; P = Save.load(); resetSkillStates(); startStage(); }
+        else if (Roster.active > selIdx) Roster.active--;
+        UI.rosterSel = -1;
+        Save.persist(); UI.renderRoster(); UI.refreshAll();
+        UI.toast('Đã xoá nhân vật.');
+      } else {
+        del.dataset.armed = '1'; del.classList.add('armed'); del.textContent = 'Chạm nữa để XOÁ HẲNG';
+        setTimeout(() => { delete del.dataset.armed; del.classList.remove('armed'); del.textContent = 'Xoá nhân vật'; }, 2600);
+      }
+    });
+    info.appendChild(del);
   },
   selectChar(i) {
     const ch = Roster.chars[i]; if (!ch) return;
@@ -6941,7 +7450,7 @@ const UI = {
     const s = Roster.settings;
     el('setQuality').querySelectorAll('button').forEach(b => b.classList.toggle('on', b.dataset.q === s.quality));
     const tg = (id, v) => el(id).classList.toggle('on', !!v);
-    tg('setFx', s.fxSkills); tg('setShake', s.shake); tg('setDmg', s.dmgNums);
+    tg('setFx', s.fxSkills); tg('setShake', s.shake); tg('setDmg', s.dmgNums); tg('setFps', s.showFps);
     tg('setBgmOn', s.bgmOn); tg('setSfxOn', s.sfxOn); tg('setMute', s.muteAll); tg('setVib', s.vibrate);
     el('setBgmVol').value = s.bgmVol; el('setSfxVol').value = s.sfxVol;
     el('soundIcon').querySelector('use').setAttribute('href', s.muteAll ? '#i-sound-off' : '#i-sound-on');
@@ -6973,6 +7482,8 @@ const PanelManager = {
     el('settingsBack').classList.toggle('show', name === 'settings');
     el('sheetBack').classList.toggle('show', name !== 'settings');
     document.querySelectorAll('.hud-ico').forEach(b => b.classList.toggle('on', b.dataset.panel === name));
+    /* v0.9.0: thanh điều hướng dọc trong panel lớn — nút đang chọn sáng theo panel hiện tại */
+    document.querySelectorAll('.pnav-btn').forEach(b => b.classList.toggle('on', b.dataset.nav === name));
     this.current = name;
     input.jx = 0; input.jy = 0;
     const th = el('joyThumb'); if (th) th.style.transform = 'translate(-50%,-50%)';
@@ -7010,6 +7521,36 @@ function init() {
     x.addEventListener('click', () => PanelManager.close());
     p.appendChild(x);
   });
+  /* v0.9.0 — THANH ĐIỀU HƯỚNG DỌC bên trái các panel lớn (như ảnh mẫu):
+     Nhân Vật / Trang Bị / Túi Đồ / Kỹ Năng / Nhiệm Vụ / Cài Đặt. Gắn rail
+     + bọc toàn bộ nội dung cũ vào .panel-body (cuộn trong panel); bấm rail
+     là PanelManager.open chuyển thẳng, không đóng/mở chồng. Nút ✕ giữ
+     nguyên ngoài vùng bọc. */
+  const NAV_DEFS = [['char', 'Nhân Vật', 'i-user'], ['equip', 'Trang Bị', 'i-shield'], ['bag', 'Túi Đồ', 'i-bag'], ['skill', 'Kỹ Năng', 'i-bolt'], ['quest', 'Nhiệm Vụ', 'i-list'], ['settings', 'Cài Đặt', 'i-gear']];
+  const buildPanelNav = host => {
+    if (!host || host.classList.contains('has-nav')) return;
+    const nav = document.createElement('nav');
+    nav.className = 'panel-nav'; nav.setAttribute('aria-label', 'Chuyển mục');
+    nav.innerHTML = NAV_DEFS.map(d => '<button class="pnav-btn" data-nav="' + d[0] + '"><span class="pnav-ic"><svg><use href="#' + d[2] + '"/></svg></span><span>' + d[1] + '</span></button>').join('');
+    nav.querySelectorAll('[data-nav]').forEach(b => b.addEventListener('click', () => { AudioFX.ensure(); PanelManager.open(b.dataset.nav); }));
+    const body = document.createElement('div'); body.className = 'panel-body';
+    [...host.childNodes].forEach(n => { if (!(n.nodeType === 1 && n.classList.contains('sheet-x'))) body.appendChild(n); });
+    host.appendChild(nav); host.appendChild(body);
+    host.classList.add('has-nav');
+  };
+  ['panel-char', 'panel-equip', 'panel-bag', 'panel-skill', 'panel-quest'].forEach(id => buildPanelNav(el(id)));
+  buildPanelNav(document.querySelector('.settings-card'));
+  /* Tab trong cửa sổ Trang bị: [Trang bị] / [% theo nguồn] */
+  document.querySelectorAll('.eq-tab').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('.eq-tab').forEach(x => x.classList.toggle('on', x === b));
+    el('eqTabGear').style.display = b.dataset.eqtab === 'gear' ? '' : 'none';
+    el('eqTabPct').style.display = b.dataset.eqtab === 'pct' ? '' : 'none';
+  }));
+  /* Tab lọc trong Túi đồ */
+  document.querySelectorAll('.bag-tab').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('.bag-tab').forEach(x => x.classList.toggle('on', x === b));
+    UI.bagTab = b.dataset.bagtab; UI.bagSel = null; UI.renderBag();
+  }));
   el('btnFs').addEventListener('click', () => toggleFullscreen());
   el('btnRosterClose').addEventListener('click', () => UI.closeRoster());
   el('bigMapClose').addEventListener('click', () => el('bigMapBack').classList.remove('show'));
@@ -7041,6 +7582,8 @@ function init() {
     P.arrive = 'safe';
     startStage();
   });
+  /* Nút ✕ tròn của hộp thoại tương tác: đóng ngay, KHÔNG chạy action */
+  el('msgClose').addEventListener('click', () => { AudioFX.ensure(); UI.dismissInteract(); });
   el('btnSound').addEventListener('click', () => {
     Roster.settings.muteAll = !Roster.settings.muteAll;
     P.sound = !Roster.settings.muteAll;
@@ -7052,7 +7595,7 @@ function init() {
 
   /* Cài đặt: nút gạt + thanh trượt + mức chất lượng */
   const bindToggle = (id, key) => el(id).addEventListener('click', () => { Roster.settings[key] = !Roster.settings[key]; UI.renderSettings(); Save.persist(); });
-  bindToggle('setFx', 'fxSkills'); bindToggle('setShake', 'shake'); bindToggle('setDmg', 'dmgNums');
+  bindToggle('setFx', 'fxSkills'); bindToggle('setShake', 'shake'); bindToggle('setDmg', 'dmgNums'); bindToggle('setFps', 'showFps');
   bindToggle('setBgmOn', 'bgmOn'); bindToggle('setSfxOn', 'sfxOn'); bindToggle('setMute', 'muteAll'); bindToggle('setVib', 'vibrate');
   el('setQuality').querySelectorAll('button').forEach(b => b.addEventListener('click', () => { Roster.settings.quality = b.dataset.q; UI.renderSettings(); Save.persist(); UI.toast('Chất lượng đồ hoạ: <b>' + b.textContent + '</b>'); }));
   el('setBgmVol').addEventListener('input', e => { Roster.settings.bgmVol = +e.target.value; Save.persist(); });
@@ -7149,11 +7692,8 @@ function init() {
   const joyMove = e => {
     const r = joy.getBoundingClientRect();
     const sx = e.clientX - (r.left + r.width / 2), sy = e.clientY - (r.top + r.height / 2);
-    /* Joystick là hình vuông nên tâm khung bao sau xoay vẫn là tâm thật;
-       chỉ cần quay lại vector kéo theo phép quay +90° khi body.rot:
-       local dx = screen dy, local dy = -screen dx. Núm kéo (con của
-       joystick, vẽ trong không gian cục bộ) và input đều dùng dx/dy này. */
-    let dx = Rot.on ? sy : sx, dy = Rot.on ? -sx : sy;
+    /* v0.9.0: không còn xoay CSS nên vector kéo dùng thẳng tọa độ màn hình */
+    let dx = sx, dy = sy;
     const max = r.width / 2 - 4, d = Math.hypot(dx, dy);
     if (d > max) { dx *= max / d; dy *= max / d; }
     thumb.style.transform = 'translate(calc(-50% + ' + dx + 'px), calc(-50% + ' + dy + 'px))';
@@ -7178,7 +7718,7 @@ function init() {
 
   /* Bàn phím (test trên máy tính) */
   window.addEventListener('keydown', e => {
-    if (e.code === 'Escape') { UI.closeSheet(); UI.closeItem(); el('bigMapBack').classList.remove('show'); if (el('settingsBack').classList.contains('show')) UI.closeSettings(); }
+    if (e.code === 'Escape') { UI.dismissInteract(); UI.closeSheet(); UI.closeItem(); el('bigMapBack').classList.remove('show'); if (el('settingsBack').classList.contains('show')) UI.closeSettings(); }
     keys[e.code] = true;
     if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Space'].includes(e.code)) e.preventDefault();
     AudioFX.ensure();
@@ -7193,15 +7733,16 @@ function init() {
   document.addEventListener('pointerdown', () => { AudioFX.ensure(); AudioFX.startBgm(); }, { once: true });
   document.addEventListener('visibilitychange', () => { if (document.hidden) Save.persist(); });
 
-  /* Tự xoay hình 90° khi khung đang dọc (webview không tự xoay): áp dụng
-     ngay từ màn đầu tiên và nghe theo mỗi lần khung đổi hướng */
-  Rot.apply();
-  if (Rot.mq.addEventListener) Rot.mq.addEventListener('change', () => Rot.apply());
+  /* v0.9.0: hướng màn hình THẬT — viewport dọc thì lớp phủ nhắc xoay máy
+     hiện (CSS) + game tạm dừng (Orient.portrait); nghe mọi thay đổi hướng
+     để tính lại canvas / camera / HUD / tọa độ cảm ứng theo khung thật */
+  Orient.apply();
+  if (Orient.mq.addEventListener) Orient.mq.addEventListener('change', () => Orient.apply());
   /* Chặn cử chỉ zoom của iOS (gesturestart) — cùng với khóa viewport và
      touch-action ở CSS, hình không còn tự phóng to / thu nhỏ giữa trận */
   document.addEventListener('gesturestart', e => e.preventDefault());
   document.addEventListener('gesturechange', e => e.preventDefault());
-  window.addEventListener('orientationchange', () => setTimeout(() => Rot.apply(), 120));
+  window.addEventListener('orientationchange', () => setTimeout(() => Orient.apply(), 120));
   /* v0.5.7: sân khấu bám vùng nhìn thấy thật — đo lại khi cửa sổ hoặc
      visualViewport đổi (thanh công cụ app trượt, bàn phím bật/tắt…) */
   window.addEventListener('resize', () => { fitStage(); setTimeout(resize, 30); });
