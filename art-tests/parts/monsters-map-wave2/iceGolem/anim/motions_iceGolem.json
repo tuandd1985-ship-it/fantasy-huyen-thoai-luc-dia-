@@ -1,0 +1,242 @@
+{
+ "prefix": "iceGolem",
+ "native": true,
+ "fit_scale": 0.95,
+ "ground_parts": [
+  "leg_l",
+  "leg_r"
+ ],
+ "actions": {
+  "idle": {
+   "loop": true,
+   "frames_ms": [
+    600,
+    600
+   ],
+   "hit_frame": null,
+   "keys": [
+    {
+     "t": 0,
+     "rot": {},
+     "root": [
+      0,
+      0
+     ]
+    },
+    {
+     "t": 600,
+     "rot": {
+      "arm_r": 2,
+      "arm_l": -2,
+      "head": 2,
+      "body": 0.5
+     },
+     "root": [
+      0,
+      3
+     ]
+    },
+    {
+     "t": 1200,
+     "rot": {},
+     "root": [
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  "move": {
+   "loop": true,
+   "frames_ms": [
+    170,
+    170,
+    170,
+    170
+   ],
+   "hit_frame": null,
+   "keys": [
+    {
+     "t": 0,
+     "rot": {
+      "leg_r": 10,
+      "leg_l": -6,
+      "arm_r": -8,
+      "arm_l": -6,
+      "body": -2,
+      "head": 2
+     },
+     "root": [
+      0,
+      0
+     ]
+    },
+    {
+     "t": 170,
+     "rot": {},
+     "root": [
+      0,
+      -5
+     ]
+    },
+    {
+     "t": 340,
+     "rot": {
+      "leg_r": -6,
+      "leg_l": 10,
+      "arm_r": 6,
+      "arm_l": 8,
+      "body": 2,
+      "head": -2
+     },
+     "root": [
+      0,
+      0
+     ]
+    },
+    {
+     "t": 510,
+     "rot": {},
+     "root": [
+      0,
+      -5
+     ]
+    },
+    {
+     "t": 680,
+     "rot": {
+      "leg_r": 10,
+      "leg_l": -6,
+      "arm_r": -8,
+      "arm_l": -6,
+      "body": -2,
+      "head": 2
+     },
+     "root": [
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  "attack": {
+   "loop": false,
+   "frames_ms": [
+    120,
+    120,
+    80,
+    80,
+    200,
+    200
+   ],
+   "hit_frame": 3,
+   "keys": [
+    {
+     "t": 0,
+     "rot": {}
+    },
+    {
+     "t": 240,
+     "rot": {
+      "arm_r": 62,
+      "arm_l": -62,
+      "head": -6,
+      "body": -4
+     },
+     "root": [
+      0,
+      -12
+     ]
+    },
+    {
+     "t": 360,
+     "rot": {
+      "arm_r": 70,
+      "arm_l": -70,
+      "head": -8,
+      "body": -5
+     },
+     "root": [
+      0,
+      -16
+     ]
+    },
+    {
+     "t": 440,
+     "rot": {
+      "arm_r": -12,
+      "arm_l": 12,
+      "head": 8,
+      "body": 6
+     },
+     "root": [
+      10,
+      0
+     ]
+    },
+    {
+     "t": 640,
+     "rot": {
+      "arm_r": -8,
+      "arm_l": 8,
+      "head": 5,
+      "body": 4
+     },
+     "root": [
+      8,
+      0
+     ]
+    },
+    {
+     "t": 840,
+     "rot": {}
+    }
+   ]
+  },
+  "hurt": {
+   "loop": false,
+   "frames_ms": [
+    80,
+    120,
+    120
+   ],
+   "hit_frame": null,
+   "keys": [
+    {
+     "t": 0,
+     "rot": {}
+    },
+    {
+     "t": 80,
+     "rot": {
+      "body": -6,
+      "head": -10,
+      "arm_r": 14,
+      "arm_l": -14
+     },
+     "root": [
+      -14,
+      -4
+     ]
+    },
+    {
+     "t": 200,
+     "rot": {
+      "body": -2.4000000000000004,
+      "head": -4.0,
+      "arm_r": 5.6000000000000005,
+      "arm_l": -5.6000000000000005
+     },
+     "root": [
+      -6,
+      0
+     ]
+    },
+    {
+     "t": 320,
+     "rot": {}
+    }
+   ]
+  }
+ }
+}
