@@ -1,0 +1,183 @@
+{
+ "prefix": "kiemsi_nam",
+ "height_px": 476,
+ "actions": {
+  "idle": {
+   "loop": true,
+   "frames_ms": [
+    600,
+    600
+   ],
+   "hit_frame": null,
+   "keys": [
+    {
+     "t": 0,
+     "rot": {}
+    },
+    {
+     "t": 600,
+     "rot": {
+      "torso": -1.0,
+      "head": 1.5,
+      "arm_r": 2.5,
+      "arm_l": -2.5,
+      "cape": 2,
+      "plume": -4
+     },
+     "root": [
+      0,
+      3
+     ]
+    }
+   ]
+  },
+  "run": {
+   "loop": true,
+   "frames_ms": [
+    90,
+    90,
+    90,
+    90,
+    90,
+    90
+   ],
+   "hit_frame": null,
+   "keys": [
+    {
+     "t": 0,
+     "rot": {
+      "leg_r": 22,
+      "leg_l": -22,
+      "arm_l": -22,
+      "arm_r": 12,
+      "torso": -4,
+      "head": 2,
+      "cape": -12,
+      "plume": 10
+     },
+     "root": [
+      0,
+      0
+     ]
+    },
+    {
+     "t": 270,
+     "rot": {
+      "leg_r": -22,
+      "leg_l": 22,
+      "arm_l": 22,
+      "arm_r": -10,
+      "torso": -4,
+      "head": -2,
+      "cape": -18,
+      "plume": 16
+     },
+     "root": [
+      0,
+      -10
+     ]
+    },
+    {
+     "t": 540,
+     "rot": {
+      "leg_r": 22,
+      "leg_l": -22,
+      "arm_l": -22,
+      "arm_r": 12,
+      "torso": -4,
+      "head": 2,
+      "cape": -12,
+      "plume": 10
+     },
+     "root": [
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  "tram_kiem": {
+   "loop": false,
+   "frames_ms": [
+    60,
+    90,
+    90,
+    50,
+    110,
+    120,
+    90
+   ],
+   "hit_frame": 4,
+   "keys": [
+    {
+     "t": 0,
+     "rot": {}
+    },
+    {
+     "t": 150,
+     "rot": {
+      "arm_r": 40,
+      "torso": -6,
+      "head": -3,
+      "arm_l": 12,
+      "cape": 6,
+      "plume": -8
+     },
+     "root": [
+      -6,
+      0
+     ]
+    },
+    {
+     "t": 240,
+     "rot": {
+      "arm_r": 48,
+      "torso": -8,
+      "head": -4,
+      "arm_l": 14,
+      "cape": 8,
+      "plume": -10
+     },
+     "root": [
+      -8,
+      0
+     ]
+    },
+    {
+     "t": 290,
+     "rot": {
+      "arm_r": -62,
+      "torso": 8,
+      "head": 4,
+      "arm_l": -16,
+      "cape": -14,
+      "plume": 14
+     },
+     "root": [
+      10,
+      0
+     ]
+    },
+    {
+     "t": 400,
+     "rot": {
+      "arm_r": -58,
+      "torso": 7,
+      "head": 3,
+      "arm_l": -14,
+      "cape": -10,
+      "plume": 10
+     },
+     "root": [
+      12,
+      0
+     ]
+    },
+    {
+     "t": 610,
+     "rot": {}
+    }
+   ]
+  }
+ }
+}

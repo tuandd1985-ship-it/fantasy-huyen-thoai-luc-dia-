@@ -1,0 +1,11 @@
+{"canvas": [515, 640], "pivot_space": "canvas",
+ "parts": [
+  {"name": "cape",  "file": "tail_cape.png",  "x": 0, "y": 0, "pivot": [318, 460], "parent": "torso", "z": 0},
+  {"name": "leg_r", "file": "leg_r.png",      "x": 0, "y": 0, "pivot": [282, 552], "parent": null,    "z": 1},
+  {"name": "leg_l", "file": "leg_l.png",      "x": 0, "y": 0, "pivot": [345, 552], "parent": null,    "z": 2},
+  {"name": "torso", "file": "torso.png",      "x": 0, "y": 0, "pivot": [318, 548], "parent": null,    "z": 3},
+  {"name": "arm_l", "file": "arm_l.png",      "x": 0, "y": 0, "pivot": [400, 415], "parent": "torso", "z": 4},
+  {"name": "head",  "file": "head.png",       "x": 0, "y": 0, "pivot": [318, 392], "parent": "torso", "z": 5},
+  {"name": "plume", "file": "hair_plume.png", "x": 0, "y": 0, "pivot": [322, 62],  "parent": "head",  "z": 6},
+  {"name": "arm_r", "file": "arm_r.png",      "x": 0, "y": 0, "pivot": [250, 420], "parent": "torso", "z": 7}
+ ]}
