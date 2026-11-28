@@ -1,0 +1,945 @@
+{
+  "source": "ImageGen",
+  "pngPx": 256,
+  "webpPx": 96,
+  "assets": [
+    {
+      "id": "slash",
+      "name": "Trảm Kiếm",
+      "family": "swordsman",
+      "slot": "main",
+      "png": "swordsman/slash.png",
+      "webp": "swordsman/slash.webp",
+      "atlas": "swordsman",
+      "cell": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "whirl",
+      "name": "Kiếm Vũ",
+      "family": "swordsman",
+      "slot": "main",
+      "png": "swordsman/whirl.png",
+      "webp": "swordsman/whirl.webp",
+      "atlas": "swordsman",
+      "cell": [
+        2,
+        1
+      ]
+    },
+    {
+      "id": "quake",
+      "name": "Địa Chấn",
+      "family": "swordsman",
+      "slot": "main",
+      "png": "swordsman/quake.png",
+      "webp": "swordsman/quake.webp",
+      "atlas": "swordsman",
+      "cell": [
+        3,
+        1
+      ]
+    },
+    {
+      "id": "ult",
+      "name": "Thiên Kiếm",
+      "family": "swordsman",
+      "slot": "main",
+      "png": "swordsman/ult.png",
+      "webp": "swordsman/ult.webp",
+      "atlas": "swordsman",
+      "cell": [
+        4,
+        1
+      ]
+    },
+    {
+      "id": "shield",
+      "name": "Lá Chắn Thép",
+      "family": "swordsman",
+      "slot": "active",
+      "png": "swordsman/shield.png",
+      "webp": "swordsman/shield.webp",
+      "atlas": "swordsman",
+      "cell": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "rage",
+      "name": "Cuồng Nộ",
+      "family": "swordsman",
+      "slot": "active",
+      "png": "swordsman/rage.png",
+      "webp": "swordsman/rage.webp",
+      "atlas": "swordsman",
+      "cell": [
+        2,
+        2
+      ]
+    },
+    {
+      "id": "lifesteal",
+      "name": "Hút Máu",
+      "family": "swordsman",
+      "slot": "passive",
+      "png": "swordsman/lifesteal.png",
+      "webp": "swordsman/lifesteal.webp",
+      "atlas": "swordsman",
+      "cell": [
+        3,
+        2
+      ]
+    },
+    {
+      "id": "bodysteel",
+      "name": "Thể Chất Thép",
+      "family": "swordsman",
+      "slot": "passive",
+      "png": "swordsman/bodysteel.png",
+      "webp": "swordsman/bodysteel.webp",
+      "atlas": "swordsman",
+      "cell": [
+        4,
+        2
+      ]
+    },
+    {
+      "id": "fireball",
+      "name": "Hỏa Cầu",
+      "family": "mage",
+      "slot": "main",
+      "png": "mage/fireball.png",
+      "webp": "mage/fireball.webp",
+      "atlas": "mage",
+      "cell": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "frost",
+      "name": "Băng Phong",
+      "family": "mage",
+      "slot": "main",
+      "png": "mage/frost.png",
+      "webp": "mage/frost.webp",
+      "atlas": "mage",
+      "cell": [
+        2,
+        1
+      ]
+    },
+    {
+      "id": "thunder",
+      "name": "Lôi Đình",
+      "family": "mage",
+      "slot": "main",
+      "png": "mage/thunder.png",
+      "webp": "mage/thunder.webp",
+      "atlas": "mage",
+      "cell": [
+        3,
+        1
+      ]
+    },
+    {
+      "id": "meteor",
+      "name": "Thiên Thạch",
+      "family": "mage",
+      "slot": "main",
+      "png": "mage/meteor.png",
+      "webp": "mage/meteor.webp",
+      "atlas": "mage",
+      "cell": [
+        4,
+        1
+      ]
+    },
+    {
+      "id": "manashield",
+      "name": "Lá Chắn Mana",
+      "family": "mage",
+      "slot": "active",
+      "png": "mage/manashield.png",
+      "webp": "mage/manashield.webp",
+      "atlas": "mage",
+      "cell": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "manaregen",
+      "name": "Hồi Mana Nhanh",
+      "family": "mage",
+      "slot": "active",
+      "png": "mage/manaregen.png",
+      "webp": "mage/manaregen.webp",
+      "atlas": "mage",
+      "cell": [
+        2,
+        2
+      ]
+    },
+    {
+      "id": "amplify",
+      "name": "Khuếch Đại Phép",
+      "family": "mage",
+      "slot": "passive",
+      "png": "mage/amplify.png",
+      "webp": "mage/amplify.webp",
+      "atlas": "mage",
+      "cell": [
+        3,
+        2
+      ]
+    },
+    {
+      "id": "endless",
+      "name": "Ma Lực Vô Tận",
+      "family": "mage",
+      "slot": "passive",
+      "png": "mage/endless.png",
+      "webp": "mage/endless.webp",
+      "atlas": "mage",
+      "cell": [
+        4,
+        2
+      ]
+    },
+    {
+      "id": "pierce",
+      "name": "Xuyên Tiễn",
+      "family": "archer",
+      "slot": "main",
+      "png": "archer/pierce.png",
+      "webp": "archer/pierce.webp",
+      "atlas": "archer",
+      "cell": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "volley",
+      "name": "Liên Tiễn",
+      "family": "archer",
+      "slot": "main",
+      "png": "archer/volley.png",
+      "webp": "archer/volley.webp",
+      "atlas": "archer",
+      "cell": [
+        2,
+        1
+      ]
+    },
+    {
+      "id": "poisonarrow",
+      "name": "Độc Tiễn",
+      "family": "archer",
+      "slot": "main",
+      "png": "archer/poisonarrow.png",
+      "webp": "archer/poisonarrow.webp",
+      "atlas": "archer",
+      "cell": [
+        3,
+        1
+      ]
+    },
+    {
+      "id": "storm",
+      "name": "Vạn Tiễn",
+      "family": "archer",
+      "slot": "main",
+      "png": "archer/storm.png",
+      "webp": "archer/storm.webp",
+      "atlas": "archer",
+      "cell": [
+        4,
+        1
+      ]
+    },
+    {
+      "id": "dodgepassive",
+      "name": "Né Tránh",
+      "family": "archer",
+      "slot": "passive",
+      "png": "archer/dodgepassive.png",
+      "webp": "archer/dodgepassive.webp",
+      "atlas": "archer",
+      "cell": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "windstep",
+      "name": "Bước Chân Gió",
+      "family": "archer",
+      "slot": "active",
+      "png": "archer/windstep.png",
+      "webp": "archer/windstep.webp",
+      "atlas": "archer",
+      "cell": [
+        2,
+        2
+      ]
+    },
+    {
+      "id": "weakmark",
+      "name": "Dấu Ấn Yếu Điểm",
+      "family": "archer",
+      "slot": "active",
+      "png": "archer/weakmark.png",
+      "webp": "archer/weakmark.webp",
+      "atlas": "archer",
+      "cell": [
+        3,
+        2
+      ]
+    },
+    {
+      "id": "eagle",
+      "name": "Mắt Đại Bàng",
+      "family": "archer",
+      "slot": "passive",
+      "png": "archer/eagle.png",
+      "webp": "archer/eagle.webp",
+      "atlas": "archer",
+      "cell": [
+        4,
+        2
+      ]
+    },
+    {
+      "id": "charge",
+      "name": "Lao tới",
+      "family": "monster",
+      "png": "monster/charge.png",
+      "webp": "monster/charge.webp",
+      "atlas": "monster",
+      "cell": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "howl",
+      "name": "Tiếng hú",
+      "family": "monster",
+      "png": "monster/howl.png",
+      "webp": "monster/howl.webp",
+      "atlas": "monster",
+      "cell": [
+        2,
+        1
+      ]
+    },
+    {
+      "id": "summon",
+      "name": "Triệu hồi",
+      "family": "monster",
+      "png": "monster/summon.png",
+      "webp": "monster/summon.webp",
+      "atlas": "monster",
+      "cell": [
+        3,
+        1
+      ]
+    },
+    {
+      "id": "nova",
+      "name": "Nổ diện rộng",
+      "family": "monster",
+      "png": "monster/nova.png",
+      "webp": "monster/nova.webp",
+      "atlas": "monster",
+      "cell": [
+        4,
+        1
+      ]
+    },
+    {
+      "id": "heal",
+      "name": "Hồi máu",
+      "family": "monster",
+      "png": "monster/heal.png",
+      "webp": "monster/heal.webp",
+      "atlas": "monster",
+      "cell": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "poison",
+      "name": "Phun độc",
+      "family": "monster",
+      "png": "monster/poison.png",
+      "webp": "monster/poison.webp",
+      "atlas": "monster",
+      "cell": [
+        2,
+        2
+      ]
+    },
+    {
+      "id": "ranged",
+      "name": "Đòn tầm xa",
+      "family": "monster",
+      "png": "monster/ranged.png",
+      "webp": "monster/ranged.webp",
+      "atlas": "monster",
+      "cell": [
+        3,
+        2
+      ]
+    },
+    {
+      "id": "enrage",
+      "name": "Cuồng nộ boss",
+      "family": "monster",
+      "png": "monster/enrage.png",
+      "webp": "monster/enrage.webp",
+      "atlas": "monster",
+      "cell": [
+        4,
+        2
+      ]
+    },
+    {
+      "id": "forest",
+      "name": "Rừng Xanh",
+      "family": "map",
+      "png": "map/forest.png",
+      "webp": "map/forest.webp",
+      "atlas": "map",
+      "cell": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "crypt",
+      "name": "Hang Tối",
+      "family": "map",
+      "png": "map/crypt.png",
+      "webp": "map/crypt.webp",
+      "atlas": "map",
+      "cell": [
+        2,
+        1
+      ]
+    },
+    {
+      "id": "swamp",
+      "name": "Đầm Lầy Độc",
+      "family": "map",
+      "png": "map/swamp.png",
+      "webp": "map/swamp.webp",
+      "atlas": "map",
+      "cell": [
+        3,
+        1
+      ]
+    },
+    {
+      "id": "desert",
+      "name": "Sa Mạc Cát",
+      "family": "map",
+      "png": "map/desert.png",
+      "webp": "map/desert.webp",
+      "atlas": "map",
+      "cell": [
+        4,
+        1
+      ]
+    },
+    {
+      "id": "volcano",
+      "name": "Núi Lửa",
+      "family": "map",
+      "png": "map/volcano.png",
+      "webp": "map/volcano.webp",
+      "atlas": "map",
+      "cell": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "frost",
+      "name": "Băng Nguyên",
+      "family": "map",
+      "png": "map/frost.png",
+      "webp": "map/frost.webp",
+      "atlas": "map",
+      "cell": [
+        2,
+        2
+      ]
+    },
+    {
+      "id": "castle",
+      "name": "Lâu Đài Bóng Đêm",
+      "family": "map",
+      "png": "map/castle.png",
+      "webp": "map/castle.webp",
+      "atlas": "map",
+      "cell": [
+        3,
+        2
+      ]
+    },
+    {
+      "id": "portal",
+      "name": "Cổng dịch chuyển",
+      "family": "map",
+      "png": "map/portal.png",
+      "webp": "map/portal.webp",
+      "atlas": "map",
+      "cell": [
+        4,
+        2
+      ]
+    },
+    {
+      "id": "slimeBump",
+      "name": "Slime Ngọc lao áp sát",
+      "family": "monster",
+      "png": "monster/slimeBump.png",
+      "webp": "monster/slimeBump.webp",
+      "atlas": "extra",
+      "cell": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "goblinClub",
+      "name": "Goblin vung chùy",
+      "family": "monster",
+      "png": "monster/goblinClub.png",
+      "webp": "monster/goblinClub.webp",
+      "atlas": "extra",
+      "cell": [
+        2,
+        1
+      ]
+    },
+    {
+      "id": "goblinArrow",
+      "name": "Goblin bắn tên",
+      "family": "monster",
+      "png": "monster/goblinArrow.png",
+      "webp": "monster/goblinArrow.webp",
+      "atlas": "extra",
+      "cell": [
+        3,
+        1
+      ]
+    },
+    {
+      "id": "wolfBite",
+      "name": "Sói Rừng cắn",
+      "family": "monster",
+      "png": "monster/wolfBite.png",
+      "webp": "monster/wolfBite.webp",
+      "atlas": "extra",
+      "cell": [
+        4,
+        1
+      ]
+    },
+    {
+      "id": "boss",
+      "name": "Điểm boss",
+      "family": "minimap",
+      "png": "minimap/boss.png",
+      "webp": "minimap/boss.webp",
+      "atlas": "extra",
+      "cell": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "elite",
+      "name": "Điểm tinh anh",
+      "family": "minimap",
+      "png": "minimap/elite.png",
+      "webp": "minimap/elite.webp",
+      "atlas": "extra",
+      "cell": [
+        2,
+        2
+      ]
+    },
+    {
+      "id": "chest",
+      "name": "Điểm rương",
+      "family": "minimap",
+      "png": "minimap/chest.png",
+      "webp": "minimap/chest.webp",
+      "atlas": "extra",
+      "cell": [
+        3,
+        2
+      ]
+    },
+    {
+      "id": "waypoint",
+      "name": "Điểm dẫn đường",
+      "family": "minimap",
+      "png": "minimap/waypoint.png",
+      "webp": "minimap/waypoint.webp",
+      "atlas": "extra",
+      "cell": [
+        4,
+        2
+      ]
+    }
+  ],
+  "atlases": [
+    {
+      "group": "swordsman",
+      "source_id": "a49464d0-7dcd-4a87-8813-cca70501c5f8",
+      "prompt": "Use case stylized-concept. Production source sprite atlas for an original chibi fantasy RPG HUD with dark olive panels and antique-gold buttons. Make exactly EIGHT independent square-area pictograms arranged in a strictly even invisible grid of 4 columns and 2 rows, widescreen 2:1 canvas. Every motif centered in its own cell with generous consistent margin, occupying 60-74% cell width/height, far from cell boundaries. Each graphic is a polished hand-painted 2D cel shaded icon, large forms thick dark outline, sharp clear edges, visually distinct at 32px, bright highlights restrained detail. True transparent background for entire atlas and between motifs, no black plate, no badge, no tile/card frame, no shadow, no letters, no text, no marker numbers or grid lines. Maintain ordered reading order left to right.\nOne atlas of swordsman icons. Cell 1 is top-left and cell 8 is bottom-right.\n1. one silver broadsword with one diagonal gold cutting arc.\n2. one horizontal silver blade inside a circular double gold slash.\n3. a sword striking downward into two chunky cracked bronze rocks, warm orange fracture.\n4. one massive vertical sacred gold sword falling from a bright narrow beam, two smaller ghost swords.\n5. silver medieval shield with solid warm golden rim.\n6. an armored fist framed by thick orange flame.\n7. large crimson blood drop being pulled into a small claw-like silhouette.\n8. one broad silver breastplate with a small golden heart in center.",
+      "cells": [
+        {
+          "id": "slash",
+          "name": "Trảm Kiếm",
+          "family": "swordsman",
+          "slot": "main"
+        },
+        {
+          "id": "whirl",
+          "name": "Kiếm Vũ",
+          "family": "swordsman",
+          "slot": "main"
+        },
+        {
+          "id": "quake",
+          "name": "Địa Chấn",
+          "family": "swordsman",
+          "slot": "main"
+        },
+        {
+          "id": "ult",
+          "name": "Thiên Kiếm",
+          "family": "swordsman",
+          "slot": "main"
+        },
+        {
+          "id": "shield",
+          "name": "Lá Chắn Thép",
+          "family": "swordsman",
+          "slot": "active"
+        },
+        {
+          "id": "rage",
+          "name": "Cuồng Nộ",
+          "family": "swordsman",
+          "slot": "active"
+        },
+        {
+          "id": "lifesteal",
+          "name": "Hút Máu",
+          "family": "swordsman",
+          "slot": "passive"
+        },
+        {
+          "id": "bodysteel",
+          "name": "Thể Chất Thép",
+          "family": "swordsman",
+          "slot": "passive"
+        }
+      ],
+      "source_sha256": "47bcb3d802850fc16cc0f0b2faa0f634ca51b9300b02bf54930788c0dcef446e",
+      "source_size": [
+        1774,
+        887
+      ]
+    },
+    {
+      "group": "mage",
+      "source_id": "ef5907eb-41e2-4864-a3ff-0c9e643fcf59",
+      "prompt": "Use case stylized-concept. Production source sprite atlas for an original chibi fantasy RPG HUD with dark olive panels and antique-gold buttons. Make exactly EIGHT independent square-area pictograms arranged in a strictly even invisible grid of 4 columns and 2 rows, widescreen 2:1 canvas. Every motif centered in its own cell with generous consistent margin, occupying 60-74% cell width/height, far from cell boundaries. Each graphic is a polished hand-painted 2D cel shaded icon, large forms thick dark outline, sharp clear edges, visually distinct at 32px, bright highlights restrained detail. True transparent background for entire atlas and between motifs, no black plate, no badge, no tile/card frame, no shadow, no letters, no text, no marker numbers or grid lines. Maintain ordered reading order left to right.\nOne atlas of mage icons. Cell 1 is top-left and cell 8 is bottom-right.\n1. round orange fire orb with a curling red flame tail.\n2. wide cluster of chunky cyan ice spikes with pale snow spark.\n3. two jagged lilac and bright white bolts forking toward the ground.\n4. a large dark red craggy molten rock with orange diagonal falling wake.\n5. curved blue arcane barrier surrounding a cyan diamond.\n6. bright blue teardrop encircled by two clockwise cyan arrows.\n7. crescent-capped purple staff emitting a large four-point violet star.\n8. blue-violet horizontal figure-eight of arcane energy with two bright lobes.",
+      "cells": [
+        {
+          "id": "fireball",
+          "name": "Hỏa Cầu",
+          "family": "mage",
+          "slot": "main"
+        },
+        {
+          "id": "frost",
+          "name": "Băng Phong",
+          "family": "mage",
+          "slot": "main"
+        },
+        {
+          "id": "thunder",
+          "name": "Lôi Đình",
+          "family": "mage",
+          "slot": "main"
+        },
+        {
+          "id": "meteor",
+          "name": "Thiên Thạch",
+          "family": "mage",
+          "slot": "main"
+        },
+        {
+          "id": "manashield",
+          "name": "Lá Chắn Mana",
+          "family": "mage",
+          "slot": "active"
+        },
+        {
+          "id": "manaregen",
+          "name": "Hồi Mana Nhanh",
+          "family": "mage",
+          "slot": "active"
+        },
+        {
+          "id": "amplify",
+          "name": "Khuếch Đại Phép",
+          "family": "mage",
+          "slot": "passive"
+        },
+        {
+          "id": "endless",
+          "name": "Ma Lực Vô Tận",
+          "family": "mage",
+          "slot": "passive"
+        }
+      ],
+      "source_sha256": "d604dce91c09d4b6d68c1b03b166f66899c78e3bcb195b1e5327c371b8b64e88",
+      "source_size": [
+        1774,
+        887
+      ]
+    },
+    {
+      "group": "archer",
+      "source_id": "76942949-c3fb-47fd-bcf5-bf3638ed96c8",
+      "prompt": "Use case stylized-concept. Production source sprite atlas for an original chibi fantasy RPG HUD with dark olive panels and antique-gold buttons. Make exactly EIGHT independent square-area pictograms arranged in a strictly even invisible grid of 4 columns and 2 rows, widescreen 2:1 canvas. Every motif centered in its own cell with generous consistent margin, occupying 60-74% cell width/height, far from cell boundaries. Each graphic is a polished hand-painted 2D cel shaded icon, large forms thick dark outline, sharp clear edges, visually distinct at 32px, bright highlights restrained detail. True transparent background for entire atlas and between motifs, no black plate, no badge, no tile/card frame, no shadow, no letters, no text, no marker numbers or grid lines. Maintain ordered reading order left to right.\nOne atlas of archer icons. Cell 1 is top-left and cell 8 is bottom-right.\n1. a single long silver arrow punching through a small shield.\n2. a bent wooden bow releasing exactly three parallel gold arrows.\n3. single green-tipped arrow with one large poison drop and short emerald mist.\n4. a fan of five pale gold arrows all raining downward at the same angle.\n5. two offset green silhouette afterimages ducking past an incoming arrow.\n6. single brown leather boot with sweeping bright teal wind ribbon.\n7. bold red three-ring target struck by a golden arrow.\n8. one sharp amber eagle eye inside a simple feathered brow.",
+      "cells": [
+        {
+          "id": "pierce",
+          "name": "Xuyên Tiễn",
+          "family": "archer",
+          "slot": "main"
+        },
+        {
+          "id": "volley",
+          "name": "Liên Tiễn",
+          "family": "archer",
+          "slot": "main"
+        },
+        {
+          "id": "poisonarrow",
+          "name": "Độc Tiễn",
+          "family": "archer",
+          "slot": "main"
+        },
+        {
+          "id": "storm",
+          "name": "Vạn Tiễn",
+          "family": "archer",
+          "slot": "main"
+        },
+        {
+          "id": "dodgepassive",
+          "name": "Né Tránh",
+          "family": "archer",
+          "slot": "passive"
+        },
+        {
+          "id": "windstep",
+          "name": "Bước Chân Gió",
+          "family": "archer",
+          "slot": "active"
+        },
+        {
+          "id": "weakmark",
+          "name": "Dấu Ấn Yếu Điểm",
+          "family": "archer",
+          "slot": "active"
+        },
+        {
+          "id": "eagle",
+          "name": "Mắt Đại Bàng",
+          "family": "archer",
+          "slot": "passive"
+        }
+      ],
+      "source_sha256": "b5debdee4ea88204053017196bebb1277528e3ab862eec3733877e21007dcd08",
+      "source_size": [
+        1774,
+        887
+      ]
+    },
+    {
+      "group": "monster",
+      "source_id": "6c9d0058-721d-44fe-b9a3-ec779536325e",
+      "prompt": "Use case stylized-concept. Production source sprite atlas for an original chibi fantasy RPG HUD with dark olive panels and antique-gold buttons. Make exactly EIGHT independent square-area pictograms arranged in a strictly even invisible grid of 4 columns and 2 rows, widescreen 2:1 canvas. Every motif centered in its own cell with generous consistent margin, occupying 60-74% cell width/height, far from cell boundaries. Each graphic is a polished hand-painted 2D cel shaded icon, large forms thick dark outline, sharp clear edges, visually distinct at 32px, bright highlights restrained detail. True transparent background for entire atlas and between motifs, no black plate, no badge, no tile/card frame, no shadow, no letters, no text, no marker numbers or grid lines. Maintain ordered reading order left to right.\nOne atlas of monster icons. Cell 1 is top-left and cell 8 is bottom-right.\n1. teal gray wolf head thrusting sideways with two distinct yellow speed streaks.\n2. dark wolf head muzzle lifted with three expanding lilac sound bands.\n3. one bright violet ground rune portal with two small silhouettes rising.\n4. orange circular blast with thick white outward spikes seen from above.\n5. bright mint pair of leaves and a broad green plus sign within a pale pulse.\n6. chartreuse poison blob with two thick droplets.\n7. one magenta energy bolt traveling left to right with a thick tapered tail.\n8. sharp black-red monster eyes surrounded by two tall crimson flame tongues.",
+      "cells": [
+        {
+          "id": "charge",
+          "name": "Lao tới",
+          "family": "monster"
+        },
+        {
+          "id": "howl",
+          "name": "Tiếng hú",
+          "family": "monster"
+        },
+        {
+          "id": "summon",
+          "name": "Triệu hồi",
+          "family": "monster"
+        },
+        {
+          "id": "nova",
+          "name": "Nổ diện rộng",
+          "family": "monster"
+        },
+        {
+          "id": "heal",
+          "name": "Hồi máu",
+          "family": "monster"
+        },
+        {
+          "id": "poison",
+          "name": "Phun độc",
+          "family": "monster"
+        },
+        {
+          "id": "ranged",
+          "name": "Đòn tầm xa",
+          "family": "monster"
+        },
+        {
+          "id": "enrage",
+          "name": "Cuồng nộ boss",
+          "family": "monster"
+        }
+      ],
+      "source_sha256": "f328e3e655808c4527ecaad0cd33a22368c64a83fde32222ff91bf3e8a0ce5f5",
+      "source_size": [
+        1774,
+        887
+      ]
+    },
+    {
+      "group": "map",
+      "source_id": "f304cc8c-a8c2-40d7-ac00-cbf61479befe",
+      "prompt": "Use case stylized-concept. Production source sprite atlas for an original chibi fantasy RPG HUD with dark olive panels and antique-gold buttons. Make exactly EIGHT independent square-area pictograms arranged in a strictly even invisible grid of 4 columns and 2 rows, widescreen 2:1 canvas. Every motif centered in its own cell with generous consistent margin, occupying 60-74% cell width/height, far from cell boundaries. Each graphic is a polished hand-painted 2D cel shaded icon, large forms thick dark outline, sharp clear edges, visually distinct at 32px, bright highlights restrained detail. True transparent background for entire atlas and between motifs, no black plate, no badge, no tile/card frame, no shadow, no letters, no text, no marker numbers or grid lines. Maintain ordered reading order left to right.\nOne atlas of map icons. Cell 1 is top-left and cell 8 is bottom-right.\n1. mini diorama olive oak, vertical cobalt river with a tiny horizontal wooden bridge, matching reference in spirit.\n2. violet grotto mouth with two dark stalactites and dim lavender crystals.\n3. crooked olive tree stump in a mossy toxic lime pond.\n4. gold sandstone obelisk and smooth ochre dunes.\n5. charcoal volcano cone with a thick red orange lava seam.\n6. three chunky pale cyan ice peaks on white snow.\n7. dark indigo gothic castle silhouette with narrow violet-lit windows.\n8. old stone arch with unobstructed circle opening containing turquoise swirl, low stone platform.",
+      "cells": [
+        {
+          "id": "forest",
+          "name": "Rừng Xanh",
+          "family": "map"
+        },
+        {
+          "id": "crypt",
+          "name": "Hang Tối",
+          "family": "map"
+        },
+        {
+          "id": "swamp",
+          "name": "Đầm Lầy Độc",
+          "family": "map"
+        },
+        {
+          "id": "desert",
+          "name": "Sa Mạc Cát",
+          "family": "map"
+        },
+        {
+          "id": "volcano",
+          "name": "Núi Lửa",
+          "family": "map"
+        },
+        {
+          "id": "frost",
+          "name": "Băng Nguyên",
+          "family": "map"
+        },
+        {
+          "id": "castle",
+          "name": "Lâu Đài Bóng Đêm",
+          "family": "map"
+        },
+        {
+          "id": "portal",
+          "name": "Cổng dịch chuyển",
+          "family": "map"
+        }
+      ],
+      "source_sha256": "f2640e624db3be1f88bd063d0fbadad3f56f5f6b1cc7766c38026aabb1f46fa1",
+      "source_size": [
+        1774,
+        887
+      ]
+    },
+    {
+      "group": "extra",
+      "source_id": "59b78d66-1774-4d4a-9bf1-1f7864ca5eef",
+      "prompt": "Use case stylized-concept. Production source sprite atlas for an original chibi fantasy RPG HUD with dark olive panels and antique-gold buttons. Make exactly EIGHT independent square-area pictograms arranged in a strictly even invisible grid of 4 columns and 2 rows, widescreen 2:1 canvas. Every motif centered in its own cell with generous consistent margin, occupying 60-74% cell width/height, far from cell boundaries. Each graphic is a polished hand-painted 2D cel shaded icon, large forms thick dark outline, sharp clear edges, visually distinct at 32px, bright highlights restrained detail. True transparent background for entire atlas and between motifs, no black plate, no badge, no tile/card frame, no shadow, no letters, no text, no marker numbers or grid lines. Maintain ordered reading order left to right.\nThe first row illustrates four forest monster attacks. The second row is four extremely legible compact minimap markers, opaque solid shapes in center. Row major:\n1. small bright emerald jelly slime leaning with thick mint impact crescent, two round black eyes and leaf sprout.\n2. one heavy brown spiked wood club with a blunt amber swinging arc.\n3. one simple crude wooden arrow with dark iron tip, rustic orange fletching and two ochre speed lines.\n4. two pale fang silhouettes in a closing gray wolf jaw around a bright cyan cross-cut.\n5. opaque crimson fang skull with two gold horns, simplified and symmetrical.\n6. single bright purple four-point star with a dark plum core edged with ivory.\n7. closed amber gold fantasy loot chest with a large ivory latch, front-facing.\n8. warm yellow compass map pin with a central cutout and ivory directional chevron.",
+      "cells": [
+        {
+          "id": "slimeBump",
+          "name": "Slime Ngọc lao áp sát",
+          "family": "monster"
+        },
+        {
+          "id": "goblinClub",
+          "name": "Goblin vung chùy",
+          "family": "monster"
+        },
+        {
+          "id": "goblinArrow",
+          "name": "Goblin bắn tên",
+          "family": "monster"
+        },
+        {
+          "id": "wolfBite",
+          "name": "Sói Rừng cắn",
+          "family": "monster"
+        },
+        {
+          "id": "boss",
+          "name": "Điểm boss",
+          "family": "minimap"
+        },
+        {
+          "id": "elite",
+          "name": "Điểm tinh anh",
+          "family": "minimap"
+        },
+        {
+          "id": "chest",
+          "name": "Điểm rương",
+          "family": "minimap"
+        },
+        {
+          "id": "waypoint",
+          "name": "Điểm dẫn đường",
+          "family": "minimap"
+        }
+      ],
+      "source_sha256": "c677b22b4f6c5a2bfd31764b2eb825545acccce12fb663a4665d5a3b184b9a41",
+      "source_size": [
+        1774,
+        887
+      ]
+    }
+  ]
+}
