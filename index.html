@@ -34,8 +34,8 @@
       .wrap{ max-width:none; margin:0; padding:0; height:100%; display:flex; flex-direction:column; }
 
       /* ===== HUD PHỦ TRÊN SÂN (sơ đồ GDD): trên trái = chân dung + tên + cấp + HP/mana ===== */
-      .hud-overlay{ position:absolute; top:calc(10px + env(safe-area-inset-top)); left:calc(10px + env(safe-area-inset-left)); z-index:8; display:flex; gap:9px; align-items:center; background:rgba(10,13,9,.60); border:1px solid rgba(238,194,106,.5); border-radius:14px; padding:6px 10px 6px 6px; backdrop-filter:blur(3px); color:#f3e9c8; max-width:min(410px,60%); box-shadow:0 4px 14px rgba(0,0,0,.35); }
-      .hud-overlay .portrait{ width:50px; height:50px; border-radius:11px; object-fit:cover; flex:0 0 auto; border:2px solid var(--gold2); }
+      .hud-overlay{ position:absolute; top:calc(10px + env(safe-area-inset-top)); left:calc(10px + env(safe-area-inset-left)); z-index:8; display:flex; gap:8px; align-items:center; background:rgba(10,13,9,.60); border:1px solid rgba(238,194,106,.5); border-radius:12px; padding:5px 9px 5px 5px; backdrop-filter:blur(3px); color:#f3e9c8; max-width:min(360px,56%); box-shadow:0 4px 14px rgba(0,0,0,.35); }
+      .hud-overlay .portrait{ width:44px; height:44px; border-radius:10px; object-fit:cover; flex:0 0 auto; border:2px solid var(--gold2); }
       .hud-overlay .stage-box{ color:#d9c98f; }
       .hud-overlay .icon-btn{ background:rgba(30,34,26,.8); border-color:rgba(238,194,106,.4); color:#f3e9c8; width:30px; height:30px; min-height:30px; }
       .hud-overlay .icon-btn svg{ width:16px; height:16px; }
@@ -60,22 +60,23 @@
       /* ===== ARENA ===== */
       .arena-wrap{ position:relative; flex:1 1 auto; min-height:0; margin-top:0; border-radius:0; overflow:hidden; border:none; box-shadow:none; background:#0a0f14; }
       canvas#game{ display:block; width:100%; touch-action:none; }
-      .arena-top{ position:absolute; top:calc(10px + env(safe-area-inset-top)); left:50%; transform:translateX(-50%); display:flex; justify-content:center; align-items:flex-start; pointer-events:none; z-index:7; }
+      .arena-top{ position:absolute; top:calc(120px + env(safe-area-inset-top)); right:calc(10px + env(safe-area-inset-right)); display:flex; justify-content:flex-end; align-items:flex-start; pointer-events:none; z-index:7; }
       .quest-chip{ position:absolute; left:calc(10px + env(safe-area-inset-left)); top:104px; z-index:6; display:flex; gap:7px; align-items:center; background:rgba(10,13,9,.55); border:1px solid rgba(238,194,106,.4); color:#f0e8cf; border-radius:999px; padding:5px 11px 5px 6px; font-size:11px; font-weight:600; max-width:250px; backdrop-filter:blur(3px); }
       .quest-chip .q-tag{ background:var(--gold); color:#fff; font-size:9px; font-weight:900; border-radius:999px; padding:2px 7px; letter-spacing:.05em; flex:0 0 auto; }
-      /* ===== HUD V2: 5 ICON TRÒN TRÊN PHẢI, NGAY TRÁI MINIMAP (không chữ, vùng chạm 44px) ===== */
-      .hud-icons{ position:absolute; top:calc(10px + env(safe-area-inset-top)); right:calc(168px + env(safe-area-inset-right)); z-index:9; display:flex; gap:4px; }
-      .hud-ico{ position:relative; width:44px; height:44px; min-height:44px; border:none; background:transparent; padding:0; display:flex; align-items:center; justify-content:center; flex:0 0 auto; }
-      .hud-ico .ico-c{ width:38px; height:38px; border-radius:50%; background:rgba(10,13,9,.62); border:1.5px solid rgba(238,194,106,.65); color:#f3e9c8; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(3px); transition:background .15s, box-shadow .15s; }
-      .hud-ico .ico-c svg{ width:20px; height:20px; }
+      /* ===== HUD V3 (v0.6.0): 5 ICON HÀNG NGANG TRÊN PHẢI, CÓ NHÃN CHỮ NHỎ DƯỚI ICON, TRÁI MINIMAP ===== */
+      .hud-icons{ position:absolute; top:calc(10px + env(safe-area-inset-top)); right:calc(166px + env(safe-area-inset-right)); z-index:9; display:flex; gap:2px; }
+      .hud-ico{ position:relative; width:52px; height:64px; min-height:44px; border:none; background:transparent; padding:0; display:flex; flex-direction:column; align-items:center; justify-content:flex-start; gap:2px; flex:0 0 auto; }
+      .hud-ico .ico-c{ width:46px; height:46px; flex:0 0 auto; border-radius:50%; background:rgba(10,13,9,.62); border:1.5px solid rgba(238,194,106,.65); color:#f3e9c8; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(3px); transition:background .15s, box-shadow .15s; }
+      .hud-ico .ico-c svg{ width:22px; height:22px; }
+      .hud-ico .ico-label{ font-size:10px; font-weight:800; line-height:1.1; color:#f3e9c8; text-shadow:0 1px 3px rgba(0,0,0,.85); white-space:nowrap; }
       .hud-ico:active .ico-c{ transform:scale(.92); }
       .hud-ico.on .ico-c{ background:rgba(164,118,27,.82); box-shadow:0 0 0 2px rgba(238,194,106,.45), 0 0 14px rgba(238,194,106,.45); color:#fff; }
-      .hud-ico .badge{ position:absolute; top:0; right:0; background:var(--hp); color:#fff; font-size:9.5px; font-weight:900; min-width:17px; height:17px; border-radius:999px; display:flex; align-items:center; justify-content:center; padding:0 4px; border:1.5px solid rgba(10,10,8,.55); z-index:2; }
-      @media (max-width:760px){ .hud-icons{ gap:1px; right:calc(164px + env(safe-area-inset-right)); } }
+      .hud-ico .badge{ position:absolute; top:0; right:2px; background:var(--hp); color:#fff; font-size:9.5px; font-weight:900; min-width:17px; height:17px; border-radius:999px; display:flex; align-items:center; justify-content:center; padding:0 4px; border:1.5px solid rgba(10,10,8,.55); z-index:2; }
+      @media (max-width:760px){ .hud-icons{ gap:0; right:calc(162px + env(safe-area-inset-right)); } .hud-ico{ width:48px; } }
       .exp-edge{ position:absolute; left:0; right:0; bottom:0; z-index:8; height:9px; background:rgba(0,0,0,.4); }
       .exp-edge .bar.exp{ height:9px; border-radius:0; margin:0; }
-      .util-row{ display:flex; gap:7px; align-items:flex-start; justify-content:flex-end; }
-      .pot-btn{ position:relative; width:44px; height:44px; border-radius:50%; border:2px solid var(--line); background:var(--panel2); box-shadow:var(--shadow); padding:0; display:flex; align-items:center; justify-content:center; }
+      .util-row{ display:contents; }
+      .pot-btn{ position:relative; width:46px; height:46px; min-width:46px; min-height:46px; border-radius:50%; border:2px solid var(--line); background:rgba(16,20,14,.78); box-shadow:var(--shadow); padding:0; display:flex; align-items:center; justify-content:center; }
       .pot-btn svg{ width:21px; height:21px; }
       .pot-btn.pot-hp{ color:#e0483e; border-color:rgba(224,72,62,.65); }
       .pot-btn.pot-mp{ color:#2f7fd0; border-color:rgba(47,127,208,.65); }
@@ -83,12 +84,14 @@
       .pot-btn:disabled{ opacity:.45; }
       .map-chip{ background:rgba(10,12,8,.62); color:#f3e9c8; border:1px solid rgba(216,169,78,.55); padding:5px 10px; border-radius:999px; font-size:12px; font-weight:700; backdrop-filter:blur(3px); }
       .map-chip small{ display:block; font-size:10.5px; font-weight:600; color:#d9c98f; }
-      .boss-bar{ position:absolute; top:56px; left:50%; transform:translateX(-50%); width:min(430px,62%); display:none; z-index:7; }
+      .boss-bar{ position:absolute; top:86px; left:50%; transform:translateX(-50%); width:min(430px,58%); display:none; z-index:7; }
       .boss-bar .bb-name{ text-align:center; color:#ffd9d2; font-weight:800; font-size:12.5px; text-shadow:0 1px 3px #000; margin-bottom:3px; }
       .boss-bar .bb-track{ height:11px; border-radius:999px; background:rgba(0,0,0,.55); border:1px solid rgba(255,120,100,.6); overflow:hidden; }
       .boss-bar .bb-fill{ height:100%; background:linear-gradient(180deg,#ff8a70,#c62f1d); width:100%; transition:width .15s; }
-      .arena-msg{ position:absolute; inset:0; display:none; align-items:center; justify-content:center; flex-direction:column; gap:10px; background:rgba(5,8,6,.55); text-align:center; padding:16px; z-index:5; }
+      .arena-msg{ position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:min(440px,86%); max-height:84%; overflow-y:auto; display:none; align-items:center; justify-content:center; flex-direction:column; gap:10px; background:rgba(14,18,12,.92); border:1.5px solid rgba(238,194,106,.65); border-radius:14px; box-shadow:0 18px 50px rgba(0,0,0,.45); text-align:center; padding:20px 18px; z-index:12; }
       .arena-msg.show{ display:flex; }
+      .arena-scrim{ position:absolute; inset:0; background:rgba(5,8,6,.35); display:none; z-index:11; }
+      .arena-scrim.show{ display:block; }
       .arena-msg h2{ margin:0; color:#ffe9a8; font-size:26px; font-weight:900; text-shadow:0 2px 10px rgba(0,0,0,.7); }
       .arena-msg p{ margin:0; color:#f0e8cf; font-size:14px; max-width:440px; }
       .big-btn{ background:linear-gradient(180deg,var(--gold2),var(--gold)); color:#fff; border:none; border-radius:12px; font-weight:800; font-size:15px; padding:11px 22px; box-shadow:0 4px 14px rgba(0,0,0,.4); }
@@ -103,24 +106,42 @@
       .move-pad{ display:flex; gap:8px; }
       .ctl-btn{ border:1px solid var(--line); background:var(--panel); color:var(--ink); border-radius:14px; width:58px; height:58px; font-size:22px; font-weight:800; box-shadow:var(--shadow); display:flex; align-items:center; justify-content:center; user-select:none; -webkit-user-select:none; touch-action:none; padding:0; }
       .ctl-btn:active,.ctl-btn.held{ background:var(--gold-soft); border-color:var(--gold2); }
-      .auto-btn{ border-radius:14px; border:1px solid var(--line); background:var(--panel); color:var(--ink-soft); height:58px; padding:0 13px; font-weight:800; font-size:13px; box-shadow:var(--shadow); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1px; line-height:1.1; }
-      .auto-btn small{ font-size:9.5px; font-weight:600; }
-      .auto-btn.on{ background:var(--btn); color:#fff; border-color:var(--btn); }
-      .fight-pad{ display:flex; flex-direction:column; gap:9px; align-items:flex-end; }
-      .support-row{ display:flex; gap:7px; align-items:flex-start; }
-      .sup-unit{ display:flex; flex-direction:column; align-items:center; gap:2px; width:44px; }
-      .sup-unit .s-name{ font-size:8.8px; font-weight:700; color:var(--ink-soft); text-align:center; line-height:1.1; }
-      .sup-btn{ position:relative; width:44px; height:44px; border-radius:50%; border:2px solid var(--line); background:var(--panel2); color:var(--gold); box-shadow:var(--shadow); padding:0; display:flex; align-items:center; justify-content:center; overflow:visible; }
-      .sup-btn svg{ width:21px; height:21px; }
+      .auto-btn{ border-radius:50%; border:2px solid rgba(238,194,106,.55); background:rgba(12,14,10,.66); color:#f0e8cf; height:52px; width:52px; min-width:52px; min-height:52px; padding:0; font-weight:900; font-size:11px; box-shadow:var(--shadow); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:0; line-height:1.05; }
+      .auto-btn small{ font-size:8px; font-weight:700; }
+      .auto-btn.on{ background:var(--btn); color:#fff; border-color:#ffe9a8; box-shadow:0 0 0 2px rgba(238,194,106,.4), 0 0 14px rgba(238,194,106,.45); }
+      /* ===== CỤM ĐÁNH VÒNG CUNG (v0.6.0) =====
+         Hộp cụm 292×292 neo góc dưới phải (trong lề an toàn). Tâm nút Đánh
+         ở (238,238) trong hộp. 4 skill chính nằm trên vòng cung bán kính
+         ~110px (114px để dây cung giữa 2 nút kề nhau 59px > đường kính
+         58px, không chồng lấn) quanh tâm Đánh ở các góc 180°/150°/120°/90°:
+           S1 (124,238) · S2 (139,181) · S3 (181,139) · S4 (238,124)
+         2 buff nối tiếp vòng cung phía trên S4 ở bán kính ~168px:
+           B1 (183,80) · B2 (264,72)
+         Bình máu/mana xếp DỌC phía trái cụm: (62,183) và (62,238).
+         AUTO phía trên cụm: (196,28). Mọi nút ≥44px, không chồng lấn:
+         khoảng cách tâm kề nhau ≥ tổng bán kính + 4px. Nhãn tên dưới nút
+         ẩn trong cụm vòng cung (giữ aria-label + chip Cấp/hồi chiêu). */
+      .fight-pad{ position:relative; width:292px; height:292px; flex:0 0 auto; }
+      .support-row{ display:contents; }
+      .sup-unit{ position:absolute; width:48px; height:48px; transform:translate(-50%,-50%); }
+      .sup-unit .s-name{ display:none; }
+      .sup-btn{ position:relative; width:48px; height:48px; min-width:48px; min-height:48px; border-radius:50%; border:2px solid rgba(238,194,106,.55); background:rgba(16,20,14,.8); color:var(--gold2); box-shadow:var(--shadow); padding:0; display:flex; align-items:center; justify-content:center; overflow:visible; }
+      .sup-btn svg{ width:22px; height:22px; }
       .sup-btn .cd{ position:absolute; left:0; right:0; bottom:0; background:rgba(8,10,8,.42); border-radius:0 0 999px 999px; pointer-events:none; }
       .sup-btn .cd-num{ position:absolute; inset:0; z-index:2; display:none; align-items:center; justify-content:center; color:#fff; font-weight:800; font-size:13px; text-shadow:0 1px 3px #000, 0 0 6px rgba(0,0,0,.85); }
       .sup-btn.active-buff{ border-color:var(--exp); color:var(--exp); }
-      .main-row{ display:flex; gap:7px; align-items:flex-start; }
-      .skill-unit{ display:flex; flex-direction:column; align-items:center; gap:3px; width:52px; flex:0 0 auto; }
-      .skill-unit .s-name{ font-size:9.5px; font-weight:700; color:var(--ink-soft); line-height:1.15; text-align:center; }
-      #skillBtns{ display:flex; gap:7px; }
-      .skill-btn{ position:relative; width:52px; height:52px; border-radius:50%; border:2px solid var(--line); background:var(--panel); color:var(--ink); box-shadow:var(--shadow); padding:0; display:flex; align-items:center; justify-content:center; }
-      .skill-btn svg{ width:25px; height:25px; }
+      #supportBtns .sup-unit:nth-child(1){ left:183px; top:80px; }
+      #supportBtns .sup-unit:nth-child(2){ left:264px; top:72px; }
+      .main-row{ display:contents; }
+      .skill-unit{ position:absolute; width:58px; height:58px; transform:translate(-50%,-50%); }
+      .skill-unit .s-name{ display:none; }
+      #skillBtns{ display:contents; }
+      #skillBtns .skill-unit:nth-child(1){ left:124px; top:238px; }
+      #skillBtns .skill-unit:nth-child(2){ left:139px; top:181px; }
+      #skillBtns .skill-unit:nth-child(3){ left:181px; top:139px; }
+      #skillBtns .skill-unit:nth-child(4){ left:238px; top:124px; }
+      .skill-btn{ position:relative; width:58px; height:58px; min-width:58px; min-height:58px; border-radius:50%; border:2px solid rgba(238,194,106,.55); background:rgba(16,20,14,.82); color:#f3e9c8; box-shadow:var(--shadow); padding:0; display:flex; align-items:center; justify-content:center; }
+      .skill-btn svg{ width:27px; height:27px; }
       .skill-btn .cd{ position:absolute; left:0; right:0; bottom:0; background:rgba(8,10,8,.42); border-radius:0 0 999px 999px; pointer-events:none; }
       .skill-btn .cd-num{ position:absolute; inset:0; z-index:2; display:none; align-items:center; justify-content:center; color:#fff; font-weight:800; font-size:15px; text-shadow:0 1px 3px #000, 0 0 6px rgba(0,0,0,.85); }
       .skill-btn .key-hint{ position:absolute; top:-6px; right:-4px; background:rgba(26,28,22,.5); border:1px solid rgba(238,194,106,.3); color:#d8d2ba; font-size:9px; font-weight:700; border-radius:6px; padding:1px 4px; }
@@ -130,12 +151,13 @@
       .skill-btn.locked .lock-lv svg{ width:9px; height:9px; flex:0 0 auto; }
       .skill-btn.ready{ border-color:var(--gold2); }
       .skill-btn.no-mp{ opacity:.6; }
-      .atk-btn{ width:70px; height:70px; border-radius:50%; border:2px solid #8c5f14; background:radial-gradient(circle at 35% 30%, #f0b95a, #c07f1d 70%); color:#fff; box-shadow:var(--shadow); display:flex; align-items:center; justify-content:center; padding:0; flex:0 0 auto; }
-      /* v0.5.7: ô chứa nút Đánh phải RỘNG BẰNG nút — trước đây nút 70px
-         nằm trong ô 52px, tràn ~9px sang phải ăn mất lề an toàn của cụm
-         skill (mép phải chỉ còn ~3px). Nay ô theo đúng cỡ nút ở mọi cỡ. */
-      .skill-unit.atk-unit{ width:70px; }
-      .atk-btn svg{ width:34px; height:34px; filter:drop-shadow(0 1px 2px rgba(0,0,0,.4)); }
+      .atk-btn{ width:84px; height:84px; min-width:84px; min-height:84px; border-radius:50%; border:2.5px solid #8c5f14; background:radial-gradient(circle at 35% 30%, #f0b95a, #c07f1d 70%); color:#fff; box-shadow:var(--shadow); display:flex; align-items:center; justify-content:center; padding:0; flex:0 0 auto; }
+      .skill-unit.atk-unit{ left:238px; top:238px; width:84px; height:84px; }
+      .atk-btn svg{ width:40px; height:40px; filter:drop-shadow(0 1px 2px rgba(0,0,0,.4)); }
+      /* Bình + AUTO định vị tuyệt đối trong hộp cụm (xem sơ đồ vòng cung ở trên) */
+      .fight-pad .util-pot-hp{ position:absolute; left:62px; top:183px; transform:translate(-50%,-50%); width:46px; height:46px; }
+      .fight-pad .util-pot-mp{ position:absolute; left:62px; top:238px; transform:translate(-50%,-50%); width:46px; height:46px; }
+      .fight-pad .auto-btn{ position:absolute; left:196px; top:28px; transform:translate(-50%,-50%); }
       .atk-btn:active{ transform:scale(.95); }
       /* ===== CHỐNG ZOOM KHI ĐÁNH ===== Gõ liên tục vào nút đánh/skill từng bị
          webview hiểu là double-tap-to-zoom (hình cứ phóng to / thu nhỏ giữa trận).
@@ -150,17 +172,16 @@
       .controls{ padding-bottom:16px; }
       /* ===== ĐIỀU KHIỂN PHỦ TRÊN SÂN (khung ngang, 2 tay) ===== */
       .arena-wrap .joy{ position:absolute; left:calc(12px + env(safe-area-inset-left)); bottom:calc(28px + env(safe-area-inset-bottom)); z-index:6; background:radial-gradient(circle at 50% 42%, rgba(30,36,28,.55), rgba(12,14,10,.55)); border-color:rgba(238,194,106,.5); }
-      .arena-wrap .auto-btn{ position:static; height:44px; padding:0 12px; background:rgba(12,14,10,.66); backdrop-filter:blur(3px); color:#f0e8cf; border-color:rgba(238,194,106,.5); }
+      .arena-wrap .auto-btn{ background:rgba(12,14,10,.66); backdrop-filter:blur(3px); color:#f0e8cf; border-color:rgba(238,194,106,.5); }
       .arena-wrap .auto-btn.on{ background:var(--btn); color:#fff; }
-      .arena-wrap .fight-pad{ position:absolute; right:calc(12px + env(safe-area-inset-right)); bottom:calc(22px + env(safe-area-inset-bottom)); z-index:6; }
-      .arena-wrap .skill-unit .s-name,.arena-wrap .sup-unit .s-name{ color:#f0e8cf; text-shadow:0 1px 3px rgba(0,0,0,.8); }
+      .arena-wrap .fight-pad{ position:absolute; right:calc(10px + env(safe-area-inset-right)); bottom:calc(10px + env(safe-area-inset-bottom)); z-index:6; }
       .arena-wrap .toasts{ left:50%; transform:translateX(-50%); bottom:18px; align-items:center; max-width:52%; width:max-content; }
       #minimap{ position:absolute; top:calc(10px + env(safe-area-inset-top)); right:calc(10px + env(safe-area-inset-right)); z-index:8; width:148px; height:100px; border-radius:10px; border:1px solid rgba(238,194,106,.55); background:rgba(8,10,8,.55); cursor:pointer; }
-      .bigmap-back{ position:fixed; inset:0; background:rgba(5,8,5,.7); display:none; align-items:center; justify-content:center; z-index:70; padding:14px; }
+      .bigmap-back{ position:fixed; inset:0; background:rgba(5,8,5,.35); display:none; align-items:center; justify-content:center; z-index:70; padding:14px; }
       .bigmap-back.show{ display:flex; }
-      .bigmap-card{ background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:12px; max-width:min(680px,96vw); text-align:center; box-shadow:var(--shadow); }
+      .bigmap-card{ --ink:#f5edd2; --ink-soft:#d8cba0; --line:rgba(238,194,106,.38); --panel2:rgba(255,255,255,.07); --gold:#eec26a; --gold2:#eec26a; background:rgba(14,18,12,.92); color:#f5edd2; border:1.5px solid rgba(238,194,106,.65); border-radius:14px; padding:12px; width:min(680px,86%); max-height:84%; overflow-y:auto; text-align:center; box-shadow:0 18px 50px rgba(0,0,0,.45); }
       .bigmap-card h3{ margin:0 0 8px; font-size:15px; }
-      #bigMap{ width:min(600px,88vw); height:auto; border-radius:10px; border:1px solid var(--line); background:#101408; }
+      #bigMap{ width:100%; max-width:600px; height:auto; border-radius:10px; border:1px solid var(--line); background:#101408; }
       .bigmap-legend{ display:flex; gap:10px; flex-wrap:wrap; justify-content:center; font-size:11px; font-weight:700; color:var(--ink-soft); margin-top:8px; }
       .bigmap-legend i{ display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:4px; }
       @media (min-width:680px){
@@ -175,9 +196,12 @@
       .dock-btn small{ font-size:7.8px; font-weight:800; line-height:1.05; }
       .dock-btn:active{ transform:scale(.92); }
       .dock-btn .badge{ position:absolute; top:-6px; right:-6px; background:var(--hp); color:#fff; font-size:10px; font-weight:800; min-width:18px; height:18px; border-radius:999px; display:flex; align-items:center; justify-content:center; padding:0 5px; border:1.5px solid rgba(255,255,255,.35); }
-      .sheet-back{ position:fixed; inset:0; background:rgba(5,8,5,.62); display:none; z-index:94; }
+      .sheet-back{ position:fixed; inset:0; background:rgba(5,8,5,.35); display:none; z-index:94; }
       .sheet-back.show{ display:block; }
-      .panel{ position:fixed; left:50%; top:50%; transform:translate(-50%,-50%); width:min(700px,94vw); max-height:88dvh; overflow-y:auto; background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:16px; box-shadow:0 18px 50px rgba(0,0,0,.45); display:none; z-index:95; }
+      /* v0.6.0: panel = CỬA SỔ NỔI NHỎ giữa sân — tối đa 86% ngang × 84% cao
+         của sân khấu, nền tối bán trong suốt viền vàng cổ, game phía sau
+         vẫn nhìn thấy (lớp mờ chỉ tối ~35%); nội dung cuộn BÊN TRONG cửa sổ */
+      .panel{ --ink:#f5edd2; --ink-soft:#d8cba0; --line:rgba(238,194,106,.38); --panel:#141a12; --panel2:rgba(255,255,255,.07); --gold:#eec26a; --gold2:#eec26a; --gold-soft:rgba(238,194,106,.16); position:fixed; left:50%; top:50%; transform:translate(-50%,-50%); width:min(700px,86%); max-height:84%; overflow-y:auto; background:rgba(16,20,14,.93); color:#f5edd2; border:1.5px solid rgba(238,194,106,.65); border-radius:14px; padding:16px; box-shadow:0 18px 50px rgba(0,0,0,.45); display:none; z-index:95; }
       .panel.active{ display:block; }
       .sheet-x{ position:absolute; top:10px; right:10px; width:30px; height:30px; min-height:30px; border-radius:50%; border:1px solid var(--line); background:var(--panel2); color:var(--ink); font-size:14px; font-weight:900; display:flex; align-items:center; justify-content:center; padding:0; z-index:2; line-height:1; }
       .sheet-x:active{ transform:scale(.9); }
@@ -217,10 +241,10 @@
       body.rot .wrap{ height:100%; }
       /* Các kích thước vw/vh của cửa sổ vốn tính theo khung vật lý (đang
          dọc) — khi đã tự xoay phải tính theo khung ngang thật của #rotRoot */
-      body.rot .panel{ width:min(700px,94%); max-height:94%; }
-      body.rot .modal{ max-height:94%; }
-      body.rot .roster-card, body.rot .settings-card{ width:min(680px,94%); }
-      body.rot .bigmap-card{ max-width:94%; }
+      body.rot .panel{ width:min(700px,86%); max-height:84%; }
+      body.rot .modal{ max-height:84%; width:min(520px,86%); }
+      body.rot .roster-card, body.rot .settings-card{ width:min(680px,86%); max-height:84%; }
+      body.rot .bigmap-card{ width:min(680px,86%); max-height:84%; }
       body.rot #bigMap{ width:auto; height:calc(100dvw - 172px); max-width:100%; }
       body.rot .scene-panel{ width:min(302px,34%); max-height:calc(100% - 150px); }
       body.rot .intro-title .t-main{ font-size:clamp(34px,7.5dvh,58px); }
@@ -293,10 +317,9 @@
       .chip.done{ background:var(--exp); color:#fff; } .chip.doing{ background:var(--gold2); color:#3a2a05; } .chip.todo{ background:var(--panel2); color:var(--ink-soft); border:1px solid var(--line); }
 
       /* ===== POPUP ĐỒ ===== */
-      .modal-back{ position:fixed; inset:0; background:rgba(5,8,5,.55); display:none; align-items:flex-end; justify-content:center; z-index:60; }
+      .modal-back{ position:fixed; inset:0; background:rgba(5,8,5,.35); display:none; align-items:center; justify-content:center; z-index:60; padding:12px; }
       .modal-back.show{ display:flex; }
-      .modal{ background:var(--panel); width:min(520px,100%); max-height:88vh; overflow:auto; border-radius:18px 18px 0 0; border:1px solid var(--line); padding:16px 16px calc(16px + env(safe-area-inset-bottom)); }
-      @media (min-width:640px){ .modal-back{ align-items:center; } .modal{ border-radius:18px; } }
+      .modal{ --ink:#f5edd2; --ink-soft:#d8cba0; --line:rgba(238,194,106,.38); --panel2:rgba(255,255,255,.07); --gold:#eec26a; --gold2:#eec26a; background:rgba(16,20,14,.94); color:#f5edd2; width:min(520px,86%); max-height:84%; overflow:auto; border-radius:14px; border:1.5px solid rgba(238,194,106,.65); box-shadow:0 18px 50px rgba(0,0,0,.45); padding:16px; }
       .modal-head{ display:flex; gap:12px; align-items:center; }
       .modal-icon{ width:62px; height:62px; border-radius:14px; border:2px solid var(--line); background:var(--panel2); display:flex; align-items:center; justify-content:center; flex:0 0 auto; }
       .modal-icon svg{ width:36px; height:36px; }
@@ -330,13 +353,13 @@
       .gem-cell .i-up{ font-size:10px; font-weight:800; }
 
       /* ===== DANH SÁCH NHÂN VẬT & CÀI ĐẶT ===== */
-      .roster-back,.settings-back{ position:fixed; inset:0; background:rgba(5,8,5,.72); display:none; align-items:flex-start; justify-content:center; z-index:80; padding:16px 12px; overflow:auto; }
+      .roster-back,.settings-back{ position:fixed; inset:0; background:rgba(5,8,5,.35); display:none; align-items:center; justify-content:center; z-index:80; padding:16px 12px; overflow:auto; }
       /* Danh sách nhân vật mở ĐÈ lên sân khấu tạo nhân vật (cùng z 80, sân khấu
          nằm sau trong DOM) nên phải cao hơn; Cài đặt mở từ danh sách còn cao hơn nữa */
       .roster-back{ z-index:86; }
       .settings-back{ z-index:96; }
       .roster-back.show,.settings-back.show{ display:flex; }
-      .roster-card,.settings-card{ background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:16px; width:min(680px,96vw); box-shadow:var(--shadow); margin:auto 0; }
+      .roster-card,.settings-card{ --ink:#f5edd2; --ink-soft:#d8cba0; --line:rgba(238,194,106,.38); --panel2:rgba(255,255,255,.07); --gold-soft:rgba(238,194,106,.16); --gold:#eec26a; --gold2:#eec26a; background:rgba(16,20,14,.93); color:#f5edd2; border:1.5px solid rgba(238,194,106,.65); border-radius:14px; padding:16px; width:min(680px,86%); max-height:84%; overflow-y:auto; box-shadow:0 18px 50px rgba(0,0,0,.45); margin:auto 0; }
       .roster-head{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:6px; }
       .roster-head h2{ margin:0; font-size:19px; }
       .roster-list{ display:flex; flex-direction:column; gap:10px; }
@@ -525,16 +548,12 @@
         .hud-overlay{ max-width:78%; }
         .quest-chip{ display:none; }
         .ctl-btn{ width:52px; height:52px; }
-        .auto-btn{ height:52px; padding:0 9px; }
-        .skill-btn{ width:47px; height:47px; } .skill-unit{ width:47px; }
-        .sup-btn{ width:44px; height:44px; } .sup-unit{ width:44px; }
-        .atk-btn{ width:62px; height:62px; } .skill-unit.atk-unit{ width:62px; }
+        /* v0.6.0: cụm vòng cung giữ NGUYÊN cỡ ở mọi khung (kể cả khung vật lý
+           dọc 390px khi tự xoay) — không thu nhỏ nút như các bản trước */
         .stat-grid{ grid-template-columns:repeat(2,1fr); }
       }
       @media (max-width:640px){
         .controls{ flex-wrap:wrap; }
-        .fight-pad{ order:3; width:100%; align-items:flex-end; }
-        .auto-btn{ margin-left:auto; }
       }
     </style>
   </head>
@@ -604,18 +623,18 @@
         <div class="boss-bar" id="bossBar"><div class="bb-name" id="bossName"></div><div class="bb-track"><div class="bb-fill" id="bossFill"></div></div></div>
         <div class="quest-chip" id="questChip"><span class="q-tag">NHIỆM VỤ</span><span id="questTxt">Chính tuyến: khám phá Rừng Xanh</span></div>
         <div class="hud-icons" id="hudIcons" aria-label="Menu chức năng">
-          <button class="hud-ico" data-panel="char" aria-label="Nhân vật"><span class="ico-c"><svg><use href="#i-user"/></svg></span><span class="badge" id="charBadge" style="display:none">0</span></button>
-          <button class="hud-ico" data-panel="bag" aria-label="Túi đồ"><span class="ico-c"><svg><use href="#i-bag"/></svg></span><span class="badge" id="bagBadge" style="display:none">0</span></button>
-          <button class="hud-ico" data-panel="equip" aria-label="Trang bị"><span class="ico-c"><svg><use href="#i-shield"/></svg></span></button>
-          <button class="hud-ico" data-panel="skill" aria-label="Kỹ năng"><span class="ico-c"><svg><use href="#i-bolt"/></svg></span></button>
-          <button class="hud-ico" data-panel="settings" aria-label="Cài đặt"><span class="ico-c"><svg><use href="#i-gear"/></svg></span></button>
+          <button class="hud-ico" data-panel="char" aria-label="Nhân vật"><span class="ico-c"><svg><use href="#i-user"/></svg></span><span class="ico-label">Nhân vật</span><span class="badge" id="charBadge" style="display:none">0</span></button>
+          <button class="hud-ico" data-panel="bag" aria-label="Túi đồ"><span class="ico-c"><svg><use href="#i-bag"/></svg></span><span class="ico-label">Túi đồ</span><span class="badge" id="bagBadge" style="display:none">0</span></button>
+          <button class="hud-ico" data-panel="equip" aria-label="Trang bị"><span class="ico-c"><svg><use href="#i-shield"/></svg></span><span class="ico-label">Trang bị</span></button>
+          <button class="hud-ico" data-panel="skill" aria-label="Kỹ năng"><span class="ico-c"><svg><use href="#i-bolt"/></svg></span><span class="ico-label">Kỹ năng</span></button>
+          <button class="hud-ico" data-panel="settings" aria-label="Cài đặt"><span class="ico-c"><svg><use href="#i-gear"/></svg></span><span class="ico-label">Cài đặt</span></button>
         </div>
         <canvas id="minimap" width="296" height="200" aria-label="Bản đồ nhỏ — chạm để phóng to"></canvas>
         <div class="joy" id="joy" aria-label="Cần điều khiển di chuyển 8 hướng"><div class="joy-thumb" id="joyThumb"></div></div>
         <div class="fight-pad">
           <div class="util-row">
-            <div class="sup-unit"><button class="pot-btn pot-hp" id="btnPotHp" aria-label="Uống bình máu"><svg><use href="#i-potion"/></svg><span class="pot-n" id="potHpN">3</span></button><span class="s-name">Bình máu</span></div>
-            <div class="sup-unit"><button class="pot-btn pot-mp" id="btnPotMp" aria-label="Uống bình mana"><svg><use href="#i-potion"/></svg><span class="pot-n" id="potMpN">2</span></button><span class="s-name">Bình mana</span></div>
+            <div class="sup-unit util-pot-hp"><button class="pot-btn pot-hp" id="btnPotHp" aria-label="Uống bình máu"><svg><use href="#i-potion"/></svg><span class="pot-n" id="potHpN">3</span></button><span class="s-name">Bình máu</span></div>
+            <div class="sup-unit util-pot-mp"><button class="pot-btn pot-mp" id="btnPotMp" aria-label="Uống bình mana"><svg><use href="#i-potion"/></svg><span class="pot-n" id="potMpN">2</span></button><span class="s-name">Bình mana</span></div>
             <button class="auto-btn" id="btnAuto" aria-label="Bật tắt chế độ tự đánh">AUTO<small id="autoState">Đang tắt</small></button>
           </div>
           <div class="support-row" id="supportBtns"></div>
@@ -629,6 +648,7 @@
         </div>
         <div class="exp-edge"><div class="bar exp"><i id="barExp" style="width:0%"></i></div></div>
         <div class="toasts" id="toasts"></div>
+        <div class="arena-scrim" id="arenaScrim"></div>
         <div class="arena-msg" id="arenaMsg">
           <h2 id="msgTitle">Hoàn thành màn!</h2>
           <p id="msgText"></p>
@@ -793,7 +813,8 @@
         <h4 class="set-h">Khác</h4>
         <div class="set-row"><span>Rung máy khi đánh boss / lên cấp</span><button class="tgl" id="setVib" aria-label="Bật tắt rung máy"></button></div>
         <p class="muted" style="margin:10px 0 0">Cài đặt áp dụng ngay. Mức đồ hoạ Thấp giảm mạnh hạt hiệu ứng để máy yếu chơi mượt.</p>
-        <p class="muted" style="margin:10px 0 0">Phiên bản <b id="gameVersion">v0.5.7</b> — Nhật ký cập nhật:</p>
+        <p class="muted" style="margin:10px 0 0">Phiên bản <b id="gameVersion">v0.6.0</b> — Nhật ký cập nhật:</p>
+        <p class="muted" style="margin:4px 0 0">v0.6.0 — Bố cục mới: skill vòng quanh nút Đánh, cửa sổ mở nhỏ gọn, nhân vật nhỏ lại cho map rộng hơn.</p>
         <p class="muted" style="margin:4px 0 0">v0.5.7 — Màn hình phủ kín điện thoại, nút bấm không bị cắt; nhân vật quay người mượt hơn.</p>
         <p class="muted" style="margin:4px 0 0">v0.5.6 — Rừng Xanh có chiều sâu thật: đi sau tán cây bị che tự nhiên, tán cây mờ đi khi đứng dưới; Pháp Sư chuyển động phiên bản mới.</p>
         <p class="muted" style="margin:4px 0 0">v0.5.5 — Sửa nhân vật lơ lửng, cân lại tỉ lệ với cây, lưu nhân vật tự động và bàn phím nhập tên trong game.</p>
@@ -1090,7 +1111,7 @@ const ASSET_FILES = [
 ];
 
 /* Phiên bản game hiện tại — hiển thị trong panel Cài đặt */
-const GAME_VERSION = 'v0.5.7';
+const GAME_VERSION = 'v0.6.0';
 
 /* =====================================================================
    VẬT THỂ TÁCH LỚP RỪNG XANH (v0.5.6) — dữ liệu từ layers.json của
@@ -2371,22 +2392,22 @@ const Sprites = {
     if (h.reviveT > 0) bob += h.reviveT * 14;   // hồi sinh: nhân vật từ từ hạ xuống trong cột sáng
     ctx.save(); ctx.translate(h.x, h.y);
     if (h.reviveT > 0) {
-      const rg = ctx.createLinearGradient(0, -190, 0, 0);
+      const rg = ctx.createLinearGradient(0, -143, 0, 0);
       rg.addColorStop(0, 'rgba(255,233,168,0)'); rg.addColorStop(1, 'rgba(255,233,168,' + (0.5 * h.reviveT) + ')');
-      ctx.fillStyle = rg; ctx.fillRect(-17, -190, 34, 190);
+      ctx.fillStyle = rg; ctx.fillRect(-13, -143, 26, 143);
     }
     if (h.dead) { const dp = Math.min(1, (h.deathT || 0) / 0.45); ctx.rotate(-dp * 1.35); ctx.globalAlpha = 1 - dp * 0.35; }
-    this.shadow(ctx, 0, 2, 21);
+    this.shadow(ctx, 0, 2, 16);
     /* Vầng hào quang theo phái dưới chân — nhân vật nổi bật giữa sân */
     const auraCol = cid === 'mage' ? '105,183,255' : cid === 'archer' ? '140,230,170' : '238,194,106';
-    const ag = ctx.createRadialGradient(0, 0, 4, 0, 0, 34);
+    const ag = ctx.createRadialGradient(0, 0, 3, 0, 0, 26);
     ag.addColorStop(0, 'rgba(' + auraCol + ',' + (0.34 + Math.sin(t * 3) * 0.07) + ')'); ag.addColorStop(1, 'rgba(' + auraCol + ',0)');
-    ctx.fillStyle = ag; ctx.beginPath(); ctx.ellipse(0, 1, 34, 12, 0, 0, Math.PI * 2); ctx.fill();
-    ctx.strokeStyle = 'rgba(' + auraCol + ',.65)'; ctx.lineWidth = 1.6;
-    ctx.beginPath(); ctx.ellipse(0, 1, 25, 8.5, 0, 0, Math.PI * 2); ctx.stroke();
+    ctx.fillStyle = ag; ctx.beginPath(); ctx.ellipse(0, 1, 26, 9, 0, 0, Math.PI * 2); ctx.fill();
+    ctx.strokeStyle = 'rgba(' + auraCol + ',.65)'; ctx.lineWidth = 1.4;
+    ctx.beginPath(); ctx.ellipse(0, 1, 19, 6.5, 0, 0, Math.PI * 2); ctx.stroke();
     if (!h.dead && !(h.castT > 0) && h.leanS) ctx.rotate(h.leanS);   /* nghiêng đà chạy ngang (v0.5.7) */
     const fxL = h.faceS === undefined ? (h.face || 1) : h.faceS;
-    ctx.scale(fxL * 1.52, 1.52 * (1 - 0.04 * (h.turnSq || 0))); ctx.translate(0, -bob);
+    ctx.scale(fxL * 1.14, 1.14 * (1 - 0.04 * (h.turnSq || 0))); ctx.translate(0, -bob);
     const hurt = h.hurtT > 0;
     const step = h.moving ? Math.sin(h.walkPh) * 4.2 : 0;
     let weaponAng = swing >= 0 ? -2.0 + swing * 2.8 : 0.55 + Math.sin(t * 2.2) * 0.05;
@@ -2829,20 +2850,20 @@ const Sprites = {
     const cid = viewClassId();
     ctx.save(); ctx.translate(h.x, h.y);
     if (h.reviveT > 0) {
-      const rg = ctx.createLinearGradient(0, -190, 0, 0);
+      const rg = ctx.createLinearGradient(0, -143, 0, 0);
       rg.addColorStop(0, 'rgba(255,233,168,0)'); rg.addColorStop(1, 'rgba(255,233,168,' + (0.5 * h.reviveT) + ')');
-      ctx.fillStyle = rg; ctx.fillRect(-17, -190, 34, 190);
+      ctx.fillStyle = rg; ctx.fillRect(-13, -143, 26, 143);
     }
-    this.shadow(ctx, 0, 2, 21);
+    this.shadow(ctx, 0, 2, 16);
     const auraCol = cid === 'mage' ? '105,183,255' : cid === 'archer' ? '140,230,170' : '238,194,106';
-    const ag = ctx.createRadialGradient(0, 0, 4, 0, 0, 33);
+    const ag = ctx.createRadialGradient(0, 0, 3, 0, 0, 25);
     ag.addColorStop(0, 'rgba(' + auraCol + ',' + (0.34 + Math.sin(t * 3) * 0.07) + ')'); ag.addColorStop(1, 'rgba(' + auraCol + ',0)');
-    ctx.fillStyle = ag; ctx.beginPath(); ctx.ellipse(0, 1, 33, 12, 0, 0, Math.PI * 2); ctx.fill();
-    ctx.strokeStyle = 'rgba(' + auraCol + ',.65)'; ctx.lineWidth = 1.6;
-    ctx.beginPath(); ctx.ellipse(0, 1, 25, 8, 0, 0, Math.PI * 2); ctx.stroke();
-    /* v0.5.5: hero trong thế giới thu xuống ×0.92 (152 → 140px) cho đồng
-       nhất tỉ lệ với cây trong tranh; hitbox/tầm đánh/tốc độ KHÔNG đổi */
-    const drawn = this.heroImage(ctx, h, t, 140);
+    ctx.fillStyle = ag; ctx.beginPath(); ctx.ellipse(0, 1, 25, 9, 0, 0, Math.PI * 2); ctx.fill();
+    ctx.strokeStyle = 'rgba(' + auraCol + ',.65)'; ctx.lineWidth = 1.4;
+    ctx.beginPath(); ctx.ellipse(0, 1, 19, 6, 0, 0, Math.PI * 2); ctx.stroke();
+    /* v0.6.0: hero trong thế giới thu tiếp ×0.75 (140 → 105px) cho map
+       trông rộng hơn; hitbox/tầm đánh/tốc độ/va chạm KHÔNG đổi */
+    const drawn = this.heroImage(ctx, h, t, 105);
     ctx.restore();
     if (!drawn) { this.heroLegacy(ctx, h, t); return; }
     if (h.buffs && (h.buffs.shieldT > 0 || h.buffs.manaShieldT > 0)) {
@@ -2850,7 +2871,7 @@ const Sprites = {
          thép, Lá Chắn Mana tím mana — viền sáng, vệt highlight, đốm sáng quay quanh */
       const mana = h.buffs.manaShieldT > 0;
       const bc = mana ? '182,120,232' : '150,185,225';
-      const bx = h.x, by = h.y - 53, brx = 37 + Math.sin(t * 2.6) * 1.2, bry = 51 + Math.cos(t * 2.2) * 1.4;
+      const bx = h.x, by = h.y - 40, brx = 28 + Math.sin(t * 2.6) * 0.9, bry = 38 + Math.cos(t * 2.2) * 1.1;
       const bg2 = ctx.createRadialGradient(bx - brx * 0.3, by - bry * 0.4, 4, bx, by, bry);
       bg2.addColorStop(0, 'rgba(255,255,255,.16)'); bg2.addColorStop(0.55, 'rgba(' + bc + ',.10)'); bg2.addColorStop(1, 'rgba(' + bc + ',.22)');
       ctx.fillStyle = bg2; ctx.beginPath(); ctx.ellipse(bx, by, brx, bry, 0, 0, Math.PI * 2); ctx.fill();
@@ -2866,21 +2887,21 @@ const Sprites = {
     if (h.buffs && h.buffs.rageT > 0) {
       /* Cuồng Nộ: quầng lửa đỏ chập chờn quanh chân */
       const fl = 0.75 + Math.sin(t * 11) * 0.25;
-      const rg2 = ctx.createRadialGradient(h.x, h.y, 2, h.x, h.y, 34);
+      const rg2 = ctx.createRadialGradient(h.x, h.y, 2, h.x, h.y, 26);
       rg2.addColorStop(0, 'rgba(255,106,46,' + (0.4 * fl) + ')'); rg2.addColorStop(1, 'rgba(255,60,20,0)');
-      ctx.fillStyle = rg2; ctx.beginPath(); ctx.ellipse(h.x, h.y, 34, 13, 0, 0, Math.PI * 2); ctx.fill();
-      ctx.strokeStyle = 'rgba(255,140,60,' + (0.65 * fl) + ')'; ctx.lineWidth = 1.8;
-      ctx.beginPath(); ctx.ellipse(h.x, h.y, 27 + Math.sin(t * 9) * 2, 9, 0, 0, Math.PI * 2); ctx.stroke();
+      ctx.fillStyle = rg2; ctx.beginPath(); ctx.ellipse(h.x, h.y, 26, 10, 0, 0, Math.PI * 2); ctx.fill();
+      ctx.strokeStyle = 'rgba(255,140,60,' + (0.65 * fl) + ')'; ctx.lineWidth = 1.6;
+      ctx.beginPath(); ctx.ellipse(h.x, h.y, 20 + Math.sin(t * 9) * 1.5, 7, 0, 0, Math.PI * 2); ctx.stroke();
     }
     if (h.buffs && h.buffs.windT > 0) {
       /* Bước Chân Gió: 2 vòng gió xoáy chạy dưới chân khi buff còn hiệu lực */
       ctx.strokeStyle = 'rgba(201,242,255,.55)'; ctx.lineWidth = 1.6;
       for (let wi = 0; wi < 2; wi++) {
         const wa = t * 6 + wi * Math.PI;
-        ctx.beginPath(); ctx.ellipse(h.x, h.y - 1, 24, 8, 0, wa, wa + 2.2); ctx.stroke();
+        ctx.beginPath(); ctx.ellipse(h.x, h.y - 1, 18, 6, 0, wa, wa + 2.2); ctx.stroke();
       }
     }
-    if (h.buffs && h.buffs.dodgeT > 0) { ctx.strokeStyle = 'rgba(140,230,170,.6)'; ctx.lineWidth = 1.6; ctx.beginPath(); ctx.ellipse(h.x, h.y - 2, 24, 8, 0, 0, Math.PI * 2); ctx.stroke(); }
+    if (h.buffs && h.buffs.dodgeT > 0) { ctx.strokeStyle = 'rgba(140,230,170,.6)'; ctx.lineWidth = 1.6; ctx.beginPath(); ctx.ellipse(h.x, h.y - 2, 18, 6, 0, 0, Math.PI * 2); ctx.stroke(); }
   },
 };
 </script>
@@ -3045,11 +3066,12 @@ function drawWolfRunes(ctx, m, t, s) {
 }
 Sprites.monster = function (ctx, m, t) {
   const hover = m.def.fly ? 52 + Math.sin(t * 5 + m.seed) * 5 : 0;
-  /* v0.5.5: MỌI quái/boss thu kích thước VẼ xuống ×0.92 đồng loạt (cùng
-     hệ số với hero) — tỉ lệ tương đối thường : tinh anh : boss giữ nguyên,
-     hitbox/tầm đánh/tốc độ/va chạm KHÔNG đổi; thanh máu + vòng tinh anh +
-     bóng dùng chung hệ số s này nên tự khớp theo */
-  const s = (m.boss ? 1.5 : 1) * (m.elite ? 1.28 : 1) * (m.sizeMul || 1) * 0.92;
+  /* v0.6.0: MỌI quái/boss thu kích thước VẼ xuống ×0.75 so với v0.5.7
+     (hệ số chung 0.92 → 0.69, cùng nhịp với hero 140 → 105px) — tỉ lệ
+     tương đối thường : tinh anh : boss giữ nguyên, hitbox/tầm đánh/
+     tốc độ/va chạm KHÔNG đổi; thanh máu + vòng tinh anh + bóng dùng
+     chung hệ số s này nên tự khớp theo */
+  const s = (m.boss ? 1.5 : 1) * (m.elite ? 1.28 : 1) * (m.sizeMul || 1) * 0.69;
   const ghost = m.deathT !== undefined;
   /* Chuyển động thủ tục v0.5.3: quái ngoài khung hình (vẫn trong lề culling
      của vòng vẽ) → amp 0, vẽ tĩnh giữ hiệu năng */
@@ -4082,7 +4104,7 @@ function updateMonster(m, dt) {
   if (m.poisonT > 0) {
     m.poisonT -= dt; m.poisonTick += dt;
     m.hp -= m.poisonDps * dt;
-    if (m.poisonTick >= 1) { m.poisonTick = 0; addFloater(m.x, m.y - (Sprites.HGT[m.type] || 70) - 10, 'Độc -' + Math.round(m.poisonDps), '#7ed957', false, 'dmg'); }
+    if (m.poisonTick >= 1) { m.poisonTick = 0; addFloater(m.x, m.y - (Sprites.HGT[m.type] || 70) * 0.69 - 10, 'Độc -' + Math.round(m.poisonDps), '#7ed957', false, 'dmg'); }
     if (m.hp <= 0) { monsters = monsters.filter(x => x !== m); killMonster(m); return; }
   }
   /* Choáng (Địa Chấn): đứng yên, không đánh */
@@ -4485,18 +4507,19 @@ function draw() {
   if (P.created || true) list.push({ y: hero.y, f: () => { Sprites.hero(ctx, hero, timeNow); ctx.globalAlpha = 1; } });
   list.sort((a, b) => a.y - b.y);
   for (const it of list) it.f();
-  /* Bảng tên + thanh máu nhỏ trên đầu nhân vật */
+  /* Bảng tên + thanh máu nhỏ trên đầu nhân vật — v0.6.0: neo theo chiều
+     cao vẽ mới 105px, cỡ chữ giữ tối thiểu 11px để vẫn đọc rõ */
   if (P.created && P.name) {
-    ctx.font = '800 12.5px "Be Vietnam Pro"'; ctx.textAlign = 'center';
-    const label = P.name + ' · Lv ' + P.level, tw = ctx.measureText(label).width + 16;
+    ctx.font = '800 11px "Be Vietnam Pro"'; ctx.textAlign = 'center';
+    const label = P.name + ' · Lv ' + P.level, tw = ctx.measureText(label).width + 14;
     ctx.fillStyle = 'rgba(8,10,8,.55)';
-    Sprites.rr(ctx, hero.x - tw / 2, hero.y - 168, tw, 19, 9); ctx.fill();
-    ctx.strokeStyle = 'rgba(238,194,106,.5)'; ctx.lineWidth = 1; Sprites.rr(ctx, hero.x - tw / 2, hero.y - 168, tw, 19, 9); ctx.stroke();
-    ctx.fillStyle = '#ffe9a8'; ctx.fillText(label, hero.x, hero.y - 154.5);
+    Sprites.rr(ctx, hero.x - tw / 2, hero.y - 128, tw, 17, 8); ctx.fill();
+    ctx.strokeStyle = 'rgba(238,194,106,.5)'; ctx.lineWidth = 1; Sprites.rr(ctx, hero.x - tw / 2, hero.y - 128, tw, 17, 8); ctx.stroke();
+    ctx.fillStyle = '#ffe9a8'; ctx.fillText(label, hero.x, hero.y - 116);
     const stNow = heroStats(), hpFrac = clamp(hero.hp / stNow.maxHp, 0, 1);
-    ctx.fillStyle = 'rgba(0,0,0,.55)'; Sprites.rr(ctx, hero.x - 27, hero.y - 146, 54, 6, 3); ctx.fill();
+    ctx.fillStyle = 'rgba(0,0,0,.55)'; Sprites.rr(ctx, hero.x - 22, hero.y - 109, 44, 5, 2.5); ctx.fill();
     ctx.fillStyle = hpFrac > 0.35 ? '#6fbf73' : '#e5484d';
-    if (hpFrac > 0.01) { Sprites.rr(ctx, hero.x - 26, hero.y - 145, 52 * hpFrac, 4, 2); ctx.fill(); }
+    if (hpFrac > 0.01) { Sprites.rr(ctx, hero.x - 21, hero.y - 108, 42 * hpFrac, 3.5, 2); ctx.fill(); }
   }
   /* Đạn */
   for (const p of projectiles) {
@@ -4769,11 +4792,11 @@ const Combat = {
     if (opts.slowPct) { m.slowT = Math.max(m.slowT, opts.slowDur || 2); m.slowPct = Math.max(m.slowPct, opts.slowPct); }
     if (opts.stunDur && !m.boss) m.stunT = Math.max(m.stunT || 0, opts.stunDur);
     if (opts.poisonPct) { m.poisonT = Math.max(m.poisonT || 0, opts.poisonDur || 3); m.poisonDps = Math.max(m.poisonDps || 0, st.atk * opts.poisonPct); }
-    addFloater(m.x + rand(-8, 8), m.y - (Sprites.HGT[m.type] || 70) - 16, (crit ? 'CHÍ MẠNG ' : '') + dmg, crit ? '#ffb03a' : '#ffe9a8', crit, 'dmg', crit);
+    addFloater(m.x + rand(-8, 8), m.y - (Sprites.HGT[m.type] || 70) * 0.69 - 14, (crit ? 'CHÍ MẠNG ' : '') + dmg, crit ? '#ffb03a' : '#ffe9a8', crit, 'dmg', crit);
     /* Phản hồi trúng đòn (v0.5.1): tia lửa + bùng sáng tại điểm trúng cho MỌI
        đòn (thường & skill, màu theo nguyên tố skill); chí mạng bùng lớn hơn */
     const hitCol = isSkill ? skillColor(opts.skillIdx || 0) : '#ffe9a8';
-    const hitY = m.y - (Sprites.HGT[m.type] || 70) * 0.55;
+    const hitY = m.y - (Sprites.HGT[m.type] || 70) * 0.69 * 0.55;
     burst(m.x, hitY, hitCol, crit ? 16 : 6, crit ? 185 : 115);
     if (crit) burstDir(m.x, hitY, Math.atan2(m.y - hero.y, m.x - hero.x), '#fff3c4', 8, 195);
     if (crit) AudioFX.crit(); else AudioFX.hit();
@@ -5136,8 +5159,9 @@ const UI = {
   showMsg(title, text, btn) {
     el('msgTitle').textContent = title; el('msgText').textContent = text; el('msgBtn').textContent = btn;
     el('arenaMsg').classList.add('show');
+    const sc = el('arenaScrim'); if (sc) sc.classList.add('show');
   },
-  hideMsg() { el('arenaMsg').classList.remove('show'); },
+  hideMsg() { el('arenaMsg').classList.remove('show'); const sc = el('arenaScrim'); if (sc) sc.classList.remove('show'); },
 
   /* ----- Panel do PanelManager quản lý chung (HUD V2): mở/đóng/chuyển panel, tạm dừng trận ----- */
   openSheet(name) { PanelManager.open(name); },
@@ -5713,6 +5737,9 @@ function init() {
   /* HUD V2: 5 icon tròn trên phải → PanelManager (mở / đóng / chuyển panel) */
   document.querySelectorAll('.hud-ico').forEach(b => b.addEventListener('click', () => { AudioFX.ensure(); PanelManager.toggle(b.dataset.panel); }));
   el('sheetBack').addEventListener('click', () => PanelManager.close());
+  /* Cài đặt cũng là cửa sổ nổi: chạm ra ngoài thẻ cài đặt là đóng */
+  el('settingsBack').addEventListener('click', e => { if (e.target === el('settingsBack')) UI.closeSettings(); });
+  el('bigMapBack').addEventListener('click', e => { if (e.target === el('bigMapBack')) el('bigMapBack').classList.remove('show'); });
   document.querySelectorAll('.panel').forEach(p => {
     const x = document.createElement('button');
     x.className = 'sheet-x'; x.textContent = '✕'; x.setAttribute('aria-label', 'Đóng cửa sổ');

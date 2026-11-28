@@ -1,5 +1,5 @@
 # PROGRESS — FANTASY: HUYỀN THOẠI LỤC ĐỊA
-Cập nhật: 2026-11-28 (sau bản v0.5.7 — full màn hình + quay người mượt).
+Cập nhật: 2026-11-28 (sau bản v0.6.0 — bố cục MMO mới: skill vòng cung, cửa sổ nổi, nhân vật nhỏ lại).
 
 ## Đã xong
 - SPEC.md (yêu cầu gốc, Do phê duyệt dần qua các vòng chốt 2026-11-27) + GDD.md (bản thiết kế v2) + bộ tài liệu Master Instruction: ART_DIRECTION, ARCHITECTURE, BALANCE, ROADMAP, GAP_ANALYSIS, TEST_REPORT, CHANGELOG.
@@ -39,7 +39,7 @@ Cập nhật: 2026-11-28 (sau bản v0.5.7 — full màn hình + quay người m
 - v0.5.7 — FULL MÀN HÌNH + QUAY MƯỢT (2026-11-28): visualViewport + lề an toàn HUD; cú xoay 117ms thay lật gương. Đã deploy + đồng bộ GitHub. Chi tiết: CHANGELOG.
 
 ## Đang chờ Do
-- Do test trên iPhone thật: màn hình đã kín và hết cắt nút chưa, quay người còn giống lật giấy không; đi sau/dưới tán cây (che + mờ), Pháp Sư v2; cộng mục cũ (hào quang boss cuồng nộ, skill cấp cao).
+- Do test v0.6.0 qua link Cloudflare mở ngoài app (Safari/ghép màn hình chính): bố cục vòng cung có thuận tay không, cửa sổ nổi vừa mắt chưa, nhân vật nhỏ lại map có rộng hơn không; cộng các mục trước (màn hình kín/hết cắt nút, quay người, che/mờ tán cây, Pháp Sư v2, hào quang boss cuồng nộ, skill cấp cao).
 - Claude đang làm 2 việc Luna giao (Do chuyển lệnh): (1) dải hướng bên + lưng cho 6 hero (mẫu Kiếm Sĩ nam trước) → tích hợp v0.5.8; (2) map Rừng Xanh MỚI theo spec sạch (đất trống 75–85%, chi tiết thành cụm, tách lớp ngay từ đầu) → Luna QC + dựng va chạm + tích hợp.
 - Dung lượng: ĐÃ xử lý 2026-11-28 — bản live chuyển sang dạng tách file (tải thực tế 21.7MB → ~11.3MB, trần tổng ~1GB theo anh Do; bản một-file giữ ở /mono làm dự phòng). Còn lại cho đợt rollout map: nạp asset theo từng map (lazy) để tải lần đầu nhẹ hơn.
 - Tiếp theo sau khi Do duyệt pilot lớp map: rollout 14 map còn lại của Claude (đã upscale sẵn): mỗi map dựng lưới va chạm theo tranh (quy trình Luna đã làm cho map_1) + giao Claude tách lớp tương tự; Làng Tân Thủ (tanthu) làm hub riêng theo Design V2.
