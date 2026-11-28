@@ -1,4 +1,10 @@
 
+## v0.7.0 — 2026-11-28 (per-skill animation strips)
+- New per-action animation path: Kiếm Sĩ Nam plays Claude's key-pose strips per skill (Trảm Kiếm 520ms / Kiếm Vũ 550ms / Địa Chấn 730ms / Thiên Kiếm 900ms, per-frame durations, cell 768×640, feet y=620, draw scale 640/476) + a dedicated idle strip; run/basic attack unchanged. Goblin melee gets idle/attack (640ms)/hit (320ms) strips, procedural motion suppressed while a strip plays. Damage/cooldown logic untouched.
+- Verified by rendered probes (rotated 390×844): skill 1 mid-animation + new idle captured live, goblin strips on screen, AUTO regression 0→7 kills + Lv2, persistence intact, 0 console errors. Skills 2–4 share the verified path (level-locked in a fresh save, source-audited).
+- Delivery note: the monolith export reached 29.4MB and EXCEEDS the KV per-value cap (413 on upload) — the split format (now 6 data files, ~14.6MB total) is the only live format; the worker's /mono route now 302-redirects to / instead of serving the stale v0.6.2 monolith.
+- Also this round: Claude's parts-assembly pilot QC'd by Luna (14 Codex parts stack to assembled.png with 0px diff — verified by her own composite; idle/run/Trảm Kiếm strips all pass cell QC). Parts hero accepted as-is (grip hand slightly larger, cape slightly wider than the current sprite — negligible at game size).
+
 ## v0.6.2 — 2026-11-28 (icon artwork for every button)
 - Do: "Các skill với icon phải có hình ảnh chứ e" — Luna generated 4 icon sheets with the media image tool and sliced 27 icons (256×256 WebP) into assets/icons/: per-class skill art ks/ps/ct-s1..s4 + buffs b1/b2, sys-attack, sys-potion-hp/mp, sys-auto, nav-character/bag/equip/skills/settings (sources in assets/icons-src/).
 - Buttons now show real artwork filling the round gold-rimmed button; cooldown sweep, C1 chip, lock labels and potion counts still overlay; missing image falls back to the old glyph. AUTO's word label became a status chip (Đang tắt/Đang bật) under the icon.

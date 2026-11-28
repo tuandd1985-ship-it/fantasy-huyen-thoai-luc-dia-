@@ -1,5 +1,5 @@
 # PROGRESS — FANTASY: HUYỀN THOẠI LỤC ĐỊA
-Cập nhật: 2026-11-28 (sau hotfix v0.6.1 — sửa mất cụm nút ở chế độ tự xoay).
+Cập nhật: 2026-11-28 (v0.7.0 LIVE — animation riêng theo từng skill cho Kiếm Sĩ Nam + Goblin cận chiến; /mono đã nghỉ hưu, chỉ còn bản split).
 
 ## Đã xong
 - SPEC.md (yêu cầu gốc, Do phê duyệt dần qua các vòng chốt 2026-11-27) + GDD.md (bản thiết kế v2) + bộ tài liệu Master Instruction: ART_DIRECTION, ARCHITECTURE, BALANCE, ROADMAP, GAP_ANALYSIS, TEST_REPORT, CHANGELOG.

@@ -837,7 +837,8 @@
         <h4 class="set-h">Khác</h4>
         <div class="set-row"><span>Rung máy khi đánh boss / lên cấp</span><button class="tgl" id="setVib" aria-label="Bật tắt rung máy"></button></div>
         <p class="muted" style="margin:10px 0 0">Cài đặt áp dụng ngay. Mức đồ hoạ Thấp giảm mạnh hạt hiệu ứng để máy yếu chơi mượt.</p>
-        <p class="muted" style="margin:10px 0 0">Phiên bản <b id="gameVersion">v0.6.2</b> — Nhật ký cập nhật:</p>
+        <p class="muted" style="margin:10px 0 0">Phiên bản <b id="gameVersion">v0.7.0</b> — Nhật ký cập nhật:</p>
+        <p class="muted" style="margin:4px 0 0">v0.7.0 — Kiếm Sĩ Nam có animation riêng cho từng skill; Goblin có animation đánh và trúng đòn.</p>
         <p class="muted" style="margin:4px 0 0">v0.6.2 — Toàn bộ nút skill và icon chức năng có hình vẽ riêng.</p>
         <p class="muted" style="margin:4px 0 0">v0.6.0 — Bố cục mới: skill vòng quanh nút Đánh, cửa sổ mở nhỏ gọn, nhân vật nhỏ lại cho map rộng hơn.</p>
         <p class="muted" style="margin:4px 0 0">v0.5.7 — Màn hình phủ kín điện thoại, nút bấm không bị cắt; nhân vật quay người mượt hơn.</p>
@@ -897,6 +898,7 @@
 <script src="assets-data-3.js"></script>
 <script src="assets-data-4.js"></script>
 <script src="assets-data-5.js"></script>
+<script src="assets-data-6.js"></script>
 <script>document.querySelectorAll('img[data-akey]').forEach(function(im){im.src=__A[im.getAttribute('data-akey')];});</script>
 <script>
 'use strict';
@@ -1016,49 +1018,73 @@ const ASSETS = {
     'archer-male': __A.k26,
     'archer-female': __A.k27,
   },
+  /* v0.7.0 — DẢI ANIMATION THEO TỪNG SKILL của Kiếm Sĩ Nam (Claude dựng
+     từ dáng chính, Luna QC đạt): ô 768×640, chân ở y=620 trong ô. dur =
+     thời lượng TỪNG KHUNG (ms) theo đúng animations.json gốc; khung gây
+     sát thương trong dữ liệu gốc là 3/1/3/4 theo thứ tự skill — logic
+     game không đổi, dải chỉ là lớp hình phát kèm khi skill được tung. */
+  skillAnim: {
+    'swordsman-male': {
+      skills: [
+        { src: __A.k28, dur: [60, 90, 50, 110, 120, 90] },
+        { src: __A.k29, dur: [80, 70, 70, 70, 70, 90, 100] },
+        { src: __A.k30, dur: [60, 140, 90, 60, 160, 120, 100] },
+        { src: __A.k31, dur: [90, 100, 160, 220, 80, 140, 110] },
+      ],
+      idle: { src: __A.k32, dur: [600, 600] },
+    },
+  },
+  /* v0.7.0 — DẢI GOBLIN CẬN CHIẾN (cùng lô Claude): ô 768×640, chân
+     y=620; nhân vật trong ô cao 500px. idle lặp, attack phát từ lúc ra
+     đòn, hit phát khi trúng đòn (nếu không giữa đòn của chính nó). */
+  gobAnim: {
+    idle: { src: __A.k33, dur: [500, 500] },
+    attack: { src: __A.k34, dur: [80, 120, 140, 60, 140, 100] },
+    hit: { src: __A.k35, dur: [90, 110, 120] },
+  },
   /* Quái Rừng Xanh vẽ bằng ẢNH THẬT (v0.4.0) — khóa = type quái trong CONFIG */
   monster: {
-    'slime': __A.k28,
-    'goblin': __A.k29,
-    'wolf': __A.k30,
-    'goblinArcher': __A.k31,
-    'goblinShaman': __A.k32,
-    'wolfLord': __A.k33,
+    'slime': __A.k36,
+    'goblin': __A.k37,
+    'wolf': __A.k38,
+    'goblinArcher': __A.k39,
+    'goblinShaman': __A.k40,
+    'wolfLord': __A.k41,
   },
   /* Prop Rừng Xanh (v0.4.0) — khóa = PROP_DEFS.image ở lớp engine */
   prop: {
-    'oak': __A.k34,
-    'pillar': __A.k35,
-    'boulder': __A.k36,
-    'bush': __A.k37,
-    'flowers': __A.k38,
-    'portalPlatform': __A.k39,
-    'portalBack': __A.k40,
+    'oak': __A.k42,
+    'pillar': __A.k43,
+    'boulder': __A.k44,
+    'bush': __A.k45,
+    'flowers': __A.k46,
+    'portalPlatform': __A.k47,
+    'portalBack': __A.k48,
   },
   /* Tile nền liền mạch riêng cho mặt đất Rừng Xanh (v0.4.0) */
   ground: {
-    'forestTile': __A.k41,
+    'forestTile': __A.k49,
     /* Rừng Xanh vẽ 2 lớp (v0.5.6): map-rung-xanh.webp = LỚP NỀN ĐÃ GỠ TÁN
        (vẽ làm nền thế giới); bản ĐẦY ĐỦ chỉ dùng cho minimap / bản đồ lớn;
        mask thang xám (trắng = vùng bị tán che) phục vụ làm mờ tán cây. */
-    'forestMap': __A.k42,
-    'forestMapFull': __A.k43,
-    'forestMask': __A.k44,
+    'forestMap': __A.k50,
+    'forestMapFull': __A.k51,
+    'forestMask': __A.k52,
   },
   /* Icon VẼ RIÊNG cho mọi nút bấm (v0.6.2) — 27 ảnh 256×256 ở assets/icons/:
      skill chính + buff chủ động theo phái (ks = Kiếm Sĩ, ps = Pháp Sư,
      ct = Cung Thủ; s1–s4 đúng thứ tự skill, b1–b2 đúng thứ tự buff hiển
      thị), nút hệ thống (đánh thường / bình / AUTO) và hàng icon chức năng. */
   icons: {
-    'ks-s1': __A.k45, 'ks-s2': __A.k46,
-    'ks-s3': __A.k47, 'ks-s4': __A.k48,
-    'ks-b1': __A.k49, 'ks-b2': __A.k50,
-    'ps-s1': __A.k51, 'ps-s2': __A.k52,
-    'ps-s3': __A.k53, 'ps-s4': __A.k54,
-    'ps-b1': __A.k55, 'ps-b2': __A.k56,
-    'ct-s1': __A.k57, 'ct-s2': __A.k58,
-    'ct-s3': __A.k59, 'ct-s4': __A.k60,
-    'ct-b1': __A.k61, 'ct-b2': __A.k62,
+    'ks-s1': __A.k53, 'ks-s2': __A.k54,
+    'ks-s3': __A.k55, 'ks-s4': __A.k56,
+    'ks-b1': __A.k57, 'ks-b2': __A.k58,
+    'ps-s1': __A.k59, 'ps-s2': __A.k60,
+    'ps-s3': __A.k61, 'ps-s4': __A.k62,
+    'ps-b1': __A.k63, 'ps-b2': __A.k64,
+    'ct-s1': __A.k65, 'ct-s2': __A.k66,
+    'ct-s3': __A.k67, 'ct-s4': __A.k68,
+    'ct-b1': __A.k69, 'ct-b2': __A.k70,
     'sys-attack': __A.k9,
     'sys-potion-hp': __A.k6,
     'sys-potion-mp': __A.k7,
@@ -1082,87 +1108,92 @@ const ASSET_FILES = [
   __A.k22, __A.k23,
   __A.k24, __A.k25,
   __A.k26, __A.k27,
-  __A.k28, __A.k29,
-  __A.k30, __A.k31,
-  __A.k32, __A.k33,
-  __A.k34, __A.k35,
+  __A.k32, __A.k28,
+  __A.k29, __A.k30,
+  __A.k31,
+  __A.k33, __A.k34,
+  __A.k35,
   __A.k36, __A.k37,
   __A.k38, __A.k39,
-  __A.k40,
-  __A.k41,
-  __A.k42,
-  __A.k43, __A.k44, __A.k63,
-  __A.k64, __A.k65, __A.k66,
-  __A.k67, __A.k68, __A.k69,
-  __A.k70, __A.k71, __A.k72,
-  __A.k73, __A.k74, __A.k75,
-  __A.k76, __A.k77, __A.k78,
-  __A.k79, __A.k80, __A.k81,
-  __A.k82, __A.k83, __A.k84,
-  __A.k85, __A.k86, __A.k87,
-  __A.k88, __A.k89, __A.k90,
-  __A.k91, __A.k92, __A.k93,
-  __A.k94, __A.k95, __A.k96,
-  __A.k97, __A.k98, __A.k99,
-  __A.k100, __A.k101, __A.k102,
-  __A.k103, __A.k104, __A.k105,
-  __A.k106, __A.k107, __A.k108,
-  __A.k109, __A.k110, __A.k111,
-  __A.k112, __A.k113, __A.k114,
-  __A.k115, __A.k116, __A.k117,
-  __A.k118, __A.k119, __A.k120,
-  __A.k121, __A.k122, __A.k123,
-  __A.k124, __A.k125, __A.k126,
-  __A.k127, __A.k128, __A.k129,
-  __A.k130, __A.k131, __A.k132,
-  __A.k133, __A.k134, __A.k135,
-  __A.k136, __A.k137, __A.k138,
-  __A.k139, __A.k140, __A.k141,
-  __A.k142, __A.k143, __A.k144,
-  __A.k145, __A.k146, __A.k147,
-  __A.k148, __A.k149, __A.k150,
-  __A.k151, __A.k152, __A.k153,
-  __A.k154, __A.k155, __A.k156,
-  __A.k157, __A.k158, __A.k159,
-  __A.k160, __A.k161, __A.k162,
-  __A.k163, __A.k164, __A.k165,
-  __A.k166, __A.k167, __A.k168,
-  __A.k169, __A.k170, __A.k171,
-  __A.k172, __A.k173, __A.k174,
-  __A.k175, __A.k176, __A.k177,
-  __A.k178, __A.k179, __A.k180,
-  __A.k181, __A.k182, __A.k183,
-  __A.k184, __A.k185, __A.k186,
-  __A.k187, __A.k188, __A.k189,
-  __A.k190, __A.k191, __A.k192,
-  __A.k193, __A.k194, __A.k195,
-  __A.k196, __A.k197, __A.k198,
-  __A.k199, __A.k200, __A.k201,
-  __A.k202, __A.k203, __A.k204,
-  __A.k205, __A.k206, __A.k207,
-  __A.k208, __A.k209, __A.k210,
-  __A.k211, __A.k212, __A.k213,
-  __A.k214, __A.k215, __A.k216,
-  __A.k217, __A.k218, __A.k219,
-  __A.k220, __A.k221, __A.k222,
-  __A.k223, __A.k224, __A.k225,
-  __A.k226, __A.k227, __A.k228,
-  __A.k229, __A.k230, __A.k231,
-  __A.k232, __A.k233, __A.k234,
-  __A.k235, __A.k236, __A.k237,
-  __A.k238, __A.k239, __A.k240,
-  __A.k241, __A.k242, __A.k243,
-  __A.k244, __A.k245, __A.k246,
-  __A.k247, __A.k248, __A.k249,
-  __A.k250, __A.k251, __A.k252,
-  __A.k253, __A.k254, __A.k255,
-  __A.k256,
-  __A.k45, __A.k46, __A.k47, __A.k48,
-  __A.k49, __A.k50,
-  __A.k51, __A.k52, __A.k53, __A.k54,
-  __A.k55, __A.k56,
-  __A.k57, __A.k58, __A.k59, __A.k60,
-  __A.k61, __A.k62,
+  __A.k40, __A.k41,
+  __A.k42, __A.k43,
+  __A.k44, __A.k45,
+  __A.k46, __A.k47,
+  __A.k48,
+  __A.k49,
+  __A.k50,
+  __A.k51, __A.k52, __A.k71,
+  __A.k72, __A.k73, __A.k74,
+  __A.k75, __A.k76, __A.k77,
+  __A.k78, __A.k79, __A.k80,
+  __A.k81, __A.k82, __A.k83,
+  __A.k84, __A.k85, __A.k86,
+  __A.k87, __A.k88, __A.k89,
+  __A.k90, __A.k91, __A.k92,
+  __A.k93, __A.k94, __A.k95,
+  __A.k96, __A.k97, __A.k98,
+  __A.k99, __A.k100, __A.k101,
+  __A.k102, __A.k103, __A.k104,
+  __A.k105, __A.k106, __A.k107,
+  __A.k108, __A.k109, __A.k110,
+  __A.k111, __A.k112, __A.k113,
+  __A.k114, __A.k115, __A.k116,
+  __A.k117, __A.k118, __A.k119,
+  __A.k120, __A.k121, __A.k122,
+  __A.k123, __A.k124, __A.k125,
+  __A.k126, __A.k127, __A.k128,
+  __A.k129, __A.k130, __A.k131,
+  __A.k132, __A.k133, __A.k134,
+  __A.k135, __A.k136, __A.k137,
+  __A.k138, __A.k139, __A.k140,
+  __A.k141, __A.k142, __A.k143,
+  __A.k144, __A.k145, __A.k146,
+  __A.k147, __A.k148, __A.k149,
+  __A.k150, __A.k151, __A.k152,
+  __A.k153, __A.k154, __A.k155,
+  __A.k156, __A.k157, __A.k158,
+  __A.k159, __A.k160, __A.k161,
+  __A.k162, __A.k163, __A.k164,
+  __A.k165, __A.k166, __A.k167,
+  __A.k168, __A.k169, __A.k170,
+  __A.k171, __A.k172, __A.k173,
+  __A.k174, __A.k175, __A.k176,
+  __A.k177, __A.k178, __A.k179,
+  __A.k180, __A.k181, __A.k182,
+  __A.k183, __A.k184, __A.k185,
+  __A.k186, __A.k187, __A.k188,
+  __A.k189, __A.k190, __A.k191,
+  __A.k192, __A.k193, __A.k194,
+  __A.k195, __A.k196, __A.k197,
+  __A.k198, __A.k199, __A.k200,
+  __A.k201, __A.k202, __A.k203,
+  __A.k204, __A.k205, __A.k206,
+  __A.k207, __A.k208, __A.k209,
+  __A.k210, __A.k211, __A.k212,
+  __A.k213, __A.k214, __A.k215,
+  __A.k216, __A.k217, __A.k218,
+  __A.k219, __A.k220, __A.k221,
+  __A.k222, __A.k223, __A.k224,
+  __A.k225, __A.k226, __A.k227,
+  __A.k228, __A.k229, __A.k230,
+  __A.k231, __A.k232, __A.k233,
+  __A.k234, __A.k235, __A.k236,
+  __A.k237, __A.k238, __A.k239,
+  __A.k240, __A.k241, __A.k242,
+  __A.k243, __A.k244, __A.k245,
+  __A.k246, __A.k247, __A.k248,
+  __A.k249, __A.k250, __A.k251,
+  __A.k252, __A.k253, __A.k254,
+  __A.k255, __A.k256, __A.k257,
+  __A.k258, __A.k259, __A.k260,
+  __A.k261, __A.k262, __A.k263,
+  __A.k264,
+  __A.k53, __A.k54, __A.k55, __A.k56,
+  __A.k57, __A.k58,
+  __A.k59, __A.k60, __A.k61, __A.k62,
+  __A.k63, __A.k64,
+  __A.k65, __A.k66, __A.k67, __A.k68,
+  __A.k69, __A.k70,
   __A.k9, __A.k6, __A.k7,
   __A.k8,
   __A.k1, __A.k2, __A.k3,
@@ -1170,7 +1201,7 @@ const ASSET_FILES = [
 ];
 
 /* Phiên bản game hiện tại — hiển thị trong panel Cài đặt */
-const GAME_VERSION = 'v0.6.2';
+const GAME_VERSION = 'v0.7.0';
 
 /* =====================================================================
    VẬT THỂ TÁCH LỚP RỪNG XANH (v0.5.6) — dữ liệu từ layers.json của
@@ -2817,6 +2848,103 @@ const Sprites = {
     ctx.drawImage(img, p.x - p.anchorX, p.y - p.anchorY, p.displayWidth, p.displayHeight);
   },
 
+  /* ===== v0.7.0 — DẢI ANIMATION RIÊNG: KIẾM SĨ NAM THEO SKILL + GOBLIN =====
+     ksAnim = { skills: [{img, dur, total} ×4], idle: {img, dur, total} }
+     gobAnim = { idle, attack, hit } — mỗi entry {img, dur, total}.
+     Kèm bản nhuộm đỏ/xanh từng dải (cùng cơ chế tint canvas sẵn có) để
+     chớp trúng đòn / phủ độc vẫn chạy trên đường vẽ mới. */
+  ksAnim: null,
+  ksAnimTint: {},
+  gobAnim: null,
+  gobAnimTint: {},
+  _loadStrip(src, tintStore, prefix) {
+    const img = new Image();
+    img.onload = () => {
+      for (const [tn, col] of [['red', '#ff3b2d'], ['green', '#57c96e']]) {
+        const c = document.createElement('canvas'); c.width = img.naturalWidth; c.height = img.naturalHeight;
+        const g2 = c.getContext('2d'); g2.drawImage(img, 0, 0);
+        g2.globalCompositeOperation = 'source-in'; g2.fillStyle = col; g2.fillRect(0, 0, c.width, c.height);
+        tintStore[prefix + '-' + tn] = c;
+      }
+    };
+    img.src = src;
+    return img;
+  },
+  loadSkillAnim() {
+    const KS = ASSETS.skillAnim['swordsman-male'], GB = ASSETS.gobAnim;
+    const mk = (e, tintStore, prefix) => ({ img: this._loadStrip(e.src, tintStore, prefix), dur: e.dur, total: e.dur.reduce((a, b) => a + b, 0) });
+    this.ksAnim = {
+      skills: KS.skills.map((s, i) => mk(s, this.ksAnimTint, 's' + i)),
+      idle: mk(KS.idle, this.ksAnimTint, 'idle'),
+    };
+    this.gobAnim = {
+      idle: mk(GB.idle, this.gobAnimTint, 'idle'),
+      attack: mk(GB.attack, this.gobAnimTint, 'attack'),
+      hit: mk(GB.hit, this.gobAnimTint, 'hit'),
+    };
+  },
+  /* Khung thứ mấy của 1 dải tại thời điểm elMs theo thời lượng từng khung;
+     loop = true thì quay vòng, không loop thì giữ khung cuối khi quá giờ */
+  stripFrame(dur, elMs, loop) {
+    let total = 0; for (const d of dur) total += d;
+    let e = elMs;
+    if (loop) e = ((e % total) + total) % total;
+    else if (e >= total) return dur.length - 1;
+    let acc = 0;
+    for (let i = 0; i < dur.length; i++) { acc += dur[i]; if (e < acc) return i; }
+    return dur.length - 1;
+  },
+  /* Vẽ 1 KHUNG của dải 768×640 (Kiếm Sĩ Nam), neo tại chân (0,0) của hệ vẽ
+     hero: chiều cao ô = chiều cao vẽ hero hiện tại × 640/476 (nhân vật
+     trong dải cũ k13 cao 476px — cùng tỉ lệ Claude đã khớp khi dựng dải);
+     neo theo đường chân y=620 của ô nên chân chạm đúng mặt đất. Lật ngang
+     theo hướng mặt (faceS) như đường vẽ cũ; KHÔNG áp nhún chạy / lao đòn /
+     rung tung phép của đường cũ để chân không trượt đất trong lúc diễn. */
+  heroStripDraw(ctx, h, height, entry, fi, tintPrefix) {
+    const baseA = ctx.globalAlpha;
+    const CW = 768, CH = 640;
+    const cellH = height * CH / 476;
+    const dw = cellH * CW / CH;
+    const dy = -cellH * 620 / CH;
+    const sx = fi * CW;
+    let bob = 0;
+    if (h.reviveT > 0) bob += h.reviveT * height * 0.3;
+    ctx.save();
+    if (h.dead) { const dp = Math.min(1, (h.deathT || 0) / 0.45); ctx.rotate(-dp * 1.35); ctx.globalAlpha = baseA * (1 - dp * 0.35); }
+    ctx.translate(0, -bob);
+    const fxA = h.faceS === undefined ? (h.face || 1) : h.faceS;
+    ctx.scale(fxA, 1 - 0.04 * (h.turnSq || 0));
+    ctx.drawImage(entry.img, sx, 0, CW, CH, -dw / 2, dy, dw, cellH);
+    if (h.poisonT > 0 && this.ksAnimTint[tintPrefix + '-green']) { ctx.globalAlpha = baseA * 0.30; ctx.drawImage(this.ksAnimTint[tintPrefix + '-green'], sx, 0, CW, CH, -dw / 2, dy, dw, cellH); ctx.globalAlpha = baseA; }
+    if (h.hurtT > 0 && this.ksAnimTint[tintPrefix + '-red']) { ctx.globalAlpha = baseA * Math.min(0.5, h.hurtT * 2.2); ctx.drawImage(this.ksAnimTint[tintPrefix + '-red'], sx, 0, CW, CH, -dw / 2, dy, dw, cellH); ctx.globalAlpha = baseA; }
+    ctx.restore();
+    return true;
+  },
+  /* Vẽ Goblin cận chiến bằng dải 768×640 trong hệ transform của
+     Sprites.monster (đã translate tới chân + scale theo face/size):
+     ưu tiên ĐANG ĐÁNH (atkAnimEl chạy từ lúc ra đòn) → TRÚNG ĐÒN
+     (hitAnimEl, chỉ khi không giữa đòn của chính nó) → ĐỨNG THỞ lặp.
+     Chiều cao ô = chiều cao vẽ goblin hiện tại (HGT) × 640/500, neo chân
+     y=620. Trả về false nếu ảnh khung đang cần chưa tải xong → nơi gọi
+     rơi về đường vẽ cũ. */
+  goblinAnimDraw(ctx, m, t) {
+    const G = this.gobAnim;
+    let entry = G.idle, prefix = 'idle', fi = this.stripFrame(G.idle.dur, t * 1000, true);
+    if (m.atkAnimEl !== undefined && m.atkAnimEl * 1000 < G.attack.total) { entry = G.attack; prefix = 'attack'; fi = this.stripFrame(G.attack.dur, m.atkAnimEl * 1000, false); }
+    else if (m.hitAnimEl !== undefined && m.hitAnimEl * 1000 < G.hit.total) { entry = G.hit; prefix = 'hit'; fi = this.stripFrame(G.hit.dur, m.hitAnimEl * 1000, false); }
+    if (!entry.img.naturalWidth) return false;
+    const baseA = ctx.globalAlpha;
+    const hgt = this.HGT[m.type] || 70;
+    const cellH = hgt * 640 / 500;
+    const dw = cellH * 768 / 640;
+    const dy = -cellH * 620 / 640;
+    const sx = fi * 768;
+    ctx.drawImage(entry.img, sx, 0, 768, 640, -dw / 2, dy, dw, cellH);
+    if (m.poisonT > 0 && this.gobAnimTint[prefix + '-green']) { ctx.globalAlpha = baseA * 0.30; ctx.drawImage(this.gobAnimTint[prefix + '-green'], sx, 0, 768, 640, -dw / 2, dy, dw, cellH); ctx.globalAlpha = baseA; }
+    if (m.hitT > 0 && this.gobAnimTint[prefix + '-red']) { ctx.globalAlpha = baseA * Math.min(0.5, m.hitT * 2.2); ctx.drawImage(this.gobAnimTint[prefix + '-red'], sx, 0, 768, 640, -dw / 2, dy, dw, cellH); ctx.globalAlpha = baseA; }
+    return true;
+  },
+
   /* Chọn khung hình theo trạng thái: chết -> khung đứng; đang vung vũ khí (swingT)
      -> khung 4 rồi 5 theo tiến trình đòn; đang thi triển (castT) -> khung 5;
      đang chạy -> vòng 4 nhịp [chạy trái, đứng, chạy phải, đứng] theo walkPh;
@@ -2834,6 +2962,21 @@ const Sprites = {
      mặt khi ra đòn. Tay chân đã cử động trong khung nên không còn nhún/nghiêng
      bằng transform như ảnh tĩnh. */
   heroAnimDraw(ctx, h, t, height, k, strip) {
+    /* v0.7.0 — Kiếm Sĩ Nam: đang tung skill (h.skillAnim do Skills.cast
+       ghi) thì phát DẢI RIÊNG của skill đó thay cho chuyển động thường;
+       đứng yên (không di chuyển / không đánh / không tung phép) thì phát
+       lặp dải idle riêng. Chạy + đánh thường giữ nguyên dải cũ bên dưới.
+       Ảnh dải chưa tải xong → rơi về đường cũ như chưa có gì thay đổi. */
+    if (k === 'swordsman-male' && this.ksAnim) {
+      const sa = h.skillAnim;
+      if (sa && this.ksAnim.skills[sa.i] && sa.el * 1000 < this.ksAnim.skills[sa.i].total) {
+        const e = this.ksAnim.skills[sa.i];
+        if (e.img.naturalWidth) return this.heroStripDraw(ctx, h, height, e, this.stripFrame(e.dur, sa.el * 1000, false), 's' + sa.i);
+      } else if (!h.dead && !h.moving && !(h.swingT > 0) && !(h.castT > 0)) {
+        const e = this.ksAnim.idle;
+        if (e.img.naturalWidth) return this.heroStripDraw(ctx, h, height, e, this.stripFrame(e.dur, t * 1000, true), 'idle');
+      }
+    }
     const baseA = ctx.globalAlpha;
     const CW = this.ANIM_CELL_W, CH = this.ANIM_CELL_H;
     const fi = this.animFrame(h, t), sx = fi * CW;
@@ -3005,6 +3148,10 @@ function motionAmp() { const q = Roster.settings.quality; return q === 'low' ? 0
 const MONSTER_COLORS = { slime:'#57c96e', goblin:'#79b257', goblinArcher:'#79b257', goblinShaman:'#b678e8', wolf:'#9a8d7d', wolfLord:'#ffb03a', fireWolf:'#ff9a2e', iceWolf:'#aee6ff', bat:'#8b76c9', spider:'#8b46c7', spiderQueen:'#b678e8', skeleton:'#e8e6da', mummy:'#d9c9a3', pharaoh:'#eec26a', toad:'#7ed957', toadKing:'#a4d65e', lizard:'#67924e', scorpion:'#d9a441', imp:'#ff7a2e', magmaGolem:'#ff6a3d', yeti:'#dfe9f2', iceGolem:'#aee6ff', iceWitch:'#69b7ff', darkKnight:'#8a93a8', vampire:'#e0483e', cultist:'#c9a0ff', wraith:'#bfe3ff', fireDragon:'#ff5040', demonLord:'#c95b8a' };
 function monsterColor(m) { return MONSTER_COLORS[m.type] || '#cfd6e2'; }
 const MM = { lift: 0, sx: 1, sy: 1, rot: 0, wx: 0, wy: 0, shScale: 1, shAlpha: 1 };
+/* v0.7.0: bộ biến dạng TRUNG TÍNH dùng cho Goblin cận chiến khi dải
+   animation riêng đang phát — tắt hẳn chuyển động thủ tục để không
+   chồng hình lên dải (chỉ đọc, không ghi) */
+const NEUTRAL_MO = { lift: 0, sx: 1, sy: 1, rot: 0, wx: 0, wy: 0, shScale: 1, shAlpha: 1 };
 /* Tính biến dạng thân cho 1 quái tại thời điểm t, ghi vào MM dùng chung:
    lift = nhấc thân khỏi đất (px cục bộ), sx/sy = nén/dãn quanh chân,
    rot = nghiêng (rad, trong không gian đã lật mặt → luôn nghiêng về phía
@@ -3136,7 +3283,10 @@ Sprites.monster = function (ctx, m, t) {
      của vòng vẽ) → amp 0, vẽ tĩnh giữ hiệu năng */
   let amp = motionAmp();
   if (m.x < cam.x - 24 || m.x > cam.x + W + 24 || m.y < cam.y - 24 || m.y > cam.y + H + 24) amp = 0;
-  const mo = monsterMotion(m, t, amp);
+  /* v0.7.0: Goblin cận chiến có dải animation riêng (đủ idle/đánh/trúng
+     đòn) → khi dải đã sẵn sàng thì dùng dải và TẮT chuyển động thủ tục */
+  const gobStrip = m.type === 'goblin' && this.gobAnim && !!(this.gobAnim.idle.img.naturalWidth);
+  const mo = gobStrip ? NEUTRAL_MO : monsterMotion(m, t, amp);
   ctx.save(); ctx.translate(m.x, m.y - hover);
   if (m.enraged) { const g = ctx.createRadialGradient(0, -40, 6, 0, -40, 74); g.addColorStop(0, 'rgba(255,60,40,.4)'); g.addColorStop(1, 'rgba(255,60,40,0)'); ctx.fillStyle = g; ctx.fillRect(-74, -114, 148, 148); }
   if (m.type === 'wolfLord' && m.enraged && !ghost) drawWolfRunes(ctx, m, t, s);
@@ -3171,7 +3321,7 @@ Sprites.monster = function (ctx, m, t) {
      MANIFEST; ảnh chưa tải xong hoặc họ không có ảnh → sprite vẽ code bên dưới.
      Mọi hiệu ứng chung (hào quang elite, bóng đổ, quầng cuồng nộ, thanh máu)
      nằm ngoài switch nên giữ nguyên cho cả hai cách vẽ. */
-  const drewImg = forestEnv ? this.monsterImage(ctx, m, t) : false;
+  const drewImg = forestEnv ? (gobStrip ? this.goblinAnimDraw(ctx, m, t) : this.monsterImage(ctx, m, t)) : false;
   if (!drewImg) switch (m.type) {
     case 'slime': {
       const sq = 1 + Math.sin(t * 6 + m.seed) * 0.07;
@@ -3754,7 +3904,7 @@ function startStage() {
   hero.face = 1; hero.faceS = 1; hero.vx = 0; hero.vy = 0; hero._atkBuf = false; hero.dead = false;
   hero.poisonT = 0; hero.slowT = 0;
   hero.buffs = { shieldT: 0, shieldVal: 0, manaShieldT: 0, rageT: 0, rageVal: 0, dodgeT: 0, dodgeVal: 0, windT: 0, windVal: 0, markT: 0, markVal: 0 };
-  hero.stunT = 0; hero.castT = 0; hero.deathT = 0; hero.reviveT = 0.9; hero.potCd = 0;
+  hero.stunT = 0; hero.castT = 0; hero.skillAnim = null; hero.deathT = 0; hero.reviveT = 0.9; hero.potCd = 0;
   const st = heroStats(); hero.hp = st.maxHp; hero.mp = st.maxMp;
   cam.x = clamp(hero.x - W / 2, 0, Math.max(0, WORLD.w - W));
   cam.y = clamp(hero.y - H / 2, 0, Math.max(0, WORLD.h - H));
@@ -4154,6 +4304,15 @@ function faceTurnStep(e, dt) {
 
 function updateMonster(m, dt) {
   faceTurnStep(m, dt);   /* xoay người mượt khi quái đổi hướng ngang (v0.5.7) */
+  /* v0.7.0: Goblin cận chiến — đồng hồ dải animation: atkT vừa được gán
+     ở khung trước (đòn đánh bắt đầu) thì atkAnimEl chạy lại từ 0 và phát
+     đủ 640ms của dải đánh; hitAnimEl do Combat.dealDamage khởi động */
+  if (m.type === 'goblin') {
+    if (m.atkT > 0 && !m._atkOn) { m._atkOn = true; m.atkAnimEl = 0; }
+    if (m.atkT <= 0) m._atkOn = false;
+    if (m.atkAnimEl !== undefined && m.atkAnimEl * 1000 < 640) m.atkAnimEl += dt;
+    if (m.hitAnimEl !== undefined && m.hitAnimEl * 1000 < 320) m.hitAnimEl += dt;
+  }
   m.hitT -= dt; m.spawnT -= dt; m.atkCd -= dt; m.healGlowT -= dt;
   if (m.hitFxT > 0) m.hitFxT -= dt;   /* rung giật khi trúng đòn (v0.5.3) */
   m.movingNow = false;   /* chỉ bật lại khi khung này thật sự dời vị trí */
@@ -4265,6 +4424,13 @@ function update(dt) {
   for (const k of ['shieldT', 'manaShieldT', 'rageT', 'dodgeT', 'windT', 'markT']) B[k] = Math.max(0, B[k] - dt);
   if (hero.stunT > 0) hero.stunT -= dt;
   if (hero.castT > 0) hero.castT -= dt;
+  /* v0.7.0: đồng hồ dải skill Kiếm Sĩ Nam — chạy hết tổng thời lượng
+     khung của dải thì tự tắt, hình quay về chuyển động thường */
+  if (hero.skillAnim) {
+    hero.skillAnim.el += dt;
+    const _saE = Sprites.ksAnim && Sprites.ksAnim.skills[hero.skillAnim.i];
+    if (!_saE || hero.skillAnim.el * 1000 >= _saE.total) hero.skillAnim = null;
+  }
   if (hero.potCd > 0) hero.potCd -= dt;
   if (hero._ignoreDropT > 0) hero._ignoreDropT -= dt;
   if (hero.reviveT > 0) hero.reviveT -= dt;
@@ -4843,6 +5009,7 @@ const Combat = {
     dmg -= m.defv * 0.45;
     dmg = Math.max(1, Math.round(dmg * (crit ? st.critDmg : 1)));
     m.hp -= dmg; m.hitT = 0.14;
+    if (m.type === 'goblin') m.hitAnimEl = 0;   /* v0.7.0: phát dải trúng đòn của Goblin */
     /* Hướng + nhịp rung giật khi trúng đòn cho lớp vẽ (v0.5.3) — hướng từ
        hero ra quái = ngược hướng đòn đánh tới */
     m.hitFxT = 0.28;
@@ -5038,6 +5205,9 @@ const Skills = {
     hero.mp -= sk.mp;
     skillState[i].cd = skillCd(i, sk);
     hero.swingT = 0.22; hero.castT = 0.38;
+    /* v0.7.0: Kiếm Sĩ Nam phát dải animation riêng của skill vừa tung
+       (chỉ là lớp hình — sát thương / hồi chiêu giữ nguyên như cũ) */
+    if (P.classId === 'swordsman' && P.gender === 'male') hero.skillAnim = { i, el: 0 };
     if (near) hero.face = near.m.x >= hero.x ? 1 : -1;
     AudioFX.skill();
     VFX.castFlash(i);   /* lớp 1 của mọi skill: lóe sáng tại hero theo màu phái */
@@ -5064,7 +5234,7 @@ const Skills = {
       }
       case 'aoe': {
         const targets = monsters.filter(m => Collision.dist2d(hero.x, hero.y, m.x, m.y) <= sk.radius);
-        if (!targets.length && !P.auto) { hero.mp += sk.mp; skillState[i].cd = 0; return; }
+        if (!targets.length && !P.auto) { hero.mp += sk.mp; skillState[i].cd = 0; hero.skillAnim = null; return; }
         pushFx({ kind: sk.id === 'frost' ? 'frost' : sk.id === 'quake' ? 'quake' : 'whirl', x: hero.x, y: hero.y, t: 0, dur: 0.4, radius: sk.radius, color: skillColor(i) });
         if (sk.id === 'quake') {
           /* Địa Chấn: vòng cảnh báo trên đất + nứt đất mờ dần + bụi đất; rung nhẹ */
@@ -6018,6 +6188,7 @@ function init() {
 
   Sprites.loadHeroArt();
   Sprites.loadMonsterArt();
+  Sprites.loadSkillAnim();
   Sprites.loadPropArt();
   /* v0.5.5: khôi phục nhân vật đã lưu trên máy TRƯỚC khi dựng sân */
   const hasSavedChars = Save.restore();
