@@ -30,3 +30,17 @@ GAME-ART-CORE (Claude), 2026-11-28. Nguồn: `../` (16 bộ phận, commit e804a
 - QC: mép ô alpha 0.0 %, 1 khối chính mỗi ô, chân y 620–620.
 - Cùng tỉ lệ (0,95 quanh chân), cùng điểm chân và cùng bộ phận với idle/run, nên chuyển từ chạy sang đánh **không đổi người**.
 - Xem: `preview_attack.gif`; so 6 hero: `../../attack_all_heroes.jpg`.
+
+
+## Skill 2–4 và trúng đòn (2026-11-29)
+| Skill | File | Khung | durations_ms | hit_frame | Alpha mép | Cách dựng |
+|---|---|---:|---|---:|---|---|
+| Liên Tiễn | `cungthu_nu_lien_tien_8f.png` | 8 | [60, 80, 50, 80, 50, 80, 50, 100] (550 ms) | 2 | 0.0 % | kéo–buông 3 lần liên tiếp (3 khung buông: 2, 4, 6; hit_frame = lần đầu) |
+| Độc Tiễn | `cungthu_nu_doc_tien_6f.png` | 6 | [70, 120, 200, 60, 140, 100] (690 ms) | 3 | 0.0 % | ngắm lâu giữ dây 200 ms, buông mạnh |
+| Vạn Tiễn | `cungthu_nu_van_tien_6f.png` | 6 | [80, 120, 160, 60, 160, 100] (680 ms) | 3 | 0.0 % | chĩa cung lên trời, kéo, buông (mưa tên) |
+| Trúng đòn | `cungthu_nu_hurt_3f.png` | 3 | [80, 110, 110] (300 ms) | – | 0.0 % | bật lùi 14 px, đầu ngả, tay văng, rồi hồi |
+
+- Cùng tỉ lệ, điểm chân và bộ phận với idle/run/attack. Mỗi ô 1 khối chính.
+- **Giới hạn (Luna quyết):**
+- Dây cung liền với cung nên không căng khi kéo (cả 3 skill).
+- Liên Tiễn: game bắn 3 mũi ở các khung buông 2, 4, 6 (hit_frame ghi lần đầu).
