@@ -1,0 +1,347 @@
+{
+ "prefix": "toadKing",
+ "native": true,
+ "fit_scale": 0.92,
+ "ground_parts": [
+  "front_l",
+  "front_r",
+  "hind_l",
+  "hind_r"
+ ],
+ "actions": {
+  "idle": {
+   "loop": true,
+   "frames_ms": [
+    600,
+    600
+   ],
+   "hit_frame": null,
+   "keys": [
+    {
+     "t": 0,
+     "rot": {},
+     "root": [
+      0,
+      0
+     ]
+    },
+    {
+     "t": 600,
+     "rot": {
+      "head": -2,
+      "front_r": 2,
+      "front_l": -2
+     },
+     "root": [
+      0,
+      0
+     ]
+    },
+    {
+     "t": 1200,
+     "rot": {},
+     "root": [
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  "move": {
+   "loop": true,
+   "frames_ms": [
+    110,
+    130,
+    130,
+    130,
+    120
+   ],
+   "hit_frame": null,
+   "keys": [
+    {
+     "t": 0,
+     "rot": {}
+    },
+    {
+     "t": 110,
+     "rot": {
+      "hind_r": 16,
+      "hind_l": -16,
+      "head": 3
+     },
+     "root": [
+      0,
+      0
+     ]
+    },
+    {
+     "t": 240,
+     "rot": {
+      "hind_r": -18,
+      "hind_l": 18,
+      "front_r": -16,
+      "front_l": 16,
+      "head": -4
+     },
+     "root": [
+      8,
+      -36
+     ]
+    },
+    {
+     "t": 380,
+     "rot": {
+      "front_r": 10,
+      "front_l": -10,
+      "head": 2
+     },
+     "root": [
+      12,
+      -10
+     ]
+    },
+    {
+     "t": 500,
+     "rot": {}
+    }
+   ]
+  },
+  "attack": {
+   "loop": false,
+   "frames_ms": [
+    90,
+    110,
+    80,
+    130,
+    110,
+    100
+   ],
+   "hit_frame": 3,
+   "keys": [
+    {
+     "t": 0,
+     "rot": {}
+    },
+    {
+     "t": 180,
+     "rot": {
+      "head": -10,
+      "front_r": 6,
+      "front_l": -6
+     },
+     "root": [
+      -8,
+      0
+     ]
+    },
+    {
+     "t": 290,
+     "rot": {
+      "head": 12,
+      "front_r": -10,
+      "front_l": 10
+     },
+     "root": [
+      10,
+      -6
+     ]
+    },
+    {
+     "t": 450,
+     "rot": {
+      "head": 6
+     },
+     "root": [
+      6,
+      0
+     ]
+    },
+    {
+     "t": 600,
+     "rot": {}
+    }
+   ]
+  },
+  "skill_slam": {
+   "loop": false,
+   "frames_ms": [
+    140,
+    140,
+    140,
+    140,
+    120,
+    120,
+    200
+   ],
+   "hit_frame": 4,
+   "keys": [
+    {
+     "t": 0,
+     "rot": {}
+    },
+    {
+     "t": 300,
+     "rot": {
+      "front_r": 18,
+      "front_l": -18,
+      "hind_r": 14,
+      "hind_l": -14,
+      "head": -12
+     },
+     "root": [
+      0,
+      0
+     ]
+    },
+    {
+     "t": 560,
+     "rot": {
+      "front_r": 20,
+      "front_l": -20,
+      "hind_r": 16,
+      "hind_l": -16,
+      "head": -14
+     },
+     "root": [
+      0,
+      0
+     ]
+    },
+    {
+     "t": 700,
+     "rot": {
+      "front_r": -20,
+      "front_l": 20,
+      "hind_r": -18,
+      "hind_l": 18,
+      "head": 6
+     },
+     "root": [
+      0,
+      -70
+     ]
+    },
+    {
+     "t": 820,
+     "rot": {
+      "front_r": 14,
+      "front_l": -14,
+      "hind_r": 10,
+      "hind_l": -10,
+      "head": 8
+     },
+     "root": [
+      0,
+      0
+     ]
+    },
+    {
+     "t": 1020,
+     "rot": {}
+    }
+   ]
+  },
+  "skill_summon": {
+   "loop": false,
+   "frames_ms": [
+    120,
+    130,
+    130,
+    130,
+    130,
+    130,
+    130
+   ],
+   "hit_frame": 3,
+   "keys": [
+    {
+     "t": 0,
+     "rot": {}
+    },
+    {
+     "t": 250,
+     "rot": {
+      "head": -16,
+      "front_r": -6,
+      "front_l": 6
+     },
+     "root": [
+      0,
+      -8
+     ]
+    },
+    {
+     "t": 500,
+     "rot": {
+      "head": -10,
+      "front_r": -4,
+      "front_l": 4
+     },
+     "root": [
+      0,
+      -4
+     ]
+    },
+    {
+     "t": 700,
+     "rot": {
+      "head": -16,
+      "front_r": -6,
+      "front_l": 6
+     },
+     "root": [
+      0,
+      -8
+     ]
+    },
+    {
+     "t": 900,
+     "rot": {}
+    }
+   ]
+  },
+  "hurt": {
+   "loop": false,
+   "frames_ms": [
+    80,
+    120,
+    120
+   ],
+   "hit_frame": null,
+   "keys": [
+    {
+     "t": 0,
+     "rot": {}
+    },
+    {
+     "t": 80,
+     "rot": {
+      "head": -12,
+      "front_r": 12,
+      "front_l": -12
+     },
+     "root": [
+      -14,
+      -4
+     ]
+    },
+    {
+     "t": 200,
+     "rot": {
+      "head": -4.800000000000001,
+      "front_r": 4.800000000000001,
+      "front_l": -4.800000000000001
+     },
+     "root": [
+      -6,
+      0
+     ]
+    },
+    {
+     "t": 320,
+     "rot": {}
+    }
+   ]
+  }
+ }
+}

@@ -1,0 +1,299 @@
+{
+ "parts": 8,
+ "canvas": [
+  768.0,
+  640.0
+ ],
+ "overlay_check": {
+  "alpha_iou": 1.0,
+  "bbox_offset_px": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "rgb_mean_abs_diff_inside": 0.0,
+  "px_alpha_mismatch": 0
+ },
+ "scale": 0.92,
+ "actions": {
+  "idle": {
+   "file": "demonLord_idle_4f.png",
+   "frames": 4,
+   "durations_ms": [
+    300,
+    300,
+    300,
+    300
+   ],
+   "hit_frame": null,
+   "loop": true,
+   "qc": [
+    {
+     "edge_alpha_pct": 0.0,
+     "opaque_components": 1,
+     "islands_ge30": 0,
+     "feet_y": 618
+    },
+    {
+     "edge_alpha_pct": 0.0,
+     "opaque_components": 1,
+     "islands_ge30": 0,
+     "feet_y": 621
+    },
+    {
+     "edge_alpha_pct": 0.0,
+     "opaque_components": 1,
+     "islands_ge30": 0,
+     "feet_y": 618
+    },
+    {
+     "edge_alpha_pct": 0.0,
+     "opaque_components": 1,
+     "islands_ge30": 0,
+     "feet_y": 621
+    }
+   ]
+  },
+  "move": {
+   "file": "demonLord_move_4f.png",
+   "frames": 4,
+   "durations_ms": [
+    140,
+    140,
+    140,
+    140
+   ],
+   "hit_frame": null,
+   "loop": true,
+   "qc": [
+    {
+     "edge_alpha_pct": 0.0,
+     "opaque_components": 1,
+     "islands_ge30": 0,
+     "feet_y": 621
+    },
+    {
+     "edge_alpha_pct": 0.0,
+     "opaque_components": 1,
+     "islands_ge30": 0,
+     "feet_y": 616
+    },
+    {
+     "edge_alpha_pct": 0.0,
+     "opaque_components": 1,
+     "islands_ge30": 0,
+     "feet_y": 621
+    },
+    {
+     "edge_alpha_pct": 0.0,
+     "opaque_components": 1,
+     "islands_ge30": 0,
+     "feet_y": 616
+    }
+   ]
+  },
+  "attack": {
+   "file": "demonLord_attack_6f.png",
+   "frames": 6,
+   "durations_ms": [
+    90,
+    110,
+    70,
+    130,
+    120,
+    100
+   ],
+   "hit_frame": 3,
+   "loop": false,
+   "qc": [
+    {
+     "edge_alpha_pct": 0.0,
+     "opaque_components": 1,
+     "islands_ge30": 0,
+     "feet_y": 621
+    },
+    {
+     "edge_alpha_pct": 0.0,
+     "opaque_components": 2,
+     "islands_ge30": 0,
+     "feet_y": 621
+    },
+    {
+     "edge_alpha_pct": 0.0,
+     "opaque_components": 1,
+     "islands_ge30": 0,
+     "feet_y": 621
+    },
+    {
+     "edge_alpha_pct": 0.0,
+     "opaque_components": 1,
+     "islands_ge30": 0,
+     "feet_y": 620
+    },
+    {
+     "edge_alpha_pct": 0.0,
+     "opaque_components": 1,
+     "islands_ge30": 0,
+     "feet_y": 620
+    },
+    {
+     "edge_alpha_pct": 0.0,
+     "opaque_components": 1,
+     "islands_ge30": 0,
+     "feet_y": 620
+    }
+   ]
+  },
+  "skill_charge": {
+   "file": "demonLord_skill_charge_7f.png",
+   "frames": 7,
+   "durations_ms": [
+    130,
+    130,
+    80,
+    80,
+    200,
+    200,
+    120
+   ],
+   "hit_frame": 3,
+   "loop": false,
+   "qc": [
+    {
+     "edge_alpha_pct": 0.0,
+     "opaque_components": 1,
+     "islands_ge30": 0,
+     "feet_y": 621
+    },
+    {
+     "edge_alpha_pct": 0.0,
+     "opaque_components": 1,
+     "islands_ge30": 0,
+     "feet_y": 621
+    },
+    {
+     "edge_alpha_pct": 0.0,
+     "opaque_components": 1,
+     "islands_ge30": 0,
+     "feet_y": 620
+    },
+    {
+     "edge_alpha_pct": 0.0,
+     "opaque_components": 1,
+     "islands_ge30": 0,
+     "feet_y": 620
+    },
+    {
+     "edge_alpha_pct": 0.0,
+     "opaque_components": 1,
+     "islands_ge30": 0,
+     "feet_y": 620
+    },
+    {
+     "edge_alpha_pct": 0.0,
+     "opaque_components": 1,
+     "islands_ge30": 0,
+     "feet_y": 619
+    },
+    {
+     "edge_alpha_pct": 0.0,
+     "opaque_components": 1,
+     "islands_ge30": 0,
+     "feet_y": 621
+    }
+   ]
+  },
+  "skill_aoe": {
+   "file": "demonLord_skill_aoe_7f.png",
+   "frames": 7,
+   "durations_ms": [
+    130,
+    130,
+    120,
+    120,
+    120,
+    120,
+    120
+   ],
+   "hit_frame": 3,
+   "loop": false,
+   "qc": [
+    {
+     "edge_alpha_pct": 0.0,
+     "opaque_components": 1,
+     "islands_ge30": 0,
+     "feet_y": 621
+    },
+    {
+     "edge_alpha_pct": 0.0,
+     "opaque_components": 1,
+     "islands_ge30": 0,
+     "feet_y": 615
+    },
+    {
+     "edge_alpha_pct": 0.0,
+     "opaque_components": 2,
+     "islands_ge30": 0,
+     "feet_y": 609
+    },
+    {
+     "edge_alpha_pct": 0.0,
+     "opaque_components": 1,
+     "islands_ge30": 0,
+     "feet_y": 621
+    },
+    {
+     "edge_alpha_pct": 0.0,
+     "opaque_components": 1,
+     "islands_ge30": 0,
+     "feet_y": 621
+    },
+    {
+     "edge_alpha_pct": 0.0,
+     "opaque_components": 1,
+     "islands_ge30": 0,
+     "feet_y": 621
+    },
+    {
+     "edge_alpha_pct": 0.0,
+     "opaque_components": 1,
+     "islands_ge30": 0,
+     "feet_y": 621
+    }
+   ]
+  },
+  "hurt": {
+   "file": "demonLord_hurt_3f.png",
+   "frames": 3,
+   "durations_ms": [
+    80,
+    120,
+    120
+   ],
+   "hit_frame": null,
+   "loop": false,
+   "qc": [
+    {
+     "edge_alpha_pct": 0.0,
+     "opaque_components": 1,
+     "islands_ge30": 0,
+     "feet_y": 621
+    },
+    {
+     "edge_alpha_pct": 0.0,
+     "opaque_components": 1,
+     "islands_ge30": 0,
+     "feet_y": 617
+    },
+    {
+     "edge_alpha_pct": 0.0,
+     "opaque_components": 1,
+     "islands_ge30": 0,
+     "feet_y": 621
+    }
+   ]
+  }
+ },
+ "seconds": 23.53
+}
