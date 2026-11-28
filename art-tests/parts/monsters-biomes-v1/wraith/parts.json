@@ -1,0 +1,171 @@
+{
+  "canvas": [
+    768,
+    640
+  ],
+  "baselineY": 620,
+  "groundTouch": [],
+  "artBottomY": 590,
+  "origin": "top-left",
+  "rig": {
+    "sides": "anatomical; left is on viewer's right in the rest pose",
+    "coordinates": "integer pixels in the shared 768x640 canvas",
+    "composition": "source-over by ascending z, place every layer at (0,0) in rest pose",
+    "bbox": "half-open [left,top,right,bottom] pixel bounds",
+    "pivotApplication": "rotate around each pivot in rest canvas coordinates; propagate parent transforms down the tree"
+  },
+  "reference": {
+    "path": "reference.png",
+    "sha256": "3cc871bcff92b35af6cb990f59fadb9b9f66a19dbf1776c52b713fd7a8ed67b0"
+  },
+  "assembled": "assembled.png",
+  "sha256Assembled": "233ca5dba001dde7c336e43ce5e83bbc4fca98782d6313ff231e2c36e4dc3f18",
+  "parts": [
+    {
+      "id": "tail",
+      "file": "tail.png",
+      "z": 0,
+      "parent": "body",
+      "joint": "waist",
+      "pivot": {
+        "x": 500,
+        "y": 388
+      },
+      "bbox": [
+        211,
+        351,
+        530,
+        591
+      ]
+    },
+    {
+      "id": "body",
+      "file": "body.png",
+      "z": 1,
+      "parent": null,
+      "joint": "root",
+      "pivot": {
+        "x": 386,
+        "y": 391
+      },
+      "bbox": [
+        226,
+        254,
+        550,
+        460
+      ]
+    },
+    {
+      "id": "arm_r",
+      "file": "arm_r.png",
+      "z": 2,
+      "parent": "body",
+      "joint": "right-shoulder",
+      "pivot": {
+        "x": 298,
+        "y": 319
+      },
+      "bbox": [
+        97,
+        278,
+        325,
+        480
+      ]
+    },
+    {
+      "id": "arm_l",
+      "file": "arm_l.png",
+      "z": 3,
+      "parent": "body",
+      "joint": "left-shoulder",
+      "pivot": {
+        "x": 476,
+        "y": 323
+      },
+      "bbox": [
+        443,
+        278,
+        669,
+        480
+      ]
+    },
+    {
+      "id": "head",
+      "file": "head.png",
+      "z": 4,
+      "parent": "body",
+      "joint": "neck",
+      "pivot": {
+        "x": 389,
+        "y": 299
+      },
+      "bbox": [
+        209,
+        66,
+        564,
+        357
+      ]
+    }
+  ],
+  "jointOverlapCheck": {
+    "windowPx": 47,
+    "anglesDeg": [
+      -20,
+      0,
+      20
+    ],
+    "jointOverlapsPx": [
+      {
+        "id": "tail",
+        "rest": 1843,
+        "rotated": {
+          "-20": 1798,
+          "20": 1882
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "arm_r",
+        "rest": 492,
+        "rotated": {
+          "-20": 464,
+          "20": 528
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "arm_l",
+        "rest": 1438,
+        "rotated": {
+          "-20": 1378,
+          "20": 1432
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "head",
+        "rest": 2155,
+        "rotated": {
+          "-20": 2144,
+          "20": 2198
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      }
+    ]
+  },
+  "imageGen": {
+    "atlas": {
+      "file": "exec-bf399ab7-3998-4629-9424-a7ea1d10d48b.png",
+      "grid": [
+        3,
+        2
+      ],
+      "prompt": "Use case: stylized-concept. Cutout animation production assets, original 2D chibi fantasy role-playing game. The attached approved visual candidate is an exact appearance reference for this flying hooded wraith with blue tail. Repaint each anatomical component independently as if the character had originally been drawn in separate layers. Keep the style, colors, camera and chibi exaggeration consistent with the attached image. Clean bold outlines, detailed cel shading, solid color inside each cutout, hidden stubs/short shoulder and joint overlap so assembled parts can rotate. On an invisible, strictly regular grid of 3 equal columns and 2 equal rows, put exactly one complete part in each listed cell, reading order, with clear transparent margins. No text, no cell dividers, no shadow, no backgrounds, do not draw the whole monster anywhere. Transparent RGBA. Anatomical left is viewer right. The unlisted cells must remain completely empty.\n1. ghost head only, dark navy hood with silver trim and small glowing sky-blue face, short hood neck.\n2. dark navy ghost torso with pale silver trim and cyan brooch, no head, arms or lower tail.\n3. one long tattered cyan-blue ghost tail with soft cyan highlights, no legs/feet, curls to screen left at bottom.\n4. one left arm with tattered navy sleeve and dark clawed gauntlet, points down-right.\n5. one right arm with tattered navy sleeve and dark clawed gauntlet, points down-left.",
+      "sha256": "231e40a129ae2a5f08abe68da6309358d3f1bf62dfa45e7f0f44a6006f553610"
+    }
+  }
+}

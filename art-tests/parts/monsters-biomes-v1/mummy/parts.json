@@ -1,0 +1,255 @@
+{
+  "canvas": [
+    768,
+    640
+  ],
+  "baselineY": 620,
+  "groundTouch": [
+    "leg_l",
+    "leg_r"
+  ],
+  "artBottomY": 620,
+  "origin": "top-left",
+  "rig": {
+    "sides": "anatomical; left is on viewer's right in the rest pose",
+    "coordinates": "integer pixels in the shared 768x640 canvas",
+    "composition": "source-over by ascending z, place every layer at (0,0) in rest pose",
+    "bbox": "half-open [left,top,right,bottom] pixel bounds",
+    "pivotApplication": "rotate around each pivot in rest canvas coordinates; propagate parent transforms down the tree"
+  },
+  "reference": {
+    "path": "reference.png",
+    "sha256": "eae8c61f971cd759af1d3cdca6bca6ea31a19dd3c4d481b6c9585308ad701955"
+  },
+  "assembled": "assembled.png",
+  "sha256Assembled": "20752041164f65d13db3cbdd70124871913951c09fa4171f84df5a5181a5f5f6",
+  "parts": [
+    {
+      "id": "leg_r",
+      "file": "leg_r.png",
+      "z": 0,
+      "parent": "body",
+      "joint": "right-hip",
+      "pivot": {
+        "x": 321,
+        "y": 513
+      },
+      "bbox": [
+        241,
+        473,
+        371,
+        621
+      ]
+    },
+    {
+      "id": "leg_l",
+      "file": "leg_l.png",
+      "z": 1,
+      "parent": "body",
+      "joint": "left-hip",
+      "pivot": {
+        "x": 446,
+        "y": 512
+      },
+      "bbox": [
+        394,
+        471,
+        535,
+        621
+      ]
+    },
+    {
+      "id": "body",
+      "file": "body.png",
+      "z": 2,
+      "parent": null,
+      "joint": "root",
+      "pivot": {
+        "x": 388,
+        "y": 468
+      },
+      "bbox": [
+        249,
+        320,
+        522,
+        555
+      ]
+    },
+    {
+      "id": "arm_r_upper",
+      "file": "arm_r_upper.png",
+      "z": 3,
+      "parent": "body",
+      "joint": "right-shoulder",
+      "pivot": {
+        "x": 302,
+        "y": 370
+      },
+      "bbox": [
+        170,
+        337,
+        324,
+        468
+      ]
+    },
+    {
+      "id": "arm_l_upper",
+      "file": "arm_l_upper.png",
+      "z": 4,
+      "parent": "body",
+      "joint": "left-shoulder",
+      "pivot": {
+        "x": 465,
+        "y": 373
+      },
+      "bbox": [
+        449,
+        336,
+        603,
+        467
+      ]
+    },
+    {
+      "id": "arm_r_forearm",
+      "file": "arm_r_forearm.png",
+      "z": 5,
+      "parent": "arm_r_upper",
+      "joint": "right-elbow",
+      "pivot": {
+        "x": 238,
+        "y": 432
+      },
+      "bbox": [
+        117,
+        409,
+        298,
+        550
+      ]
+    },
+    {
+      "id": "arm_l_forearm",
+      "file": "arm_l_forearm.png",
+      "z": 6,
+      "parent": "arm_l_upper",
+      "joint": "left-elbow",
+      "pivot": {
+        "x": 535,
+        "y": 434
+      },
+      "bbox": [
+        470,
+        409,
+        652,
+        550
+      ]
+    },
+    {
+      "id": "head",
+      "file": "head.png",
+      "z": 7,
+      "parent": "body",
+      "joint": "neck",
+      "pivot": {
+        "x": 377,
+        "y": 339
+      },
+      "bbox": [
+        216,
+        43,
+        550,
+        382
+      ]
+    }
+  ],
+  "jointOverlapCheck": {
+    "windowPx": 47,
+    "anglesDeg": [
+      -20,
+      0,
+      20
+    ],
+    "jointOverlapsPx": [
+      {
+        "id": "leg_r",
+        "rest": 2143,
+        "rotated": {
+          "-20": 2140,
+          "20": 2130
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "leg_l",
+        "rest": 2192,
+        "rotated": {
+          "-20": 2192,
+          "20": 2192
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "arm_r_upper",
+        "rest": 1386,
+        "rotated": {
+          "-20": 1384,
+          "20": 1435
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "arm_l_upper",
+        "rest": 1375,
+        "rotated": {
+          "-20": 1407,
+          "20": 1378
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "arm_r_forearm",
+        "rest": 1693,
+        "rotated": {
+          "-20": 1681,
+          "20": 1695
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "arm_l_forearm",
+        "rest": 1712,
+        "rotated": {
+          "-20": 1694,
+          "20": 1703
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "head",
+        "rest": 1765,
+        "rotated": {
+          "-20": 1775,
+          "20": 1771
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      }
+    ]
+  },
+  "imageGen": {
+    "atlas": {
+      "file": "exec-240bb94e-021a-4f48-a487-ef36cc3d7ac4.png",
+      "grid": [
+        3,
+        3
+      ],
+      "prompt": "Use case: stylized-concept. Cutout animation production assets, original 2D chibi fantasy role-playing game. The attached approved visual candidate is an exact appearance reference for this short chibi linen-wrapped mummy. Repaint each anatomical component independently as if the character had originally been drawn in separate layers. Keep the style, colors, camera and chibi exaggeration consistent with the attached image. Clean bold outlines, detailed cel shading, solid color inside each cutout, hidden stubs/short shoulder and joint overlap so assembled parts can rotate. On an invisible, strictly regular grid of 3 equal columns and 3 equal rows, put exactly one complete part in each listed cell, reading order, with clear transparent margins. No text, no cell dividers, no shadow, no backgrounds, do not draw the whole monster anywhere. Transparent RGBA. Anatomical left is viewer right. The unlisted cells must remain completely empty.\n1. full round bandaged mummy head, teal glowing eyes, golden brow band with turquoise diamond.\n2. body only, richly wrapped linen and gold teal belt, short coat flaps, no limbs.\n3. left upper arm in ivory wraps points down-right.\n4. right upper arm in ivory wraps points down-left.\n5. left forearm and grasping left hand, points down-right.\n6. right forearm and grasping right hand, points down-left.\n7. left bandaged leg and foot complete with hidden hip overlap, facing screen right.\n8. right bandaged leg and foot complete with hidden hip overlap, facing screen left.",
+      "sha256": "8d278f13f07014fdfb58a881b03add5027acebaf66e0009b0572d98cb2362984"
+    }
+  }
+}

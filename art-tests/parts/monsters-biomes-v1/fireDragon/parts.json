@@ -1,0 +1,282 @@
+{
+  "canvas": [
+    768,
+    640
+  ],
+  "baselineY": 620,
+  "groundTouch": [
+    "foreleg_l",
+    "foreleg_r"
+  ],
+  "artBottomY": 620,
+  "origin": "top-left",
+  "rig": {
+    "sides": "anatomical; left is on viewer's right in the rest pose",
+    "coordinates": "integer pixels in the shared 768x640 canvas",
+    "composition": "source-over by ascending z, place every layer at (0,0) in rest pose",
+    "bbox": "half-open [left,top,right,bottom] pixel bounds",
+    "pivotApplication": "rotate around each pivot in rest canvas coordinates; propagate parent transforms down the tree"
+  },
+  "reference": {
+    "path": "reference.png",
+    "sha256": "1d07a9c13c2e804a4973a8c7e91e1cb1bf69840d25450a841212c9aa2106f490"
+  },
+  "assembled": "assembled.png",
+  "sha256Assembled": "18d78a8000fbb8155d7f495fc2dfa6fdeeba34b0cc963d96fb96d0c4c11d8c27",
+  "parts": [
+    {
+      "id": "wing_r",
+      "file": "wing_r.png",
+      "z": 0,
+      "parent": "body",
+      "joint": "right-wing-root",
+      "pivot": {
+        "x": 344,
+        "y": 318
+      },
+      "bbox": [
+        23,
+        120,
+        386,
+        437
+      ]
+    },
+    {
+      "id": "wing_l",
+      "file": "wing_l.png",
+      "z": 1,
+      "parent": "body",
+      "joint": "left-wing-root",
+      "pivot": {
+        "x": 420,
+        "y": 323
+      },
+      "bbox": [
+        388,
+        119,
+        745,
+        438
+      ]
+    },
+    {
+      "id": "tail",
+      "file": "tail.png",
+      "z": 2,
+      "parent": "body",
+      "joint": "tail-root",
+      "pivot": {
+        "x": 471,
+        "y": 475
+      },
+      "bbox": [
+        404,
+        425,
+        712,
+        575
+      ]
+    },
+    {
+      "id": "hindleg_r",
+      "file": "hindleg_r.png",
+      "z": 3,
+      "parent": "body",
+      "joint": "right-hip",
+      "pivot": {
+        "x": 260,
+        "y": 469
+      },
+      "bbox": [
+        143,
+        393,
+        320,
+        590
+      ]
+    },
+    {
+      "id": "hindleg_l",
+      "file": "hindleg_l.png",
+      "z": 4,
+      "parent": "body",
+      "joint": "left-hip",
+      "pivot": {
+        "x": 501,
+        "y": 445
+      },
+      "bbox": [
+        457,
+        393,
+        635,
+        590
+      ]
+    },
+    {
+      "id": "body",
+      "file": "body.png",
+      "z": 5,
+      "parent": null,
+      "joint": "root",
+      "pivot": {
+        "x": 385,
+        "y": 408
+      },
+      "bbox": [
+        212,
+        239,
+        555,
+        563
+      ]
+    },
+    {
+      "id": "foreleg_r",
+      "file": "foreleg_r.png",
+      "z": 6,
+      "parent": "body",
+      "joint": "right-shoulder",
+      "pivot": {
+        "x": 294,
+        "y": 426
+      },
+      "bbox": [
+        171,
+        362,
+        368,
+        621
+      ]
+    },
+    {
+      "id": "foreleg_l",
+      "file": "foreleg_l.png",
+      "z": 7,
+      "parent": "body",
+      "joint": "left-shoulder",
+      "pivot": {
+        "x": 487,
+        "y": 422
+      },
+      "bbox": [
+        415,
+        362,
+        610,
+        621
+      ]
+    },
+    {
+      "id": "head",
+      "file": "head.png",
+      "z": 8,
+      "parent": "body",
+      "joint": "neck",
+      "pivot": {
+        "x": 384,
+        "y": 331
+      },
+      "bbox": [
+        204,
+        44,
+        568,
+        379
+      ]
+    }
+  ],
+  "jointOverlapCheck": {
+    "windowPx": 47,
+    "anglesDeg": [
+      -20,
+      0,
+      20
+    ],
+    "jointOverlapsPx": [
+      {
+        "id": "wing_r",
+        "rest": 2148,
+        "rotated": {
+          "-20": 2128,
+          "20": 2209
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "wing_l",
+        "rest": 2071,
+        "rotated": {
+          "-20": 2022,
+          "20": 2045
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "tail",
+        "rest": 1937,
+        "rotated": {
+          "-20": 1964,
+          "20": 1979
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "hindleg_r",
+        "rest": 2093,
+        "rotated": {
+          "-20": 2110,
+          "20": 2043
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "hindleg_l",
+        "rest": 1489,
+        "rotated": {
+          "-20": 1552,
+          "20": 1454
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "foreleg_r",
+        "rest": 2142,
+        "rotated": {
+          "-20": 2201,
+          "20": 2117
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "foreleg_l",
+        "rest": 2068,
+        "rotated": {
+          "-20": 2065,
+          "20": 2113
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "head",
+        "rest": 2209,
+        "rotated": {
+          "-20": 2209,
+          "20": 2209
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      }
+    ]
+  },
+  "imageGen": {
+    "atlas": {
+      "file": "exec-5142e4d9-ab87-4d71-8c04-320d3c3bc384.png",
+      "grid": [
+        3,
+        3
+      ],
+      "prompt": "Use case: stylized-concept. Cutout animation production assets, original 2D chibi fantasy role-playing game. The attached approved visual candidate is an exact appearance reference for this crimson armored dragon boss with broad wings. Repaint each anatomical component independently as if the character had originally been drawn in separate layers. Keep the style, colors, camera and chibi exaggeration consistent with the attached image. Clean bold outlines, detailed cel shading, solid color inside each cutout, hidden stubs/short shoulder and joint overlap so assembled parts can rotate. On an invisible, strictly regular grid of 3 equal columns and 3 equal rows, put exactly one complete part in each listed cell, reading order, with clear transparent margins. No text, no cell dividers, no shadow, no backgrounds, do not draw the whole monster anywhere. Transparent RGBA. Anatomical left is viewer right. The unlisted cells must remain completely empty.\n1. huge chibi dragon head complete with dark basalt horns, amber eyes, and red scales, big muzzle.\n2. dragon torso only, red scaled chest with gold breastplate, gold armored belly, no head, wings, tail or legs.\n3. long curling red armored tail isolated, root on left and tail extends toward screen right.\n4. one broad burnt orange left wing with dark red bones, root at screen left and wing spreads up-right.\n5. single right wing spreads up-left, root at screen right.\n6. one large sturdy left dragon foreleg with complete golden armguard and claw, points down-right.\n7. one large sturdy right dragon foreleg with complete golden armguard and claw, points down-left.\n8. left hind leg and large foot red and golden, down-right.\n9. right hind leg and large foot red and golden, down-left.",
+      "sha256": "bff7ff141337d4acc850c2135cefa46585bc8b7b357bb5f9b10901884614ce95"
+    }
+  }
+}

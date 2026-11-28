@@ -1,0 +1,144 @@
+{
+  "canvas": [
+    768,
+    640
+  ],
+  "baselineY": 620,
+  "groundTouch": [],
+  "artBottomY": 501,
+  "origin": "top-left",
+  "rig": {
+    "sides": "anatomical; left is on viewer's right in the rest pose",
+    "coordinates": "integer pixels in the shared 768x640 canvas",
+    "composition": "source-over by ascending z, place every layer at (0,0) in rest pose",
+    "bbox": "half-open [left,top,right,bottom] pixel bounds",
+    "pivotApplication": "rotate around each pivot in rest canvas coordinates; propagate parent transforms down the tree"
+  },
+  "reference": {
+    "path": "reference.png",
+    "sha256": "23f3edf2d2952bc5ff32ebe9786322cc30d141ab54a00ea92cd33f8c912b4613"
+  },
+  "assembled": "assembled.png",
+  "sha256Assembled": "80f826b06f3b7820de8cb31ef2cf64027dad85b85f7a42b1e050a233e8470183",
+  "parts": [
+    {
+      "id": "wing_r",
+      "file": "wing_r.png",
+      "z": 0,
+      "parent": "body",
+      "joint": "right-shoulder",
+      "pivot": {
+        "x": 349,
+        "y": 347
+      },
+      "bbox": [
+        27,
+        152,
+        390,
+        459
+      ]
+    },
+    {
+      "id": "wing_l",
+      "file": "wing_l.png",
+      "z": 1,
+      "parent": "body",
+      "joint": "left-shoulder",
+      "pivot": {
+        "x": 432,
+        "y": 341
+      },
+      "bbox": [
+        378,
+        148,
+        741,
+        455
+      ]
+    },
+    {
+      "id": "body",
+      "file": "body.png",
+      "z": 2,
+      "parent": null,
+      "joint": "root",
+      "pivot": {
+        "x": 391,
+        "y": 374
+      },
+      "bbox": [
+        298,
+        275,
+        482,
+        502
+      ]
+    },
+    {
+      "id": "head",
+      "file": "head.png",
+      "z": 3,
+      "parent": "body",
+      "joint": "neck",
+      "pivot": {
+        "x": 390,
+        "y": 330
+      },
+      "bbox": [
+        233,
+        115,
+        546,
+        375
+      ]
+    }
+  ],
+  "jointOverlapCheck": {
+    "windowPx": 47,
+    "anglesDeg": [
+      -20,
+      0,
+      20
+    ],
+    "jointOverlapsPx": [
+      {
+        "id": "wing_r",
+        "rest": 1027,
+        "rotated": {
+          "-20": 1024,
+          "20": 1035
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "wing_l",
+        "rest": 1596,
+        "rotated": {
+          "-20": 1548,
+          "20": 1589
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "head",
+        "rest": 2209,
+        "rotated": {
+          "-20": 2209,
+          "20": 2209
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      }
+    ]
+  },
+  "imageGen": {
+    "atlas": {
+      "file": "exec-816cf0d1-e5d8-4843-adbc-6775e2b49483.png",
+      "grid": [
+        3,
+        2
+      ],
+      "prompt": "Use case: stylized-concept. Cutout animation production assets, original 2D chibi fantasy role-playing game. The attached approved visual candidate is an exact appearance reference for this plum flying cave bat, frontal with wings open. Repaint each anatomical component independently as if the character had originally been drawn in separate layers. Keep the style, colors, camera and chibi exaggeration consistent with the attached image. Clean bold outlines, detailed cel shading, solid color inside each cutout, hidden stubs/short shoulder and joint overlap so assembled parts can rotate. On an invisible, strictly regular grid of 3 equal columns and 2 equal rows, put exactly one complete part in each listed cell, reading order, with clear transparent margins. No text, no cell dividers, no shadow, no backgrounds, do not draw the whole monster anywhere. Transparent RGBA. Anatomical left is viewer right. The unlisted cells must remain completely empty.\n1. body core and two little feet but no head or wings, tiny plum fur chest.\n2. oversized expressive purple bat head and both pink ears, amber eyes, fangs, short neck.\n3. complete bat left wing extending toward screen right from root, pink plum membrane with large clear point.\n4. complete bat right wing extending toward screen left from root, pink plum membrane with large clear point.",
+      "sha256": "fc42a2bb921a68a9b85522b24fcf5a00d4cc4d856ab28f01d7579328ec803744"
+    }
+  }
+}

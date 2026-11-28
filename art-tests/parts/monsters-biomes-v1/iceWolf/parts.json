@@ -1,0 +1,228 @@
+{
+  "canvas": [
+    768,
+    640
+  ],
+  "baselineY": 620,
+  "groundTouch": [
+    "front_l",
+    "rear_l"
+  ],
+  "artBottomY": 620,
+  "origin": "top-left",
+  "rig": {
+    "sides": "anatomical; left is on viewer's right in the rest pose",
+    "coordinates": "integer pixels in the shared 768x640 canvas",
+    "composition": "source-over by ascending z, place every layer at (0,0) in rest pose",
+    "bbox": "half-open [left,top,right,bottom] pixel bounds",
+    "pivotApplication": "rotate around each pivot in rest canvas coordinates; propagate parent transforms down the tree"
+  },
+  "reference": {
+    "path": "reference.png",
+    "sha256": "654b21cb01e8fa6d3d582788763b565d4914a806ceee181c326253b7e44baa9e"
+  },
+  "assembled": "assembled.png",
+  "sha256Assembled": "1da7f3050bd9a8a3c1b15b83c5a4c94709e0feafb86f7869912e96e6f0b7935f",
+  "parts": [
+    {
+      "id": "tail",
+      "file": "tail.png",
+      "z": 0,
+      "parent": "body",
+      "joint": "tail-root",
+      "pivot": {
+        "x": 228,
+        "y": 344
+      },
+      "bbox": [
+        39,
+        188,
+        282,
+        388
+      ]
+    },
+    {
+      "id": "rear_r",
+      "file": "rear_r.png",
+      "z": 1,
+      "parent": "body",
+      "joint": "far-hip",
+      "pivot": {
+        "x": 226,
+        "y": 416
+      },
+      "bbox": [
+        153,
+        380,
+        296,
+        578
+      ]
+    },
+    {
+      "id": "front_r",
+      "file": "front_r.png",
+      "z": 2,
+      "parent": "body",
+      "joint": "far-shoulder",
+      "pivot": {
+        "x": 461,
+        "y": 413
+      },
+      "bbox": [
+        412,
+        379,
+        543,
+        577
+      ]
+    },
+    {
+      "id": "rear_l",
+      "file": "rear_l.png",
+      "z": 3,
+      "parent": "body",
+      "joint": "near-hip",
+      "pivot": {
+        "x": 252,
+        "y": 434
+      },
+      "bbox": [
+        179,
+        402,
+        321,
+        621
+      ]
+    },
+    {
+      "id": "front_l",
+      "file": "front_l.png",
+      "z": 4,
+      "parent": "body",
+      "joint": "near-shoulder",
+      "pivot": {
+        "x": 490,
+        "y": 418
+      },
+      "bbox": [
+        449,
+        392,
+        604,
+        621
+      ]
+    },
+    {
+      "id": "body",
+      "file": "body.png",
+      "z": 5,
+      "parent": null,
+      "joint": "root",
+      "pivot": {
+        "x": 373,
+        "y": 368
+      },
+      "bbox": [
+        185,
+        276,
+        552,
+        461
+      ]
+    },
+    {
+      "id": "head",
+      "file": "head.png",
+      "z": 6,
+      "parent": "body",
+      "joint": "neck",
+      "pivot": {
+        "x": 488,
+        "y": 337
+      },
+      "bbox": [
+        417,
+        179,
+        702,
+        429
+      ]
+    }
+  ],
+  "jointOverlapCheck": {
+    "windowPx": 47,
+    "anglesDeg": [
+      -20,
+      0,
+      20
+    ],
+    "jointOverlapsPx": [
+      {
+        "id": "tail",
+        "rest": 1815,
+        "rotated": {
+          "-20": 1822,
+          "20": 1744
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "rear_r",
+        "rest": 2109,
+        "rotated": {
+          "-20": 2114,
+          "20": 2134
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "front_r",
+        "rest": 1947,
+        "rotated": {
+          "-20": 1917,
+          "20": 2011
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "rear_l",
+        "rest": 1743,
+        "rotated": {
+          "-20": 1699,
+          "20": 1758
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "front_l",
+        "rest": 2028,
+        "rotated": {
+          "-20": 1975,
+          "20": 1998
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "head",
+        "rest": 2209,
+        "rotated": {
+          "-20": 2209,
+          "20": 2209
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      }
+    ]
+  },
+  "imageGen": {
+    "atlas": {
+      "file": "exec-368bbd00-f65e-425e-b545-6b0391ef844c.png",
+      "grid": [
+        3,
+        3
+      ],
+      "prompt": "Use case: stylized-concept. Cutout animation production assets, original 2D chibi fantasy role-playing game. The attached approved visual candidate is an exact appearance reference for this low quadruped ice wolf aiming to the right. Repaint each anatomical component independently as if the character had originally been drawn in separate layers. Keep the style, colors, camera and chibi exaggeration consistent with the attached image. Clean bold outlines, detailed cel shading, solid color inside each cutout, hidden stubs/short shoulder and joint overlap so assembled parts can rotate. On an invisible, strictly regular grid of 3 equal columns and 3 equal rows, put exactly one complete part in each listed cell, reading order, with clear transparent margins. No text, no cell dividers, no shadow, no backgrounds, do not draw the whole monster anywhere. Transparent RGBA. Anatomical left is viewer right. The unlisted cells must remain completely empty.\n1. icy armored wolf head looking right with strong ears, white mane, blue eyes and angular long muzzle.\n2. horizontal wolf torso, blue-gray fur extended from left hips to right shoulders, complete back and belly, no legs or head.\n3. long fluffy icy white tail, root at screen right and whole tail pointing left.\n4. left front leg and paw, one whole foreleg from shoulder down-right.\n5. right front leg and paw, whole foreleg from shoulder down-right darker than left.\n6. left hind leg and paw, rear bent leg with icy ankle, down-forward.\n7. right hind leg and paw, rear bent leg with icy ankle, down-forward, darker than left.",
+      "sha256": "8ba67fbda838443e7149398b744e1d0332e797b83b2e6125affa18ebe1114874"
+    }
+  }
+}

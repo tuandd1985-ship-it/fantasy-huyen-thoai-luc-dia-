@@ -1,0 +1,201 @@
+{
+  "canvas": [
+    768,
+    640
+  ],
+  "baselineY": 620,
+  "groundTouch": [
+    "front_l",
+    "front_r"
+  ],
+  "artBottomY": 620,
+  "origin": "top-left",
+  "rig": {
+    "sides": "anatomical; left is on viewer's right in the rest pose",
+    "coordinates": "integer pixels in the shared 768x640 canvas",
+    "composition": "source-over by ascending z, place every layer at (0,0) in rest pose",
+    "bbox": "half-open [left,top,right,bottom] pixel bounds",
+    "pivotApplication": "rotate around each pivot in rest canvas coordinates; propagate parent transforms down the tree"
+  },
+  "reference": {
+    "path": "reference.png",
+    "sha256": "15a62b3c56a8f3411ca039efacd0ab0a6afea0eff2785a8b15df68eca788f27c"
+  },
+  "assembled": "assembled.png",
+  "sha256Assembled": "90a6fed00ff667f881fce096e000600247b2e4c84a523e7cfe5ac6670564036b",
+  "parts": [
+    {
+      "id": "hind_r",
+      "file": "hind_r.png",
+      "z": 0,
+      "parent": "body",
+      "joint": "right-hip",
+      "pivot": {
+        "x": 264,
+        "y": 474
+      },
+      "bbox": [
+        77,
+        373,
+        324,
+        574
+      ]
+    },
+    {
+      "id": "hind_l",
+      "file": "hind_l.png",
+      "z": 1,
+      "parent": "body",
+      "joint": "left-hip",
+      "pivot": {
+        "x": 518,
+        "y": 474
+      },
+      "bbox": [
+        456,
+        377,
+        691,
+        578
+      ]
+    },
+    {
+      "id": "body",
+      "file": "body.png",
+      "z": 2,
+      "parent": null,
+      "joint": "root",
+      "pivot": {
+        "x": 387,
+        "y": 402
+      },
+      "bbox": [
+        155,
+        243,
+        615,
+        578
+      ]
+    },
+    {
+      "id": "head",
+      "file": "head.png",
+      "z": 3,
+      "parent": "body",
+      "joint": "neck",
+      "pivot": {
+        "x": 387,
+        "y": 355
+      },
+      "bbox": [
+        189,
+        132,
+        585,
+        399
+      ]
+    },
+    {
+      "id": "front_r",
+      "file": "front_r.png",
+      "z": 4,
+      "parent": "body",
+      "joint": "right-shoulder",
+      "pivot": {
+        "x": 279,
+        "y": 430
+      },
+      "bbox": [
+        124,
+        378,
+        340,
+        621
+      ]
+    },
+    {
+      "id": "front_l",
+      "file": "front_l.png",
+      "z": 5,
+      "parent": "body",
+      "joint": "left-shoulder",
+      "pivot": {
+        "x": 498,
+        "y": 431
+      },
+      "bbox": [
+        435,
+        378,
+        641,
+        621
+      ]
+    }
+  ],
+  "jointOverlapCheck": {
+    "windowPx": 47,
+    "anglesDeg": [
+      -20,
+      0,
+      20
+    ],
+    "jointOverlapsPx": [
+      {
+        "id": "hind_r",
+        "rest": 2209,
+        "rotated": {
+          "-20": 2209,
+          "20": 2209
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "hind_l",
+        "rest": 2209,
+        "rotated": {
+          "-20": 2209,
+          "20": 2209
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "head",
+        "rest": 2209,
+        "rotated": {
+          "-20": 2209,
+          "20": 2197
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "front_r",
+        "rest": 2209,
+        "rotated": {
+          "-20": 2209,
+          "20": 2209
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "front_l",
+        "rest": 2209,
+        "rotated": {
+          "-20": 2209,
+          "20": 2209
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      }
+    ]
+  },
+  "imageGen": {
+    "atlas": {
+      "file": "exec-0a35c1b3-35ce-49e1-a104-b0b9edcc742c.png",
+      "grid": [
+        3,
+        2
+      ],
+      "prompt": "Use case: stylized-concept. Cutout animation production assets, original 2D chibi fantasy role-playing game. The attached approved visual candidate is an exact appearance reference for this large squat poison toad. Repaint each anatomical component independently as if the character had originally been drawn in separate layers. Keep the style, colors, camera and chibi exaggeration consistent with the attached image. Clean bold outlines, detailed cel shading, solid color inside each cutout, hidden stubs/short shoulder and joint overlap so assembled parts can rotate. On an invisible, strictly regular grid of 3 equal columns and 2 equal rows, put exactly one complete part in each listed cell, reading order, with clear transparent margins. No text, no cell dividers, no shadow, no backgrounds, do not draw the whole monster anywhere. Transparent RGBA. Anatomical left is viewer right. The unlisted cells must remain completely empty.\n1. fat squat olive mottled toad body from chest to lower belly, dark back spots and one golden cream large belly, without limbs or head.\n2. large wide olive toad head, expressive amber eyes, no scenery, amber sac cheek silhouette.\n3. one left foreleg and wide front foot, extends down-right.\n4. one right foreleg and wide front foot, extends down-left.\n5. one left folded hindleg and wide hind foot facing screen right.\n6. one right folded hindleg and wide hind foot facing screen left.",
+      "sha256": "15e52562cbfef36bc0756e2ec64b7a05bb2beba82f8411dc2ecaa35821b32bfd"
+    }
+  }
+}
