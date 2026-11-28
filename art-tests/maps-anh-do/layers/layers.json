@@ -1,0 +1,2534 @@
+{
+ "source": "art-tests/maps-anh-do/upscaled-x2/map_1_x2.webp",
+ "world": [
+  2804,
+  2244
+ ],
+ "ground": "map_1_ground.webp",
+ "canopy_mask": "map_1_canopy_mask.png",
+ "draw": "ground first; then every object at (bbox[0], bbox[1]), Y-sorted by baseY together with hero/monster feet y",
+ "objects": [
+  {
+   "file": "objects/tree_000.png",
+   "kind": "tree",
+   "bbox": [
+    2019,
+    0,
+    145,
+    50
+   ],
+   "baseY": 54,
+   "trunk_px": 0,
+   "area_px": 3926
+  },
+  {
+   "file": "objects/tree_001.png",
+   "kind": "tree",
+   "bbox": [
+    172,
+    0,
+    127,
+    69
+   ],
+   "baseY": 73,
+   "trunk_px": 0,
+   "area_px": 5067
+  },
+  {
+   "file": "objects/tree_002.png",
+   "kind": "tree",
+   "bbox": [
+    2554,
+    0,
+    149,
+    90
+   ],
+   "baseY": 94,
+   "trunk_px": 0,
+   "area_px": 5608
+  },
+  {
+   "file": "objects/tree_003.png",
+   "kind": "tree",
+   "bbox": [
+    1039,
+    0,
+    155,
+    128
+   ],
+   "baseY": 132,
+   "trunk_px": 0,
+   "area_px": 9578
+  },
+  {
+   "file": "objects/tree_004.png",
+   "kind": "tree",
+   "bbox": [
+    2366,
+    0,
+    118,
+    97
+   ],
+   "baseY": 159,
+   "trunk_px": 66,
+   "area_px": 5899
+  },
+  {
+   "file": "objects/tree_005.png",
+   "kind": "tree",
+   "bbox": [
+    566,
+    16,
+    121,
+    140
+   ],
+   "baseY": 160,
+   "trunk_px": 0,
+   "area_px": 8606
+  },
+  {
+   "file": "objects/tree_006.png",
+   "kind": "tree",
+   "bbox": [
+    671,
+    0,
+    185,
+    165
+   ],
+   "baseY": 169,
+   "trunk_px": 0,
+   "area_px": 16666
+  },
+  {
+   "file": "objects/tree_007.png",
+   "kind": "tree",
+   "bbox": [
+    1281,
+    30,
+    138,
+    133
+   ],
+   "baseY": 170,
+   "trunk_px": 11,
+   "area_px": 6676
+  },
+  {
+   "file": "objects/tree_008.png",
+   "kind": "tree",
+   "bbox": [
+    1650,
+    36,
+    158,
+    131
+   ],
+   "baseY": 171,
+   "trunk_px": 0,
+   "area_px": 7069
+  },
+  {
+   "file": "objects/rock_009.png",
+   "kind": "rock",
+   "bbox": [
+    1354,
+    2,
+    302,
+    129
+   ],
+   "baseY": 181,
+   "trunk_px": null,
+   "area_px": 19042
+  },
+  {
+   "file": "objects/tree_010.png",
+   "kind": "tree",
+   "bbox": [
+    920,
+    26,
+    210,
+    163
+   ],
+   "baseY": 193,
+   "trunk_px": 0,
+   "area_px": 17644
+  },
+  {
+   "file": "objects/rock_011.png",
+   "kind": "rock",
+   "bbox": [
+    2515,
+    33,
+    218,
+    119
+   ],
+   "baseY": 197,
+   "trunk_px": null,
+   "area_px": 8369
+  },
+  {
+   "file": "objects/tree_012.png",
+   "kind": "tree",
+   "bbox": [
+    1446,
+    57,
+    135,
+    137
+   ],
+   "baseY": 198,
+   "trunk_px": 0,
+   "area_px": 9453
+  },
+  {
+   "file": "objects/tree_013.png",
+   "kind": "tree",
+   "bbox": [
+    1634,
+    126,
+    118,
+    70
+   ],
+   "baseY": 200,
+   "trunk_px": 0,
+   "area_px": 4063
+  },
+  {
+   "file": "objects/tree_014.png",
+   "kind": "tree",
+   "bbox": [
+    183,
+    63,
+    163,
+    141
+   ],
+   "baseY": 208,
+   "trunk_px": 0,
+   "area_px": 11142
+  },
+  {
+   "file": "objects/tree_015.png",
+   "kind": "tree",
+   "bbox": [
+    2191,
+    0,
+    211,
+    189
+   ],
+   "baseY": 217,
+   "trunk_px": 32,
+   "area_px": 23391
+  },
+  {
+   "file": "objects/tree_016.png",
+   "kind": "tree",
+   "bbox": [
+    2695,
+    95,
+    109,
+    140
+   ],
+   "baseY": 239,
+   "trunk_px": 0,
+   "area_px": 7167
+  },
+  {
+   "file": "objects/tree_017.png",
+   "kind": "tree",
+   "bbox": [
+    134,
+    118,
+    76,
+    123
+   ],
+   "baseY": 245,
+   "trunk_px": 0,
+   "area_px": 4768
+  },
+  {
+   "file": "objects/tree_018.png",
+   "kind": "tree",
+   "bbox": [
+    1411,
+    173,
+    71,
+    80
+   ],
+   "baseY": 257,
+   "trunk_px": 0,
+   "area_px": 2854
+  },
+  {
+   "file": "objects/tree_019.png",
+   "kind": "tree",
+   "bbox": [
+    1473,
+    188,
+    124,
+    69
+   ],
+   "baseY": 261,
+   "trunk_px": 0,
+   "area_px": 4791
+  },
+  {
+   "file": "objects/tree_020.png",
+   "kind": "tree",
+   "bbox": [
+    979,
+    159,
+    183,
+    113
+   ],
+   "baseY": 276,
+   "trunk_px": 0,
+   "area_px": 10888
+  },
+  {
+   "file": "objects/tree_021.png",
+   "kind": "tree",
+   "bbox": [
+    2467,
+    146,
+    137,
+    151
+   ],
+   "baseY": 301,
+   "trunk_px": 0,
+   "area_px": 11537
+  },
+  {
+   "file": "objects/tree_022.png",
+   "kind": "tree",
+   "bbox": [
+    591,
+    146,
+    143,
+    154
+   ],
+   "baseY": 304,
+   "trunk_px": 0,
+   "area_px": 10209
+  },
+  {
+   "file": "objects/tree_023.png",
+   "kind": "tree",
+   "bbox": [
+    867,
+    163,
+    123,
+    141
+   ],
+   "baseY": 308,
+   "trunk_px": 0,
+   "area_px": 8942
+  },
+  {
+   "file": "objects/tree_024.png",
+   "kind": "tree",
+   "bbox": [
+    33,
+    56,
+    142,
+    214
+   ],
+   "baseY": 326,
+   "trunk_px": 60,
+   "area_px": 15062
+  },
+  {
+   "file": "objects/tree_025.png",
+   "kind": "tree",
+   "bbox": [
+    1812,
+    147,
+    181,
+    175
+   ],
+   "baseY": 326,
+   "trunk_px": 0,
+   "area_px": 13772
+  },
+  {
+   "file": "objects/tree_026.png",
+   "kind": "tree",
+   "bbox": [
+    965,
+    210,
+    236,
+    134
+   ],
+   "baseY": 348,
+   "trunk_px": 0,
+   "area_px": 16164
+  },
+  {
+   "file": "objects/tree_027.png",
+   "kind": "tree",
+   "bbox": [
+    2703,
+    204,
+    101,
+    155
+   ],
+   "baseY": 363,
+   "trunk_px": 0,
+   "area_px": 7465
+  },
+  {
+   "file": "objects/tree_028.png",
+   "kind": "tree",
+   "bbox": [
+    1877,
+    278,
+    92,
+    97
+   ],
+   "baseY": 379,
+   "trunk_px": 0,
+   "area_px": 3854
+  },
+  {
+   "file": "objects/tree_029.png",
+   "kind": "tree",
+   "bbox": [
+    2265,
+    303,
+    74,
+    75
+   ],
+   "baseY": 382,
+   "trunk_px": 0,
+   "area_px": 3414
+  },
+  {
+   "file": "objects/tree_030.png",
+   "kind": "tree",
+   "bbox": [
+    2560,
+    312,
+    62,
+    70
+   ],
+   "baseY": 386,
+   "trunk_px": 0,
+   "area_px": 1621
+  },
+  {
+   "file": "objects/tree_031.png",
+   "kind": "tree",
+   "bbox": [
+    1943,
+    94,
+    263,
+    286
+   ],
+   "baseY": 393,
+   "trunk_px": 17,
+   "area_px": 28833
+  },
+  {
+   "file": "objects/tree_032.png",
+   "kind": "tree",
+   "bbox": [
+    2300,
+    223,
+    172,
+    167
+   ],
+   "baseY": 394,
+   "trunk_px": 0,
+   "area_px": 13307
+  },
+  {
+   "file": "objects/rock_033.png",
+   "kind": "rock",
+   "bbox": [
+    294,
+    206,
+    159,
+    137
+   ],
+   "baseY": 396,
+   "trunk_px": null,
+   "area_px": 11046
+  },
+  {
+   "file": "objects/tree_034.png",
+   "kind": "tree",
+   "bbox": [
+    1341,
+    230,
+    252,
+    198
+   ],
+   "baseY": 432,
+   "trunk_px": 0,
+   "area_px": 22914
+  },
+  {
+   "file": "objects/tree_035.png",
+   "kind": "tree",
+   "bbox": [
+    2709,
+    350,
+    95,
+    93
+   ],
+   "baseY": 447,
+   "trunk_px": 0,
+   "area_px": 5002
+  },
+  {
+   "file": "objects/tree_036.png",
+   "kind": "tree",
+   "bbox": [
+    2410,
+    269,
+    171,
+    190
+   ],
+   "baseY": 463,
+   "trunk_px": 0,
+   "area_px": 14872
+  },
+  {
+   "file": "objects/tree_037.png",
+   "kind": "tree",
+   "bbox": [
+    1470,
+    392,
+    73,
+    73
+   ],
+   "baseY": 469,
+   "trunk_px": 0,
+   "area_px": 2457
+  },
+  {
+   "file": "objects/tree_038.png",
+   "kind": "tree",
+   "bbox": [
+    2321,
+    375,
+    128,
+    122
+   ],
+   "baseY": 501,
+   "trunk_px": 0,
+   "area_px": 6834
+  },
+  {
+   "file": "objects/tree_039.png",
+   "kind": "tree",
+   "bbox": [
+    2211,
+    417,
+    149,
+    89
+   ],
+   "baseY": 510,
+   "trunk_px": 0,
+   "area_px": 4562
+  },
+  {
+   "file": "objects/tree_040.png",
+   "kind": "tree",
+   "bbox": [
+    765,
+    333,
+    76,
+    106
+   ],
+   "baseY": 515,
+   "trunk_px": 80,
+   "area_px": 3651
+  },
+  {
+   "file": "objects/rock_041.png",
+   "kind": "rock",
+   "bbox": [
+    2612,
+    452,
+    66,
+    61
+   ],
+   "baseY": 533,
+   "trunk_px": null,
+   "area_px": 2141
+  },
+  {
+   "file": "objects/rock_042.png",
+   "kind": "rock",
+   "bbox": [
+    293,
+    454,
+    73,
+    72
+   ],
+   "baseY": 551,
+   "trunk_px": null,
+   "area_px": 2324
+  },
+  {
+   "file": "objects/tree_043.png",
+   "kind": "tree",
+   "bbox": [
+    892,
+    433,
+    146,
+    125
+   ],
+   "baseY": 562,
+   "trunk_px": 0,
+   "area_px": 7570
+  },
+  {
+   "file": "objects/tree_044.png",
+   "kind": "tree",
+   "bbox": [
+    1648,
+    373,
+    286,
+    186
+   ],
+   "baseY": 563,
+   "trunk_px": 0,
+   "area_px": 24054
+  },
+  {
+   "file": "objects/rock_045.png",
+   "kind": "rock",
+   "bbox": [
+    2675,
+    496,
+    54,
+    56
+   ],
+   "baseY": 570,
+   "trunk_px": null,
+   "area_px": 1462
+  },
+  {
+   "file": "objects/tree_046.png",
+   "kind": "tree",
+   "bbox": [
+    778,
+    337,
+    160,
+    230
+   ],
+   "baseY": 571,
+   "trunk_px": 0,
+   "area_px": 15696
+  },
+  {
+   "file": "objects/tree_047.png",
+   "kind": "tree",
+   "bbox": [
+    346,
+    520,
+    118,
+    62
+   ],
+   "baseY": 586,
+   "trunk_px": 0,
+   "area_px": 3851
+  },
+  {
+   "file": "objects/tree_048.png",
+   "kind": "tree",
+   "bbox": [
+    191,
+    284,
+    226,
+    300
+   ],
+   "baseY": 588,
+   "trunk_px": 0,
+   "area_px": 25996
+  },
+  {
+   "file": "objects/rock_049.png",
+   "kind": "rock",
+   "bbox": [
+    620,
+    410,
+    172,
+    139
+   ],
+   "baseY": 603,
+   "trunk_px": null,
+   "area_px": 6056
+  },
+  {
+   "file": "objects/tree_050.png",
+   "kind": "tree",
+   "bbox": [
+    2464,
+    541,
+    158,
+    101
+   ],
+   "baseY": 646,
+   "trunk_px": 0,
+   "area_px": 7193
+  },
+  {
+   "file": "objects/tree_051.png",
+   "kind": "tree",
+   "bbox": [
+    2634,
+    565,
+    147,
+    78
+   ],
+   "baseY": 647,
+   "trunk_px": 0,
+   "area_px": 4812
+  },
+  {
+   "file": "objects/tree_052.png",
+   "kind": "tree",
+   "bbox": [
+    1269,
+    578,
+    115,
+    70
+   ],
+   "baseY": 652,
+   "trunk_px": 0,
+   "area_px": 3934
+  },
+  {
+   "file": "objects/tree_053.png",
+   "kind": "tree",
+   "bbox": [
+    542,
+    561,
+    104,
+    101
+   ],
+   "baseY": 666,
+   "trunk_px": 0,
+   "area_px": 4740
+  },
+  {
+   "file": "objects/tree_054.png",
+   "kind": "tree",
+   "bbox": [
+    1550,
+    506,
+    129,
+    179
+   ],
+   "baseY": 689,
+   "trunk_px": 0,
+   "area_px": 13553
+  },
+  {
+   "file": "objects/tree_055.png",
+   "kind": "tree",
+   "bbox": [
+    2085,
+    538,
+    97,
+    153
+   ],
+   "baseY": 695,
+   "trunk_px": 0,
+   "area_px": 8760
+  },
+  {
+   "file": "objects/tree_056.png",
+   "kind": "tree",
+   "bbox": [
+    1662,
+    525,
+    178,
+    181
+   ],
+   "baseY": 710,
+   "trunk_px": 2,
+   "area_px": 15060
+  },
+  {
+   "file": "objects/tree_057.png",
+   "kind": "tree",
+   "bbox": [
+    2495,
+    616,
+    198,
+    117
+   ],
+   "baseY": 737,
+   "trunk_px": 0,
+   "area_px": 11147
+  },
+  {
+   "file": "objects/tree_058.png",
+   "kind": "tree",
+   "bbox": [
+    1114,
+    552,
+    167,
+    184
+   ],
+   "baseY": 740,
+   "trunk_px": 0,
+   "area_px": 13481
+  },
+  {
+   "file": "objects/tree_059.png",
+   "kind": "tree",
+   "bbox": [
+    2138,
+    566,
+    157,
+    174
+   ],
+   "baseY": 744,
+   "trunk_px": 0,
+   "area_px": 11127
+  },
+  {
+   "file": "objects/tree_060.png",
+   "kind": "tree",
+   "bbox": [
+    632,
+    576,
+    212,
+    165
+   ],
+   "baseY": 745,
+   "trunk_px": 0,
+   "area_px": 12700
+  },
+  {
+   "file": "objects/tree_061.png",
+   "kind": "tree",
+   "bbox": [
+    2647,
+    665,
+    157,
+    80
+   ],
+   "baseY": 749,
+   "trunk_px": 0,
+   "area_px": 6891
+  },
+  {
+   "file": "objects/tree_062.png",
+   "kind": "tree",
+   "bbox": [
+    2067,
+    666,
+    75,
+    102
+   ],
+   "baseY": 772,
+   "trunk_px": 1,
+   "area_px": 4093
+  },
+  {
+   "file": "objects/tree_063.png",
+   "kind": "tree",
+   "bbox": [
+    4,
+    681,
+    109,
+    94
+   ],
+   "baseY": 779,
+   "trunk_px": 0,
+   "area_px": 4055
+  },
+  {
+   "file": "objects/rock_064.png",
+   "kind": "rock",
+   "bbox": [
+    2089,
+    729,
+    68,
+    61
+   ],
+   "baseY": 810,
+   "trunk_px": null,
+   "area_px": 2265
+  },
+  {
+   "file": "objects/tree_065.png",
+   "kind": "tree",
+   "bbox": [
+    910,
+    631,
+    199,
+    180
+   ],
+   "baseY": 815,
+   "trunk_px": 0,
+   "area_px": 15788
+  },
+  {
+   "file": "objects/rock_066.png",
+   "kind": "rock",
+   "bbox": [
+    1040,
+    757,
+    100,
+    48
+   ],
+   "baseY": 819,
+   "trunk_px": null,
+   "area_px": 1368
+  },
+  {
+   "file": "objects/tree_067.png",
+   "kind": "tree",
+   "bbox": [
+    1925,
+    632,
+    258,
+    198
+   ],
+   "baseY": 834,
+   "trunk_px": 0,
+   "area_px": 18793
+  },
+  {
+   "file": "objects/rock_068.png",
+   "kind": "rock",
+   "bbox": [
+    1068,
+    657,
+    177,
+    129
+   ],
+   "baseY": 835,
+   "trunk_px": null,
+   "area_px": 7973
+  },
+  {
+   "file": "objects/tree_069.png",
+   "kind": "tree",
+   "bbox": [
+    259,
+    659,
+    121,
+    197
+   ],
+   "baseY": 860,
+   "trunk_px": 3,
+   "area_px": 12670
+  },
+  {
+   "file": "objects/tree_070.png",
+   "kind": "tree",
+   "bbox": [
+    1171,
+    743,
+    184,
+    117
+   ],
+   "baseY": 864,
+   "trunk_px": 0,
+   "area_px": 9309
+  },
+  {
+   "file": "objects/tree_071.png",
+   "kind": "tree",
+   "bbox": [
+    2365,
+    710,
+    174,
+    163
+   ],
+   "baseY": 877,
+   "trunk_px": 0,
+   "area_px": 12165
+  },
+  {
+   "file": "objects/tree_072.png",
+   "kind": "tree",
+   "bbox": [
+    984,
+    732,
+    249,
+    155
+   ],
+   "baseY": 891,
+   "trunk_px": 0,
+   "area_px": 10536
+  },
+  {
+   "file": "objects/tree_073.png",
+   "kind": "tree",
+   "bbox": [
+    2278,
+    788,
+    87,
+    114
+   ],
+   "baseY": 906,
+   "trunk_px": 0,
+   "area_px": 4465
+  },
+  {
+   "file": "objects/tree_074.png",
+   "kind": "tree",
+   "bbox": [
+    340,
+    673,
+    207,
+    234
+   ],
+   "baseY": 911,
+   "trunk_px": 0,
+   "area_px": 23856
+  },
+  {
+   "file": "objects/tree_075.png",
+   "kind": "tree",
+   "bbox": [
+    190,
+    785,
+    192,
+    136
+   ],
+   "baseY": 925,
+   "trunk_px": 0,
+   "area_px": 11189
+  },
+  {
+   "file": "objects/tree_076.png",
+   "kind": "tree",
+   "bbox": [
+    1634,
+    766,
+    194,
+    160
+   ],
+   "baseY": 930,
+   "trunk_px": 0,
+   "area_px": 14440
+  },
+  {
+   "file": "objects/tree_077.png",
+   "kind": "tree",
+   "bbox": [
+    1701,
+    885,
+    82,
+    83
+   ],
+   "baseY": 972,
+   "trunk_px": 0,
+   "area_px": 3484
+  },
+  {
+   "file": "objects/rock_078.png",
+   "kind": "rock",
+   "bbox": [
+    2209,
+    851,
+    147,
+    97
+   ],
+   "baseY": 984,
+   "trunk_px": null,
+   "area_px": 5874
+  },
+  {
+   "file": "objects/tree_079.png",
+   "kind": "tree",
+   "bbox": [
+    2316,
+    817,
+    192,
+    174
+   ],
+   "baseY": 995,
+   "trunk_px": 0,
+   "area_px": 15775
+  },
+  {
+   "file": "objects/tree_080.png",
+   "kind": "tree",
+   "bbox": [
+    57,
+    811,
+    132,
+    181
+   ],
+   "baseY": 996,
+   "trunk_px": 0,
+   "area_px": 10890
+  },
+  {
+   "file": "objects/tree_081.png",
+   "kind": "tree",
+   "bbox": [
+    761,
+    900,
+    170,
+    89
+   ],
+   "baseY": 997,
+   "trunk_px": 12,
+   "area_px": 7365
+  },
+  {
+   "file": "objects/tree_082.png",
+   "kind": "tree",
+   "bbox": [
+    1670,
+    923,
+    225,
+    86
+   ],
+   "baseY": 1013,
+   "trunk_px": 0,
+   "area_px": 8046
+  },
+  {
+   "file": "objects/tree_083.png",
+   "kind": "tree",
+   "bbox": [
+    5,
+    925,
+    132,
+    87
+   ],
+   "baseY": 1016,
+   "trunk_px": 0,
+   "area_px": 5991
+  },
+  {
+   "file": "objects/tree_084.png",
+   "kind": "tree",
+   "bbox": [
+    2637,
+    809,
+    167,
+    230
+   ],
+   "baseY": 1043,
+   "trunk_px": 0,
+   "area_px": 19489
+  },
+  {
+   "file": "objects/rock_085.png",
+   "kind": "rock",
+   "bbox": [
+    169,
+    864,
+    222,
+    129
+   ],
+   "baseY": 1043,
+   "trunk_px": null,
+   "area_px": 11138
+  },
+  {
+   "file": "objects/rock_086.png",
+   "kind": "rock",
+   "bbox": [
+    2646,
+    949,
+    66,
+    73
+   ],
+   "baseY": 1048,
+   "trunk_px": null,
+   "area_px": 2460
+  },
+  {
+   "file": "objects/tree_087.png",
+   "kind": "tree",
+   "bbox": [
+    1224,
+    958,
+    144,
+    103
+   ],
+   "baseY": 1065,
+   "trunk_px": 0,
+   "area_px": 5809
+  },
+  {
+   "file": "objects/rock_088.png",
+   "kind": "rock",
+   "bbox": [
+    2467,
+    773,
+    181,
+    210
+   ],
+   "baseY": 1067,
+   "trunk_px": null,
+   "area_px": 15905
+  },
+  {
+   "file": "objects/tree_089.png",
+   "kind": "tree",
+   "bbox": [
+    2319,
+    966,
+    156,
+    107
+   ],
+   "baseY": 1077,
+   "trunk_px": 0,
+   "area_px": 6065
+  },
+  {
+   "file": "objects/tree_090.png",
+   "kind": "tree",
+   "bbox": [
+    164,
+    1009,
+    210,
+    105
+   ],
+   "baseY": 1118,
+   "trunk_px": 0,
+   "area_px": 9674
+  },
+  {
+   "file": "objects/tree_091.png",
+   "kind": "tree",
+   "bbox": [
+    75,
+    995,
+    100,
+    125
+   ],
+   "baseY": 1124,
+   "trunk_px": 0,
+   "area_px": 6241
+  },
+  {
+   "file": "objects/tree_092.png",
+   "kind": "tree",
+   "bbox": [
+    2581,
+    936,
+    223,
+    231
+   ],
+   "baseY": 1171,
+   "trunk_px": 0,
+   "area_px": 16104
+  },
+  {
+   "file": "objects/tree_093.png",
+   "kind": "tree",
+   "bbox": [
+    451,
+    951,
+    217,
+    217
+   ],
+   "baseY": 1172,
+   "trunk_px": 0,
+   "area_px": 17653
+  },
+  {
+   "file": "objects/tree_094.png",
+   "kind": "tree",
+   "bbox": [
+    2092,
+    1102,
+    107,
+    68
+   ],
+   "baseY": 1174,
+   "trunk_px": 0,
+   "area_px": 3087
+  },
+  {
+   "file": "objects/tree_095.png",
+   "kind": "tree",
+   "bbox": [
+    1558,
+    1080,
+    129,
+    101
+   ],
+   "baseY": 1185,
+   "trunk_px": 0,
+   "area_px": 5732
+  },
+  {
+   "file": "objects/tree_096.png",
+   "kind": "tree",
+   "bbox": [
+    1463,
+    1028,
+    135,
+    156
+   ],
+   "baseY": 1188,
+   "trunk_px": 0,
+   "area_px": 8204
+  },
+  {
+   "file": "objects/tree_097.png",
+   "kind": "tree",
+   "bbox": [
+    884,
+    966,
+    207,
+    220
+   ],
+   "baseY": 1190,
+   "trunk_px": 0,
+   "area_px": 19954
+  },
+  {
+   "file": "objects/tree_098.png",
+   "kind": "tree",
+   "bbox": [
+    1649,
+    1131,
+    58,
+    58
+   ],
+   "baseY": 1193,
+   "trunk_px": 0,
+   "area_px": 1480
+  },
+  {
+   "file": "objects/tree_099.png",
+   "kind": "tree",
+   "bbox": [
+    0,
+    1015,
+    113,
+    179
+   ],
+   "baseY": 1198,
+   "trunk_px": 0,
+   "area_px": 11964
+  },
+  {
+   "file": "objects/tree_100.png",
+   "kind": "tree",
+   "bbox": [
+    356,
+    1130,
+    123,
+    70
+   ],
+   "baseY": 1215,
+   "trunk_px": 19,
+   "area_px": 3930
+  },
+  {
+   "file": "objects/tree_101.png",
+   "kind": "tree",
+   "bbox": [
+    977,
+    1033,
+    167,
+    184
+   ],
+   "baseY": 1221,
+   "trunk_px": 0,
+   "area_px": 10957
+  },
+  {
+   "file": "objects/tree_102.png",
+   "kind": "tree",
+   "bbox": [
+    1348,
+    1139,
+    101,
+    79
+   ],
+   "baseY": 1222,
+   "trunk_px": 0,
+   "area_px": 4422
+  },
+  {
+   "file": "objects/tree_103.png",
+   "kind": "tree",
+   "bbox": [
+    2413,
+    1177,
+    115,
+    86
+   ],
+   "baseY": 1267,
+   "trunk_px": 0,
+   "area_px": 3965
+  },
+  {
+   "file": "objects/rock_104.png",
+   "kind": "rock",
+   "bbox": [
+    1410,
+    1126,
+    115,
+    118
+   ],
+   "baseY": 1289,
+   "trunk_px": null,
+   "area_px": 7277
+  },
+  {
+   "file": "objects/tree_105.png",
+   "kind": "tree",
+   "bbox": [
+    1486,
+    1182,
+    111,
+    105
+   ],
+   "baseY": 1291,
+   "trunk_px": 0,
+   "area_px": 2971
+  },
+  {
+   "file": "objects/tree_106.png",
+   "kind": "tree",
+   "bbox": [
+    0,
+    1120,
+    188,
+    181
+   ],
+   "baseY": 1305,
+   "trunk_px": 0,
+   "area_px": 14467
+  },
+  {
+   "file": "objects/tree_107.png",
+   "kind": "tree",
+   "bbox": [
+    675,
+    1146,
+    127,
+    158
+   ],
+   "baseY": 1308,
+   "trunk_px": 0,
+   "area_px": 7933
+  },
+  {
+   "file": "objects/tree_108.png",
+   "kind": "tree",
+   "bbox": [
+    861,
+    1192,
+    106,
+    137
+   ],
+   "baseY": 1333,
+   "trunk_px": 0,
+   "area_px": 7838
+  },
+  {
+   "file": "objects/rock_109.png",
+   "kind": "rock",
+   "bbox": [
+    2364,
+    1211,
+    203,
+    101
+   ],
+   "baseY": 1350,
+   "trunk_px": null,
+   "area_px": 7695
+  },
+  {
+   "file": "objects/tree_110.png",
+   "kind": "tree",
+   "bbox": [
+    137,
+    1133,
+    126,
+    197
+   ],
+   "baseY": 1352,
+   "trunk_px": 26,
+   "area_px": 9436
+  },
+  {
+   "file": "objects/tree_111.png",
+   "kind": "tree",
+   "bbox": [
+    2540,
+    1136,
+    223,
+    225
+   ],
+   "baseY": 1365,
+   "trunk_px": 0,
+   "area_px": 27264
+  },
+  {
+   "file": "objects/tree_112.png",
+   "kind": "tree",
+   "bbox": [
+    791,
+    1301,
+    74,
+    73
+   ],
+   "baseY": 1378,
+   "trunk_px": 0,
+   "area_px": 2597
+  },
+  {
+   "file": "objects/tree_113.png",
+   "kind": "tree",
+   "bbox": [
+    723,
+    1138,
+    177,
+    237
+   ],
+   "baseY": 1379,
+   "trunk_px": 0,
+   "area_px": 15179
+  },
+  {
+   "file": "objects/tree_114.png",
+   "kind": "tree",
+   "bbox": [
+    1170,
+    1209,
+    131,
+    169
+   ],
+   "baseY": 1382,
+   "trunk_px": 0,
+   "area_px": 12546
+  },
+  {
+   "file": "objects/tree_115.png",
+   "kind": "tree",
+   "bbox": [
+    1294,
+    1209,
+    243,
+    187
+   ],
+   "baseY": 1400,
+   "trunk_px": 0,
+   "area_px": 20007
+  },
+  {
+   "file": "objects/tree_116.png",
+   "kind": "tree",
+   "bbox": [
+    2334,
+    1282,
+    144,
+    119
+   ],
+   "baseY": 1405,
+   "trunk_px": 0,
+   "area_px": 4495
+  },
+  {
+   "file": "objects/tree_117.png",
+   "kind": "tree",
+   "bbox": [
+    0,
+    1259,
+    221,
+    148
+   ],
+   "baseY": 1411,
+   "trunk_px": 0,
+   "area_px": 12092
+  },
+  {
+   "file": "objects/tree_118.png",
+   "kind": "tree",
+   "bbox": [
+    1228,
+    1335,
+    99,
+    90
+   ],
+   "baseY": 1429,
+   "trunk_px": 0,
+   "area_px": 4550
+  },
+  {
+   "file": "objects/tree_119.png",
+   "kind": "tree",
+   "bbox": [
+    2478,
+    1312,
+    128,
+    118
+   ],
+   "baseY": 1434,
+   "trunk_px": 0,
+   "area_px": 6905
+  },
+  {
+   "file": "objects/tree_120.png",
+   "kind": "tree",
+   "bbox": [
+    2595,
+    1362,
+    78,
+    81
+   ],
+   "baseY": 1447,
+   "trunk_px": 0,
+   "area_px": 3192
+  },
+  {
+   "file": "objects/tree_121.png",
+   "kind": "tree",
+   "bbox": [
+    1115,
+    1308,
+    85,
+    136
+   ],
+   "baseY": 1448,
+   "trunk_px": 0,
+   "area_px": 5063
+  },
+  {
+   "file": "objects/tree_122.png",
+   "kind": "tree",
+   "bbox": [
+    362,
+    1370,
+    96,
+    77
+   ],
+   "baseY": 1451,
+   "trunk_px": 0,
+   "area_px": 3799
+  },
+  {
+   "file": "objects/tree_123.png",
+   "kind": "tree",
+   "bbox": [
+    1959,
+    1322,
+    139,
+    137
+   ],
+   "baseY": 1463,
+   "trunk_px": 0,
+   "area_px": 7343
+  },
+  {
+   "file": "objects/tree_124.png",
+   "kind": "tree",
+   "bbox": [
+    446,
+    1373,
+    76,
+    86
+   ],
+   "baseY": 1463,
+   "trunk_px": 0,
+   "area_px": 3241
+  },
+  {
+   "file": "objects/tree_125.png",
+   "kind": "tree",
+   "bbox": [
+    1895,
+    1312,
+    99,
+    153
+   ],
+   "baseY": 1469,
+   "trunk_px": 0,
+   "area_px": 8346
+  },
+  {
+   "file": "objects/tree_126.png",
+   "kind": "tree",
+   "bbox": [
+    2239,
+    1382,
+    121,
+    132
+   ],
+   "baseY": 1518,
+   "trunk_px": 0,
+   "area_px": 7132
+  },
+  {
+   "file": "objects/tree_127.png",
+   "kind": "tree",
+   "bbox": [
+    1844,
+    1377,
+    82,
+    139
+   ],
+   "baseY": 1520,
+   "trunk_px": 0,
+   "area_px": 4597
+  },
+  {
+   "file": "objects/tree_128.png",
+   "kind": "tree",
+   "bbox": [
+    501,
+    1451,
+    89,
+    76
+   ],
+   "baseY": 1531,
+   "trunk_px": 0,
+   "area_px": 4048
+  },
+  {
+   "file": "objects/tree_129.png",
+   "kind": "tree",
+   "bbox": [
+    979,
+    1461,
+    108,
+    70
+   ],
+   "baseY": 1535,
+   "trunk_px": 0,
+   "area_px": 3467
+  },
+  {
+   "file": "objects/tree_130.png",
+   "kind": "tree",
+   "bbox": [
+    2033,
+    1418,
+    250,
+    209
+   ],
+   "baseY": 1631,
+   "trunk_px": 0,
+   "area_px": 26947
+  },
+  {
+   "file": "objects/tree_131.png",
+   "kind": "tree",
+   "bbox": [
+    815,
+    1450,
+    233,
+    185
+   ],
+   "baseY": 1639,
+   "trunk_px": 0,
+   "area_px": 21517
+  },
+  {
+   "file": "objects/tree_132.png",
+   "kind": "tree",
+   "bbox": [
+    214,
+    1448,
+    207,
+    204
+   ],
+   "baseY": 1656,
+   "trunk_px": 0,
+   "area_px": 24103
+  },
+  {
+   "file": "objects/tree_133.png",
+   "kind": "tree",
+   "bbox": [
+    2272,
+    1535,
+    70,
+    119
+   ],
+   "baseY": 1658,
+   "trunk_px": 0,
+   "area_px": 4418
+  },
+  {
+   "file": "objects/tree_134.png",
+   "kind": "tree",
+   "bbox": [
+    0,
+    1503,
+    120,
+    165
+   ],
+   "baseY": 1672,
+   "trunk_px": 0,
+   "area_px": 10144
+  },
+  {
+   "file": "objects/tree_135.png",
+   "kind": "tree",
+   "bbox": [
+    415,
+    1447,
+    219,
+    232
+   ],
+   "baseY": 1683,
+   "trunk_px": 0,
+   "area_px": 20078
+  },
+  {
+   "file": "objects/tree_136.png",
+   "kind": "tree",
+   "bbox": [
+    963,
+    1627,
+    82,
+    68
+   ],
+   "baseY": 1699,
+   "trunk_px": 0,
+   "area_px": 2706
+  },
+  {
+   "file": "objects/tree_137.png",
+   "kind": "tree",
+   "bbox": [
+    1374,
+    1530,
+    232,
+    171
+   ],
+   "baseY": 1705,
+   "trunk_px": 0,
+   "area_px": 23076
+  },
+  {
+   "file": "objects/tree_138.png",
+   "kind": "tree",
+   "bbox": [
+    353,
+    1572,
+    117,
+    131
+   ],
+   "baseY": 1707,
+   "trunk_px": 0,
+   "area_px": 6716
+  },
+  {
+   "file": "objects/tree_139.png",
+   "kind": "tree",
+   "bbox": [
+    1169,
+    1557,
+    89,
+    149
+   ],
+   "baseY": 1710,
+   "trunk_px": 0,
+   "area_px": 6628
+  },
+  {
+   "file": "objects/tree_140.png",
+   "kind": "tree",
+   "bbox": [
+    105,
+    1502,
+    120,
+    212
+   ],
+   "baseY": 1718,
+   "trunk_px": 0,
+   "area_px": 12946
+  },
+  {
+   "file": "objects/rock_141.png",
+   "kind": "rock",
+   "bbox": [
+    306,
+    1630,
+    83,
+    77
+   ],
+   "baseY": 1734,
+   "trunk_px": null,
+   "area_px": 3270
+  },
+  {
+   "file": "objects/tree_142.png",
+   "kind": "tree",
+   "bbox": [
+    1021,
+    1548,
+    176,
+    186
+   ],
+   "baseY": 1738,
+   "trunk_px": 0,
+   "area_px": 16764
+  },
+  {
+   "file": "objects/tree_143.png",
+   "kind": "tree",
+   "bbox": [
+    2052,
+    1580,
+    229,
+    183
+   ],
+   "baseY": 1767,
+   "trunk_px": 0,
+   "area_px": 18729
+  },
+  {
+   "file": "objects/tree_144.png",
+   "kind": "tree",
+   "bbox": [
+    1772,
+    1589,
+    184,
+    147
+   ],
+   "baseY": 1776,
+   "trunk_px": 44,
+   "area_px": 8864
+  },
+  {
+   "file": "objects/tree_145.png",
+   "kind": "tree",
+   "bbox": [
+    2541,
+    1545,
+    184,
+    229
+   ],
+   "baseY": 1778,
+   "trunk_px": 0,
+   "area_px": 20245
+  },
+  {
+   "file": "objects/tree_146.png",
+   "kind": "tree",
+   "bbox": [
+    1399,
+    1690,
+    86,
+    85
+   ],
+   "baseY": 1779,
+   "trunk_px": 0,
+   "area_px": 3485
+  },
+  {
+   "file": "objects/tree_147.png",
+   "kind": "tree",
+   "bbox": [
+    1466,
+    1721,
+    71,
+    63
+   ],
+   "baseY": 1788,
+   "trunk_px": 0,
+   "area_px": 2412
+  },
+  {
+   "file": "objects/rock_148.png",
+   "kind": "rock",
+   "bbox": [
+    2516,
+    1684,
+    83,
+    78
+   ],
+   "baseY": 1789,
+   "trunk_px": null,
+   "area_px": 2804
+  },
+  {
+   "file": "objects/tree_149.png",
+   "kind": "tree",
+   "bbox": [
+    0,
+    1662,
+    113,
+    132
+   ],
+   "baseY": 1798,
+   "trunk_px": 0,
+   "area_px": 9533
+  },
+  {
+   "file": "objects/rock_150.png",
+   "kind": "rock",
+   "bbox": [
+    308,
+    1745,
+    64,
+    45
+   ],
+   "baseY": 1803,
+   "trunk_px": null,
+   "area_px": 1261
+  },
+  {
+   "file": "objects/tree_151.png",
+   "kind": "tree",
+   "bbox": [
+    2255,
+    1683,
+    159,
+    134
+   ],
+   "baseY": 1821,
+   "trunk_px": 0,
+   "area_px": 7291
+  },
+  {
+   "file": "objects/tree_152.png",
+   "kind": "tree",
+   "bbox": [
+    1462,
+    1668,
+    221,
+    150
+   ],
+   "baseY": 1822,
+   "trunk_px": 0,
+   "area_px": 11410
+  },
+  {
+   "file": "objects/tree_153.png",
+   "kind": "tree",
+   "bbox": [
+    2145,
+    1667,
+    138,
+    158
+   ],
+   "baseY": 1829,
+   "trunk_px": 0,
+   "area_px": 12078
+  },
+  {
+   "file": "objects/tree_154.png",
+   "kind": "tree",
+   "bbox": [
+    718,
+    1746,
+    139,
+    84
+   ],
+   "baseY": 1843,
+   "trunk_px": 17,
+   "area_px": 5085
+  },
+  {
+   "file": "objects/rock_155.png",
+   "kind": "rock",
+   "bbox": [
+    96,
+    1571,
+    164,
+    195
+   ],
+   "baseY": 1843,
+   "trunk_px": null,
+   "area_px": 12170
+  },
+  {
+   "file": "objects/tree_156.png",
+   "kind": "tree",
+   "bbox": [
+    1670,
+    1747,
+    69,
+    94
+   ],
+   "baseY": 1845,
+   "trunk_px": 0,
+   "area_px": 2699
+  },
+  {
+   "file": "objects/tree_157.png",
+   "kind": "tree",
+   "bbox": [
+    304,
+    1717,
+    196,
+    125
+   ],
+   "baseY": 1846,
+   "trunk_px": 0,
+   "area_px": 9082
+  },
+  {
+   "file": "objects/rock_158.png",
+   "kind": "rock",
+   "bbox": [
+    2274,
+    1537,
+    226,
+    227
+   ],
+   "baseY": 1855,
+   "trunk_px": null,
+   "area_px": 20934
+  },
+  {
+   "file": "objects/tree_159.png",
+   "kind": "tree",
+   "bbox": [
+    284,
+    1746,
+    144,
+    151
+   ],
+   "baseY": 1901,
+   "trunk_px": 4,
+   "area_px": 5840
+  },
+  {
+   "file": "objects/tree_160.png",
+   "kind": "tree",
+   "bbox": [
+    618,
+    1761,
+    159,
+    142
+   ],
+   "baseY": 1907,
+   "trunk_px": 5,
+   "area_px": 8502
+  },
+  {
+   "file": "objects/tree_161.png",
+   "kind": "tree",
+   "bbox": [
+    2406,
+    1785,
+    117,
+    119
+   ],
+   "baseY": 1908,
+   "trunk_px": 0,
+   "area_px": 5443
+  },
+  {
+   "file": "objects/tree_162.png",
+   "kind": "tree",
+   "bbox": [
+    1546,
+    1803,
+    141,
+    103
+   ],
+   "baseY": 1910,
+   "trunk_px": 0,
+   "area_px": 6353
+  },
+  {
+   "file": "objects/tree_163.png",
+   "kind": "tree",
+   "bbox": [
+    115,
+    1795,
+    192,
+    119
+   ],
+   "baseY": 1918,
+   "trunk_px": 0,
+   "area_px": 9818
+  },
+  {
+   "file": "objects/tree_164.png",
+   "kind": "tree",
+   "bbox": [
+    0,
+    1770,
+    119,
+    154
+   ],
+   "baseY": 1928,
+   "trunk_px": 0,
+   "area_px": 8428
+  },
+  {
+   "file": "objects/rock_165.png",
+   "kind": "rock",
+   "bbox": [
+    299,
+    1866,
+    87,
+    62
+   ],
+   "baseY": 1949,
+   "trunk_px": null,
+   "area_px": 2400
+  },
+  {
+   "file": "objects/tree_166.png",
+   "kind": "tree",
+   "bbox": [
+    81,
+    1850,
+    89,
+    100
+   ],
+   "baseY": 1954,
+   "trunk_px": 8,
+   "area_px": 3701
+  },
+  {
+   "file": "objects/rock_167.png",
+   "kind": "rock",
+   "bbox": [
+    1294,
+    1876,
+    65,
+    67
+   ],
+   "baseY": 1966,
+   "trunk_px": null,
+   "area_px": 2410
+  },
+  {
+   "file": "objects/rock_168.png",
+   "kind": "rock",
+   "bbox": [
+    1320,
+    1923,
+    85,
+    78
+   ],
+   "baseY": 2029,
+   "trunk_px": null,
+   "area_px": 2267
+  },
+  {
+   "file": "objects/tree_169.png",
+   "kind": "tree",
+   "bbox": [
+    94,
+    1903,
+    122,
+    124
+   ],
+   "baseY": 2031,
+   "trunk_px": 0,
+   "area_px": 7602
+  },
+  {
+   "file": "objects/rock_170.png",
+   "kind": "rock",
+   "bbox": [
+    2196,
+    1934,
+    155,
+    90
+   ],
+   "baseY": 2056,
+   "trunk_px": null,
+   "area_px": 5762
+  },
+  {
+   "file": "objects/tree_171.png",
+   "kind": "tree",
+   "bbox": [
+    859,
+    1884,
+    119,
+    172
+   ],
+   "baseY": 2060,
+   "trunk_px": 0,
+   "area_px": 13953
+  },
+  {
+   "file": "objects/tree_172.png",
+   "kind": "tree",
+   "bbox": [
+    206,
+    1891,
+    273,
+    168
+   ],
+   "baseY": 2063,
+   "trunk_px": 0,
+   "area_px": 22269
+  },
+  {
+   "file": "objects/tree_173.png",
+   "kind": "tree",
+   "bbox": [
+    1763,
+    1861,
+    203,
+    205
+   ],
+   "baseY": 2070,
+   "trunk_px": 0,
+   "area_px": 15810
+  },
+  {
+   "file": "objects/tree_174.png",
+   "kind": "tree",
+   "bbox": [
+    2487,
+    1702,
+    317,
+    299
+   ],
+   "baseY": 2078,
+   "trunk_px": 81,
+   "area_px": 33309
+  },
+  {
+   "file": "objects/tree_175.png",
+   "kind": "tree",
+   "bbox": [
+    1261,
+    1977,
+    149,
+    109
+   ],
+   "baseY": 2090,
+   "trunk_px": 0,
+   "area_px": 7304
+  },
+  {
+   "file": "objects/tree_176.png",
+   "kind": "tree",
+   "bbox": [
+    1528,
+    1947,
+    116,
+    157
+   ],
+   "baseY": 2108,
+   "trunk_px": 0,
+   "area_px": 8894
+  },
+  {
+   "file": "objects/tree_177.png",
+   "kind": "tree",
+   "bbox": [
+    2339,
+    1981,
+    222,
+    129
+   ],
+   "baseY": 2114,
+   "trunk_px": 0,
+   "area_px": 7949
+  },
+  {
+   "file": "objects/tree_178.png",
+   "kind": "tree",
+   "bbox": [
+    1028,
+    1888,
+    245,
+    223
+   ],
+   "baseY": 2115,
+   "trunk_px": 0,
+   "area_px": 30255
+  },
+  {
+   "file": "objects/tree_179.png",
+   "kind": "tree",
+   "bbox": [
+    1829,
+    1939,
+    203,
+    195
+   ],
+   "baseY": 2138,
+   "trunk_px": 0,
+   "area_px": 15634
+  },
+  {
+   "file": "objects/rock_180.png",
+   "kind": "rock",
+   "bbox": [
+    2263,
+    2056,
+    106,
+    64
+   ],
+   "baseY": 2142,
+   "trunk_px": null,
+   "area_px": 3746
+  },
+  {
+   "file": "objects/tree_181.png",
+   "kind": "tree",
+   "bbox": [
+    2296,
+    2039,
+    125,
+    104
+   ],
+   "baseY": 2147,
+   "trunk_px": 0,
+   "area_px": 3178
+  },
+  {
+   "file": "objects/tree_182.png",
+   "kind": "tree",
+   "bbox": [
+    1904,
+    2113,
+    51,
+    58
+   ],
+   "baseY": 2175,
+   "trunk_px": 0,
+   "area_px": 909
+  },
+  {
+   "file": "objects/tree_183.png",
+   "kind": "tree",
+   "bbox": [
+    942,
+    1911,
+    137,
+    278
+   ],
+   "baseY": 2193,
+   "trunk_px": 2,
+   "area_px": 21159
+  },
+  {
+   "file": "objects/rock_184.png",
+   "kind": "rock",
+   "bbox": [
+    2390,
+    2077,
+    86,
+    89
+   ],
+   "baseY": 2198,
+   "trunk_px": null,
+   "area_px": 3765
+  },
+  {
+   "file": "objects/tree_185.png",
+   "kind": "tree",
+   "bbox": [
+    1068,
+    2104,
+    81,
+    94
+   ],
+   "baseY": 2202,
+   "trunk_px": 0,
+   "area_px": 4808
+  },
+  {
+   "file": "objects/tree_186.png",
+   "kind": "tree",
+   "bbox": [
+    767,
+    2046,
+    183,
+    153
+   ],
+   "baseY": 2203,
+   "trunk_px": 0,
+   "area_px": 14088
+  },
+  {
+   "file": "objects/tree_187.png",
+   "kind": "tree",
+   "bbox": [
+    1225,
+    2092,
+    103,
+    119
+   ],
+   "baseY": 2215,
+   "trunk_px": 0,
+   "area_px": 6317
+  },
+  {
+   "file": "objects/rock_188.png",
+   "kind": "rock",
+   "bbox": [
+    2476,
+    2054,
+    167,
+    121
+   ],
+   "baseY": 2221,
+   "trunk_px": null,
+   "area_px": 7426
+  },
+  {
+   "file": "objects/tree_189.png",
+   "kind": "tree",
+   "bbox": [
+    1610,
+    1980,
+    240,
+    209
+   ],
+   "baseY": 2226,
+   "trunk_px": 41,
+   "area_px": 25770
+  },
+  {
+   "file": "objects/tree_190.png",
+   "kind": "tree",
+   "bbox": [
+    890,
+    2152,
+    148,
+    71
+   ],
+   "baseY": 2227,
+   "trunk_px": 0,
+   "area_px": 5889
+  },
+  {
+   "file": "objects/tree_191.png",
+   "kind": "tree",
+   "bbox": [
+    1131,
+    2045,
+    147,
+    199
+   ],
+   "baseY": 2249,
+   "trunk_px": 0,
+   "area_px": 15724
+  },
+  {
+   "file": "objects/tree_192.png",
+   "kind": "tree",
+   "bbox": [
+    590,
+    2028,
+    246,
+    216
+   ],
+   "baseY": 2249,
+   "trunk_px": 0,
+   "area_px": 21324
+  },
+  {
+   "file": "objects/tree_193.png",
+   "kind": "tree",
+   "bbox": [
+    1021,
+    2150,
+    161,
+    94
+   ],
+   "baseY": 2249,
+   "trunk_px": 0,
+   "area_px": 6897
+  }
+ ]
+}

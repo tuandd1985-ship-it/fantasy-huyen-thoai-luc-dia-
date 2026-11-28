@@ -1,0 +1,17 @@
+{
+ "world": [
+  2804,
+  2244
+ ],
+ "objects": 194,
+ "trees": 166,
+ "rock_crystal_tops": 28,
+ "removed_area_pct": 30.21,
+ "recomposite_lossless_max_abs_diff": 0,
+ "recomposite_px_diff_gt1": 0,
+ "ground_webp_q95_vs_lossless_outside_removed_mean_abs": 1.511,
+ "water_false_positives_dropped": 11,
+ "trunk_px_kept_in_ground": 57079,
+ "fill": "texture synthesis from clean grass windows of map_1 itself (pool 32 windows), tone-matched per hole; SDXL inpaint tried first and rejected (invented boulders/huts)",
+ "seconds": 140.8
+}
