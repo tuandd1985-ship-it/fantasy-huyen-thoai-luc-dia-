@@ -263,8 +263,19 @@ def qc(rgba_u8, ref_u8=None, bir=None):
     return m
 
 
-def judge(m):
+def judge(m, profile="single"):
+    """profile="multicolor" (Luna 2026-11-28): for multi-colour objects (flower clumps, potions, banners) the
+    edge-vs-core chroma dE is not meaningful, so it is reported but not judged; such objects are judged on
+    edge spill / fringe (edge_cast, plus grey_halo where the caller measures it) and MUST be signed off on the
+    contact sheet by eye (r["visual_check_required"] is left False until a human ticks it)."""
     t = THRESH; r = {}
+    if profile == "multicolor":
+        r["core_solid"] = m["core_solid_pct"] >= t["core_solid_pct_min"]
+        r["core_holes"] = m["core_holes"] <= t["core_holes_max"]
+        r["stray_islands"] = m["stray_islands"] <= t["stray_islands_max"]
+        r["not_touching_frame_edge"] = m["touch_frame_edge"] == t["touch_frame_edge"]
+        r["edge_cast"] = m["edge_cast_pct"] < t["edge_cast_pct_max"]
+        return r
     r["core_solid"] = m["core_solid_pct"] >= t["core_solid_pct_min"]
     r["core_holes"] = m["core_holes"] <= t["core_holes_max"]
     r["stray_islands"] = m["stray_islands"] <= t["stray_islands_max"]

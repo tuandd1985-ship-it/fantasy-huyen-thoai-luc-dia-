@@ -1,0 +1,56 @@
+{
+ "settings": {
+  "seed": 730001,
+  "steps": 28,
+  "cfg": 5.0,
+  "sampler": "euler_ancestral",
+  "scheduler": "normal",
+  "controlnet": "controlnet-openpose-sdxl-xinsir.safetensors",
+  "cn_strength": 1.0,
+  "stickwidth_px": 12,
+  "dot_radius_px": 12,
+  "char_prompt": "1boy, solo, chibi, knight, light blue hair, blue eyes, steel helmet with red plume, silver plate armor, red cape, brown boots",
+  "tail": "full body, from slightly above, simple background, plain light grey background, masterpiece, high score, great score, absurdres",
+  "negative": "lowres, bad anatomy, bad hands, extra digits, fewer digits, extra arms, extra legs, text, error, cropped, worst quality, low quality, low score, bad score, average score, signature, watermark, username, blurry, multiple views, scenery",
+  "poses": {
+   "a_dung_huong_xuong": "standing, facing viewer, holding sword at side, neutral pose",
+   "b_skill_kiem": "attacking, raising sword overhead with both hands, dynamic pose, wide stance, holding sword",
+   "c_trung_don": "hurt, recoiling backwards, knocked back, arms flung out, leaning back, pained expression, holding sword"
+  },
+  "turnaround_prompt": "1boy, solo, chibi, knight, light blue hair, blue eyes, steel helmet with red plume, silver plate armor, red cape, brown boots, character turnaround, reference sheet, multiple views, front view, side view, back view, standing, holding sword, full body, simple background, plain light grey background, masterpiece, high score, great score, absurdres"
+ },
+ "jobs": {
+  "turnaround_animagine": {
+   "seconds": 25.6,
+   "vram_peak_mib_total_gpu": 7369
+  },
+  "turnaround_sdxl_base": {
+   "seconds": 25.6,
+   "vram_peak_mib_total_gpu": 7386
+  },
+  "a_dung_huong_xuong_animagine": {
+   "seconds": 31.6,
+   "vram_peak_mib_total_gpu": 7328
+  },
+  "a_dung_huong_xuong_sdxl_base": {
+   "seconds": 30.1,
+   "vram_peak_mib_total_gpu": 7329
+  },
+  "b_skill_kiem_animagine": {
+   "seconds": 30.1,
+   "vram_peak_mib_total_gpu": 7329
+  },
+  "b_skill_kiem_sdxl_base": {
+   "seconds": 30.1,
+   "vram_peak_mib_total_gpu": 7393
+  },
+  "c_trung_don_animagine": {
+   "seconds": 31.6,
+   "vram_peak_mib_total_gpu": 7929
+  },
+  "c_trung_don_sdxl_base": {
+   "seconds": 30.2,
+   "vram_peak_mib_total_gpu": 7325
+  }
+ }
+}

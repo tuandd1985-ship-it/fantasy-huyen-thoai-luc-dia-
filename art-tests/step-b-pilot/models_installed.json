@@ -1,0 +1,25 @@
+{
+ "updated": "2026-11-28",
+ "approval": "Anh Do duyệt B1 + B2 (STEP_B_DOWNLOADS.md); B3 hoãn, B4 không tải",
+ "models": [
+  {"id": "B1", "file": "animagine-xl-4.0-opt.safetensors",
+   "path": "C:/AI/ComfyUI-Local/ComfyUI/models/checkpoints/animagine-xl-4.0-opt.safetensors",
+   "source_url": "https://huggingface.co/cagliostrolab/animagine-xl-4.0/resolve/main/animagine-xl-4.0-opt.safetensors",
+   "size_bytes": 6938350040,
+   "sha256_expected": "6327eca98bfb6538dd7a4edce22484a1bbc57a8cff6b11d075d40da1afb847ac",
+   "sha256_actual": "6327eca98bfb6538dd7a4edce22484a1bbc57a8cff6b11d075d40da1afb847ac",
+   "hash_match": true, "license": "CreativeML Open RAIL++-M",
+   "license_files": ["licenses/openrail++m_LICENSE.md", "licenses/animagine-xl-4.0_README.md"],
+   "downloaded": "2026-11-28"},
+  {"id": "B2", "file": "controlnet-openpose-sdxl-xinsir.safetensors",
+   "original_name": "diffusion_pytorch_model.safetensors",
+   "path": "C:/AI/ComfyUI-Local/ComfyUI/models/controlnet/controlnet-openpose-sdxl-xinsir.safetensors",
+   "source_url": "https://huggingface.co/xinsir/controlnet-openpose-sdxl-1.0/resolve/main/diffusion_pytorch_model.safetensors",
+   "size_bytes": 2502139104,
+   "sha256_expected": "b8524e557a7df60d081f5d4a0eb109967d107df217943bf88c2d99b9ebcc06c5",
+   "sha256_actual": "b8524e557a7df60d081f5d4a0eb109967d107df217943bf88c2d99b9ebcc06c5",
+   "hash_match": true, "license": "Apache-2.0",
+   "license_files": ["licenses/apache-2.0.txt", "licenses/xinsir-openpose-sdxl_README.md"],
+   "downloaded": "2026-11-28"}
+ ]
+}

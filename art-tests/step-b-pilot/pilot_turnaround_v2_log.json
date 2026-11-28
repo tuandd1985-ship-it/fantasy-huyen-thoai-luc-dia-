@@ -1,0 +1,15 @@
+{
+ "prompt": "1boy, solo, chibi, knight, light blue hair, blue eyes, open-face steel helmet with red plume, visible face, silver plate armor, red cape, brown boots, character turnaround, reference sheet, three views, front view, side view, back view, standing, holding sword, full body, simple background, plain light grey background, masterpiece, high score, great score, absurdres",
+ "negative": "lowres, bad anatomy, bad hands, extra digits, fewer digits, extra arms, extra legs, text, error, cropped, worst quality, low quality, low score, bad score, average score, signature, watermark, username, blurry, scenery, closed helmet, visor, tall, realistic proportions",
+ "seed": 730001,
+ "jobs": {
+  "turnaround_v2_openpose_animagine": {
+   "seconds": 30.1,
+   "vram_peak_mib_total_gpu": 7901
+  },
+  "turnaround_v2_openpose_sdxl_base": {
+   "seconds": 30.1,
+   "vram_peak_mib_total_gpu": 7838
+  }
+ }
+}

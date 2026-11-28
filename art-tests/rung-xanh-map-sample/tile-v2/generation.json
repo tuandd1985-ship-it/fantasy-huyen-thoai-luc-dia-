@@ -1,0 +1,118 @@
+{
+ "model": "sd_xl_base_1.0.safetensors",
+ "sampler": "dpmpp_2m karras",
+ "steps": 28,
+ "cfg": 6.5,
+ "prompt": "seamless tileable top-down game ground texture, soft painted grass, muted olive green, low contrast, broad flat grass patches, short sparse grass strokes, a few tiny scattered flowers, stylized hand painted rpg map ground, flat even lighting, simple, calm",
+ "negative": "dense flowers, flower carpet, pink flowers, long grass blades, tall grass, realistic, photo, photorealistic, high detail, high contrast, saturated, vibrant, objects, rocks, stones, trees, path, dirt road, characters, perspective, horizon, sky, text, seams, vignette, border, frame, blurry",
+ "post": {
+  "flatten_sigma": 90,
+  "flatten_keep": 0.35,
+  "contrast": 0.8,
+  "saturation": 0.8
+ },
+ "candidates": {
+  "729001": {
+   "inpaint_seed": 729501,
+   "seconds": {
+    "txt2img": 18.1,
+    "inpaint": 18.2,
+    "post": 2.67
+   },
+   "metrics_before_post": {
+    "seam_ratio_x": 1.254,
+    "seam_ratio_y": 1.826,
+    "mean_rgb": [
+     125.4,
+     128.7,
+     68.7
+    ],
+    "mean_saturation": 0.465,
+    "luma_std": 7.46,
+    "lowfreq_luma_std": 0.65,
+    "pink_px_pct": 0.003
+   },
+   "metrics": {
+    "seam_ratio_x": 1.223,
+    "seam_ratio_y": 1.837,
+    "mean_rgb": [
+     121.9,
+     124.5,
+     76.5
+    ],
+    "mean_saturation": 0.385,
+    "luma_std": 5.74,
+    "lowfreq_luma_std": 0.38,
+    "pink_px_pct": 0.001
+   }
+  },
+  "729002": {
+   "inpaint_seed": 729502,
+   "seconds": {
+    "txt2img": 21.1,
+    "inpaint": 19.7,
+    "post": 2.71
+   },
+   "metrics_before_post": {
+    "seam_ratio_x": 0.821,
+    "seam_ratio_y": 0.905,
+    "mean_rgb": [
+     122.5,
+     126.1,
+     66.9
+    ],
+    "mean_saturation": 0.47,
+    "luma_std": 6.31,
+    "lowfreq_luma_std": 0.45,
+    "pink_px_pct": 0.001
+   },
+   "metrics": {
+    "seam_ratio_x": 0.796,
+    "seam_ratio_y": 0.893,
+    "mean_rgb": [
+     119.0,
+     122.0,
+     74.5
+    ],
+    "mean_saturation": 0.389,
+    "luma_std": 4.93,
+    "lowfreq_luma_std": 0.26,
+    "pink_px_pct": 0.0
+   }
+  },
+  "729003": {
+   "inpaint_seed": 729503,
+   "seconds": {
+    "txt2img": 18.1,
+    "inpaint": 18.1,
+    "post": 2.88
+   },
+   "metrics_before_post": {
+    "seam_ratio_x": 1.359,
+    "seam_ratio_y": 1.034,
+    "mean_rgb": [
+     118.4,
+     123.8,
+     58.5
+    ],
+    "mean_saturation": 0.528,
+    "luma_std": 4.25,
+    "lowfreq_luma_std": 0.38,
+    "pink_px_pct": 0.002
+   },
+   "metrics": {
+    "seam_ratio_x": 1.33,
+    "seam_ratio_y": 1.02,
+    "mean_rgb": [
+     114.8,
+     119.1,
+     66.8
+    ],
+    "mean_saturation": 0.439,
+    "luma_std": 3.37,
+    "lowfreq_luma_std": 0.24,
+    "pink_px_pct": 0.0
+   }
+  }
+ }
+}
