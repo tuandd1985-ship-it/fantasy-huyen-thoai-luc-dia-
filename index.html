@@ -789,7 +789,8 @@
         <h4 class="set-h">Khác</h4>
         <div class="set-row"><span>Rung máy khi đánh boss / lên cấp</span><button class="tgl" id="setVib" aria-label="Bật tắt rung máy"></button></div>
         <p class="muted" style="margin:10px 0 0">Cài đặt áp dụng ngay. Mức đồ hoạ Thấp giảm mạnh hạt hiệu ứng để máy yếu chơi mượt.</p>
-        <p class="muted" style="margin:10px 0 0">Phiên bản <b id="gameVersion">v0.5.5</b> — Nhật ký cập nhật:</p>
+        <p class="muted" style="margin:10px 0 0">Phiên bản <b id="gameVersion">v0.5.6</b> — Nhật ký cập nhật:</p>
+        <p class="muted" style="margin:4px 0 0">v0.5.6 — Rừng Xanh có chiều sâu thật: đi sau tán cây bị che tự nhiên, tán cây mờ đi khi đứng dưới; Pháp Sư chuyển động phiên bản mới.</p>
         <p class="muted" style="margin:4px 0 0">v0.5.5 — Sửa nhân vật lơ lửng, cân lại tỉ lệ với cây, lưu nhân vật tự động và bàn phím nhập tên trong game.</p>
         <p class="muted" style="margin:4px 0 0">v0.5.4 — Pháp Sư có chuyển động thật; bản đồ Rừng Xanh dùng bản làm nét mới, màu trầm hơn để nhân vật nổi bật.</p>
         <p class="muted" style="margin:4px 0 0">v0.5.3 — Quái di chuyển linh hoạt: Slime nảy thạch, sói phi, goblin nhịp bước, boss uy nghi.</p>
@@ -842,6 +843,9 @@
 
 <script src="assets-data-1.js"></script>
 <script src="assets-data-2.js"></script>
+<script src="assets-data-3.js"></script>
+<script src="assets-data-4.js"></script>
+<script src="assets-data-5.js"></script>
 <script>document.querySelectorAll('img[data-akey]').forEach(function(im){im.src=__A[im.getAttribute('data-akey')];});</script>
 <script>
 'use strict';
@@ -949,8 +953,12 @@ const ASSETS = {
   /* Tile nền liền mạch riêng cho mặt đất Rừng Xanh (v0.4.0) */
   ground: {
     'forestTile': __A.k32,
-    /* Tranh nguyên khối toàn map Rừng Xanh (v0.5.0) — nền + minimap */
+    /* Rừng Xanh vẽ 2 lớp (v0.5.6): map-rung-xanh.webp = LỚP NỀN ĐÃ GỠ TÁN
+       (vẽ làm nền thế giới); bản ĐẦY ĐỦ chỉ dùng cho minimap / bản đồ lớn;
+       mask thang xám (trắng = vùng bị tán che) phục vụ làm mờ tán cây. */
     'forestMap': __A.k33,
+    'forestMapFull': __A.k34,
+    'forestMask': __A.k35,
   },
 };
 /* Danh sách phẳng MỌI file ảnh (toàn literal) — dùng để preload màn chờ */
@@ -974,10 +982,136 @@ const ASSET_FILES = [
   __A.k31,
   __A.k32,
   __A.k33,
+  __A.k34, __A.k35, __A.k36,
+  __A.k37, __A.k38, __A.k39,
+  __A.k40, __A.k41, __A.k42,
+  __A.k43, __A.k44, __A.k45,
+  __A.k46, __A.k47, __A.k48,
+  __A.k49, __A.k50, __A.k51,
+  __A.k52, __A.k53, __A.k54,
+  __A.k55, __A.k56, __A.k57,
+  __A.k58, __A.k59, __A.k60,
+  __A.k61, __A.k62, __A.k63,
+  __A.k64, __A.k65, __A.k66,
+  __A.k67, __A.k68, __A.k69,
+  __A.k70, __A.k71, __A.k72,
+  __A.k73, __A.k74, __A.k75,
+  __A.k76, __A.k77, __A.k78,
+  __A.k79, __A.k80, __A.k81,
+  __A.k82, __A.k83, __A.k84,
+  __A.k85, __A.k86, __A.k87,
+  __A.k88, __A.k89, __A.k90,
+  __A.k91, __A.k92, __A.k93,
+  __A.k94, __A.k95, __A.k96,
+  __A.k97, __A.k98, __A.k99,
+  __A.k100, __A.k101, __A.k102,
+  __A.k103, __A.k104, __A.k105,
+  __A.k106, __A.k107, __A.k108,
+  __A.k109, __A.k110, __A.k111,
+  __A.k112, __A.k113, __A.k114,
+  __A.k115, __A.k116, __A.k117,
+  __A.k118, __A.k119, __A.k120,
+  __A.k121, __A.k122, __A.k123,
+  __A.k124, __A.k125, __A.k126,
+  __A.k127, __A.k128, __A.k129,
+  __A.k130, __A.k131, __A.k132,
+  __A.k133, __A.k134, __A.k135,
+  __A.k136, __A.k137, __A.k138,
+  __A.k139, __A.k140, __A.k141,
+  __A.k142, __A.k143, __A.k144,
+  __A.k145, __A.k146, __A.k147,
+  __A.k148, __A.k149, __A.k150,
+  __A.k151, __A.k152, __A.k153,
+  __A.k154, __A.k155, __A.k156,
+  __A.k157, __A.k158, __A.k159,
+  __A.k160, __A.k161, __A.k162,
+  __A.k163, __A.k164, __A.k165,
+  __A.k166, __A.k167, __A.k168,
+  __A.k169, __A.k170, __A.k171,
+  __A.k172, __A.k173, __A.k174,
+  __A.k175, __A.k176, __A.k177,
+  __A.k178, __A.k179, __A.k180,
+  __A.k181, __A.k182, __A.k183,
+  __A.k184, __A.k185, __A.k186,
+  __A.k187, __A.k188, __A.k189,
+  __A.k190, __A.k191, __A.k192,
+  __A.k193, __A.k194, __A.k195,
+  __A.k196, __A.k197, __A.k198,
+  __A.k199, __A.k200, __A.k201,
+  __A.k202, __A.k203, __A.k204,
+  __A.k205, __A.k206, __A.k207,
+  __A.k208, __A.k209, __A.k210,
+  __A.k211, __A.k212, __A.k213,
+  __A.k214, __A.k215, __A.k216,
+  __A.k217, __A.k218, __A.k219,
+  __A.k220, __A.k221, __A.k222,
+  __A.k223, __A.k224, __A.k225,
+  __A.k226, __A.k227, __A.k228,
+  __A.k229,
 ];
 
 /* Phiên bản game hiện tại — hiển thị trong panel Cài đặt */
-const GAME_VERSION = 'v0.5.5';
+const GAME_VERSION = 'v0.5.6';
+
+/* =====================================================================
+   VẬT THỂ TÁCH LỚP RỪNG XANH (v0.5.6) — dữ liệu từ layers.json của
+   Claude: 194 vật thể (166 tán cây + 28 ngọn đá/pha lê), mỗi vật thể là
+   1 ảnh WebP trong suốt ở assets/objects/. Tuple:
+   [file, kind (0 = tán cây, 1 = đá/pha lê), x, y, w, h, baseY] — bbox
+   theo tọa độ thế giới 2804×2244, baseY = Y của gốc vật thể để Y-sort
+   cùng hero/quái/cổng. Danh sách ĐÃ sắp xếp sẵn theo baseY tăng dần.
+   ===================================================================== */
+const FOREST_OBJECTS = [
+  ["tree_000.webp",0,2019,0,145,50,54],["tree_001.webp",0,172,0,127,69,73],["tree_002.webp",0,2554,0,149,90,94],["tree_003.webp",0,1039,0,155,128,132],
+  ["tree_004.webp",0,2366,0,118,97,159],["tree_005.webp",0,566,16,121,140,160],["tree_006.webp",0,671,0,185,165,169],["tree_007.webp",0,1281,30,138,133,170],
+  ["tree_008.webp",0,1650,36,158,131,171],["rock_009.webp",1,1354,2,302,129,181],["tree_010.webp",0,920,26,210,163,193],["rock_011.webp",1,2515,33,218,119,197],
+  ["tree_012.webp",0,1446,57,135,137,198],["tree_013.webp",0,1634,126,118,70,200],["tree_014.webp",0,183,63,163,141,208],["tree_015.webp",0,2191,0,211,189,217],
+  ["tree_016.webp",0,2695,95,109,140,239],["tree_017.webp",0,134,118,76,123,245],["tree_018.webp",0,1411,173,71,80,257],["tree_019.webp",0,1473,188,124,69,261],
+  ["tree_020.webp",0,979,159,183,113,276],["tree_021.webp",0,2467,146,137,151,301],["tree_022.webp",0,591,146,143,154,304],["tree_023.webp",0,867,163,123,141,308],
+  ["tree_024.webp",0,33,56,142,214,326],["tree_025.webp",0,1812,147,181,175,326],["tree_026.webp",0,965,210,236,134,348],["tree_027.webp",0,2703,204,101,155,363],
+  ["tree_028.webp",0,1877,278,92,97,379],["tree_029.webp",0,2265,303,74,75,382],["tree_030.webp",0,2560,312,62,70,386],["tree_031.webp",0,1943,94,263,286,393],
+  ["tree_032.webp",0,2300,223,172,167,394],["rock_033.webp",1,294,206,159,137,396],["tree_034.webp",0,1341,230,252,198,432],["tree_035.webp",0,2709,350,95,93,447],
+  ["tree_036.webp",0,2410,269,171,190,463],["tree_037.webp",0,1470,392,73,73,469],["tree_038.webp",0,2321,375,128,122,501],["tree_039.webp",0,2211,417,149,89,510],
+  ["tree_040.webp",0,765,333,76,106,515],["rock_041.webp",1,2612,452,66,61,533],["rock_042.webp",1,293,454,73,72,551],["tree_043.webp",0,892,433,146,125,562],
+  ["tree_044.webp",0,1648,373,286,186,563],["rock_045.webp",1,2675,496,54,56,570],["tree_046.webp",0,778,337,160,230,571],["tree_047.webp",0,346,520,118,62,586],
+  ["tree_048.webp",0,191,284,226,300,588],["rock_049.webp",1,620,410,172,139,603],["tree_050.webp",0,2464,541,158,101,646],["tree_051.webp",0,2634,565,147,78,647],
+  ["tree_052.webp",0,1269,578,115,70,652],["tree_053.webp",0,542,561,104,101,666],["tree_054.webp",0,1550,506,129,179,689],["tree_055.webp",0,2085,538,97,153,695],
+  ["tree_056.webp",0,1662,525,178,181,710],["tree_057.webp",0,2495,616,198,117,737],["tree_058.webp",0,1114,552,167,184,740],["tree_059.webp",0,2138,566,157,174,744],
+  ["tree_060.webp",0,632,576,212,165,745],["tree_061.webp",0,2647,665,157,80,749],["tree_062.webp",0,2067,666,75,102,772],["tree_063.webp",0,4,681,109,94,779],
+  ["rock_064.webp",1,2089,729,68,61,810],["tree_065.webp",0,910,631,199,180,815],["rock_066.webp",1,1040,757,100,48,819],["tree_067.webp",0,1925,632,258,198,834],
+  ["rock_068.webp",1,1068,657,177,129,835],["tree_069.webp",0,259,659,121,197,860],["tree_070.webp",0,1171,743,184,117,864],["tree_071.webp",0,2365,710,174,163,877],
+  ["tree_072.webp",0,984,732,249,155,891],["tree_073.webp",0,2278,788,87,114,906],["tree_074.webp",0,340,673,207,234,911],["tree_075.webp",0,190,785,192,136,925],
+  ["tree_076.webp",0,1634,766,194,160,930],["tree_077.webp",0,1701,885,82,83,972],["rock_078.webp",1,2209,851,147,97,984],["tree_079.webp",0,2316,817,192,174,995],
+  ["tree_080.webp",0,57,811,132,181,996],["tree_081.webp",0,761,900,170,89,997],["tree_082.webp",0,1670,923,225,86,1013],["tree_083.webp",0,5,925,132,87,1016],
+  ["tree_084.webp",0,2637,809,167,230,1043],["rock_085.webp",1,169,864,222,129,1043],["rock_086.webp",1,2646,949,66,73,1048],["tree_087.webp",0,1224,958,144,103,1065],
+  ["rock_088.webp",1,2467,773,181,210,1067],["tree_089.webp",0,2319,966,156,107,1077],["tree_090.webp",0,164,1009,210,105,1118],["tree_091.webp",0,75,995,100,125,1124],
+  ["tree_092.webp",0,2581,936,223,231,1171],["tree_093.webp",0,451,951,217,217,1172],["tree_094.webp",0,2092,1102,107,68,1174],["tree_095.webp",0,1558,1080,129,101,1185],
+  ["tree_096.webp",0,1463,1028,135,156,1188],["tree_097.webp",0,884,966,207,220,1190],["tree_098.webp",0,1649,1131,58,58,1193],["tree_099.webp",0,0,1015,113,179,1198],
+  ["tree_100.webp",0,356,1130,123,70,1215],["tree_101.webp",0,977,1033,167,184,1221],["tree_102.webp",0,1348,1139,101,79,1222],["tree_103.webp",0,2413,1177,115,86,1267],
+  ["rock_104.webp",1,1410,1126,115,118,1289],["tree_105.webp",0,1486,1182,111,105,1291],["tree_106.webp",0,0,1120,188,181,1305],["tree_107.webp",0,675,1146,127,158,1308],
+  ["tree_108.webp",0,861,1192,106,137,1333],["rock_109.webp",1,2364,1211,203,101,1350],["tree_110.webp",0,137,1133,126,197,1352],["tree_111.webp",0,2540,1136,223,225,1365],
+  ["tree_112.webp",0,791,1301,74,73,1378],["tree_113.webp",0,723,1138,177,237,1379],["tree_114.webp",0,1170,1209,131,169,1382],["tree_115.webp",0,1294,1209,243,187,1400],
+  ["tree_116.webp",0,2334,1282,144,119,1405],["tree_117.webp",0,0,1259,221,148,1411],["tree_118.webp",0,1228,1335,99,90,1429],["tree_119.webp",0,2478,1312,128,118,1434],
+  ["tree_120.webp",0,2595,1362,78,81,1447],["tree_121.webp",0,1115,1308,85,136,1448],["tree_122.webp",0,362,1370,96,77,1451],["tree_123.webp",0,1959,1322,139,137,1463],
+  ["tree_124.webp",0,446,1373,76,86,1463],["tree_125.webp",0,1895,1312,99,153,1469],["tree_126.webp",0,2239,1382,121,132,1518],["tree_127.webp",0,1844,1377,82,139,1520],
+  ["tree_128.webp",0,501,1451,89,76,1531],["tree_129.webp",0,979,1461,108,70,1535],["tree_130.webp",0,2033,1418,250,209,1631],["tree_131.webp",0,815,1450,233,185,1639],
+  ["tree_132.webp",0,214,1448,207,204,1656],["tree_133.webp",0,2272,1535,70,119,1658],["tree_134.webp",0,0,1503,120,165,1672],["tree_135.webp",0,415,1447,219,232,1683],
+  ["tree_136.webp",0,963,1627,82,68,1699],["tree_137.webp",0,1374,1530,232,171,1705],["tree_138.webp",0,353,1572,117,131,1707],["tree_139.webp",0,1169,1557,89,149,1710],
+  ["tree_140.webp",0,105,1502,120,212,1718],["rock_141.webp",1,306,1630,83,77,1734],["tree_142.webp",0,1021,1548,176,186,1738],["tree_143.webp",0,2052,1580,229,183,1767],
+  ["tree_144.webp",0,1772,1589,184,147,1776],["tree_145.webp",0,2541,1545,184,229,1778],["tree_146.webp",0,1399,1690,86,85,1779],["tree_147.webp",0,1466,1721,71,63,1788],
+  ["rock_148.webp",1,2516,1684,83,78,1789],["tree_149.webp",0,0,1662,113,132,1798],["rock_150.webp",1,308,1745,64,45,1803],["tree_151.webp",0,2255,1683,159,134,1821],
+  ["tree_152.webp",0,1462,1668,221,150,1822],["tree_153.webp",0,2145,1667,138,158,1829],["tree_154.webp",0,718,1746,139,84,1843],["rock_155.webp",1,96,1571,164,195,1843],
+  ["tree_156.webp",0,1670,1747,69,94,1845],["tree_157.webp",0,304,1717,196,125,1846],["rock_158.webp",1,2274,1537,226,227,1855],["tree_159.webp",0,284,1746,144,151,1901],
+  ["tree_160.webp",0,618,1761,159,142,1907],["tree_161.webp",0,2406,1785,117,119,1908],["tree_162.webp",0,1546,1803,141,103,1910],["tree_163.webp",0,115,1795,192,119,1918],
+  ["tree_164.webp",0,0,1770,119,154,1928],["rock_165.webp",1,299,1866,87,62,1949],["tree_166.webp",0,81,1850,89,100,1954],["rock_167.webp",1,1294,1876,65,67,1966],
+  ["rock_168.webp",1,1320,1923,85,78,2029],["tree_169.webp",0,94,1903,122,124,2031],["rock_170.webp",1,2196,1934,155,90,2056],["tree_171.webp",0,859,1884,119,172,2060],
+  ["tree_172.webp",0,206,1891,273,168,2063],["tree_173.webp",0,1763,1861,203,205,2070],["tree_174.webp",0,2487,1702,317,299,2078],["tree_175.webp",0,1261,1977,149,109,2090],
+  ["tree_176.webp",0,1528,1947,116,157,2108],["tree_177.webp",0,2339,1981,222,129,2114],["tree_178.webp",0,1028,1888,245,223,2115],["tree_179.webp",0,1829,1939,203,195,2138],
+  ["rock_180.webp",1,2263,2056,106,64,2142],["tree_181.webp",0,2296,2039,125,104,2147],["tree_182.webp",0,1904,2113,51,58,2175],["tree_183.webp",0,942,1911,137,278,2193],
+  ["rock_184.webp",1,2390,2077,86,89,2198],["tree_185.webp",0,1068,2104,81,94,2202],["tree_186.webp",0,767,2046,183,153,2203],["tree_187.webp",0,1225,2092,103,119,2215],
+  ["rock_188.webp",1,2476,2054,167,121,2221],["tree_189.webp",0,1610,1980,240,209,2226],["tree_190.webp",0,890,2152,148,71,2227],["tree_191.webp",0,1131,2045,147,199,2249],
+  ["tree_192.webp",0,590,2028,246,216,2249],["tree_193.webp",0,1021,2150,161,94,2249],
+];
 
 /* =====================================================================
    LƯỚI VA CHẠM RỪNG XANH (v0.5.0) — suy từ chính tranh nguyên khối:
@@ -1361,6 +1495,7 @@ let pendingHits = [];   // đòn cận chiến chờ chạm mục tiêu (xử l�
 let atkHeld = false;    // đang giữ nút đánh → tự đánh lặp ngay khi hết hồi chiêu
 let stageKills = 0, spawned = 0, spawnTimer = 0, stageState = 'fighting';
 let shake = 0, flash = 0, timeNow = 0, frameNo = 0;
+let frameDt = 0.016;   /* dt của khung hình hiện tại (loop ghi) — cho nội suy mờ tán cây */
 let skillState = CONFIG.classes.swordsman.skills.map(() => ({ cd: 0 }));
 let supState = CONFIG.classes.swordsman.support.map(() => ({ cd: 0 }));
 const input = { jx: 0, jy: 0 };
@@ -2065,10 +2200,11 @@ const Sprites = {
 
   /* ----- Nền thế giới: đất, điểm trang trí, viền map, cổng ----- */
   background(ctx, map, cam) {
-    /* Rừng Xanh v0.5.0: mặt đất = TRANH NGUYÊN KHỐI phủ toàn bộ thế giới
-       (sông/cầu/cây/đá/hang đã vẽ sẵn trong tranh) — không tile lặp, không
-       trang trí/viền vẽ code chồng lên tranh. Tranh chưa tải xong → tạm
-       rơi về nền tile cũ bên dưới. Map khác giữ nguyên 100%. */
+    /* Rừng Xanh: mặt đất = LỚP NỀN ĐÃ GỠ TÁN phủ toàn bộ thế giới
+       (v0.5.6; sông/cầu/thân cây/gốc đá vẫn vẽ sẵn trong lớp nền) — các
+       tán cây / ngọn đá tách riêng tham gia Y-sort ở vòng vẽ chính để
+       che thực thể đúng chiều sâu. Nền chưa tải xong → tạm rơi về nền
+       tile cũ bên dưới. Map khác giữ nguyên 100%. */
     const painted = map.id === 'forest' && !!this.mapArt;
     if (painted) ctx.drawImage(this.mapArt, 0, 0, WORLD.w, WORLD.h);
     let tiled = false;
@@ -2443,6 +2579,15 @@ const Sprites = {
   propArt: {},
   groundTile: null,
   mapArt: null,
+  /* v0.5.6 — lớp tách Rừng Xanh: tranh ĐẦY ĐỦ (chỉ cho minimap/bản đồ
+     lớn), danh sách vật thể Y-sort kèm alpha hiện tại để làm mờ tán, và
+     mask tán cây đã đọc 1 lần vào mảng (nửa độ phân giải) để tra cứu
+     theo chỉ số — không getImageData mỗi khung. */
+  mapArtFull: null,
+  forestObjs: [],
+  canopyData: null,
+  canopyW: 0,
+  canopyH: 0,
   _tilePat: null,
   loadMonsterArt() {
     for (const k of Object.keys(ASSETS.monster)) {
@@ -2469,10 +2614,58 @@ const Sprites = {
     const tile = new Image();
     tile.onload = () => { this.groundTile = tile; this._tilePat = null; };
     tile.src = ASSETS.ground.forestTile;
-    /* Tranh nguyên khối Rừng Xanh (v0.5.0): nền thế giới + nền minimap */
+    /* Lớp nền Rừng Xanh ĐÃ GỠ TÁN (v0.5.6): vẽ làm nền thế giới */
     const mapImg = new Image();
     mapImg.onload = () => { this.mapArt = mapImg; };
     mapImg.src = ASSETS.ground.forestMap;
+    /* Tranh ĐẦY ĐỦ Rừng Xanh: CHỈ minimap / bản đồ lớn dùng ảnh này */
+    const fullImg = new Image();
+    fullImg.onload = () => { this.mapArtFull = fullImg; };
+    fullImg.src = ASSETS.ground.forestMapFull;
+    /* Mask tán cây: nạp 1 lần, vẽ thu nhỏ 1/2 vào canvas ngoài màn hình
+       rồi đọc TOÀN BỘ vào mảng Uint8Array — từ đó tra giá trị tại điểm
+       chân thực thể bằng chỉ số mảng, không đọc ảnh lại mỗi khung. */
+    const maskImg = new Image();
+    maskImg.onload = () => {
+      try {
+        const MW = 1402, MH = 1122;
+        const mc = document.createElement('canvas'); mc.width = MW; mc.height = MH;
+        const mg = mc.getContext('2d', { willReadFrequently: true });
+        mg.drawImage(maskImg, 0, 0, MW, MH);
+        const md = mg.getImageData(0, 0, MW, MH).data;
+        const arr = new Uint8Array(MW * MH);
+        for (let i = 0; i < MW * MH; i++) arr[i] = md[i * 4];
+        this.canopyData = arr; this.canopyW = MW; this.canopyH = MH;
+      } catch (e) { /* mask lỗi → bỏ qua hiệu ứng mờ, Y-sort vẫn chạy */ }
+    };
+    maskImg.src = ASSETS.ground.forestMask;
+    /* 194 vật thể tách lớp: dựng bản ghi (đã sắp theo baseY) + nạp ảnh */
+    this.forestObjs = FOREST_OBJECTS.map(t => ({
+      file: t[0], kind: t[1], x: t[2], y: t[3], w: t[4], h: t[5], baseY: t[6],
+      img: null, alpha: 1,
+    }));
+    for (const o of this.forestObjs) {
+      const im = new Image();
+      im.onload = () => { o.img = im; };
+      im.src = 'assets/objects/' + o.file;
+    }
+  },
+  /* Giá trị mask tán cây (0–255) tại điểm thế giới (x, y) — tra mảng đã
+     đọc sẵn; chưa nạp xong mask thì trả 0 (không mờ). */
+  canopyAt(x, y) {
+    if (!this.canopyData) return 0;
+    const mx = clamp(Math.floor(x * this.canopyW / 2804), 0, this.canopyW - 1);
+    const my = clamp(Math.floor(y * this.canopyH / 2244), 0, this.canopyH - 1);
+    return this.canopyData[my * this.canopyW + mx];
+  },
+  /* Vẽ 1 vật thể tách lớp tại bbox thế giới của nó với alpha hiện tại
+     (alpha < 1 khi có thực thể đứng dưới tán — xem updateForestFade) */
+  forestObjImage(ctx, o) {
+    if (!o.img) return;
+    const prevA = ctx.globalAlpha;
+    ctx.globalAlpha = o.alpha;
+    ctx.drawImage(o.img, o.x, o.y, o.w, o.h);
+    ctx.globalAlpha = prevA;
   },
   /* Vẽ ẢNH quái neo tại CHÂN trong hệ transform hiện tại của Sprites.monster
      (đã translate tới chân + scale theo face/size): chiều cao đích = HGT của
@@ -4042,6 +4235,38 @@ function updateCamera(dt) {
   cam.x += (tx - cam.x) * k; cam.y += (ty - cam.y) * k;
 }
 
+/* ----- LÀM MỜ TÁN CÂY RỪNG XANH (v0.5.6) -----
+   Mỗi khung: với các vật thể đang giao khung hình, kiểm tra có thực thể
+   nào (hero hoặc quái) đang đứng DƯỚI nó không — điểm chân nằm trong
+   vùng mask sáng (> 110) VÀ nằm trong bbox của vật thể VÀ ở phía trên
+   baseY của vật thể (đang đứng sau/dưới tán). Có → alpha đích 0.35;
+   không → 1. Alpha nội suy tuyến tính theo dt: đi hết quãng 0.65 trong
+   ~150ms nên chuyển mờ/ra rõ MƯỢT, không nhảy đột ngột. Chỉ chạy ở
+   Rừng Xanh (forestEnv); map khác không có lớp này. */
+function updateForestFade(dt) {
+  if (!forestEnv || !Sprites.canopyData) return;
+  const objs = Sprites.forestObjs;
+  if (!objs.length) return;
+  const step = dt * (0.65 / 0.15);
+  for (const o of objs) {
+    if (!o.img) continue;
+    if (o.x + o.w < cam.x - 60 || o.x > cam.x + W + 60 || o.y + o.h < cam.y - 60 || o.y > cam.y + H + 60) {
+      if (o.alpha !== 1) o.alpha = 1;
+      continue;
+    }
+    let under = false;
+    if (hero && !hero.dead && hero.y < o.baseY && hero.x >= o.x - 6 && hero.x <= o.x + o.w + 6 && hero.y >= o.y - 6 && hero.y <= o.y + o.h + 6 && Sprites.canopyAt(hero.x, hero.y) > 110) under = true;
+    if (!under) {
+      for (const m of monsters) {
+        if (m.y < o.baseY && m.x >= o.x - 6 && m.x <= o.x + o.w + 6 && m.y >= o.y - 6 && m.y <= o.y + o.h + 6 && Sprites.canopyAt(m.x, m.y) > 110) { under = true; break; }
+      }
+    }
+    const target = under ? 0.35 : 1;
+    if (o.alpha < target) o.alpha = Math.min(target, o.alpha + step);
+    else if (o.alpha > target) o.alpha = Math.max(target, o.alpha - step);
+  }
+}
+
 /* ----- Vẽ ----- */
 function draw() {
   const { map } = currentMap();
@@ -4137,6 +4362,19 @@ function draw() {
     if (p.layer !== 'sorted') continue;
     if (p.x < cam.x - 180 || p.x > cam.x + W + 180 || p.y < cam.y - 340 || p.y > cam.y + H + 80) continue;
     list.push({ y: p.y + (p.sortY || 0), f: () => Sprites.propImage(ctx, p) });
+  }
+  /* Vật thể tách lớp Rừng Xanh (v0.5.6): tán cây / ngọn đá tham gia
+     CHUNG danh sách Y-sort theo baseY — vật thể có baseY lớn hơn điểm
+     chân thực thể thì vẽ sau (che thực thể), nhỏ hơn thì vẽ trước.
+     Chỉ vẽ vật thể giao khung hình camera; alpha do updateForestFade
+     quyết định (mờ xuống 0.35 khi có thực thể đứng dưới tán). */
+  if (forestEnv) {
+    updateForestFade(frameDt);
+    for (const o of Sprites.forestObjs) {
+      if (!o.img) continue;
+      if (o.x + o.w < cam.x - 40 || o.x > cam.x + W + 40 || o.y + o.h < cam.y - 40 || o.y > cam.y + H + 40) continue;
+      list.push({ y: o.baseY, f: () => Sprites.forestObjImage(ctx, o) });
+    }
   }
   for (const d of drops) {
     list.push({ y: d.y, f: () => drawDrop(d) });
@@ -4345,7 +4583,7 @@ function drawDrop(d) {
 let lastTs = 0;
 function loop(ts) {
   const dt = Math.min(0.05, (ts - lastTs) / 1000 || 0.016);
-  lastTs = ts;
+  lastTs = ts; frameDt = dt;
   update(dt); draw();
   requestAnimationFrame(loop);
 }
@@ -4359,10 +4597,11 @@ const Minimap = {
     const sx = w / WORLD.w, sy = h / WORLD.h;
     c.fillStyle = map.groundDark; c.fillRect(0, 0, w, h);
     if (forestEnv && map.id === 'forest') {
-      /* v0.5.0: nền minimap / bản đồ lớn = chính TRANH NGUYÊN KHỐI của map
-         (sông/cầu/đá thấy thật trên bản đồ); các vòng vùng + chấm đánh dấu
-         giữ nguyên như trước */
-      if (Sprites.mapArt) c.drawImage(Sprites.mapArt, 0, 0, w, h);
+      /* v0.5.6: nền minimap / bản đồ lớn = TRANH ĐẦY ĐỦ của map (bản có
+         tán cây — nhìn như trước khi tách lớp), KHÔNG dùng lớp nền đã gỡ
+         tán đang vẽ ở thế giới; các vòng vùng + chấm đánh dấu giữ nguyên */
+      const mmArt = Sprites.mapArtFull || Sprites.mapArt;
+      if (mmArt) c.drawImage(mmArt, 0, 0, w, h);
       c.strokeStyle = 'rgba(238,194,106,.8)'; c.lineWidth = 1.4;
       c.beginPath(); c.arc(forestEnv.safe.x * sx, forestEnv.safe.y * sy, forestEnv.safe.r * sx, 0, Math.PI * 2); c.stroke();
       c.strokeStyle = 'rgba(255,110,80,.8)';
