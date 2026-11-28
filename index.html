@@ -760,7 +760,8 @@
         <h4 class="set-h">Khác</h4>
         <div class="set-row"><span>Rung máy khi đánh boss / lên cấp</span><button class="tgl" id="setVib" aria-label="Bật tắt rung máy"></button></div>
         <p class="muted" style="margin:10px 0 0">Cài đặt áp dụng ngay. Mức đồ hoạ Thấp giảm mạnh hạt hiệu ứng để máy yếu chơi mượt.</p>
-        <p class="muted" style="margin:10px 0 0">Phiên bản <b id="gameVersion">v0.5.2</b> — Nhật ký cập nhật:</p>
+        <p class="muted" style="margin:10px 0 0">Phiên bản <b id="gameVersion">v0.5.3</b> — Nhật ký cập nhật:</p>
+        <p class="muted" style="margin:4px 0 0">v0.5.3 — Quái di chuyển linh hoạt: Slime nảy thạch, sói phi, goblin nhịp bước, boss uy nghi.</p>
         <p class="muted" style="margin:4px 0 0">v0.5.2 — Bản đồ Rừng Xanh nét hơn với ảnh độ phân giải cao.</p>
         <p class="muted" style="margin:4px 0 0">v0.5.1 — Hiệu ứng skill mới: vệt sáng, hạt nguyên tố, vòng cảnh báo và khiên buff đẹp hơn cho cả 3 phái.</p>
         <p class="muted" style="margin:4px 0 0">v0.5.0 — Rừng Xanh dùng bản đồ tranh nguyên khối mới: sông/cầu/cây/đá đúng theo tranh, đi qua sông bằng cầu gỗ.</p>
@@ -931,7 +932,7 @@ const ASSET_FILES = [
 ];
 
 /* Phiên bản game hiện tại — hiển thị trong panel Cài đặt */
-const GAME_VERSION = 'v0.5.2';
+const GAME_VERSION = 'v0.5.3';
 
 /* =====================================================================
    LƯỚI VA CHẠM RỪNG XANH (v0.5.0) — suy từ chính tranh nguyên khối:
@@ -1283,6 +1284,7 @@ const hero = {
   blockT: 0,
 };
 let monsters = [], drops = [], floaters = [], particles = [], slashes = [], projectiles = [], telegraphs = [], obstacles = [];
+let deathFx = [];   // xác quái vừa chết: phồng nhẹ ~0.18s rồi vỡ thành hạt theo màu họ (v0.5.3) — không để lại xác
 let stageProps = [];   // part prop theo lớp của map hiện tại (Rừng Xanh v0.4.0) — nạp lại ở genStageWorld
 let pendingHits = [];   // đòn cận chiến chờ chạm mục tiêu (xử lý theo khung hình, không dùng setTimeout)
 let atkHeld = false;    // đang giữ nút đánh → tự đánh lặp ngay khi hết hồi chiêu
@@ -2343,10 +2345,11 @@ const Sprites = {
     const baseA = ctx.globalAlpha;
     const hgt = this.HGT[m.type] || 70;
     const w = hgt * img.naturalWidth / img.naturalHeight;
-    const bob = m.def.fly ? 0 : Math.abs(Math.sin(m.walkPh)) * hgt * 0.022;
-    ctx.drawImage(img, -w / 2, -hgt - bob, w, hgt);
-    if (m.poisonT > 0 && this.monsterArtTint[m.type + '-green']) { ctx.globalAlpha = baseA * 0.30; ctx.drawImage(this.monsterArtTint[m.type + '-green'], -w / 2, -hgt - bob, w, hgt); ctx.globalAlpha = baseA; }
-    if (m.hitT > 0 && this.monsterArtTint[m.type + '-red']) { ctx.globalAlpha = baseA * Math.min(0.5, m.hitT * 2.2); ctx.drawImage(this.monsterArtTint[m.type + '-red'], -w / 2, -hgt - bob, w, hgt); ctx.globalAlpha = baseA; }
+    /* Nhún/nảy thân do lớp bọc Sprites.monster lo (v0.5.3: transform quanh
+       chân theo hồ sơ họ quái) — ở đây chỉ vẽ ảnh đúng khung neo chân */
+    ctx.drawImage(img, -w / 2, -hgt, w, hgt);
+    if (m.poisonT > 0 && this.monsterArtTint[m.type + '-green']) { ctx.globalAlpha = baseA * 0.30; ctx.drawImage(this.monsterArtTint[m.type + '-green'], -w / 2, -hgt, w, hgt); ctx.globalAlpha = baseA; }
+    if (m.hitT > 0 && this.monsterArtTint[m.type + '-red']) { ctx.globalAlpha = baseA * Math.min(0.5, m.hitT * 2.2); ctx.drawImage(this.monsterArtTint[m.type + '-red'], -w / 2, -hgt, w, hgt); ctx.globalAlpha = baseA; }
     return true;
   },
   /* Vẽ 1 part prop theo anchor của nó (bóng đã nung sẵn trong ảnh: baked) */
@@ -2535,19 +2538,188 @@ const Sprites = {
    (boss) × 1.38 (sizeMul) ≈ 373px ≈ 2.5 hero. Các họ vẽ code ở map khác
    giữ nguyên số cũ (HGT ở đó chỉ neo thanh máu/số nổi, không đổi hình). */
 Sprites.HGT = { slime:130, goblin:135, goblinArcher:135, goblinShaman:135, wolf:130, fireWolf:50, iceWolf:50, wolfLord:180, bat:30, vulture:44, spider:46, spiderQueen:58, skeleton:72, mummy:74, pharaoh:92, toad:50, toadKing:60, lizard:68, scorpion:40, imp:62, magmaGolem:92, iceGolem:100, yeti:98, witch:76, iceWitch:76, darkKnight:82, vampire:78, cultist:72, wraith:74, fireDragon:118, demonLord:128 };
+/* =====================================================================
+   v0.5.3 — QUÁI DI CHUYỂN LINH HOẠT (chuyển động thủ tục trên ảnh tĩnh)
+   Hồ sơ chuyển động theo HỌ quái; phase (m.walkPh) chạy theo QUÃNG ĐƯỜNG
+   đã đi thật (cộng dồn trong updateMonster qua motionStride) nên quái
+   dừng là đứng yên tự nhiên, không trượt chân. Mọi biến dạng áp qua
+   transform quanh điểm neo ở CHÂN trong Sprites.monster — lớp vẽ DÙNG
+   CHUNG cho mọi map, cả quái ảnh thật lẫn quái vẽ code. Bóng đổ neo tại
+   vị trí logic, không đi theo biến dạng thân. Thuần lớp vẽ: không đổi
+   chỉ số / tốc độ / sát thương / AI / phạm vi của bất kỳ quái nào.
+   Biên độ: Đồ họa Thấp → ×0.5; quái ngoài khung hình → 0 (vẽ tĩnh).
+   Đối tượng đệm MM dùng chung, không cấp phát mới trong vòng lặp vẽ.
+   ===================================================================== */
+function motionProfileOf(m) {
+  if (m.boss) return 'boss';
+  if (m.def.fly) return 'fly';
+  switch (m.type) {
+    case 'slime': case 'toad': return 'slime';
+    case 'wolf': case 'fireWolf': case 'iceWolf': case 'spider': case 'scorpion': return 'beast';
+    default: return 'biped';
+  }
+}
+/* Độ dài 1 chu kỳ bước/nảy tính bằng px đường đi — quyết định nhịp phase */
+function motionStride(m) {
+  const p = motionProfileOf(m);
+  return p === 'slime' ? 52 : p === 'beast' ? 76 : p === 'boss' ? 110 : p === 'fly' ? 60 : (m.def.behavior === 'tank' ? 58 : 46);
+}
+function motionAmp() { const q = Roster.settings.quality; return q === 'low' ? 0.5 : 1; }
+/* Màu hạt vỡ khi chết theo họ quái (nối hệ hạt v0.5.1) */
+const MONSTER_COLORS = { slime:'#57c96e', goblin:'#79b257', goblinArcher:'#79b257', goblinShaman:'#b678e8', wolf:'#9a8d7d', wolfLord:'#ffb03a', fireWolf:'#ff9a2e', iceWolf:'#aee6ff', bat:'#8b76c9', spider:'#8b46c7', spiderQueen:'#b678e8', skeleton:'#e8e6da', mummy:'#d9c9a3', pharaoh:'#eec26a', toad:'#7ed957', toadKing:'#a4d65e', lizard:'#67924e', scorpion:'#d9a441', imp:'#ff7a2e', magmaGolem:'#ff6a3d', yeti:'#dfe9f2', iceGolem:'#aee6ff', iceWitch:'#69b7ff', darkKnight:'#8a93a8', vampire:'#e0483e', cultist:'#c9a0ff', wraith:'#bfe3ff', fireDragon:'#ff5040', demonLord:'#c95b8a' };
+function monsterColor(m) { return MONSTER_COLORS[m.type] || '#cfd6e2'; }
+const MM = { lift: 0, sx: 1, sy: 1, rot: 0, wx: 0, wy: 0, shScale: 1, shAlpha: 1 };
+/* Tính biến dạng thân cho 1 quái tại thời điểm t, ghi vào MM dùng chung:
+   lift = nhấc thân khỏi đất (px cục bộ), sx/sy = nén/dãn quanh chân,
+   rot = nghiêng (rad, trong không gian đã lật mặt → luôn nghiêng về phía
+   trước), wx/wy = lệch vị trí theo TỌA ĐỘ THẾ GIỚI (lao/giật trúng đòn),
+   shScale/shAlpha = bóng đổ co/mờ khi thân ở đỉnh nảy hoặc đang bay. */
+function monsterMotion(m, t, amp) {
+  MM.lift = 0; MM.sx = 1; MM.sy = 1; MM.rot = 0; MM.wx = 0; MM.wy = 0; MM.shScale = 1; MM.shAlpha = 1;
+  if (m.deathT !== undefined) return MM;   /* bóng ma lúc chết: chỉ phồng + mờ, không chuyển động */
+  const hgt = Sprites.HGT[m.type] || 70;
+  const prof = motionProfileOf(m);
+  const moving = !!m.movingNow;
+  const ph = m.walkPh || 0;
+  if (amp > 0) {
+    if (prof === 'slime') {
+      if (moving) {
+        /* Nảy thạch: chạm đất nén bẹp (sy ~0.85, sx ~1.10), bật lên dãn
+           (sy ~1.15) + thân nhấc khỏi đất; bóng co/mờ ở đỉnh nảy */
+        const c = Math.cos(ph), air = (1 - c) / 2;
+        MM.lift = air * hgt * 0.085 * amp;
+        MM.sy = 1 - 0.15 * c * amp;
+        MM.sx = 1 + 0.10 * c * amp;
+        MM.shScale = 1 - air * 0.32 * amp;
+        MM.shAlpha = 1 - air * 0.40 * amp;
+      } else { /* đứng yên: "thở" thạch chậm */
+        const br = Math.sin(t * 2.1 + m.seed);
+        MM.sy = 1 + br * 0.045 * amp; MM.sx = 1 - br * 0.038 * amp;
+      }
+    } else if (prof === 'beast') {
+      if (moving) {
+        /* Phi: nhún 2 nhịp theo bước, kéo dãn ngang khi phi, nghiêng về
+           trước theo tốc độ thật; bóng bám đất (không đổi) */
+        const b = Math.abs(Math.sin(ph));
+        MM.lift = b * hgt * 0.045 * amp;
+        MM.rot = Math.sin(ph) * 0.05 * amp + 0.035 * (m.spdFrac || 0) * amp;
+        MM.sx = 1 + b * 0.045 * amp;
+        MM.sy = 1 - b * 0.02 * amp;
+      } else MM.sy = 1 + Math.sin(t * 1.9 + m.seed) * 0.012 * amp;
+    } else if (prof === 'boss') {
+      if (moving) {
+        /* Bước nặng chậm: nhún sâu biên độ lớn tần suất thấp (sải dài),
+           thân đung đưa uy nghi, KHÔNG nảy khỏi đất */
+        const b = Math.abs(Math.sin(ph));
+        MM.lift = b * hgt * 0.016 * amp;
+        MM.sy = 1 - b * 0.035 * amp;
+        MM.sx = 1 + b * 0.02 * amp;
+        MM.rot = Math.sin(ph) * 0.03 * amp;
+      } else { /* thở trầm chậm */
+        const br = Math.sin(t * 1.15 + m.seed);
+        MM.sy = 1 + br * 0.02 * amp; MM.sx = 1 - br * 0.012 * amp;
+      }
+    } else if (prof === 'fly') {
+      /* Lơ lửng: bob sin nằm ở hover sẵn có; ở đây chỉ ngân theo hướng
+         bay / chao nhẹ khi đứng; bóng tách rời xử lý ở nơi gọi */
+      MM.rot = (moving ? 0.07 : Math.sin(t * 1.8 + m.seed) * 0.045) * amp;
+      MM.sy = 1 + Math.sin(t * 3.1 + m.seed) * 0.02 * amp;
+    } else { /* biped — người 2 chân (goblin, xương khô, kỵ sĩ…) */
+      if (moving) {
+        /* Nhún theo nhịp bước 2 nhịp + lắc thân nhẹ 2 bên ±0.03 rad —
+           cả ảnh (vũ khí/khiên) lắc đồng bộ vì biến dạng ở lớp ngoài */
+        const b = Math.abs(Math.sin(ph));
+        MM.lift = b * hgt * 0.028 * amp;
+        MM.rot = Math.sin(ph) * 0.03 * amp;
+        MM.sy = 1 - b * 0.015 * amp;
+      } else { /* đứng yên: thở nhẹ */
+        MM.sy = 1 + Math.sin(t * 2 + m.seed) * 0.014 * amp;
+        MM.rot = Math.sin(t * 1.25 + m.seed) * 0.008 * amp;
+      }
+    }
+    /* HÀNH ĐỘNG — lấy đà / lao / giật lùi: chỉ hiệu ứng vẽ, thời điểm gây
+       sát thương giữ nguyên. Cận chiến: nén lấy đà 120ms cuối trước khi
+       atkCd chạm 0 (khi đã trong tầm đánh), ra đòn thì lao tới + dãn theo
+       hướng tấn công theo cửa sổ atkT sẵn có; bắn xa: giật lùi nhẹ. */
+    const melee = m.boss || !m.def.behavior || m.def.behavior === 'melee' || m.def.behavior === 'tank' || m.def.behavior === 'pack';
+    if (!m.def.fly && stageState === 'fighting' && !hero.dead) {
+      if (melee && m.atkCd > 0 && m.atkCd <= 0.12 && (m.stunT || 0) <= 0) {
+        if (Math.hypot(hero.x - m.x, hero.y - m.y) <= m.def.range + 20) {
+          const k = (1 - m.atkCd / 0.12) * amp;
+          MM.sy -= 0.07 * k; MM.sx += 0.05 * k; MM.wx -= m.face * 1.6 * k;
+        }
+      }
+      if (m.atkT > 0) {
+        const e = Math.sin(Math.min(1, (0.3 - m.atkT) / 0.24) * Math.PI) * amp;
+        if (melee) { MM.wx += m.face * e * hgt * 0.055; MM.sx += e * 0.06; MM.sy -= e * 0.03; }
+        else { MM.wx -= m.face * e * hgt * 0.035; MM.sy -= e * 0.025; }
+      }
+    }
+    /* TRÚNG ĐÒN: giật ngược theo hướng đòn + rung 2–3 nhịp tắt dần
+       (hitFxT/hitDir do Combat.dealDamage ghi khi đòn chạm) */
+    if (m.hitFxT > 0) {
+      const k = m.hitFxT / 0.28;
+      const osc = Math.sin((0.28 - m.hitFxT) * 40) * k * 4.2 * amp;
+      MM.wx += (m.hitDirX || 0) * (2.2 * k * amp + osc);
+      MM.wy += (m.hitDirY || 0) * (1.2 * k * amp + osc * 0.4);
+    }
+  }
+  return MM;
+}
+/* Hào quang RUNES cuồng nộ riêng Chúa Sói (v0.5.3): vòng rune mờ đập
+   nhịp quanh thân khi dưới 50% HP (m.enraged) — 12 dấu rune chạy chậm
+   quanh hình ellipse ôm thân, alpha đập theo nhịp tim. */
+function drawWolfRunes(ctx, m, t, s) {
+  const hgtW = (Sprites.HGT[m.type] || 70) * s;
+  const cy = -hgtW * 0.52, rx = hgtW * 0.55, ry = hgtW * 0.60;
+  const pulse = 0.5 + Math.sin(t * 4.2) * 0.5;
+  ctx.save();
+  ctx.strokeStyle = 'rgba(255,106,61,' + (0.16 + 0.20 * pulse) + ')'; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.ellipse(0, cy, rx, ry, 0, 0, Math.PI * 2); ctx.stroke();
+  ctx.fillStyle = 'rgba(255,140,70,1)';
+  for (let i = 0; i < 12; i++) {
+    const a = (i / 12) * Math.PI * 2 + t * 0.6;
+    const x = Math.cos(a) * rx, y = cy + Math.sin(a) * ry;
+    ctx.save(); ctx.translate(x, y); ctx.rotate(a + Math.PI / 2);
+    ctx.globalAlpha = 0.25 + 0.45 * pulse * (0.55 + 0.45 * Math.sin(i * 2.39 + t * 4.2));
+    ctx.beginPath(); ctx.moveTo(0, -5); ctx.lineTo(3.4, 0); ctx.lineTo(0, 5); ctx.lineTo(-3.4, 0); ctx.closePath(); ctx.fill();
+    ctx.restore();
+  }
+  ctx.restore();
+}
 Sprites.monster = function (ctx, m, t) {
-  const hover = m.def.fly ? 52 + Math.sin(t * 5 + m.seed) * 5 : Math.abs(Math.sin(m.walkPh)) * 2;
+  const hover = m.def.fly ? 52 + Math.sin(t * 5 + m.seed) * 5 : 0;
   const s = (m.boss ? 1.5 : 1) * (m.elite ? 1.28 : 1) * (m.sizeMul || 1);
+  const ghost = m.deathT !== undefined;
+  /* Chuyển động thủ tục v0.5.3: quái ngoài khung hình (vẫn trong lề culling
+     của vòng vẽ) → amp 0, vẽ tĩnh giữ hiệu năng */
+  let amp = motionAmp();
+  if (m.x < cam.x - 24 || m.x > cam.x + W + 24 || m.y < cam.y - 24 || m.y > cam.y + H + 24) amp = 0;
+  const mo = monsterMotion(m, t, amp);
   ctx.save(); ctx.translate(m.x, m.y - hover);
   if (m.enraged) { const g = ctx.createRadialGradient(0, -40, 6, 0, -40, 74); g.addColorStop(0, 'rgba(255,60,40,.4)'); g.addColorStop(1, 'rgba(255,60,40,0)'); ctx.fillStyle = g; ctx.fillRect(-74, -114, 148, 148); }
+  if (m.type === 'wolfLord' && m.enraged && !ghost) drawWolfRunes(ctx, m, t, s);
   if (m.elite) { ctx.strokeStyle = 'rgba(245,155,61,.9)'; ctx.lineWidth = 2.4; ctx.beginPath(); ctx.ellipse(0, 2, 24 * s, 8 * s, 0, 0, Math.PI * 2); ctx.stroke(); }
   /* Bóng đổ co theo tỉ lệ thật của ảnh (v0.5.0): quái ảnh thật → bóng rộng
-     ~30% bề ngang ảnh tại kích thước vẽ hiện tại; quái vẽ code giữ số cũ */
+     ~30% bề ngang ảnh tại kích thước vẽ hiện tại; quái vẽ code giữ số cũ.
+     v0.5.3: bóng NEO TẠI VỊ TRÍ LOGIC (không đi theo biến dạng thân), co
+     nhỏ/mờ khi thân ở đỉnh nảy (Slime) và nhạt/bé khi quái bay (bóng tách
+     rời dưới đất). */
   const imgArt = forestEnv ? this.monsterArt[m.type] : null;
   const shW = imgArt ? (this.HGT[m.type] || 70) * s * (imgArt.naturalWidth / imgArt.naturalHeight) * 0.30 : (m.boss ? 32 : 18);
-  this.shadow(ctx, 0, hover + 2, shW);
-  ctx.scale(m.face * s, s);
+  ctx.save();
+  ctx.globalAlpha = mo.shAlpha * (m.def.fly ? 0.6 : 1) * (ghost ? Math.max(0, 1 - m.deathT / 0.18) : 1);
+  this.shadow(ctx, 0, hover + 2, shW * mo.shScale * (m.def.fly ? 0.8 : 1));
+  ctx.restore();
+  /* Lệch thân theo tọa độ thế giới (lao khi ra đòn / giật khi trúng đòn) —
+     áp TRƯỚC khi lật mặt để hướng luôn đúng; chân/bóng ở trên không lệch */
+  ctx.translate(mo.wx, mo.wy);
+  const gs = ghost ? s * (1 + Math.min(0.22, m.deathT * 1.5)) : s;   /* xác phồng nhẹ trước khi vỡ hạt */
+  ctx.scale(m.face * gs, gs);
   if (m.spawnT > 0) ctx.globalAlpha = Math.max(0.25, 1 - m.spawnT / 0.35);
+  if (ghost) ctx.globalAlpha *= Math.max(0, 1 - m.deathT / 0.18);
+  /* Biến dạng quanh điểm neo CHÂN: nghiêng → nén/dãn → nhấc thân */
+  ctx.rotate(mo.rot); ctx.scale(mo.sx, mo.sy); ctx.translate(0, -mo.lift);
   const flash = m.hitT > 0;
   const C = n => (flash ? '#ffffff' : n);
   const pal = m.def.palette;
@@ -2876,7 +3048,7 @@ Sprites.monster = function (ctx, m, t) {
   if (m.healGlowT > 0 && m.type !== 'cultist') { /* hiệu ứng hồi máu ở engine */ }
   // Thanh máu trên đầu (vị trí neo theo HGT × s; quái ảnh thật thì bề ngang
   // thanh cũng nở theo hệ số kích thước hiện tại, tối đa ×1.35)
-  if (m.hp < m.maxHp && !m.boss) {
+  if (m.hp < m.maxHp && !m.boss && !ghost) {
     const w = imgArt ? Math.round(42 * clamp(s, 1, 1.35)) : 42, hgt = (this.HGT[m.type] || 70) * s;
     const by = m.y - hover - hgt - 12;
     ctx.fillStyle = 'rgba(0,0,0,.55)'; ctx.fillRect(m.x - w / 2, by, w, 5);
@@ -2884,7 +3056,7 @@ Sprites.monster = function (ctx, m, t) {
     ctx.fillRect(m.x - w / 2 + 0.5, by + 0.5, (w - 1) * Math.max(0, m.hp / m.maxHp), 4);
     if (m.slowT > 0) { ctx.fillStyle = '#aee6ff'; ctx.fillRect(m.x - w / 2, by - 4, w, 2); }
   }
-  if (m.elite && !m.boss) {
+  if (m.elite && !m.boss && !ghost) {
     ctx.fillStyle = '#f59b3d'; ctx.font = '900 11px "Be Vietnam Pro"'; ctx.textAlign = 'center';
     ctx.fillText('★ TINH ANH', m.x, m.y - hover - (this.HGT[m.type] || 70) * s - 20);
   }
@@ -3087,6 +3259,7 @@ function spawnMonster(forceType, opts) {
     exp: Math.round(base.exp * expS * (elite ? CONFIG.elite.expGold : 1)),
     gold: Math.round(rand(base.gold[0], base.gold[1]) * (1 + (P.stage - 1) * 0.2 + cm.idx * 0.7) * (elite ? CONFIG.elite.expGold : 1)),
     atkCd: rand(0.4, 0.9), atkT: 0, hitT: 0, walkPh: rand(0, 6), seed: rand(0, 10), spawnT: 0.35,
+    movingNow: false, spdFrac: 0, hitFxT: 0, hitDirX: 1, hitDirY: 0,
     slowT: 0, slowPct: 0, stunT: 0, poisonT: 0, poisonDps: 0, poisonTick: 0, healCd: rand(1.5, 3), healGlowT: 0, blocked: false,
     aiOff: Math.floor(rand(0, 3)), avoidSign: Math.random() < 0.5 ? 1 : -1, avoidT: 0,
     skillT: 2.2, skillIdx: 0, enraged: false, chargeT: 0, chargeDirX: 0, chargeDirY: 0, chargeHit: false, chargeMult: 1,
@@ -3122,6 +3295,7 @@ function updatePortal() {
 
 function startStage() {
   monsters = []; drops = []; floaters = []; slashes = []; projectiles = []; telegraphs = [];
+  deathFx = [];
   VFX.resetFx();
   pendingHits = []; atkHeld = false;
   stageKills = 0; spawned = 0; spawnTimer = 0.5; stageState = 'fighting'; tapTarget = null;
@@ -3312,7 +3486,10 @@ function killMonster(m) {
   P.gold += m.gold; AudioFX.coin();
   addFloater(m.x, m.y - 76, '+' + m.gold + ' vàng', '#ffd970');
   gainExp(m.exp);
-  burst(m.x, m.y - 30, m.boss ? '#ffb03a' : m.elite ? '#f59b3d' : '#cfd6e2', m.boss ? 42 : 16, m.boss ? 170 : 110);
+  /* Chết (v0.5.3): thân không biến mất ngay — giữ lại làm "bóng ma" phồng
+     nhẹ ~0.18s trong deathFx rồi vỡ thành hạt theo màu họ quái (xử lý ở
+     vòng update); xác không để lại sau khi vỡ */
+  m.deathT = 0; deathFx.push(m);
   const cm = currentMap();
   if (m.boss) {
     const tbl = CONFIG.bossDrops[CONFIG.bossTierForMap(cm.idx) - 1];
@@ -3491,6 +3668,8 @@ function steerVelocity(m, tx, ty, dt) {
 }
 function updateMonster(m, dt) {
   m.hitT -= dt; m.spawnT -= dt; m.atkCd -= dt; m.healGlowT -= dt;
+  if (m.hitFxT > 0) m.hitFxT -= dt;   /* rung giật khi trúng đòn (v0.5.3) */
+  m.movingNow = false;   /* chỉ bật lại khi khung này thật sự dời vị trí */
   if (m.atkT > 0) m.atkT -= dt;
   if (m.slowT > 0) m.slowT -= dt;
   /* Độc theo thời gian (Độc Tiễn) */
@@ -3511,7 +3690,10 @@ function updateMonster(m, dt) {
 
   if (m.boss && m.chargeT > 0) {
     m.chargeT -= dt;
+    const cox = m.x, coy = m.y;
     Collision.move(m, m.chargeDirX * 560, m.chargeDirY * 560, dt);
+    m.walkPh += Math.hypot(m.x - cox, m.y - coy) * (Math.PI * 2 / motionStride(m));
+    m.movingNow = true;
     if (!m.chargeHit && dist < 50) { heroTakeDamage(m.atk * m.chargeMult); m.chargeHit = true; }
     return;
   }
@@ -3570,7 +3752,16 @@ function updateMonster(m, dt) {
       }
     }
   }
-  if (moving) { Collision.move(m, mvx, mvy, dt); m.walkPh += dt * 9; }
+  if (moving) {
+    /* Phase bước chạy theo QUÃNG ĐƯỜNG ĐI THẬT (v0.5.3): đo độ dời sau
+       va chạm — bị chặn đứng thì phase đứng yên, thân thôi nhún tự nhiên */
+    const ox = m.x, oy = m.y;
+    Collision.move(m, mvx, mvy, dt);
+    const dd = Math.hypot(m.x - ox, m.y - oy);
+    m.walkPh += dd * (Math.PI * 2 / motionStride(m));
+    m.movingNow = dd > 0.02;
+    if (dt > 0 && m.speed > 0) m.spdFrac = clamp(dd / (m.speed * dt), 0, 1.15);
+  }
   else if (m.blocked) Collision.resolve(m);
 }
 
@@ -3694,6 +3885,18 @@ function update(dt) {
     if (!hero.dead && Collision.dist2d(hero.x, hero.y, d.x, d.y) < 40) { if (collectDrop(d)) drops.splice(i, 1); }
   }
   for (let i = floaters.length - 1; i >= 0; i--) { const f = floaters[i]; f.t += dt; f.y -= 34 * dt; if (f.t > 0.95) floaters.splice(i, 1); }
+  /* Xác quái phồng → vỡ hạt (v0.5.3): hết 0.18s thì bùng hạt màu họ quái
+     (boss thêm vòng hạt lan), rồi dọn hẳn khỏi deathFx */
+  for (let i = deathFx.length - 1; i >= 0; i--) {
+    const g = deathFx[i]; g.deathT += dt;
+    if (g.deathT >= 0.18) {
+      deathFx.splice(i, 1);
+      const gc = monsterColor(g), gy = g.y - (Sprites.HGT[g.type] || 70) * 0.4;
+      burst(g.x, gy, gc, g.boss ? 42 : g.elite ? 24 : 16, g.boss ? 170 : 115);
+      if (g.boss) ringBurst(g.x, gy, gc, 18, 150);
+      burst(g.x, gy, '#ffffff', 5, 80);
+    }
+  }
   /* Hạt pool v0.5.1: trọng lực + lực cản riêng từng hạt; chết thì trả về pool */
   for (let i = particles.length - 1; i >= 0; i--) { const p = particles[i]; p.t += dt; if (p.drag) { const dr = Math.max(0, 1 - p.drag * dt); p.vx *= dr; p.vy *= dr; } p.x += p.vx * dt; p.y += p.vy * dt; p.vy += p.grav * dt; if (p.t > p.life) { particles.splice(i, 1); vfxFree.push(p); } }
   for (let i = groundFx.length - 1; i >= 0; i--) { groundFx[i].t += dt; if (groundFx[i].t > groundFx[i].life) groundFx.splice(i, 1); }
@@ -3818,6 +4021,11 @@ function draw() {
   for (const m of monsters) {
     if (m.x < cam.x - 120 || m.x > cam.x + W + 120 || m.y < cam.y - 160 || m.y > cam.y + H + 80) continue;
     list.push({ y: m.y, f: () => Sprites.monster(ctx, m, timeNow) });
+  }
+  /* Bóng ma xác quái đang phồng chờ vỡ hạt (v0.5.3) — chung Y-sort */
+  for (const g of deathFx) {
+    if (g.x < cam.x - 120 || g.x > cam.x + W + 120 || g.y < cam.y - 160 || g.y > cam.y + H + 80) continue;
+    list.push({ y: g.y, f: () => Sprites.monster(ctx, g, timeNow) });
   }
   if (P.created || true) list.push({ y: hero.y, f: () => { Sprites.hero(ctx, hero, timeNow); ctx.globalAlpha = 1; } });
   list.sort((a, b) => a.y - b.y);
@@ -4097,6 +4305,11 @@ const Combat = {
     dmg -= m.defv * 0.45;
     dmg = Math.max(1, Math.round(dmg * (crit ? st.critDmg : 1)));
     m.hp -= dmg; m.hitT = 0.14;
+    /* Hướng + nhịp rung giật khi trúng đòn cho lớp vẽ (v0.5.3) — hướng từ
+       hero ra quái = ngược hướng đòn đánh tới */
+    m.hitFxT = 0.28;
+    const hdx = m.x - hero.x, hdy = m.y - hero.y, hdl = Math.hypot(hdx, hdy) || 1;
+    m.hitDirX = hdx / hdl; m.hitDirY = hdy / hdl;
     if (opts.slowPct) { m.slowT = Math.max(m.slowT, opts.slowDur || 2); m.slowPct = Math.max(m.slowPct, opts.slowPct); }
     if (opts.stunDur && !m.boss) m.stunT = Math.max(m.stunT || 0, opts.stunDur);
     if (opts.poisonPct) { m.poisonT = Math.max(m.poisonT || 0, opts.poisonDur || 3); m.poisonDps = Math.max(m.poisonDps || 0, st.atk * opts.poisonPct); }

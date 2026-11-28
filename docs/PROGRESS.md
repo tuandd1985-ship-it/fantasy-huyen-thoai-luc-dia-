@@ -1,5 +1,5 @@
 # PROGRESS — FANTASY: HUYỀN THOẠI LỤC ĐỊA
-Cập nhật: 2026-11-28 (sau bản v0.5.2 — map Rừng Xanh hi-res nét hơn).
+Cập nhật: 2026-11-28 (sau bản v0.5.3 — quái di chuyển linh hoạt).
 
 ## Đã xong
 - SPEC.md (yêu cầu gốc, Do phê duyệt dần qua các vòng chốt 2026-11-27) + GDD.md (bản thiết kế v2) + bộ tài liệu Master Instruction: ART_DIRECTION, ARCHITECTURE, BALANCE, ROADMAP, GAP_ANALYSIS, TEST_REPORT, CHANGELOG.
@@ -27,10 +27,12 @@ Cập nhật: 2026-11-28 (sau bản v0.5.2 — map Rừng Xanh hi-res nét hơn)
 
 - v0.5.2 — MAP RỪNG XANH HI-RES (2026-11-28): nền dùng bản 4206×3366 (gấp 3 độ phân giải v0.5.0), nét hơn hẳn khi zoom. Đã deploy + đồng bộ GitHub. Chi tiết: CHANGELOG.
 
+- v0.5.3 — QUÁI DI CHUYỂN LINH HOẠT (2026-11-28): chuyển động thủ tục theo họ quái, chết vỡ hạt, boss có vòng rune khi cuồng nộ. Đã deploy + đồng bộ GitHub. Chi tiết: CHANGELOG.
+- Lô Claude (commit 05c217b) đã QC bởi Luna: 15 map upscale bằng Upscayl digital-art-4x + chỉnh màu (map rừng luma ~139, trầm hơn hero) — ĐẠT, giữ hình học ×2 nên lưới va chạm còn nguyên; dải Pháp Sư Nam/Nữ (art-tests/mage-anim/) — ĐẠT kỹ thuật tuyệt đối (mỗi ô đúng 1 nhân vật, alpha mép 0%, chân thẳng hàng, mặt rõ), dáng giữa các khung còn hơi ít khác biệt (chủ yếu gậy/quả cầu) — tích hợp trước ở v0.5.4, bản IP-Adapter biên độ lớn giao Claude làm tiếp.
+
 ## Đang chờ Do
-- Do test trên iPhone thật: Rừng Xanh tranh hi-res (đi cầu qua sông, tỉ lệ, độ nét) + hiệu ứng skill v0.5.1 (các chiêu Lv8/15/25 cần nhân vật cấp cao để xem vòng cảnh báo).
-- Claude làm dải chuyển động Pháp Sư mới (đang tải thêm công cụ nâng chất lượng ảnh/GIF) → đẩy GitHub → Luna QC + tích hợp.
-- Đợt tiếp theo: v0.5.3 quái di chuyển linh hoạt (chuyển động thủ tục theo họ quái); sau đó rollout các map tranh còn lại theo quy trình pilot.
+- Do test trên iPhone thật: quái di chuyển v0.5.3 (đặc biệt hào quang boss khi cuồng nộ — probe chưa ép máu boss được), Rừng Xanh hi-res, hiệu ứng skill v0.5.1 ở cấp cao.
+- Đợt tiếp theo: v0.5.4 tích hợp dải Pháp Sư + thay nền Rừng Xanh bằng map_1_x2 của Claude (áp dụng thử theo lệnh Do); Claude tách 2 lớp map (nền + tán cây Y-sort/làm mờ khi đi dưới tán) cho pilot map_1 → Luna tích hợp v0.5.5; sau đó rollout các map còn lại.
 - Chốt có đưa Pháp Sư Goblin vào pool spawn của Rừng Xanh không (hiện đã có ảnh + mapping, chưa spawn).
 
 ## Chưa đạt / tồn đọng (không đánh dấu hoàn thành)
