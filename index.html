@@ -760,7 +760,8 @@
         <h4 class="set-h">Khác</h4>
         <div class="set-row"><span>Rung máy khi đánh boss / lên cấp</span><button class="tgl" id="setVib" aria-label="Bật tắt rung máy"></button></div>
         <p class="muted" style="margin:10px 0 0">Cài đặt áp dụng ngay. Mức đồ hoạ Thấp giảm mạnh hạt hiệu ứng để máy yếu chơi mượt.</p>
-        <p class="muted" style="margin:10px 0 0">Phiên bản <b id="gameVersion">v0.4.2</b> — Nhật ký cập nhật:</p>
+        <p class="muted" style="margin:10px 0 0">Phiên bản <b id="gameVersion">v0.5.0</b> — Nhật ký cập nhật:</p>
+        <p class="muted" style="margin:4px 0 0">v0.5.0 — Rừng Xanh dùng bản đồ tranh nguyên khối mới: sông/cầu/cây/đá đúng theo tranh, đi qua sông bằng cầu gỗ.</p>
         <p class="muted" style="margin:4px 0 0">v0.4.2 — Pháp Sư có chuyển động tung phép khi chạm chọn và trong trận; đánh thường không còn thời gian chờ, chạm là đánh ngay.</p>
         <p class="muted" style="margin:4px 0 0">v0.4.1 — Gọn cụm skill: skill chính sát nút Đánh, buff chủ động lên hàng trên, skill bị động chuyển vào bảng Kỹ năng; số đếm hồi chiêu dễ đọc hơn.</p>
         <p class="muted" style="margin:4px 0 0">v0.4.0 — Rừng Xanh vẽ quái &amp; boss Chúa Sói bằng ảnh thật, nền cỏ tile liền mạch mới; cổng dịch chuyển tách lớp bệ/vòm có nút tương tác, prop ảnh (sồi, cột đá, tảng đá, bụi cây, khóm hoa) với va chạm ellipse; Pháp Sư tạm dùng ảnh toàn thân tĩnh thay dải chuyển động.</p>
@@ -901,6 +902,8 @@ const ASSETS = {
   /* Tile nền liền mạch riêng cho mặt đất Rừng Xanh (v0.4.0) */
   ground: {
     'forestTile': __A.k30,
+    /* Tranh nguyên khối toàn map Rừng Xanh (v0.5.0) — nền + minimap */
+    'forestMap': __A.k31,
   },
 };
 /* Danh sách phẳng MỌI file ảnh (toàn literal) — dùng để preload màn chờ */
@@ -922,10 +925,114 @@ const ASSET_FILES = [
   __A.k27, __A.k28,
   __A.k29,
   __A.k30,
+  __A.k31,
 ];
 
 /* Phiên bản game hiện tại — hiển thị trong panel Cài đặt */
-const GAME_VERSION = 'v0.4.2';
+const GAME_VERSION = 'v0.5.0';
+
+/* =====================================================================
+   LƯỚI VA CHẠM RỪNG XANH (v0.5.0) — suy từ chính tranh nguyên khối:
+   100 cột × 80 hàng phủ toàn thế giới 2804×2244 (ô ≈ 28×28 px). Mỗi
+   dòng RLE liệt kê các khoảng CỘT BỊ CHẶN của hàng đó (hàng 0 = trên
+   cùng, cột tính từ 0, khoảng dạng a-b hoặc một số): sông, vách đá,
+   cây, pha lê, hang… trong tranh đều là ô chặn; đường mòn, bãi cỏ và
+   các CẦU GỖ là ô trống. Giải mã 1 lần lúc tải thành lưới boolean.
+   ===================================================================== */
+const FOREST_GRID_RLE = [
+  '0-5,8-9,33-37,42-45,49-53,55,71,75,87-88,94,99',
+  '0-6,26,36-38,42-45,48-57,63-64,71,79-80,92,94-96',
+  '0-2,6-7,38,41-46,48-53,55-56,84-85,91-95',
+  '0-1,14-18,22,41-48,50-52,56-59,74,90-94',
+  '0-1,8-9,11-18,20,25-26,43-48,50-51,56-60,63,74,87-95',
+  '0-3,5-6,13-20,43-48,50-52,54-58,82-83,85-95',
+  '0-2,15-20,44-50,81-88,92,94-95',
+  '0-2,16-23,33,44-51,80-88,92,94-95',
+  '0-1,13,16-22,33,37-38,44-49,67-68,71-72,78-83,91-96',
+  '0-1,7,12-13,15-21,33,41-42,44-49,65,67,77-82,91-96',
+  '0-2,11-14,18-22,35-37,44-47,59,76-81,91-97',
+  '0-2,11-15,43-47,52-53,55,69-70,77-80,83-84,87-88,99',
+  '0-5,10-13,15-16,43-48,50,76-82,87-88',
+  '2-6,10-16,20,28,42-46,49,51,75-80,82-83',
+  '0,3-7,9-11,13-18,28,31,43-46,62-63,75-80,83',
+  '3-10,13-18,45,65,76-81',
+  '2-8,10,13-15,17-18,25,29-30,60-61,64-65,79-81,94,98',
+  '2-11,13,15,24-25,32-33,38-40,59,71,85-86,93-95',
+  '0,3-12,23-27,37-41,61,69,71-73,92-95,99',
+  '4-13,23-27,29,37-41,68-74,91-95,97',
+  '0,4-5,22-28,36-43,46,57-58,66-70,72,74,88,90-97',
+  '0,25,35-41,60-61,66-70,75-76,92,94-97',
+  '0,2,33-40,65-69,78-79,92-93,99',
+  '2-3,31-35,38-39,46-47,49-50,64-70,73-74,92-93',
+  '6-8,28-29,31-33,43-44,63-68,98',
+  '5-10,13-14,23,26-27,30-34,37-42,62-67,71-72,88',
+  '0,4-9,35,38-43,51-52,62-67,70,75,88-90,99',
+  '3-9,11-12,38-43,52,63-67,74-76,89-91',
+  '0-8,14-15,37,39-41,44,64-68,74-76,82-83,89-91',
+  '0-7,37,41,44,61-62,65-70,87-88,90-91,93',
+  '0-2,5-7,49,65-70,90-92,96-97',
+  '0-2,39-42,61,66-71,84-85,88-93',
+  '0-1,9,63,65-71,80-82,88-91,93',
+  '0-1,5-9,11-12,23-26,28,32-33,60,62-70,79-83,87-93,99',
+  '6-7,9-10,12-13,23-26,46,55-56,61-64,67-68,70,79,81-82,87-92,95',
+  '6-7,9-10,12-13,20,24-26,44,46-47,57-58,66-67,87,89-92,95-96',
+  '5-13,24-27,36-37,86-87,89-92,95-96',
+  '8-11,18-21,25-28,46,48-49,79-80,85-86,91-92,95,99',
+  '0,25-30,35,38-39,70-73,94-95',
+  '26-31,70-74',
+  '0,4,25-31,40,53,56-57,68-74,82-83,92-93',
+  '0,23-30,49,52-54,61-62,71-75,92',
+  '2-3,19-26,28-29,46-47,51,53-55,70-75,95',
+  '6,16-25,29,51-55,70-75,87-88,95',
+  '0,16-23,29,31-33,44,47-48,50-53,68-74,86,88,99',
+  '1,18-21,49-53,66-72,86-89,93',
+  '0,34,51-52,56,58-59,65-69,71-73,85-90,93,99',
+  '9-13,23,51,53,64-67,72-73,86-90',
+  '9-14,64-66,87',
+  '0,8-13,50,63-65,70-71,93,95',
+  '0-14,68,91-96',
+  '0-12,40-41,47,66,95-96',
+  '0-9,11,16,26-27,93,95',
+  '0-3,5-9,16,19,93-95,97-99',
+  '0-2,8,12-13,19,67-68,96-99',
+  '0-1,5,23-24,34-35,78-79,96-99',
+  '1-2,5,7,17,59-62,83,85,96-99',
+  '0-2,6-7,15,18,40,43-44,59-63,82-88,94,96-99',
+  '0,6-7,12,15-17,40,53,55-56,59-62,82-88,97-99',
+  '4-8,13,16,27,42-45,49-50,53,59-63,82-87,92-93,97-99',
+  '4-7,9,11,13-14,24-25,35,59-63,74,79,81-82,84-85,87-88,90,95-99',
+  '3-7,9,11-15,28-29,52-54,60-64,74,81,84,86-88,90-91,96-99',
+  '3-9,11-14,31-32,61-67,78,80,83-84,86-88,90-93,96-99',
+  '3-9,11,62-67,81,84,86-88,90-91,97-99',
+  '0,3-8,11-12,36,64-66,86-90,99',
+  '3-6,30-35,57,65,88-90,99',
+  '4-5,10-12,16-18,28-33,87,89,93-94',
+  '3,5-18,26-32,69-72,77,97-98',
+  '0-2,10-13,16,18,24-31,46-47,69-73,76-77,82-84',
+  '0-3,6,12-13,17,23-30,45-49,70-77,79,83',
+  '0-3,6,14-19,21,23-27,29,40-41,46-49,68,71-81,91',
+  '0-3,14-19,21-27,46-48,56-57,64,68,72-81,83',
+  '0-2,4,14-25,35-36,47-48,73-83,89,93-94,99',
+  '0-2,13-23,68,74-83,89,92,97-99',
+  '0-2,10-22,31-32,60,73-83,86,91-93,98-99',
+  '0-3,9-20,34-35,40,60,63,71-89,91-93,96-99',
+  '0-5,8-21,30,39,41-43,45,71-99',
+  '0-19,21,45,47-48,68-75,77-99',
+  '0-10,12-18,40,46,54,68-74,78-89,91-99',
+  '0-17,58-60,64-74,77-99'
+];
+const FOREST_GRID = (() => {
+  const g = new Uint8Array(100 * 80);
+  FOREST_GRID_RLE.forEach((line, r) => {
+    for (const part of line.split(',')) {
+      const m = /^(\d+)(?:-(\d+))?$/.exec(part.trim());
+      if (!m) continue;
+      const a = +m[1], b = m[2] ? +m[2] : a;
+      for (let c = a; c <= b && c < 100; c++) g[r * 100 + c] = 1;
+    }
+  });
+  return g;
+})();
 
 /* =====================================================================
    LỚP DỮ LIỆU · CONFIG
@@ -1672,6 +1779,34 @@ const Gems = {
 const WORLD = { w: 1560, h: 1180 };   // kích thước map (lớn hơn màn hình, camera bám theo)
 let waterRects = [];        // vùng nước không đi qua được (trừ cầu) — nạp theo map ở genStageWorld
 let forestEnv = null;       // dữ liệu môi trường riêng của Rừng Xanh (sông, cầu, khu an toàn, khu boss…)
+let forestGrid = null;      // lưới va chạm 100×80 của Rừng Xanh (v0.5.0) — map khác: null
+/* Ô lưới tại điểm thế giới (x, y) có bị chặn không — ngoài lưới coi như chặn */
+function gridBlockedAt(x, y) {
+  if (!forestGrid) return false;
+  const c = Math.floor(x / WORLD.w * 100), r = Math.floor(y / WORLD.h * 80);
+  if (c < 0 || c >= 100 || r < 0 || r >= 80) return true;
+  return forestGrid[r * 100 + c] === 1;
+}
+/* Tìm điểm trên Ô TRỐNG gần (x, y) nhất: quét vòng ô nở dần quanh ô chứa
+   điểm (tâm ô đích, kẹp trong biên an toàn của thế giới). Dùng để quái
+   spawn / bị đẩy luôn đứng trên đất đi được của Rừng Xanh. */
+function gridFreePos(x, y) {
+  if (!forestGrid || !gridBlockedAt(x, y)) return { x, y };
+  const cw = WORLD.w / 100, ch = WORLD.h / 80;
+  const cc = clamp(Math.floor(x / cw), 0, 99), cr = clamp(Math.floor(y / ch), 0, 79);
+  for (let ring = 1; ring <= 100; ring++) {
+    for (let r = cr - ring; r <= cr + ring; r++) {
+      for (let c = cc - ring; c <= cc + ring; c++) {
+        if (Math.max(Math.abs(c - cc), Math.abs(r - cr)) !== ring) continue;
+        if (c < 0 || c >= 100 || r < 0 || r >= 80) continue;
+        if (!forestGrid[r * 100 + c]) {
+          return { x: clamp((c + 0.5) * cw, 40, WORLD.w - 40), y: clamp((r + 0.5) * ch, 60, WORLD.h - 40) };
+        }
+      }
+    }
+  }
+  return { x, y };
+}
 const Collision = {
   clampWorld(e) {
     e.x = Math.max(26, Math.min(WORLD.w - 26, e.x));
@@ -1695,6 +1830,38 @@ const Collision = {
           else { const s = 1 / Math.sqrt(q); e.x = cx + dx * s; e.y = cy + dy * s; }
           blocked = true;
         }
+      }
+    }
+    return blocked;
+  },
+  /* LƯỚI VA CHẠM RỪNG XANH (v0.5.0): thực thể là hình tròn (điểm chân +
+     bán kính như cảm giác va chạm vật cản tròn hiện tại) kiểm tra với các
+     Ô CHẶN quanh nó — mỗi ô là 1 hộp AABB, đẩy ra theo điểm gần nhất trên
+     hộp → trượt mượt dọc bờ sông / gốc cây / vách đá trong tranh. */
+  resolveGrid(e) {
+    if (!forestGrid) return false;
+    let blocked = false;
+    const r = e.r || 13, cw = WORLD.w / 100, ch = WORLD.h / 80;
+    const c0 = Math.max(0, Math.floor((e.x - r) / cw)), c1 = Math.min(99, Math.floor((e.x + r) / cw));
+    const r0 = Math.max(0, Math.floor((e.y - r) / ch)), r1 = Math.min(79, Math.floor((e.y + r) / ch));
+    for (let ry = r0; ry <= r1; ry++) {
+      for (let cx = c0; cx <= c1; cx++) {
+        if (!forestGrid[ry * 100 + cx]) continue;
+        const bx = cx * cw, by = ry * ch;
+        const nx = Math.max(bx, Math.min(e.x, bx + cw)), ny = Math.max(by, Math.min(e.y, by + ch));
+        const dx = e.x - nx, dy = e.y - ny, d2 = dx * dx + dy * dy;
+        if (d2 >= r * r) continue;
+        if (d2 < 0.0001) {
+          /* Tâm lọt hẳn vào trong ô: thoát theo cạnh gần nhất */
+          const exL = e.x - bx, exR = bx + cw - e.x, exT = e.y - by, exB = by + ch - e.y;
+          const m = Math.min(exL, exR, exT, exB);
+          if (m === exL) e.x = bx - r; else if (m === exR) e.x = bx + cw + r;
+          else if (m === exT) e.y = by - r; else e.y = by + ch + r;
+        } else {
+          const d = Math.sqrt(d2), push = r - d;
+          e.x += dx / d * push; e.y += dy / d * push;
+        }
+        blocked = true;
       }
     }
     return blocked;
@@ -1732,6 +1899,10 @@ const Collision = {
       /* Footprint ellipse của prop xử lý SAU nước/vòng an toàn: cú đẩy cuối
          thuộc về prop để thực thể không bị nước đẩy ngược vào gốc cây/chân vòm */
       if (this.resolveProps(e)) blocked = true;
+      /* Lưới tranh Rừng Xanh xử lý CUỐI CÙNG: vị trí chốt hạ luôn tôn trọng
+         sông/vách/cây trong tranh (chân vòm cổng đứng trên ô trống nên
+         không xung đột với footprint của cổng) */
+      if (this.resolveGrid(e)) blocked = true;
     }
     const bx = e.x, by = e.y;
     this.clampWorld(e);
@@ -1745,6 +1916,8 @@ const Collision = {
   },
   /* Đạn tại (x,y) có chạm vật cản không (tròn cũ + footprint ellipse prop) */
   pointBlocked(x, y, rad) {
+    /* Rừng Xanh v0.5.0: đạn vào Ô CHẶN của lưới tranh (đá/cây/vách) là chết */
+    if (forestGrid && gridBlockedAt(x, y)) return true;
     for (const o of obstacles) {
       const dx = x - o.x, dy = y - o.y, rr = o.r * 0.8 + (rad || 2);
       if (dx * dx + dy * dy < rr * rr) return o;
@@ -1790,16 +1963,20 @@ const Sprites = {
 
   /* ----- Nền thế giới: đất, điểm trang trí, viền map, cổng ----- */
   background(ctx, map, cam) {
-    /* Rừng Xanh: mặt đất = pattern tile cỏ liền mạch neo theo tọa độ thế giới
-       (pattern bám hệ tọa độ hiện tại nên trượt đúng theo camera như nền cũ).
-       Tile chưa tải xong → tạm phủ màu đất như trước. Map khác giữ nguyên. */
+    /* Rừng Xanh v0.5.0: mặt đất = TRANH NGUYÊN KHỐI phủ toàn bộ thế giới
+       (sông/cầu/cây/đá/hang đã vẽ sẵn trong tranh) — không tile lặp, không
+       trang trí/viền vẽ code chồng lên tranh. Tranh chưa tải xong → tạm
+       rơi về nền tile cũ bên dưới. Map khác giữ nguyên 100%. */
+    const painted = map.id === 'forest' && !!this.mapArt;
+    if (painted) ctx.drawImage(this.mapArt, 0, 0, WORLD.w, WORLD.h);
     let tiled = false;
-    if (map.id === 'forest' && this.groundTile) {
+    if (!painted && map.id === 'forest' && this.groundTile) {
       if (!this._tilePat) this._tilePat = ctx.createPattern(this.groundTile, 'repeat');
       if (this._tilePat) { ctx.fillStyle = this._tilePat; ctx.fillRect(cam.x - 4, cam.y - 4, cam.w + 8, cam.h + 8); tiled = true; }
     }
-    if (!tiled) { ctx.fillStyle = map.ground; ctx.fillRect(0, 0, WORLD.w, WORLD.h); }
+    if (!painted && !tiled) { ctx.fillStyle = map.ground; ctx.fillRect(0, 0, WORLD.w, WORLD.h); }
     for (const p of groundDeco) {
+      if (painted) break;
       if (p.x < cam.x - 90 || p.x > cam.x + cam.w + 90 || p.y < cam.y - 90 || p.y > cam.y + cam.h + 90) continue;
       if (p.k === 0) { ctx.fillStyle = 'rgba(0,0,0,.10)'; ctx.beginPath(); ctx.ellipse(p.x, p.y, p.r, p.r * 0.55, 0, 0, Math.PI * 2); ctx.fill(); }
       else if (p.k === 1) { ctx.fillStyle = 'rgba(255,255,255,.08)'; ctx.beginPath(); ctx.ellipse(p.x, p.y, p.r, p.r * 0.55, 0, 0, Math.PI * 2); ctx.fill(); }
@@ -1813,57 +1990,19 @@ const Sprites = {
         ctx.beginPath(); ctx.arc(p.x, p.y, 2, 0, Math.PI * 2); ctx.fill();
       }
     }
-    // Viền map (vật thật ở mép — camera + va chạm biên giữ nhân vật bên trong)
-    ctx.fillStyle = map.mid;
-    ctx.fillRect(0, 0, WORLD.w, 30); ctx.fillRect(0, WORLD.h - 30, WORLD.w, 30);
-    ctx.fillRect(0, 0, 30, WORLD.h); ctx.fillRect(WORLD.w - 30, 0, 30, WORLD.h);
-    ctx.fillStyle = 'rgba(255,255,255,.10)'; ctx.fillRect(0, 30, WORLD.w, 3); ctx.fillRect(0, WORLD.h - 33, WORLD.w, 3);
-    for (const b of borderDeco) this.borderBit(ctx, b.x, b.y, map);
-    /* ===== RỪNG XANH: sông, cầu gỗ, khu an toàn, vùng tinh anh, khu boss, phế tích ===== */
-    if (map.id === 'forest' && forestEnv) {
-      const fe = forestEnv;
-      // Lối mòn đất: cổng vào → cầu → khu boss
-      ctx.strokeStyle = 'rgba(146,110,62,.35)'; ctx.lineWidth = 34; ctx.lineCap = 'round';
-      ctx.beginPath(); ctx.moveTo(fe.safe.x, fe.safe.y + 60); ctx.quadraticCurveTo(fe.safe.x + 60, fe.bridgeY + 120, fe.riverX - 30, fe.bridgeY); ctx.quadraticCurveTo(fe.riverX + 200, fe.bridgeY - 160, fe.bossArena.x - 120, fe.bossArena.y + 130); ctx.stroke();
-      // Vùng tinh anh: thảm cỏ sẫm + vòng đá đánh dấu
-      ctx.fillStyle = 'rgba(120,72,20,.16)'; ctx.beginPath(); ctx.ellipse(fe.eliteZone.x, fe.eliteZone.y, fe.eliteZone.r, fe.eliteZone.r * 0.72, 0, 0, Math.PI * 2); ctx.fill();
-      ctx.strokeStyle = 'rgba(245,155,61,.5)'; ctx.lineWidth = 2.4; ctx.setLineDash([10, 9]);
-      ctx.beginPath(); ctx.ellipse(fe.eliteZone.x, fe.eliteZone.y, fe.eliteZone.r, fe.eliteZone.r * 0.72, 0, 0, Math.PI * 2); ctx.stroke(); ctx.setLineDash([]);
-      // Khu boss: nền đá phế tích + vòng đấu
-      ctx.fillStyle = 'rgba(70,64,58,.4)'; ctx.beginPath(); ctx.ellipse(fe.bossArena.x, fe.bossArena.y, fe.bossArena.r + 26, (fe.bossArena.r + 26) * 0.74, 0, 0, Math.PI * 2); ctx.fill();
-      ctx.fillStyle = 'rgba(255,255,255,.06)';
-      for (let i = 0; i < 9; i++) { const a = i / 9 * Math.PI * 2; ctx.beginPath(); ctx.ellipse(fe.bossArena.x + Math.cos(a) * fe.bossArena.r * 0.6, fe.bossArena.y + Math.sin(a) * fe.bossArena.r * 0.42, 26, 13, a, 0, Math.PI * 2); ctx.fill(); }
-      ctx.strokeStyle = 'rgba(255,110,80,.55)'; ctx.lineWidth = 3;
-      ctx.beginPath(); ctx.ellipse(fe.bossArena.x, fe.bossArena.y, fe.bossArena.r, fe.bossArena.r * 0.72, 0, 0, Math.PI * 2); ctx.stroke();
-      // Sông: hai đoạn nước chảy (chừa cầu)
-      for (const wr of waterRects) {
-        const wg = ctx.createLinearGradient(wr.x, 0, wr.x + wr.w, 0);
-        wg.addColorStop(0, '#2e6ea6'); wg.addColorStop(0.5, '#4a97c9'); wg.addColorStop(1, '#2e6ea6');
-        ctx.fillStyle = wg; ctx.fillRect(wr.x, wr.y, wr.w, wr.h);
-        ctx.strokeStyle = 'rgba(255,255,255,.35)'; ctx.lineWidth = 2;
-        const off = (timeNow * 26) % 46;
-        for (let fy = wr.y - 46 + off; fy < wr.y + wr.h; fy += 46) {
-          ctx.beginPath(); ctx.moveTo(wr.x + 12, fy); ctx.quadraticCurveTo(wr.x + wr.w / 2, fy + 9, wr.x + wr.w - 12, fy); ctx.stroke();
-        }
-        ctx.fillStyle = 'rgba(30,70,40,.55)'; ctx.fillRect(wr.x - 5, wr.y, 5, wr.h); ctx.fillRect(wr.x + wr.w, wr.y, 5, wr.h);
-      }
-      // Cầu gỗ bắc qua sông
-      const bx0 = fe.riverX - 16, bw = fe.riverW + 32, by0 = fe.bridgeY - fe.bridgeHalf;
-      ctx.fillStyle = '#7a5a34'; ctx.fillRect(bx0, by0, bw, fe.bridgeHalf * 2);
-      ctx.fillStyle = '#8f6c3e';
-      for (let px = bx0 + 4; px < bx0 + bw - 6; px += 15) ctx.fillRect(px, by0 + 4, 10, fe.bridgeHalf * 2 - 8);
-      ctx.fillStyle = '#5e451f'; ctx.fillRect(bx0, by0, bw, 7); ctx.fillRect(bx0, by0 + fe.bridgeHalf * 2 - 7, bw, 7);
-      ctx.fillStyle = '#4a3420';
-      for (let px = bx0 + 6; px < bx0 + bw; px += 30) { ctx.fillRect(px, by0 - 5, 5, 12); ctx.fillRect(px, by0 + fe.bridgeHalf * 2 - 7, 5, 12); }
-      // Khu an toàn (làng nhỏ): vòng sân đá + cột cờ
-      ctx.fillStyle = 'rgba(214,196,150,.30)'; ctx.beginPath(); ctx.ellipse(fe.safe.x, fe.safe.y, fe.safe.r, fe.safe.r * 0.7, 0, 0, Math.PI * 2); ctx.fill();
-      ctx.strokeStyle = 'rgba(238,194,106,.65)'; ctx.lineWidth = 2.6; ctx.setLineDash([12, 8]);
-      ctx.beginPath(); ctx.ellipse(fe.safe.x, fe.safe.y, fe.safe.r, fe.safe.r * 0.7, 0, 0, Math.PI * 2); ctx.stroke(); ctx.setLineDash([]);
-      ctx.fillStyle = '#6e4f30'; ctx.fillRect(fe.safe.x - 118, fe.safe.y - 66, 5, 44);
-      ctx.fillStyle = '#3d7a4a'; ctx.beginPath(); ctx.moveTo(fe.safe.x - 113, fe.safe.y - 66); ctx.lineTo(fe.safe.x - 84, fe.safe.y - 57); ctx.lineTo(fe.safe.x - 113, fe.safe.y - 48); ctx.closePath(); ctx.fill();
-      ctx.fillStyle = '#7a4b21'; ctx.beginPath(); ctx.moveTo(fe.safe.x + 96, fe.safe.y - 30); ctx.lineTo(fe.safe.x + 122, fe.safe.y - 58); ctx.lineTo(fe.safe.x + 148, fe.safe.y - 30); ctx.closePath(); ctx.fill();
-      ctx.fillStyle = '#a03d2a'; ctx.fillRect(fe.safe.x + 104, fe.safe.y - 30, 36, 26);
+    // Viền map (vật thật ở mép — camera + va chạm biên giữ nhân vật bên trong).
+    // Rừng Xanh tranh nguyên khối: mép tranh đã vẽ sẵn vách đá/nước và lưới
+    // va chạm giữ nhân vật bên trong → bỏ hẳn viền vẽ code.
+    if (!painted) {
+      ctx.fillStyle = map.mid;
+      ctx.fillRect(0, 0, WORLD.w, 30); ctx.fillRect(0, WORLD.h - 30, WORLD.w, 30);
+      ctx.fillRect(0, 0, 30, WORLD.h); ctx.fillRect(WORLD.w - 30, 0, 30, WORLD.h);
+      ctx.fillStyle = 'rgba(255,255,255,.10)'; ctx.fillRect(0, 30, WORLD.w, 3); ctx.fillRect(0, WORLD.h - 33, WORLD.w, 3);
+      for (const b of borderDeco) this.borderBit(ctx, b.x, b.y, map);
     }
+    /* Rừng Xanh v0.5.0: sông/cầu/khu an toàn/vùng tinh anh/khu boss đều đã
+       vẽ sẵn trong TRANH NGUYÊN KHỐI ở trên — không còn lớp vẽ code chồng
+       (sông 2 đoạn + cầu gỗ + vòng vùng) như bản tile trước đây. */
     // Cổng vào (dưới) & cổng ra (trên) — Rừng Xanh từ v0.4.0 dùng CỔNG PROP
     // tách lớp (bệ ground + vòm Y-sort, xem PROP_DEFS/genStageWorld) nên
     // không vẽ cổng bằng code nữa; các map khác giữ nguyên.
@@ -2160,6 +2299,7 @@ const Sprites = {
   monsterArtTint: {},
   propArt: {},
   groundTile: null,
+  mapArt: null,
   _tilePat: null,
   loadMonsterArt() {
     for (const k of Object.keys(ASSETS.monster)) {
@@ -2185,6 +2325,10 @@ const Sprites = {
     const tile = new Image();
     tile.onload = () => { this.groundTile = tile; this._tilePat = null; };
     tile.src = ASSETS.ground.forestTile;
+    /* Tranh nguyên khối Rừng Xanh (v0.5.0): nền thế giới + nền minimap */
+    const mapImg = new Image();
+    mapImg.onload = () => { this.mapArt = mapImg; };
+    mapImg.src = ASSETS.ground.forestMap;
   },
   /* Vẽ ẢNH quái neo tại CHÂN trong hệ transform hiện tại của Sprites.monster
      (đã translate tới chân + scale theo face/size): chiều cao đích = HGT của
@@ -2352,14 +2496,23 @@ const Sprites = {
 <script>
 'use strict';
 /* ===== Sprites.monster — mọi họ quái & boss (gốc vẽ = chân) ===== */
-Sprites.HGT = { slime:30, goblin:62, goblinArcher:64, goblinShaman:64, wolf:50, fireWolf:50, iceWolf:50, wolfLord:64, bat:30, vulture:44, spider:46, spiderQueen:58, skeleton:72, mummy:74, pharaoh:92, toad:50, toadKing:60, lizard:68, scorpion:40, imp:62, magmaGolem:92, iceGolem:100, yeti:98, witch:76, iceWitch:76, darkKnight:82, vampire:78, cultist:72, wraith:74, fireDragon:118, demonLord:128 };
+/* Chiều cao vẽ (px thế giới). Từ v0.5.0, các họ Rừng Xanh có ẢNH THẬT cân
+   theo chuẩn tỉ lệ với hero (~150px): quái thường ≈ 0.87–0.90 hero, tinh
+   anh ×1.28 (hệ số elite sẵn có) ≈ 1.15 hero, boss Chúa Sói 180 × 1.5
+   (boss) × 1.38 (sizeMul) ≈ 373px ≈ 2.5 hero. Các họ vẽ code ở map khác
+   giữ nguyên số cũ (HGT ở đó chỉ neo thanh máu/số nổi, không đổi hình). */
+Sprites.HGT = { slime:130, goblin:135, goblinArcher:135, goblinShaman:135, wolf:130, fireWolf:50, iceWolf:50, wolfLord:180, bat:30, vulture:44, spider:46, spiderQueen:58, skeleton:72, mummy:74, pharaoh:92, toad:50, toadKing:60, lizard:68, scorpion:40, imp:62, magmaGolem:92, iceGolem:100, yeti:98, witch:76, iceWitch:76, darkKnight:82, vampire:78, cultist:72, wraith:74, fireDragon:118, demonLord:128 };
 Sprites.monster = function (ctx, m, t) {
   const hover = m.def.fly ? 52 + Math.sin(t * 5 + m.seed) * 5 : Math.abs(Math.sin(m.walkPh)) * 2;
   const s = (m.boss ? 1.5 : 1) * (m.elite ? 1.28 : 1) * (m.sizeMul || 1);
   ctx.save(); ctx.translate(m.x, m.y - hover);
   if (m.enraged) { const g = ctx.createRadialGradient(0, -40, 6, 0, -40, 74); g.addColorStop(0, 'rgba(255,60,40,.4)'); g.addColorStop(1, 'rgba(255,60,40,0)'); ctx.fillStyle = g; ctx.fillRect(-74, -114, 148, 148); }
   if (m.elite) { ctx.strokeStyle = 'rgba(245,155,61,.9)'; ctx.lineWidth = 2.4; ctx.beginPath(); ctx.ellipse(0, 2, 24 * s, 8 * s, 0, 0, Math.PI * 2); ctx.stroke(); }
-  this.shadow(ctx, 0, hover + 2, m.boss ? 32 : 18);
+  /* Bóng đổ co theo tỉ lệ thật của ảnh (v0.5.0): quái ảnh thật → bóng rộng
+     ~30% bề ngang ảnh tại kích thước vẽ hiện tại; quái vẽ code giữ số cũ */
+  const imgArt = forestEnv ? this.monsterArt[m.type] : null;
+  const shW = imgArt ? (this.HGT[m.type] || 70) * s * (imgArt.naturalWidth / imgArt.naturalHeight) * 0.30 : (m.boss ? 32 : 18);
+  this.shadow(ctx, 0, hover + 2, shW);
   ctx.scale(m.face * s, s);
   if (m.spawnT > 0) ctx.globalAlpha = Math.max(0.25, 1 - m.spawnT / 0.35);
   const flash = m.hitT > 0;
@@ -2688,9 +2841,10 @@ Sprites.monster = function (ctx, m, t) {
   }
   ctx.restore();
   if (m.healGlowT > 0 && m.type !== 'cultist') { /* hiệu ứng hồi máu ở engine */ }
-  // Thanh máu trên đầu
+  // Thanh máu trên đầu (vị trí neo theo HGT × s; quái ảnh thật thì bề ngang
+  // thanh cũng nở theo hệ số kích thước hiện tại, tối đa ×1.35)
   if (m.hp < m.maxHp && !m.boss) {
-    const w = 42, hgt = (this.HGT[m.type] || 70) * s;
+    const w = imgArt ? Math.round(42 * clamp(s, 1, 1.35)) : 42, hgt = (this.HGT[m.type] || 70) * s;
     const by = m.y - hover - hgt - 12;
     ctx.fillStyle = 'rgba(0,0,0,.55)'; ctx.fillRect(m.x - w / 2, by, w, 5);
     ctx.fillStyle = m.elite ? '#f59b3d' : '#e5484d';
@@ -2793,7 +2947,16 @@ const portalFx = { inZone: false };
 function genStageWorld() {
   const { map } = currentMap();
   groundDeco = []; borderDeco = []; obstacles = []; waterRects = []; forestEnv = null;
+  forestGrid = null;
   stageProps = []; portalFx.inZone = false;
+  /* Kích thước thế giới theo map: Rừng Xanh v0.5.0 dùng tranh nguyên khối
+     ở tỉ lệ ×2.0 (2804×2244) để hero ~150px nhỏ hơn tán cây trong tranh
+     (120–190px) và map đủ rộng; mọi map khác giữ nguyên 1560×1180. Cổng
+     vào/ra neo lại theo kích thước mới (chỉ dùng vẽ cổng ở map khác). */
+  if (map.id === 'forest') { WORLD.w = 2804; WORLD.h = 2244; }
+  else { WORLD.w = 1560; WORLD.h = 1180; }
+  GATE_IN.x = WORLD.w / 2; GATE_IN.y = WORLD.h - 34;
+  GATE_OUT.x = WORLD.w / 2; GATE_OUT.y = 40;
   for (let i = 0; i < 190; i++) groundDeco.push({ x: rand(40, WORLD.w - 40), y: rand(50, WORLD.h - 40), r: rand(14, 46), k: Math.floor(rand(0, 5)) });
   const step = 92;
   for (let x = 46; x < WORLD.w; x += step) { if (Math.abs(x - GATE_OUT.x) > 70) borderDeco.push({ x: x + rand(-8, 8), y: 30 }); if (Math.abs(x - GATE_IN.x) > 70) borderDeco.push({ x: x + rand(-8, 8), y: WORLD.h - 30 }); }
@@ -2807,66 +2970,32 @@ function genStageWorld() {
     if (obstacles.some(q => Collision.dist2d(o.x, o.y, q.x, q.y) < 150)) continue;
     obstacles.push(o);
   }
-  /* ===== RỪNG XANH CHUẨN (giai đoạn 1): sông + cầu gỗ, phế tích, khu an toàn,
-     vùng tinh anh (tây bắc), khu boss (đông bắc) — mọi vùng đều có vai trò chơi thật ===== */
+  /* ===== RỪNG XANH v0.5.0 — PILOT TRANH NGUYÊN KHỐI =====
+     Nền là 1 bức tranh phủ toàn thế giới 2804×2244 (xem Sprites.background):
+     bỏ nền tile lặp, bỏ TOÀN BỘ prop rời (sồi/cột đá/tảng đá/bụi cây/khóm
+     hoa) và bỏ vật cản tròn — mọi chướng ngại trong tranh (sông, vách đá,
+     cây, pha lê) chặn qua LƯỚI VA CHẠM 100×80 (FOREST_GRID), qua sông bằng
+     các cầu gỗ đã vẽ sẵn (ô trống trên lưới). Chỉ giữ CỔNG ĐÁ 2 LỚP tại
+     tọa độ chuẩn hóa (0.455, 0.415). Các vùng theo tọa độ chuẩn hóa của
+     thế giới mới: an toàn/xuất phát (0.53, 0.86) r≈0.085 bề ngang, tinh
+     anh (0.78, 0.30) r≈0.11, boss (0.87, 0.70) r≈0.10. */
   if (map.id === 'forest') {
-    const riverX = 742, riverW = 96, bridgeY = 596, bridgeHalf = 58;
+    forestGrid = FOREST_GRID;
+    obstacles = [];
+    waterRects = [];
     forestEnv = {
-      riverX, riverW, bridgeY, bridgeHalf,
-      safe: { x: GATE_IN.x, y: GATE_IN.y - 30, r: 165 },
-      eliteZone: { x: 300, y: 268, r: 215 },
-      bossArena: { x: 1212, y: 252, r: 205 },
-      ruins: { x: 1212, y: 252 },
+      grid: true,
+      safe: { x: WORLD.w * 0.53, y: WORLD.h * 0.86, r: WORLD.w * 0.085 },
+      eliteZone: { x: WORLD.w * 0.78, y: WORLD.h * 0.30, r: WORLD.w * 0.11 },
+      bossArena: { x: WORLD.w * 0.87, y: WORLD.h * 0.70, r: WORLD.w * 0.10 },
     };
-    waterRects = [
-      { x: riverX, y: 34, w: riverW, h: bridgeY - bridgeHalf - 34 },
-      { x: riverX, y: bridgeY + bridgeHalf, w: riverW, h: WORLD.h - 34 - (bridgeY + bridgeHalf) },
-    ];
-    /* Vị trí group cổng forest-portal-01 (khai báo sớm để các prop khác
-       tránh vùng cổng): đặt bên bờ khô phía tây của khu cổng vào GATE_IN,
-       trong vòng an toàn của làng. Không đặt đúng tọa độ GATE_IN/GATE_OUT
-       được vì cả hai nằm giữa lòng sông (x 742–838) — hero đứng vào là bị
-       Collision đẩy ra bờ ngay, không thể đứng trên bệ để tương tác. */
-    const portalPos = { x: GATE_IN.x - 160, y: GATE_IN.y - 60 };
+    const portalPos = { x: WORLD.w * 0.455, y: WORLD.h * 0.415 };
     forestEnv.portal = portalPos;
-    /* PROP ẢNH thay vật cản vẽ code (v0.4.0): toàn bộ vật cản vòng tròn vừa
-       sinh cho map này (đều là cây) chuyển thành prop sồi/tảng đá có
-       footprint ellipse; mật độ giữ nguyên như mật độ vật cản cũ. Điểm nào
-       rơi sát cổng (<150) thì bỏ — giữ lối đi xuyên giữa vòm luôn thông. */
-    const genericSpots = obstacles.splice(0, obstacles.length)
-      .filter(o => Collision.dist2d(o.x, o.y, portalPos.x, portalPos.y) > 150);
-    genericSpots.forEach((o, i) => stageProps.push(makeProp(i % 4 === 3 ? 'boulder' : 'oak', o.x, o.y)));
-    // Phế tích quanh khu boss: cột đá (va chạm ellipse thật)
-    const ruinSpots = [[1086, 150], [1338, 148], [1072, 356], [1352, 352], [1212, 96]];
-    for (const [rx, ry] of ruinSpots) stageProps.push(makeProp('pillar', rx, ry));
-    // Hàng cây thưa quanh khu tinh anh + dọc bờ sông (tránh chắn cầu)
-    const treeSpots = [[170, 150], [430, 130], [210, 420], [470, 430], [640, 210], [660, 980], [920, 180], [950, 1020], [1400, 620], [180, 900], [1380, 940]];
-    for (const [tx, ty] of treeSpots) {
-      if (Math.abs(ty - bridgeY) < 90 && tx > riverX - 130 && tx < riverX + riverW + 130) continue;
-      stageProps.push(makeProp('oak', tx, ty));
-    }
-    /* CỔNG DỊCH CHUYỂN forest-portal-01 tại portalPos ở trên: bệ ở lớp
-       ground (không va chạm, có ellipse tương tác), vòm ở lớp Y-sort
-       (va chạm chỉ ở 2 chân, giữa vòm đi xuyên được). */
+    /* CỔNG DỊCH CHUYỂN forest-portal-01: bệ ở lớp ground (không va chạm,
+       có ellipse tương tác), vòm ở lớp Y-sort (va chạm chỉ ở 2 chân, giữa
+       vòm đi xuyên được) — nguyên cơ chế đã duyệt từ v0.4.0. */
     stageProps.push(makeProp('portalPlatform', portalPos.x, portalPos.y, 'forest-portal-01'));
     stageProps.push(makeProp('portalBack', portalPos.x, portalPos.y, 'forest-portal-01'));
-    /* Bụi cây (đi xuyên) + khóm hoa (decal ground): rải thưa tương đương mật
-       độ trang trí cũ, tránh sông/cầu, bệ cổng, vòng làng và khu boss */
-    const scatterOk = (x, y, minPortal) =>
-      !(x > riverX - 46 && x < riverX + riverW + 46) &&
-      Collision.dist2d(x, y, portalPos.x, portalPos.y) > minPortal &&
-      Collision.dist2d(x, y, forestEnv.safe.x, forestEnv.safe.y) > 185 &&
-      Collision.dist2d(x, y, forestEnv.bossArena.x, forestEnv.bossArena.y) > 235;
-    let placedBush = 0, placedFlowers = 0, scatterTries = 0;
-    while ((placedBush < 10 || placedFlowers < 16) && scatterTries < 260) {
-      scatterTries++;
-      const x = rand(70, WORLD.w - 70), y = rand(120, WORLD.h - 70);
-      if (!scatterOk(x, y, 190)) continue;
-      if (placedBush < 10 && (placedFlowers >= 16 || Math.random() < 0.4)) { stageProps.push(makeProp('bush', x, y)); placedBush++; }
-      else if (placedFlowers < 16) { stageProps.push(makeProp('flowers', x, y)); placedFlowers++; }
-    }
-    // Điểm trang trí mặt đất riêng: bãi hoa + lối mòn đất từ cổng vào → cầu → khu boss
-    for (let i = 0; i < 46; i++) groundDeco.push({ x: rand(50, WORLD.w - 50), y: rand(60, WORLD.h - 50), r: rand(3, 7), k: 4 });
   }
 }
 
@@ -2875,14 +3004,18 @@ function spawnPoint(dist) {
   let x = clamp(hero.x + Math.cos(a) * dist, 60, WORLD.w - 60);
   let y = clamp(hero.y + Math.sin(a) * dist, 90, WORLD.h - 60);
   if (Collision.dist2d(x, y, hero.x, hero.y) < 400) { x = clamp(hero.x - Math.cos(a) * dist, 60, WORLD.w - 60); y = clamp(hero.y - Math.sin(a) * dist, 90, WORLD.h - 60); }
-  if (forestEnv) {
-    /* Quái thường chỉ spawn cùng bờ sông với nhân vật (tránh kẹt 2 bờ); boss/tinh anh có vùng riêng */
-    const rx0 = forestEnv.riverX, rx1 = forestEnv.riverX + forestEnv.riverW;
-    if (x > rx0 - 24 && x < rx1 + 24) x = hero.x < rx0 ? rx0 - 52 : rx1 + 52;
-    const hSide = hero.x < rx0 ? -1 : hero.x > rx1 ? 1 : 0;
-    const mSide = x < rx0 ? -1 : x > rx1 ? 1 : 0;
-    if (hSide && mSide && hSide !== mSide) x = hSide < 0 ? rx0 - rand(70, 210) : rx1 + rand(70, 210);
-    x = clamp(x, 60, WORLD.w - 60);
+  if (forestGrid) {
+    /* Rừng Xanh v0.5.0: quái CHỈ spawn trên ô đi được của lưới tranh —
+       điểm rơi vào ô chặn (sông/cây/đá) thì lấy mẫu lại quanh hero tới
+       khi trúng ô trống; quá số lần thử thì snap về ô trống gần nhất */
+    let tries = 0;
+    while (gridBlockedAt(x, y) && tries < 40) {
+      tries++;
+      const a2 = rand(0, Math.PI * 2);
+      x = clamp(hero.x + Math.cos(a2) * dist, 60, WORLD.w - 60);
+      y = clamp(hero.y + Math.sin(a2) * dist, 90, WORLD.h - 60);
+    }
+    if (gridBlockedAt(x, y)) { const p = gridFreePos(x, y); x = p.x; y = p.y; }
   }
   return { x, y };
 }
@@ -2907,6 +3040,9 @@ function spawnMonster(forceType, opts) {
   let pos = opts.near ? { x: clamp(opts.near.x + rand(-70, 70), 50, WORLD.w - 50), y: clamp(opts.near.y + rand(-50, 50), 80, WORLD.h - 50) } : spawnPoint(rand(480, 580));
   if (forestEnv && boss) pos = { x: forestEnv.bossArena.x, y: forestEnv.bossArena.y };
   else if (forestEnv && elite) pos = { x: clamp(forestEnv.eliteZone.x + rand(-110, 110), 60, WORLD.w - 60), y: clamp(forestEnv.eliteZone.y + rand(-80, 80), 90, WORLD.h - 60) };
+  /* Rừng Xanh v0.5.0: điểm spawn cuối (kể cả tâm khu boss / vùng tinh anh)
+     phải nằm trên ô đi được — rơi vào ô chặn thì snap về ô trống gần nhất */
+  if (forestGrid && !opts.near) pos = gridFreePos(pos.x, pos.y);
   const m = {
     type, boss, elite, summoned: !!opts.summoned, def: base, name: (elite ? 'Tinh Anh · ' : '') + base.name, isMonster: true,
     x: pos.x, y: pos.y, r: boss ? 24 : base.behavior === 'tank' ? 16 : 13,
@@ -2956,7 +3092,11 @@ function startStage() {
   pendingHits = []; atkHeld = false;
   stageKills = 0; spawned = 0; spawnTimer = 0.5; stageState = 'fighting'; tapTarget = null;
   genStageWorld();
-  hero.x = GATE_IN.x; hero.y = GATE_IN.y - 26; hero.face = 1; hero.faceS = 1; hero.vx = 0; hero.vy = 0; hero._atkBuf = false; hero.dead = false;
+  /* Điểm xuất phát: Rừng Xanh v0.5.0 = tâm vùng an toàn theo tranh
+     (0.53, 0.86); các map khác giữ nguyên cổng vào như cũ */
+  if (forestEnv && forestEnv.safe) { hero.x = forestEnv.safe.x; hero.y = forestEnv.safe.y; }
+  else { hero.x = GATE_IN.x; hero.y = GATE_IN.y - 26; }
+  hero.face = 1; hero.faceS = 1; hero.vx = 0; hero.vy = 0; hero._atkBuf = false; hero.dead = false;
   hero.poisonT = 0; hero.slowT = 0;
   hero.buffs = { shieldT: 0, shieldVal: 0, manaShieldT: 0, rageT: 0, rageVal: 0, dodgeT: 0, dodgeVal: 0, windT: 0, windVal: 0, markT: 0, markVal: 0 };
   hero.stunT = 0; hero.castT = 0; hero.deathT = 0; hero.reviveT = 0.9; hero.potCd = 0;
@@ -3614,8 +3754,10 @@ const Minimap = {
     const sx = w / WORLD.w, sy = h / WORLD.h;
     c.fillStyle = map.groundDark; c.fillRect(0, 0, w, h);
     if (forestEnv && map.id === 'forest') {
-      c.fillStyle = '#4a97c9'; c.fillRect(forestEnv.riverX * sx, 0, forestEnv.riverW * sx, h);
-      c.fillStyle = '#8f6c3e'; c.fillRect((forestEnv.riverX - 8) * sx, (forestEnv.bridgeY - 8) * sy, (forestEnv.riverW + 16) * sx, 16 * sy);
+      /* v0.5.0: nền minimap / bản đồ lớn = chính TRANH NGUYÊN KHỐI của map
+         (sông/cầu/đá thấy thật trên bản đồ); các vòng vùng + chấm đánh dấu
+         giữ nguyên như trước */
+      if (Sprites.mapArt) c.drawImage(Sprites.mapArt, 0, 0, w, h);
       c.strokeStyle = 'rgba(238,194,106,.8)'; c.lineWidth = 1.4;
       c.beginPath(); c.arc(forestEnv.safe.x * sx, forestEnv.safe.y * sy, forestEnv.safe.r * sx, 0, Math.PI * 2); c.stroke();
       c.strokeStyle = 'rgba(255,110,80,.8)';
@@ -3628,8 +3770,14 @@ const Minimap = {
     for (const p of stageProps) { if (p.collision && p.collision.length) c.fillRect(p.x * sx - 2, p.y * sy - 2, 4, 4); }
     c.strokeStyle = 'rgba(255,255,255,.45)'; c.lineWidth = 1.4;
     c.strokeRect(cam.x * sx, cam.y * sy, W * sx, H * sy);
-    c.fillStyle = '#57c9c9'; c.fillRect(GATE_IN.x * sx - 4, GATE_IN.y * sy - 3, 8, 6);
-    c.fillStyle = '#eec26a'; c.fillRect(GATE_OUT.x * sx - 4, GATE_OUT.y * sy - 3, 8, 6);
+    if (forestEnv && map.id === 'forest' && forestEnv.portal) {
+      /* Rừng Xanh: chấm cyan = điểm xuất phát/vùng an toàn, chấm vàng = cổng đá */
+      c.fillStyle = '#57c9c9'; c.fillRect(forestEnv.safe.x * sx - 4, forestEnv.safe.y * sy - 3, 8, 6);
+      c.fillStyle = '#eec26a'; c.fillRect(forestEnv.portal.x * sx - 4, forestEnv.portal.y * sy - 3, 8, 6);
+    } else {
+      c.fillStyle = '#57c9c9'; c.fillRect(GATE_IN.x * sx - 4, GATE_IN.y * sy - 3, 8, 6);
+      c.fillStyle = '#eec26a'; c.fillRect(GATE_OUT.x * sx - 4, GATE_OUT.y * sy - 3, 8, 6);
+    }
     for (const d of drops) { c.fillStyle = d.kind === 'potion' ? '#ff8a95' : '#ffd23e'; c.beginPath(); c.arc(d.x * sx, d.y * sy, 3, 0, Math.PI * 2); c.fill(); }
     for (const m of monsters) {
       if (m.boss) { c.fillStyle = '#b678e8'; c.beginPath(); c.arc(m.x * sx, m.y * sy, 6.5, 0, Math.PI * 2); c.fill(); c.strokeStyle = '#fff'; c.lineWidth = 1.4; c.stroke(); }
@@ -3761,7 +3909,9 @@ const Combat = {
         let tx = null, ty = null, stopD = 0;
         if (dropNear && (!near || near.d > 175)) { tx = dropNear.x; ty = dropNear.y; stopD = 16; }
         else if (near) { tx = near.m.x; ty = near.m.y; stopD = (st.range || c.range) * 0.8; }
-        if (tx !== null && forestEnv) {
+        if (tx !== null && forestEnv && forestEnv.riverX) {
+          /* (Chỉ còn áp dụng cho bố cục sông thẳng cũ — Rừng Xanh v0.5.0 dùng
+             lưới tranh, không còn riverX; AUTO đi thẳng + cơ chế chống kẹt) */
           /* Mục tiêu ở bờ sông bên kia → AUTO đi 2 chặng: tới đầu cầu bờ mình trước, rồi qua cầu */
           const rx0 = forestEnv.riverX, rx1 = forestEnv.riverX + forestEnv.riverW, cx = (rx0 + rx1) / 2;
           const hSide = hero.x < cx ? -1 : 1, tSide = tx < cx ? -1 : 1;
