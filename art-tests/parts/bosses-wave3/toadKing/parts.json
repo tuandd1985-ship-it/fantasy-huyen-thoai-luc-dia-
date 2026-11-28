@@ -1,0 +1,201 @@
+{
+  "canvas": [
+    768,
+    640
+  ],
+  "baselineY": 620,
+  "groundTouch": [
+    "front_l",
+    "front_r"
+  ],
+  "artBottomY": 620,
+  "origin": "top-left",
+  "rig": {
+    "sides": "anatomical; left is on viewer's right in the rest pose",
+    "coordinates": "integer pixels in the shared 768x640 canvas",
+    "composition": "source-over by ascending z, place every layer at (0,0) in rest pose",
+    "bbox": "half-open [left,top,right,bottom] pixel bounds",
+    "pivotApplication": "rotate around each pivot in rest canvas coordinates; propagate parent transforms down the tree"
+  },
+  "reference": {
+    "path": "reference.png",
+    "sha256": "b051a83235b0194e0cf12143b5c1008ad76c994dce44f71734fbfcb23505e375"
+  },
+  "assembled": "assembled.png",
+  "sha256Assembled": "623e94e780f5cbd887bdabf1a4051adc7f6f59d3b78dc4ed848c99010858cfe2",
+  "parts": [
+    {
+      "id": "hind_r",
+      "file": "hind_r.png",
+      "z": 0,
+      "parent": "body",
+      "joint": "right-hip",
+      "pivot": {
+        "x": 249,
+        "y": 461
+      },
+      "bbox": [
+        63,
+        362,
+        314,
+        582
+      ]
+    },
+    {
+      "id": "hind_l",
+      "file": "hind_l.png",
+      "z": 1,
+      "parent": "body",
+      "joint": "left-hip",
+      "pivot": {
+        "x": 527,
+        "y": 461
+      },
+      "bbox": [
+        459,
+        362,
+        700,
+        582
+      ]
+    },
+    {
+      "id": "body",
+      "file": "body.png",
+      "z": 2,
+      "parent": null,
+      "joint": "root",
+      "pivot": {
+        "x": 382,
+        "y": 433
+      },
+      "bbox": [
+        151,
+        269,
+        621,
+        589
+      ]
+    },
+    {
+      "id": "head",
+      "file": "head.png",
+      "z": 3,
+      "parent": "body",
+      "joint": "neck",
+      "pivot": {
+        "x": 384,
+        "y": 381
+      },
+      "bbox": [
+        146,
+        56,
+        621,
+        414
+      ]
+    },
+    {
+      "id": "front_r",
+      "file": "front_r.png",
+      "z": 4,
+      "parent": "body",
+      "joint": "right-shoulder",
+      "pivot": {
+        "x": 259,
+        "y": 445
+      },
+      "bbox": [
+        96,
+        385,
+        349,
+        621
+      ]
+    },
+    {
+      "id": "front_l",
+      "file": "front_l.png",
+      "z": 5,
+      "parent": "body",
+      "joint": "left-shoulder",
+      "pivot": {
+        "x": 515,
+        "y": 445
+      },
+      "bbox": [
+        419,
+        385,
+        672,
+        621
+      ]
+    }
+  ],
+  "jointOverlapCheck": {
+    "windowPx": 47,
+    "anglesDeg": [
+      -20,
+      0,
+      20
+    ],
+    "jointOverlapsPx": [
+      {
+        "id": "hind_r",
+        "rest": 2209,
+        "rotated": {
+          "-20": 2209,
+          "20": 2209
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "hind_l",
+        "rest": 2209,
+        "rotated": {
+          "-20": 2209,
+          "20": 2209
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "head",
+        "rest": 2209,
+        "rotated": {
+          "-20": 2200,
+          "20": 2209
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "front_r",
+        "rest": 2209,
+        "rotated": {
+          "-20": 2209,
+          "20": 2209
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "front_l",
+        "rest": 2209,
+        "rotated": {
+          "-20": 2209,
+          "20": 2209
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      }
+    ]
+  },
+  "imageGen": {
+    "atlas": {
+      "file": "exec-3cda959f-c196-48fe-9999-d30130416c51.png",
+      "grid": [
+        3,
+        2
+      ],
+      "prompt": "Use case: stylized-concept. An original fantasy chibi RPG boss animation rig art atlas referencing the supplied full character, for modular 2D skeletal game motion. Draw the exact listed individual body parts, no fully assembled actor, still match the reference's identity, colors and 3/4 elevated camera. Heavy crisp outlines, opaque rich cel shading, painted game steel/fur/cloth. Include hidden connection cap overlaps on parts, ensure each element fits entirely in the central 85% of its cell. Atlas must be a rigorously aligned invisible 3 columns by 2 rows grid, each cell one independently painted piece, numbered in reading order below, every unlisted cell entirely transparent. True transparent alpha background and neutral detached parts, no labels, graphics, background, ground shadow, glows outside body. Anatomical left means screen right. \n1. Boss head only, broad deep teal toad face gold eyes, glowing lime cheek sacs and willow-root crown including leaves, throat and short neck overlap.\n2. Broad heavy deep-teal body with warm cream belly and back moss, same palette, no head or limbs or crown.\n3. Anatomical left front foreleg and foot, deep teal skin, bronze cuff, extends down-right.\n4. Anatomical right front foreleg and foot, bronze cuff, extends down-left.\n5. Left folded muscular hindleg and broad toad toes, extends down-right.\n6. Right folded muscular hindleg and broad toad toes, extends down-left.",
+      "sha256": "c1b0460140f26cc02d7ee96fe76e8b19fe84c2cd09ebf957ae0bc78a01cb32fc"
+    }
+  }
+}

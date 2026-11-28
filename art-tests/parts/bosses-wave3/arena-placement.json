@@ -1,0 +1,22 @@
+{
+  "map": "../../maps-anh-do/map/bossxuan.png",
+  "mapSha256": "4ad1380bece3d2e46be79d232d9ecc20807fb574473c2d9e3c5b99d72d370383",
+  "grid": "../../maps-anh-do/collision/maps_collision.json#bossxuan",
+  "bossId": "wolfLord",
+  "normalizedGroundAnchor": {
+    "x": 0.5,
+    "y": 0.47
+  },
+  "sampledClearance": {
+    "gridColumnsInclusive": [
+      36,
+      64
+    ],
+    "gridRowsInclusive": [
+      35,
+      39
+    ],
+    "unblockedCount": 145
+  },
+  "scope": "preview lane sample only; gameplay collision and charge distance are unchanged"
+}

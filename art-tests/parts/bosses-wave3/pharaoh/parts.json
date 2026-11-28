@@ -1,0 +1,255 @@
+{
+  "canvas": [
+    768,
+    640
+  ],
+  "baselineY": 620,
+  "groundTouch": [
+    "leg_l",
+    "leg_r"
+  ],
+  "artBottomY": 620,
+  "origin": "top-left",
+  "rig": {
+    "sides": "anatomical; left is on viewer's right in the rest pose",
+    "coordinates": "integer pixels in the shared 768x640 canvas",
+    "composition": "source-over by ascending z, place every layer at (0,0) in rest pose",
+    "bbox": "half-open [left,top,right,bottom] pixel bounds",
+    "pivotApplication": "rotate around each pivot in rest canvas coordinates; propagate parent transforms down the tree"
+  },
+  "reference": {
+    "path": "reference.png",
+    "sha256": "359764a5164358f4d51916fed9eaed007096e447d029a5960825c947b348f563"
+  },
+  "assembled": "assembled.png",
+  "sha256Assembled": "ed00deb63596000196d762890a02bb6e765b73d3a6d0c4041e6d36cccaa2e7f0",
+  "parts": [
+    {
+      "id": "leg_r",
+      "file": "leg_r.png",
+      "z": 0,
+      "parent": "body",
+      "joint": "right-hip",
+      "pivot": {
+        "x": 307,
+        "y": 509
+      },
+      "bbox": [
+        233,
+        445,
+        380,
+        621
+      ]
+    },
+    {
+      "id": "leg_l",
+      "file": "leg_l.png",
+      "z": 1,
+      "parent": "body",
+      "joint": "left-hip",
+      "pivot": {
+        "x": 466,
+        "y": 500
+      },
+      "bbox": [
+        391,
+        445,
+        542,
+        621
+      ]
+    },
+    {
+      "id": "body",
+      "file": "body.png",
+      "z": 2,
+      "parent": null,
+      "joint": "root",
+      "pivot": {
+        "x": 382,
+        "y": 483
+      },
+      "bbox": [
+        190,
+        266,
+        611,
+        569
+      ]
+    },
+    {
+      "id": "arm_r_upper",
+      "file": "arm_r_upper.png",
+      "z": 3,
+      "parent": "body",
+      "joint": "right-shoulder",
+      "pivot": {
+        "x": 327,
+        "y": 342
+      },
+      "bbox": [
+        190,
+        285,
+        362,
+        466
+      ]
+    },
+    {
+      "id": "arm_l_upper",
+      "file": "arm_l_upper.png",
+      "z": 4,
+      "parent": "body",
+      "joint": "left-shoulder",
+      "pivot": {
+        "x": 501,
+        "y": 330
+      },
+      "bbox": [
+        463,
+        287,
+        605,
+        444
+      ]
+    },
+    {
+      "id": "arm_r_forearm",
+      "file": "arm_r_forearm.png",
+      "z": 5,
+      "parent": "arm_r_upper",
+      "joint": "right-elbow",
+      "pivot": {
+        "x": 266,
+        "y": 414
+      },
+      "bbox": [
+        116,
+        381,
+        302,
+        521
+      ]
+    },
+    {
+      "id": "head",
+      "file": "head.png",
+      "z": 6,
+      "parent": "body",
+      "joint": "neck",
+      "pivot": {
+        "x": 380,
+        "y": 315
+      },
+      "bbox": [
+        213,
+        19,
+        560,
+        352
+      ]
+    },
+    {
+      "id": "hand_l_staff",
+      "file": "hand_l_staff.png",
+      "z": 7,
+      "parent": "arm_l_upper",
+      "joint": "left-elbow",
+      "pivot": {
+        "x": 564,
+        "y": 398
+      },
+      "bbox": [
+        522,
+        75,
+        729,
+        611
+      ]
+    }
+  ],
+  "jointOverlapCheck": {
+    "windowPx": 47,
+    "anglesDeg": [
+      -20,
+      0,
+      20
+    ],
+    "jointOverlapsPx": [
+      {
+        "id": "leg_r",
+        "rest": 1795,
+        "rotated": {
+          "-20": 1810,
+          "20": 1837
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "leg_l",
+        "rest": 2122,
+        "rotated": {
+          "-20": 2165,
+          "20": 2095
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "arm_r_upper",
+        "rest": 1984,
+        "rotated": {
+          "-20": 1983,
+          "20": 1955
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "arm_l_upper",
+        "rest": 2160,
+        "rotated": {
+          "-20": 2192,
+          "20": 2129
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "arm_r_forearm",
+        "rest": 1529,
+        "rotated": {
+          "-20": 1492,
+          "20": 1545
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "head",
+        "rest": 2208,
+        "rotated": {
+          "-20": 2194,
+          "20": 2209
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "hand_l_staff",
+        "rest": 1978,
+        "rotated": {
+          "-20": 1938,
+          "20": 1978
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      }
+    ]
+  },
+  "imageGen": {
+    "atlas": {
+      "file": "exec-02ab1c32-1a65-4cd0-9e53-cdeddec43ba7.png",
+      "grid": [
+        3,
+        3
+      ],
+      "prompt": "Use case: stylized-concept. An original fantasy chibi RPG boss animation rig art atlas referencing the supplied full character, for modular 2D skeletal game motion. Draw the exact listed individual body parts, no fully assembled actor, still match the reference's identity, colors and 3/4 elevated camera. Heavy crisp outlines, opaque rich cel shading, painted game steel/fur/cloth. Include hidden connection cap overlaps on parts, ensure each element fits entirely in the central 85% of its cell. Atlas must be a rigorously aligned invisible 3 columns by 3 rows grid, each cell one independently painted piece, numbered in reading order below, every unlisted cell entirely transparent. True transparent alpha background and neutral detached parts, no labels, graphics, background, ground shadow, glows outside body. Anatomical left means screen right. \n1. complete gold skull mask and midnight blue/gold striped Egyptian nemes headdress with golden cobra crest, cyan eyes, short neck.\n2. body torso, dark violet royal cape behind shoulders integrated into same cutout, linen wrappings, high gold collar and gold scarab belt, no limbs.\n3. left upper arm with linen wrappings and gold shoulder, points down-right.\n4. right upper arm with linen wrappings and gold shoulder, points down-left.\n5. left forearm and one left hand holding the complete tall golden scarab staff with turquoise gem, staff nearly vertical, hand located at 62 to 68 percent from top of staff, wrist attaches from screen left.\n6. right forearm and one outstretched empty wrapped hand, points down-left.\n7. left linen-wrapped leg with sandal and solid proximal overlap.\n8. right linen-wrapped leg with sandal and solid proximal overlap.",
+      "sha256": "5295eb44eaa9883288326f1575209aff6b8b8e120cb3658a9d4185e5bbaf1006"
+    }
+  }
+}

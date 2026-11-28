@@ -1,0 +1,255 @@
+{
+  "canvas": [
+    768,
+    640
+  ],
+  "baselineY": 620,
+  "groundTouch": [
+    "leg_l",
+    "leg_r"
+  ],
+  "artBottomY": 620,
+  "origin": "top-left",
+  "rig": {
+    "sides": "anatomical; left is on viewer's right in the rest pose",
+    "coordinates": "integer pixels in the shared 768x640 canvas",
+    "composition": "source-over by ascending z, place every layer at (0,0) in rest pose",
+    "bbox": "half-open [left,top,right,bottom] pixel bounds",
+    "pivotApplication": "rotate around each pivot in rest canvas coordinates; propagate parent transforms down the tree"
+  },
+  "reference": {
+    "path": "reference.png",
+    "sha256": "ceb1f987025c32b7329fc600d9bc9ec55e5a364f4e87dd7d39b9e2d727d14404"
+  },
+  "assembled": "assembled.png",
+  "sha256Assembled": "e44c345bd1a6919b28451ce5102a2dd189da193687896f7e568feae2a33ef1a6",
+  "parts": [
+    {
+      "id": "wing_r",
+      "file": "wing_r.png",
+      "z": 0,
+      "parent": "body",
+      "joint": "right-wing-root",
+      "pivot": {
+        "x": 355,
+        "y": 316
+      },
+      "bbox": [
+        21,
+        145,
+        388,
+        433
+      ]
+    },
+    {
+      "id": "wing_l",
+      "file": "wing_l.png",
+      "z": 1,
+      "parent": "body",
+      "joint": "left-wing-root",
+      "pivot": {
+        "x": 420,
+        "y": 318
+      },
+      "bbox": [
+        381,
+        143,
+        747,
+        435
+      ]
+    },
+    {
+      "id": "leg_r",
+      "file": "leg_r.png",
+      "z": 2,
+      "parent": "body",
+      "joint": "right-hip",
+      "pivot": {
+        "x": 282,
+        "y": 456
+      },
+      "bbox": [
+        184,
+        400,
+        379,
+        621
+      ]
+    },
+    {
+      "id": "leg_l",
+      "file": "leg_l.png",
+      "z": 3,
+      "parent": "body",
+      "joint": "left-hip",
+      "pivot": {
+        "x": 492,
+        "y": 460
+      },
+      "bbox": [
+        405,
+        400,
+        602,
+        621
+      ]
+    },
+    {
+      "id": "body",
+      "file": "body.png",
+      "z": 4,
+      "parent": null,
+      "joint": "root",
+      "pivot": {
+        "x": 385,
+        "y": 433
+      },
+      "bbox": [
+        202,
+        233,
+        559,
+        585
+      ]
+    },
+    {
+      "id": "arm_r",
+      "file": "arm_r.png",
+      "z": 5,
+      "parent": "body",
+      "joint": "right-shoulder",
+      "pivot": {
+        "x": 279,
+        "y": 340
+      },
+      "bbox": [
+        81,
+        284,
+        351,
+        565
+      ]
+    },
+    {
+      "id": "arm_l",
+      "file": "arm_l.png",
+      "z": 6,
+      "parent": "body",
+      "joint": "left-shoulder",
+      "pivot": {
+        "x": 481,
+        "y": 336
+      },
+      "bbox": [
+        419,
+        283,
+        691,
+        565
+      ]
+    },
+    {
+      "id": "head",
+      "file": "head.png",
+      "z": 7,
+      "parent": "body",
+      "joint": "neck",
+      "pivot": {
+        "x": 386,
+        "y": 270
+      },
+      "bbox": [
+        209,
+        27,
+        562,
+        305
+      ]
+    }
+  ],
+  "jointOverlapCheck": {
+    "windowPx": 47,
+    "anglesDeg": [
+      -20,
+      0,
+      20
+    ],
+    "jointOverlapsPx": [
+      {
+        "id": "wing_r",
+        "rest": 2045,
+        "rotated": {
+          "-20": 2003,
+          "20": 2059
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "wing_l",
+        "rest": 2139,
+        "rotated": {
+          "-20": 2195,
+          "20": 2130
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "leg_r",
+        "rest": 2086,
+        "rotated": {
+          "-20": 2086,
+          "20": 2086
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "leg_l",
+        "rest": 2132,
+        "rotated": {
+          "-20": 2132,
+          "20": 2132
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "arm_r",
+        "rest": 1918,
+        "rotated": {
+          "-20": 1918,
+          "20": 1918
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "arm_l",
+        "rest": 1846,
+        "rotated": {
+          "-20": 1846,
+          "20": 1846
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "head",
+        "rest": 2190,
+        "rotated": {
+          "-20": 2146,
+          "20": 2180
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      }
+    ]
+  },
+  "imageGen": {
+    "atlas": {
+      "file": "exec-58bb35eb-1a98-4db3-9c9a-83e4b8cb569f.png",
+      "grid": [
+        3,
+        3
+      ],
+      "prompt": "Use case: stylized-concept. An original fantasy chibi RPG boss animation rig art atlas referencing the supplied full character, for modular 2D skeletal game motion. Draw the exact listed individual body parts, no fully assembled actor, still match the reference's identity, colors and 3/4 elevated camera. Heavy crisp outlines, opaque rich cel shading, painted game steel/fur/cloth. Include hidden connection cap overlaps on parts, ensure each element fits entirely in the central 85% of its cell. Atlas must be a rigorously aligned invisible 3 columns by 3 rows grid, each cell one independently painted piece, numbered in reading order below, every unlisted cell entirely transparent. True transparent alpha background and neutral detached parts, no labels, graphics, background, ground shadow, glows outside body. Anatomical left means screen right. \n1. massive complete head, obsidian plate and tapered golden horn crown, magenta eyes, armored jaw and short neck.\n2. broad torso, chunky violet-black chest armor with gold edging, crimson waistcloth and luminous amethyst core, no head legs arms or wings.\n3. anatomical left large independent red dragon-like wing, root on the screen left of the wing, gold and charcoal contours extending toward right.\n4. anatomical right large independent red wing, root on the screen right of the wing, extends left.\n5. left heavy claw arm, full arm from shoulder to gold-tipped claw, points down-right.\n6. right heavy claw arm, points down-left.\n7. left armored thigh to boot with an oversized dramatic armored shin, stance outward toward screen right.\n8. right armored thigh to boot, stance toward screen left.",
+      "sha256": "04c118b1992db7f237d5669f9808fc4b1441441417717dfaf3e68adbcca9a030"
+    }
+  }
+}

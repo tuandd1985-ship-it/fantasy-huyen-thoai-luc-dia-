@@ -1,0 +1,228 @@
+{
+  "canvas": [
+    768,
+    640
+  ],
+  "baselineY": 620,
+  "groundTouch": [
+    "front_l",
+    "rear_l"
+  ],
+  "artBottomY": 620,
+  "origin": "top-left",
+  "rig": {
+    "sides": "anatomical; left is on viewer's right in the rest pose",
+    "coordinates": "integer pixels in the shared 768x640 canvas",
+    "composition": "source-over by ascending z, place every layer at (0,0) in rest pose",
+    "bbox": "half-open [left,top,right,bottom] pixel bounds",
+    "pivotApplication": "rotate around each pivot in rest canvas coordinates; propagate parent transforms down the tree"
+  },
+  "reference": {
+    "path": "reference.png",
+    "sha256": "a8cd73e1889903a641d6bb20c8536be277d0c9ac3c4f6b60af44ad98437b3efc"
+  },
+  "assembled": "assembled.png",
+  "sha256Assembled": "b16444a8cd64430410ab26ff0b550719fcaa01b8efae3e14ec56fe57d1579e34",
+  "parts": [
+    {
+      "id": "tail",
+      "file": "tail.png",
+      "z": 0,
+      "parent": "body",
+      "joint": "tail-root",
+      "pivot": {
+        "x": 203,
+        "y": 335
+      },
+      "bbox": [
+        40,
+        199,
+        272,
+        382
+      ]
+    },
+    {
+      "id": "rear_r",
+      "file": "rear_r.png",
+      "z": 1,
+      "parent": "body",
+      "joint": "far-hip",
+      "pivot": {
+        "x": 225,
+        "y": 402
+      },
+      "bbox": [
+        147,
+        368,
+        294,
+        579
+      ]
+    },
+    {
+      "id": "front_r",
+      "file": "front_r.png",
+      "z": 2,
+      "parent": "body",
+      "joint": "far-shoulder",
+      "pivot": {
+        "x": 472,
+        "y": 420
+      },
+      "bbox": [
+        422,
+        374,
+        568,
+        588
+      ]
+    },
+    {
+      "id": "rear_l",
+      "file": "rear_l.png",
+      "z": 3,
+      "parent": "body",
+      "joint": "near-hip",
+      "pivot": {
+        "x": 250,
+        "y": 422
+      },
+      "bbox": [
+        175,
+        379,
+        339,
+        621
+      ]
+    },
+    {
+      "id": "front_l",
+      "file": "front_l.png",
+      "z": 4,
+      "parent": "body",
+      "joint": "near-shoulder",
+      "pivot": {
+        "x": 530,
+        "y": 413
+      },
+      "bbox": [
+        494,
+        380,
+        654,
+        621
+      ]
+    },
+    {
+      "id": "body",
+      "file": "body.png",
+      "z": 5,
+      "parent": null,
+      "joint": "root",
+      "pivot": {
+        "x": 377,
+        "y": 374
+      },
+      "bbox": [
+        172,
+        246,
+        582,
+        482
+      ]
+    },
+    {
+      "id": "head",
+      "file": "head.png",
+      "z": 6,
+      "parent": "body",
+      "joint": "neck",
+      "pivot": {
+        "x": 505,
+        "y": 329
+      },
+      "bbox": [
+        437,
+        161,
+        725,
+        403
+      ]
+    }
+  ],
+  "jointOverlapCheck": {
+    "windowPx": 47,
+    "anglesDeg": [
+      -20,
+      0,
+      20
+    ],
+    "jointOverlapsPx": [
+      {
+        "id": "tail",
+        "rest": 564,
+        "rotated": {
+          "-20": 493,
+          "20": 659
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "rear_r",
+        "rest": 2209,
+        "rotated": {
+          "-20": 2203,
+          "20": 2209
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "front_r",
+        "rest": 2017,
+        "rotated": {
+          "-20": 2000,
+          "20": 2052
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "rear_l",
+        "rest": 2209,
+        "rotated": {
+          "-20": 2209,
+          "20": 2209
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "front_l",
+        "rest": 2126,
+        "rotated": {
+          "-20": 2106,
+          "20": 2190
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "head",
+        "rest": 2097,
+        "rotated": {
+          "-20": 2128,
+          "20": 2109
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      }
+    ]
+  },
+  "imageGen": {
+    "atlas": {
+      "file": "exec-e171d23c-1e3e-45f4-a2c6-861c48dd1338.png",
+      "grid": [
+        3,
+        3
+      ],
+      "prompt": "Use case: stylized-concept. An original fantasy chibi RPG boss animation rig art atlas referencing the supplied full character, for modular 2D skeletal game motion. Draw the exact listed individual body parts, no fully assembled actor, still match the reference's identity, colors and 3/4 elevated camera. Heavy crisp outlines, opaque rich cel shading, painted game steel/fur/cloth. Include hidden connection cap overlaps on parts, ensure each element fits entirely in the central 85% of its cell. Atlas must be a rigorously aligned invisible 3 columns by 3 rows grid, each cell one independently painted piece, numbered in reading order below, every unlisted cell entirely transparent. True transparent alpha background and neutral detached parts, no labels, graphics, background, ground shadow, glows outside body. Anatomical left means screen right. \n1. Head only, huge dark charcoal alpha-wolf muzzle and tufted cheek, pointed ears, green glowing eyes, existing scar, mane collar at neck, looks screen right with snarling mouth.\n2. Horizontal broad charcoal-gray wolf torso, dark feathery fur, a glowing green rune on shoulder and another on flank, no legs, no head.\n3. Separate bushy charcoal-gray tail tapering to screen left, its root is on the right.\n4. Near left front leg and clawed paw complete, distinct light gray fur ruff at joint, angled down-right.\n5. Far right front leg and clawed paw, darker, angled down-right.\n6. Near left hind leg and clawed paw, bent haunch in dark gray with subtle green rune, angled down-right.\n7. Far right hind leg and clawed paw, darker, angled down-right.",
+      "sha256": "843b896fc912e8cdc0440bb8e45dfc76098fd5627f7aca313b6cb28d3ebe7ac0"
+    }
+  }
+}
