@@ -159,6 +159,16 @@
       .fight-pad .util-pot-mp{ position:absolute; left:62px; top:238px; transform:translate(-50%,-50%); width:46px; height:46px; }
       .fight-pad .auto-btn{ position:absolute; left:196px; top:28px; transform:translate(-50%,-50%); }
       .atk-btn:active{ transform:scale(.95); }
+      /* ===== ẢNH ICON NÚT (v0.6.2) ===== Ảnh vẽ phủ kín nút tròn (tự bo
+         tròn theo nút, viền vàng của nút giữ nguyên); glyph cũ nằm DƯỚI
+         ảnh làm fallback — ảnh lỗi tải thì onerror ẩn ảnh, glyph hiện lại,
+         không bao giờ có nút trống. Vòng quét hồi chiêu (.cd / .cd-num),
+         chip Cấp, nhãn khoá cấp và số lượng bình nằm SAU ảnh trong DOM
+         nên vẫn vẽ ĐÈ lên ảnh như trước. */
+      .btn-art{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; border-radius:50%; pointer-events:none; }
+      .atk-btn{ position:relative; }
+      .hud-ico .ico-c{ position:relative; }
+      .auto-btn .auto-state{ position:absolute; left:50%; bottom:3px; transform:translateX(-50%); z-index:2; background:rgba(8,10,8,.62); border-radius:999px; padding:0 5px; white-space:nowrap; }
       /* ===== CHỐNG ZOOM KHI ĐÁNH ===== Gõ liên tục vào nút đánh/skill từng bị
          webview hiểu là double-tap-to-zoom (hình cứ phóng to / thu nhỏ giữa trận).
          Khóa hẳn cử chỉ zoom trên mọi nút bấm; riêng nút chiến đấu dùng
@@ -637,25 +647,25 @@
         <div class="boss-bar" id="bossBar"><div class="bb-name" id="bossName"></div><div class="bb-track"><div class="bb-fill" id="bossFill"></div></div></div>
         <div class="quest-chip" id="questChip"><span class="q-tag">NHIỆM VỤ</span><span id="questTxt">Chính tuyến: khám phá Rừng Xanh</span></div>
         <div class="hud-icons" id="hudIcons" aria-label="Menu chức năng">
-          <button class="hud-ico" data-panel="char" aria-label="Nhân vật"><span class="ico-c"><svg><use href="#i-user"/></svg></span><span class="ico-label">Nhân vật</span><span class="badge" id="charBadge" style="display:none">0</span></button>
-          <button class="hud-ico" data-panel="bag" aria-label="Túi đồ"><span class="ico-c"><svg><use href="#i-bag"/></svg></span><span class="ico-label">Túi đồ</span><span class="badge" id="bagBadge" style="display:none">0</span></button>
-          <button class="hud-ico" data-panel="equip" aria-label="Trang bị"><span class="ico-c"><svg><use href="#i-shield"/></svg></span><span class="ico-label">Trang bị</span></button>
-          <button class="hud-ico" data-panel="skill" aria-label="Kỹ năng"><span class="ico-c"><svg><use href="#i-bolt"/></svg></span><span class="ico-label">Kỹ năng</span></button>
-          <button class="hud-ico" data-panel="settings" aria-label="Cài đặt"><span class="ico-c"><svg><use href="#i-gear"/></svg></span><span class="ico-label">Cài đặt</span></button>
+          <button class="hud-ico" data-panel="char" aria-label="Nhân vật"><span class="ico-c"><img class="btn-art" data-akey="k1" alt="" onerror="this.style.display='none'"><svg><use href="#i-user"/></svg></span><span class="ico-label">Nhân vật</span><span class="badge" id="charBadge" style="display:none">0</span></button>
+          <button class="hud-ico" data-panel="bag" aria-label="Túi đồ"><span class="ico-c"><img class="btn-art" data-akey="k2" alt="" onerror="this.style.display='none'"><svg><use href="#i-bag"/></svg></span><span class="ico-label">Túi đồ</span><span class="badge" id="bagBadge" style="display:none">0</span></button>
+          <button class="hud-ico" data-panel="equip" aria-label="Trang bị"><span class="ico-c"><img class="btn-art" data-akey="k3" alt="" onerror="this.style.display='none'"><svg><use href="#i-shield"/></svg></span><span class="ico-label">Trang bị</span></button>
+          <button class="hud-ico" data-panel="skill" aria-label="Kỹ năng"><span class="ico-c"><img class="btn-art" data-akey="k4" alt="" onerror="this.style.display='none'"><svg><use href="#i-bolt"/></svg></span><span class="ico-label">Kỹ năng</span></button>
+          <button class="hud-ico" data-panel="settings" aria-label="Cài đặt"><span class="ico-c"><img class="btn-art" data-akey="k5" alt="" onerror="this.style.display='none'"><svg><use href="#i-gear"/></svg></span><span class="ico-label">Cài đặt</span></button>
         </div>
         <canvas id="minimap" width="296" height="200" aria-label="Bản đồ nhỏ — chạm để phóng to"></canvas>
         <div class="joy" id="joy" aria-label="Cần điều khiển di chuyển 8 hướng"><div class="joy-thumb" id="joyThumb"></div></div>
         <div class="fight-pad">
           <div class="util-row">
-            <div class="sup-unit util-pot-hp"><button class="pot-btn pot-hp" id="btnPotHp" aria-label="Uống bình máu"><svg><use href="#i-potion"/></svg><span class="pot-n" id="potHpN">3</span></button><span class="s-name">Bình máu</span></div>
-            <div class="sup-unit util-pot-mp"><button class="pot-btn pot-mp" id="btnPotMp" aria-label="Uống bình mana"><svg><use href="#i-potion"/></svg><span class="pot-n" id="potMpN">2</span></button><span class="s-name">Bình mana</span></div>
-            <button class="auto-btn" id="btnAuto" aria-label="Bật tắt chế độ tự đánh">AUTO<small id="autoState">Đang tắt</small></button>
+            <div class="sup-unit util-pot-hp"><button class="pot-btn pot-hp" id="btnPotHp" aria-label="Uống bình máu"><img class="btn-art" data-akey="k6" alt="" onerror="this.style.display='none'"><svg><use href="#i-potion"/></svg><span class="pot-n" id="potHpN">3</span></button><span class="s-name">Bình máu</span></div>
+            <div class="sup-unit util-pot-mp"><button class="pot-btn pot-mp" id="btnPotMp" aria-label="Uống bình mana"><img class="btn-art" data-akey="k7" alt="" onerror="this.style.display='none'"><svg><use href="#i-potion"/></svg><span class="pot-n" id="potMpN">2</span></button><span class="s-name">Bình mana</span></div>
+            <button class="auto-btn" id="btnAuto" aria-label="Bật tắt chế độ tự đánh"><img class="btn-art" data-akey="k8" alt="" onerror="this.style.display='none'"><small id="autoState" class="auto-state">Đang tắt</small></button>
           </div>
           <div class="support-row" id="supportBtns"></div>
           <div class="main-row">
             <div id="skillBtns"></div>
             <div class="skill-unit atk-unit">
-              <button class="atk-btn" id="btnAtk" aria-label="Đánh thường"><svg><use href="#i-sword"/></svg></button>
+              <button class="atk-btn" id="btnAtk" aria-label="Đánh thường"><img class="btn-art" data-akey="k9" alt="" onerror="this.style.display='none'"><svg><use href="#i-sword"/></svg></button>
               <span class="s-name">Đánh</span>
             </div>
           </div>
@@ -782,7 +792,7 @@
 
     <!-- ====== MÀN HÌNH CHỜ LOAD / GIỚI THIỆU ====== -->
     <div class="intro-back" id="introBack" role="status" aria-label="Đang tải game">
-      <img class="intro-art" data-akey="k1" alt="Ba anh hùng chibi đối đầu quái vật trên thảo nguyên" />
+      <img class="intro-art" data-akey="k10" alt="Ba anh hùng chibi đối đầu quái vật trên thảo nguyên" />
       <div class="intro-shade"></div>
       <div class="intro-box">
         <h1 class="intro-title"><span class="t-main">FANTASY</span><span class="t-sub">HUYỀN THOẠI LỤC ĐỊA</span></h1>
@@ -827,7 +837,8 @@
         <h4 class="set-h">Khác</h4>
         <div class="set-row"><span>Rung máy khi đánh boss / lên cấp</span><button class="tgl" id="setVib" aria-label="Bật tắt rung máy"></button></div>
         <p class="muted" style="margin:10px 0 0">Cài đặt áp dụng ngay. Mức đồ hoạ Thấp giảm mạnh hạt hiệu ứng để máy yếu chơi mượt.</p>
-        <p class="muted" style="margin:10px 0 0">Phiên bản <b id="gameVersion">v0.6.0</b> — Nhật ký cập nhật:</p>
+        <p class="muted" style="margin:10px 0 0">Phiên bản <b id="gameVersion">v0.6.2</b> — Nhật ký cập nhật:</p>
+        <p class="muted" style="margin:4px 0 0">v0.6.2 — Toàn bộ nút skill và icon chức năng có hình vẽ riêng.</p>
         <p class="muted" style="margin:4px 0 0">v0.6.0 — Bố cục mới: skill vòng quanh nút Đánh, cửa sổ mở nhỏ gọn, nhân vật nhỏ lại cho map rộng hơn.</p>
         <p class="muted" style="margin:4px 0 0">v0.5.7 — Màn hình phủ kín điện thoại, nút bấm không bị cắt; nhân vật quay người mượt hơn.</p>
         <p class="muted" style="margin:4px 0 0">v0.5.6 — Rừng Xanh có chiều sâu thật: đi sau tán cây bị che tự nhiên, tán cây mờ đi khi đứng dưới; Pháp Sư chuyển động phiên bản mới.</p>
@@ -975,97 +986,112 @@ function fitStage() {
    đúng 1 dòng literal vào đây.
    ===================================================================== */
 const ASSETS = {
-  intro: __A.k1,
+  intro: __A.k10,
   hero: {
-    'swordsman-male': __A.k2,
-    'swordsman-female': __A.k3,
-    'mage-male': __A.k4,
-    'mage-female': __A.k5,
-    'archer-male': __A.k6,
-    'archer-female': __A.k7,
+    'swordsman-male': __A.k11,
+    'swordsman-female': __A.k12,
+    'mage-male': __A.k13,
+    'mage-female': __A.k14,
+    'archer-male': __A.k15,
+    'archer-female': __A.k16,
   },
   portrait: {
     'swordsman-male': __A.k0,
-    'swordsman-female': __A.k8,
-    'mage-male': __A.k9,
-    'mage-female': __A.k10,
-    'archer-male': __A.k11,
-    'archer-female': __A.k12,
+    'swordsman-female': __A.k17,
+    'mage-male': __A.k18,
+    'mage-female': __A.k19,
+    'archer-male': __A.k20,
+    'archer-female': __A.k21,
   },
   anim: {
-    'swordsman-male': __A.k13,
-    'swordsman-female': __A.k14,
+    'swordsman-male': __A.k22,
+    'swordsman-female': __A.k23,
     /* Pháp Sư (nam + nữ): dải chuyển động MỚI của Claude (v0.5.4) —
        2520×500, 6 ô 420×500 [idle1, idle2, run1, run2, cast1, cast2],
        đã QC: mỗi ô đúng 1 nhân vật, alpha mép 0%, chân thẳng hàng.
        Dải cũ bị lỗi dính hình nhân vật bên cạnh khi cắt khung (ngừng dùng
        từ v0.4.0) nay được thay hẳn bằng dải mới này. */
-    'mage-male': __A.k15,
-    'mage-female': __A.k16,
-    'archer-male': __A.k17,
-    'archer-female': __A.k18,
+    'mage-male': __A.k24,
+    'mage-female': __A.k25,
+    'archer-male': __A.k26,
+    'archer-female': __A.k27,
   },
   /* Quái Rừng Xanh vẽ bằng ẢNH THẬT (v0.4.0) — khóa = type quái trong CONFIG */
   monster: {
-    'slime': __A.k19,
-    'goblin': __A.k20,
-    'wolf': __A.k21,
-    'goblinArcher': __A.k22,
-    'goblinShaman': __A.k23,
-    'wolfLord': __A.k24,
+    'slime': __A.k28,
+    'goblin': __A.k29,
+    'wolf': __A.k30,
+    'goblinArcher': __A.k31,
+    'goblinShaman': __A.k32,
+    'wolfLord': __A.k33,
   },
   /* Prop Rừng Xanh (v0.4.0) — khóa = PROP_DEFS.image ở lớp engine */
   prop: {
-    'oak': __A.k25,
-    'pillar': __A.k26,
-    'boulder': __A.k27,
-    'bush': __A.k28,
-    'flowers': __A.k29,
-    'portalPlatform': __A.k30,
-    'portalBack': __A.k31,
+    'oak': __A.k34,
+    'pillar': __A.k35,
+    'boulder': __A.k36,
+    'bush': __A.k37,
+    'flowers': __A.k38,
+    'portalPlatform': __A.k39,
+    'portalBack': __A.k40,
   },
   /* Tile nền liền mạch riêng cho mặt đất Rừng Xanh (v0.4.0) */
   ground: {
-    'forestTile': __A.k32,
+    'forestTile': __A.k41,
     /* Rừng Xanh vẽ 2 lớp (v0.5.6): map-rung-xanh.webp = LỚP NỀN ĐÃ GỠ TÁN
        (vẽ làm nền thế giới); bản ĐẦY ĐỦ chỉ dùng cho minimap / bản đồ lớn;
        mask thang xám (trắng = vùng bị tán che) phục vụ làm mờ tán cây. */
-    'forestMap': __A.k33,
-    'forestMapFull': __A.k34,
-    'forestMask': __A.k35,
+    'forestMap': __A.k42,
+    'forestMapFull': __A.k43,
+    'forestMask': __A.k44,
+  },
+  /* Icon VẼ RIÊNG cho mọi nút bấm (v0.6.2) — 27 ảnh 256×256 ở assets/icons/:
+     skill chính + buff chủ động theo phái (ks = Kiếm Sĩ, ps = Pháp Sư,
+     ct = Cung Thủ; s1–s4 đúng thứ tự skill, b1–b2 đúng thứ tự buff hiển
+     thị), nút hệ thống (đánh thường / bình / AUTO) và hàng icon chức năng. */
+  icons: {
+    'ks-s1': __A.k45, 'ks-s2': __A.k46,
+    'ks-s3': __A.k47, 'ks-s4': __A.k48,
+    'ks-b1': __A.k49, 'ks-b2': __A.k50,
+    'ps-s1': __A.k51, 'ps-s2': __A.k52,
+    'ps-s3': __A.k53, 'ps-s4': __A.k54,
+    'ps-b1': __A.k55, 'ps-b2': __A.k56,
+    'ct-s1': __A.k57, 'ct-s2': __A.k58,
+    'ct-s3': __A.k59, 'ct-s4': __A.k60,
+    'ct-b1': __A.k61, 'ct-b2': __A.k62,
+    'sys-attack': __A.k9,
+    'sys-potion-hp': __A.k6,
+    'sys-potion-mp': __A.k7,
+    'sys-auto': __A.k8,
+    'nav-character': __A.k1,
+    'nav-bag': __A.k2,
+    'nav-equip': __A.k3,
+    'nav-skills': __A.k4,
+    'nav-settings': __A.k5,
   },
 };
 /* Danh sách phẳng MỌI file ảnh (toàn literal) — dùng để preload màn chờ */
 const ASSET_FILES = [
-  __A.k1,
-  __A.k2, __A.k3,
-  __A.k4, __A.k5,
-  __A.k6, __A.k7,
-  __A.k0, __A.k8,
-  __A.k9, __A.k10,
+  __A.k10,
   __A.k11, __A.k12,
   __A.k13, __A.k14,
   __A.k15, __A.k16,
-  __A.k17, __A.k18,
-  __A.k19, __A.k20,
-  __A.k21, __A.k22,
-  __A.k23, __A.k24,
-  __A.k25, __A.k26,
-  __A.k27, __A.k28,
-  __A.k29, __A.k30,
-  __A.k31,
-  __A.k32,
-  __A.k33,
-  __A.k34, __A.k35, __A.k36,
-  __A.k37, __A.k38, __A.k39,
-  __A.k40, __A.k41, __A.k42,
-  __A.k43, __A.k44, __A.k45,
-  __A.k46, __A.k47, __A.k48,
-  __A.k49, __A.k50, __A.k51,
-  __A.k52, __A.k53, __A.k54,
-  __A.k55, __A.k56, __A.k57,
-  __A.k58, __A.k59, __A.k60,
-  __A.k61, __A.k62, __A.k63,
+  __A.k0, __A.k17,
+  __A.k18, __A.k19,
+  __A.k20, __A.k21,
+  __A.k22, __A.k23,
+  __A.k24, __A.k25,
+  __A.k26, __A.k27,
+  __A.k28, __A.k29,
+  __A.k30, __A.k31,
+  __A.k32, __A.k33,
+  __A.k34, __A.k35,
+  __A.k36, __A.k37,
+  __A.k38, __A.k39,
+  __A.k40,
+  __A.k41,
+  __A.k42,
+  __A.k43, __A.k44, __A.k63,
   __A.k64, __A.k65, __A.k66,
   __A.k67, __A.k68, __A.k69,
   __A.k70, __A.k71, __A.k72,
@@ -1121,11 +1147,30 @@ const ASSET_FILES = [
   __A.k220, __A.k221, __A.k222,
   __A.k223, __A.k224, __A.k225,
   __A.k226, __A.k227, __A.k228,
-  __A.k229,
+  __A.k229, __A.k230, __A.k231,
+  __A.k232, __A.k233, __A.k234,
+  __A.k235, __A.k236, __A.k237,
+  __A.k238, __A.k239, __A.k240,
+  __A.k241, __A.k242, __A.k243,
+  __A.k244, __A.k245, __A.k246,
+  __A.k247, __A.k248, __A.k249,
+  __A.k250, __A.k251, __A.k252,
+  __A.k253, __A.k254, __A.k255,
+  __A.k256,
+  __A.k45, __A.k46, __A.k47, __A.k48,
+  __A.k49, __A.k50,
+  __A.k51, __A.k52, __A.k53, __A.k54,
+  __A.k55, __A.k56,
+  __A.k57, __A.k58, __A.k59, __A.k60,
+  __A.k61, __A.k62,
+  __A.k9, __A.k6, __A.k7,
+  __A.k8,
+  __A.k1, __A.k2, __A.k3,
+  __A.k4, __A.k5,
 ];
 
 /* Phiên bản game hiện tại — hiển thị trong panel Cài đặt */
-const GAME_VERSION = 'v0.6.0';
+const GAME_VERSION = 'v0.6.2';
 
 /* =====================================================================
    VẬT THỂ TÁCH LỚP RỪNG XANH (v0.5.6) — dữ liệu từ layers.json của
@@ -5156,6 +5201,11 @@ const keys = {};
 const fmt = n => Math.round(n).toLocaleString('vi-VN');
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const icon = (id, cls) => '<svg' + (cls ? ' class="' + cls + '"' : '') + '><use href="#' + id + '"/></svg>';
+/* v0.6.2: ảnh icon nút theo phái — tiền tố file trong ASSETS.icons
+   (ks = Kiếm Sĩ, ps = Pháp Sư, ct = Cung Thủ). Ảnh phủ kín nút, glyph
+   cũ giữ ngay dưới ảnh: ảnh lỗi tải thì onerror ẩn ảnh → glyph hiện. */
+const ICON_PREFIX = { swordsman: 'ks', mage: 'ps', archer: 'ct' };
+const btnArt = key => '<img class="btn-art" src="' + ASSETS.icons[key] + '" alt="" onerror="this.style.display=\'none\'">';
 function rarityColor(r) { return getComputedStyle(document.documentElement).getPropertyValue('--r-' + CONFIG.rarities[r].css).trim() || '#ffd970'; }
 function resetSkillStates() {
   skillState = cls().skills.map(() => ({ cd: 0 }));
@@ -5241,7 +5291,7 @@ const UI = {
     const box = el('skillBtns'); box.innerHTML = '';
     cls().skills.forEach((sk, i) => {
       const unit = document.createElement('div'); unit.className = 'skill-unit';
-      unit.innerHTML = '<button class="skill-btn" aria-label="' + sk.name + '">' + icon(sk.icon) +
+      unit.innerHTML = '<button class="skill-btn" aria-label="' + sk.name + '">' + btnArt(ICON_PREFIX[P.classId] + '-s' + (i + 1)) + icon(sk.icon) +
         '<span class="cd"></span><span class="cd-num"></span>' +
         '<span class="lv-chip">C' + P.skillLv[i] + '</span><span class="key-hint">' + (i + 1) + '</span>' +
         '<span class="lock-lv" style="display:none">' + icon('i-lock') + 'Lv ' + sk.unlock + '</span></button>' +
@@ -5274,10 +5324,12 @@ const UI = {
      để refresh/cast không lệch khi lọc bỏ bị động. */
   buildSupportBtns() {
     const box = el('supportBtns'); box.innerHTML = '';
+    let shown = 0;   /* v0.6.2: buff CHỦ ĐỘNG thứ mấy đang hiển thị (b1, b2) — bị động bị lọc bỏ nên đếm riêng theo thứ tự hiện nút */
     cls().support.forEach((sp, i) => {
       if (sp.type !== 'active') return;
+      shown++;
       const unit = document.createElement('div'); unit.className = 'sup-unit';
-      unit.innerHTML = '<button class="sup-btn" data-sup="' + i + '" aria-label="' + sp.name + '">' + icon(sp.icon) +
+      unit.innerHTML = '<button class="sup-btn" data-sup="' + i + '" aria-label="' + sp.name + '">' + btnArt(ICON_PREFIX[P.classId] + '-b' + shown) + icon(sp.icon) +
         '<span class="cd"></span><span class="cd-num"></span></button>' +
         '<span class="s-name">' + sp.name + '</span>';
       unit.querySelector('button').addEventListener('pointerdown', e => { e.preventDefault(); AudioFX.ensure(); Skills.castSupport(i); });

@@ -1,3 +1,9 @@
+
+## v0.6.2 — 2026-11-28 (icon artwork for every button)
+- Do: "Các skill với icon phải có hình ảnh chứ e" — Luna generated 4 icon sheets with the media image tool and sliced 27 icons (256×256 WebP) into assets/icons/: per-class skill art ks/ps/ct-s1..s4 + buffs b1/b2, sys-attack, sys-potion-hp/mp, sys-auto, nav-character/bag/equip/skills/settings (sources in assets/icons-src/).
+- Buttons now show real artwork filling the round gold-rimmed button; cooldown sweep, C1 chip, lock labels and potion counts still overlay; missing image falls back to the old glyph. AUTO's word label became a status chip (Đang tắt/Đang bật) under the icon.
+- Verified with REAL rendered probes in rotated 390×844 for all 3 classes (correct icon set per class, touch regression incl. AUTO actually fighting, all 5 floating panels), 0 console errors.
+- Delivery: 257 unique assets; split total ~11.9MB; monolith 23.3MB at /mono (approaching the 25MB KV cap — split is the primary format).
 # CHANGELOG — FANTASY: HUYỀN THOẠI LỤC ĐỊA
 
 ## 2026-11-28
