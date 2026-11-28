@@ -1,5 +1,5 @@
 # PROGRESS — FANTASY: HUYỀN THOẠI LỤC ĐỊA
-Cập nhật: 2026-11-28 (sau bản v0.5.0 — Rừng Xanh dùng bản đồ tranh nguyên khối).
+Cập nhật: 2026-11-28 (sau bản v0.5.1 — hiệu ứng skill mới).
 
 ## Đã xong
 - SPEC.md (yêu cầu gốc, Do phê duyệt dần qua các vòng chốt 2026-11-27) + GDD.md (bản thiết kế v2) + bộ tài liệu Master Instruction: ART_DIRECTION, ARCHITECTURE, BALANCE, ROADMAP, GAP_ANALYSIS, TEST_REPORT, CHANGELOG.
@@ -23,10 +23,12 @@ Cập nhật: 2026-11-28 (sau bản v0.5.0 — Rừng Xanh dùng bản đồ tra
 
 - v0.5.0 — RỪNG XANH BẢN ĐỒ TRANH NGUYÊN KHỐI (2026-11-28): ảnh map_1 phủ thế giới 2804×2244, va chạm lưới 100×80 phân tích từ tranh (sông/cầu/cây/đá), tỉ lệ hero/quái/boss theo chuẩn mới. Probe đầy đủ PASS, đã deploy + đồng bộ GitHub. Chi tiết: CHANGELOG.
 
+- v0.5.1 — HIỆU ỨNG SKILL MỚI (2026-11-28): hệ hạt pool 300, mọi skill 3 lớp hiệu ứng + vòng cảnh báo + hiệu ứng đất, buff hiển thị trên người (bong bóng khiên/hào quang/vệt gió). Đã deploy + đồng bộ GitHub. Chi tiết: CHANGELOG.
+
 ## Đang chờ Do
-- Do test bản v0.5.0 trên iPhone thật: Rừng Xanh tranh nguyên khối (đi cầu qua sông, tỉ lệ người/map/quái, cảm giác map rộng).
+- Do test trên iPhone thật: v0.5.0 (Rừng Xanh tranh, đi cầu qua sông, tỉ lệ) + v0.5.1 (hiệu ứng skill 3 phái; các chiêu Lv8/15/25 cần nhân vật cấp cao để xem vòng cảnh báo).
 - Claude làm dải chuyển động Pháp Sư mới (đang tải thêm công cụ nâng chất lượng ảnh/GIF) → đẩy GitHub → Luna QC + tích hợp.
-- Đợt tiếp theo: v0.5.1 nâng cấp hiệu ứng skill (hạt/vệt sáng/vùng cảnh báo) bằng hiệu ứng code; sau đó rollout các map tranh còn lại (map_4 Băng Nguyên, map_5 Núi Lửa, hang1 Hang Tối...) theo cùng quy trình pilot.
+- Đợt tiếp theo: v0.5.2 map Rừng Xanh nét hơn (bản hi-res 4206×3366 đã xử lý sẵn), v0.5.3 quái di chuyển linh hoạt (chuyển động thủ tục theo họ quái); sau đó rollout các map tranh còn lại theo quy trình pilot.
 - Chốt có đưa Pháp Sư Goblin vào pool spawn của Rừng Xanh không (hiện đã có ảnh + mapping, chưa spawn).
 
 ## Chưa đạt / tồn đọng (không đánh dấu hoàn thành)
