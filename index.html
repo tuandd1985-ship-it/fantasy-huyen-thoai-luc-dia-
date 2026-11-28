@@ -760,7 +760,8 @@
         <h4 class="set-h">Khác</h4>
         <div class="set-row"><span>Rung máy khi đánh boss / lên cấp</span><button class="tgl" id="setVib" aria-label="Bật tắt rung máy"></button></div>
         <p class="muted" style="margin:10px 0 0">Cài đặt áp dụng ngay. Mức đồ hoạ Thấp giảm mạnh hạt hiệu ứng để máy yếu chơi mượt.</p>
-        <p class="muted" style="margin:10px 0 0">Phiên bản <b id="gameVersion">v0.5.3</b> — Nhật ký cập nhật:</p>
+        <p class="muted" style="margin:10px 0 0">Phiên bản <b id="gameVersion">v0.5.4</b> — Nhật ký cập nhật:</p>
+        <p class="muted" style="margin:4px 0 0">v0.5.4 — Pháp Sư có chuyển động thật; bản đồ Rừng Xanh dùng bản làm nét mới, màu trầm hơn để nhân vật nổi bật.</p>
         <p class="muted" style="margin:4px 0 0">v0.5.3 — Quái di chuyển linh hoạt: Slime nảy thạch, sói phi, goblin nhịp bước, boss uy nghi.</p>
         <p class="muted" style="margin:4px 0 0">v0.5.2 — Bản đồ Rừng Xanh nét hơn với ảnh độ phân giải cao.</p>
         <p class="muted" style="margin:4px 0 0">v0.5.1 — Hiệu ứng skill mới: vệt sáng, hạt nguyên tố, vòng cảnh báo và khiên buff đẹp hơn cho cả 3 phái.</p>
@@ -876,37 +877,40 @@ const ASSETS = {
   anim: {
     'swordsman-male': __A.k13,
     'swordsman-female': __A.k14,
-    /* Pháp Sư (nam + nữ): dải chuyển động bị lỗi dính hình nhân vật bên cạnh
-       khi cắt khung → NGỪNG DÙNG từ v0.4.0 (file vẫn giữ trong assets/anim/).
-       Thiếu entry ở đây thì heroImage() tự rơi về ảnh toàn thân tĩnh + hiệu
-       ứng chuyển động bằng code cho phái Pháp Sư. */
-    'archer-male': __A.k15,
-    'archer-female': __A.k16,
+    /* Pháp Sư (nam + nữ): dải chuyển động MỚI của Claude (v0.5.4) —
+       2520×500, 6 ô 420×500 [idle1, idle2, run1, run2, cast1, cast2],
+       đã QC: mỗi ô đúng 1 nhân vật, alpha mép 0%, chân thẳng hàng.
+       Dải cũ bị lỗi dính hình nhân vật bên cạnh khi cắt khung (ngừng dùng
+       từ v0.4.0) nay được thay hẳn bằng dải mới này. */
+    'mage-male': __A.k15,
+    'mage-female': __A.k16,
+    'archer-male': __A.k17,
+    'archer-female': __A.k18,
   },
   /* Quái Rừng Xanh vẽ bằng ẢNH THẬT (v0.4.0) — khóa = type quái trong CONFIG */
   monster: {
-    'slime': __A.k17,
-    'goblin': __A.k18,
-    'wolf': __A.k19,
-    'goblinArcher': __A.k20,
-    'goblinShaman': __A.k21,
-    'wolfLord': __A.k22,
+    'slime': __A.k19,
+    'goblin': __A.k20,
+    'wolf': __A.k21,
+    'goblinArcher': __A.k22,
+    'goblinShaman': __A.k23,
+    'wolfLord': __A.k24,
   },
   /* Prop Rừng Xanh (v0.4.0) — khóa = PROP_DEFS.image ở lớp engine */
   prop: {
-    'oak': __A.k23,
-    'pillar': __A.k24,
-    'boulder': __A.k25,
-    'bush': __A.k26,
-    'flowers': __A.k27,
-    'portalPlatform': __A.k28,
-    'portalBack': __A.k29,
+    'oak': __A.k25,
+    'pillar': __A.k26,
+    'boulder': __A.k27,
+    'bush': __A.k28,
+    'flowers': __A.k29,
+    'portalPlatform': __A.k30,
+    'portalBack': __A.k31,
   },
   /* Tile nền liền mạch riêng cho mặt đất Rừng Xanh (v0.4.0) */
   ground: {
-    'forestTile': __A.k30,
+    'forestTile': __A.k32,
     /* Tranh nguyên khối toàn map Rừng Xanh (v0.5.0) — nền + minimap */
-    'forestMap': __A.k31,
+    'forestMap': __A.k33,
   },
 };
 /* Danh sách phẳng MỌI file ảnh (toàn literal) — dùng để preload màn chờ */
@@ -926,13 +930,14 @@ const ASSET_FILES = [
   __A.k23, __A.k24,
   __A.k25, __A.k26,
   __A.k27, __A.k28,
-  __A.k29,
-  __A.k30,
+  __A.k29, __A.k30,
   __A.k31,
+  __A.k32,
+  __A.k33,
 ];
 
 /* Phiên bản game hiện tại — hiển thị trong panel Cài đặt */
-const GAME_VERSION = 'v0.5.3';
+const GAME_VERSION = 'v0.5.4';
 
 /* =====================================================================
    LƯỚI VA CHẠM RỪNG XANH (v0.5.0) — suy từ chính tranh nguyên khối:
@@ -2277,8 +2282,9 @@ const Sprites = {
         }
       };
       img.src = ASSETS.hero[k];
-      /* Biến thể không có entry trong ASSETS.anim (Pháp Sư từ v0.4.0) thì
-         KHÔNG tải dải — heroImage() tự rơi về ảnh toàn thân tĩnh ở trên. */
+      /* Biến thể không có entry trong ASSETS.anim thì KHÔNG tải dải —
+         heroImage() tự rơi về ảnh toàn thân tĩnh ở trên. Từ v0.5.4 cả 3
+         phái × 2 giới đều có entry (Pháp Sư dùng dải mới của Claude). */
       const animSrc = ASSETS.anim[k];
       if (animSrc) {
         const strip = new Image();
@@ -2413,59 +2419,25 @@ const Sprites = {
     if (!img) return false;
     const baseA = ctx.globalAlpha;
     const swing = h.swingT > 0 ? 1 - h.swingT / 0.22 : -1;
-    /* PHÁP SƯ (v0.4.2): không có dải khung nên chuyển động TUNG PHÉP làm
-       hoàn toàn bằng thủ tục trên ảnh tĩnh — nhảy lên nhẹ + lao người về
-       trước + nghiêng người khi vung gậy (swingT), giơ thế tụ phép khi
-       thi triển (castT), và quả cầu trên đầu gậy PHÁT SÁNG + tóe tia lửa
-       phép đồng bộ đúng thời điểm ra đòn. Độ mạnh/nghiêng/nhảy ngang với
-       khung ra đòn của Kiếm Sĩ / Cung Thủ. Các phái có dải khung không
-       đi qua nhánh tĩnh này nên không đổi hành vi. */
-    const isMage = viewClassId() === 'mage';
-    let castGlow = 0;   // 0..1 — cường độ phát sáng của quả cầu phép
-    if (isMage && !h.dead) {
-      if (swing >= 0) castGlow = Math.max(castGlow, Math.sin(swing * Math.PI));
-      if (h.castT > 0) castGlow = Math.max(castGlow, 0.62 + 0.38 * Math.sin(t * 26));
-      if (!h.moving) castGlow = Math.max(castGlow, 0.13 + 0.07 * Math.sin(t * 3.2));   // đứng thở: quả cầu vẫn hơi sáng
-    }
+    /* Nhánh TĨNH này chỉ còn là dự phòng khi dải khung chưa tải xong.
+       v0.5.4: Pháp Sư đã có dải khung thật (heroAnimDraw lo toàn bộ
+       idle/run/cast) nên chuyển động THỦ TỤC riêng của Pháp Sư từ v0.4.2
+       (nhảy + nghiêng khi tung phép, quả cầu gậy phát sáng + tia lửa) đã
+       TẮT hẳn — không còn lớp chuyển động nào chồng lên dải khung. */
     let bob = h.moving ? Math.abs(Math.sin(h.walkPh)) * height * 0.018 : Math.sin(t * 2.2) * height * 0.008;
     if (h.reviveT > 0) bob += h.reviveT * height * 0.3;
-    if (isMage && swing >= 0) bob += Math.sin(swing * Math.PI) * height * 0.085;   // nhảy lên nhẹ khi tung phép
-    if (isMage && h.castT > 0) bob += height * 0.02;                               // lơ lửng nhẹ khi tụ phép
     const w = height * img.naturalWidth / img.naturalHeight;
     ctx.save();
     if (h.dead) { const dp = Math.min(1, (h.deathT || 0) / 0.45); ctx.rotate(-dp * 1.35); ctx.globalAlpha = baseA * (1 - dp * 0.35); }
     ctx.translate(0, -bob);
     if (h.moving) ctx.rotate(Math.sin(h.walkPh) * 0.035);
-    if (swing >= 0) { const lp = Math.sin(swing * Math.PI); const lunge = isMage ? 0.11 : 0.07, lean = isMage ? 0.17 : 0.07; ctx.translate((h.face || 1) * lp * height * lunge, 0); ctx.rotate(-(h.face || 1) * lp * lean); }
-    if (h.castT > 0) { const cp = 1 + Math.sin(t * 26) * (isMage ? 0.02 : 0.012); ctx.scale(cp, cp); if (isMage) { ctx.translate((h.face || 1) * height * 0.035, 0); ctx.rotate(-(h.face || 1) * 0.09); } }
+    if (swing >= 0) { const lp = Math.sin(swing * Math.PI); ctx.translate((h.face || 1) * lp * height * 0.07, 0); ctx.rotate(-(h.face || 1) * lp * 0.07); }
+    if (h.castT > 0) { const cp = 1 + Math.sin(t * 26) * 0.012; ctx.scale(cp, cp); }
     const fxI = h.faceS === undefined ? (h.face || 1) : h.faceS;
     ctx.scale(Math.abs(fxI) < 0.3 ? (fxI < 0 ? -0.3 : 0.3) : fxI, 1);
     ctx.drawImage(img, -w / 2, -height, w, height);
     if (h.poisonT > 0 && this.heroArtTint[k + '-green']) { ctx.globalAlpha = baseA * 0.30; ctx.drawImage(this.heroArtTint[k + '-green'], -w / 2, -height, w, height); ctx.globalAlpha = baseA; }
     if (h.hurtT > 0 && this.heroArtTint[k + '-red']) { ctx.globalAlpha = baseA * Math.min(0.5, h.hurtT * 2.2); ctx.drawImage(this.heroArtTint[k + '-red'], -w / 2, -height, w, height); ctx.globalAlpha = baseA; }
-    /* Quả cầu phép phát sáng + tia lửa quanh đầu gậy (tọa độ theo ảnh:
-       quả cầu nằm ở ~80% chiều rộng, ~29% chiều cao của ảnh toàn thân;
-       hệ vẽ đã lật theo hướng mặt nên tia lửa luôn ở đúng phía gậy). */
-    if (castGlow > 0.02) {
-      const orbRgb = viewGender() === 'female' ? '182,120,232' : '105,183,255';
-      const gx = w * 0.305, gy = -height * 0.705, R = height * (0.085 + 0.05 * castGlow);
-      const og = ctx.createRadialGradient(gx, gy, 1, gx, gy, R * 2.1);
-      og.addColorStop(0, 'rgba(255,255,255,' + (0.7 * castGlow * baseA) + ')');
-      og.addColorStop(0.35, 'rgba(' + orbRgb + ',' + (0.5 * castGlow * baseA) + ')');
-      og.addColorStop(1, 'rgba(' + orbRgb + ',0)');
-      ctx.fillStyle = og; ctx.beginPath(); ctx.arc(gx, gy, R * 2.1, 0, Math.PI * 2); ctx.fill();
-      ctx.fillStyle = 'rgba(255,255,255,' + (0.4 * castGlow * baseA) + ')';
-      ctx.beginPath(); ctx.arc(gx, gy, R * 0.5, 0, Math.PI * 2); ctx.fill();
-      if (castGlow > 0.3) {   // tia lửa phép bay quanh quả cầu khi ra đòn / tụ phép
-        for (let si = 0; si < 6; si++) {
-          const sa = t * 9 + si * (Math.PI / 3), sr = R * (1.05 + 0.3 * Math.sin(t * 13 + si * 1.7));
-          const sx2 = gx + Math.cos(sa) * sr, sy2 = gy + Math.sin(sa) * sr * 0.82;
-          const ss2 = height * 0.016 * (0.6 + 0.4 * Math.sin(t * 17 + si * 2.1)) * castGlow;
-          ctx.fillStyle = 'rgba(255,244,200,' + (0.85 * castGlow * baseA) + ')';
-          ctx.beginPath(); ctx.moveTo(sx2, sy2 - ss2); ctx.quadraticCurveTo(sx2 + ss2 * 0.18, sy2 - ss2 * 0.18, sx2 + ss2, sy2); ctx.quadraticCurveTo(sx2 + ss2 * 0.18, sy2 + ss2 * 0.18, sx2, sy2 + ss2); ctx.quadraticCurveTo(sx2 - ss2 * 0.18, sy2 + ss2 * 0.18, sx2 - ss2, sy2); ctx.quadraticCurveTo(sx2 - ss2 * 0.18, sy2 - ss2 * 0.18, sx2, sy2 - ss2); ctx.fill();
-        }
-      }
-    }
     ctx.restore();
     return true;
   },
