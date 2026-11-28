@@ -166,6 +166,19 @@
          chip Cấp, nhãn khoá cấp và số lượng bình nằm SAU ảnh trong DOM
          nên vẫn vẽ ĐÈ lên ảnh như trước. */
       .btn-art{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; border-radius:50%; pointer-events:none; }
+      /* ===== ICON PHẲNG CODEX (v0.7.1) ===== Bộ icons2 nền TRONG SUỐT nên
+         KHÔNG phủ kín nút như tranh màu: hiện kiểu contain ở ~82% lòng nút,
+         để lộ nền nút tối + viền vàng sẵn có; glyph cũ vẫn nằm dưới làm
+         fallback khi ảnh lỗi tải (onerror ẩn ảnh). */
+      .btn-art.btn-flat{ left:9%; top:9%; width:82%; height:82%; object-fit:contain; border-radius:0; }
+      /* Panel Kỹ năng: icon phẳng nằm trong ô .a-ic, đè lên glyph fallback */
+      .skill-row-item .a-ic{ position:relative; }
+      .skill-row-item .a-ic img{ position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:27px; height:27px; object-fit:contain; pointer-events:none; }
+      /* Danh sách map: icon phẳng cạnh tên map + icon cổng ở nút màn BOSS */
+      .map-block .mb-ic{ width:22px; height:22px; object-fit:contain; flex:0 0 auto; align-self:center; }
+      .stage-btn .st-ic{ width:16px; height:16px; object-fit:contain; }
+      /* Thanh HP boss: icon cuồng nộ cạnh tên khi boss vào pha enrage */
+      .boss-bar .bb-name img.bb-enr{ width:15px; height:15px; object-fit:contain; vertical-align:-2px; margin-left:5px; }
       .atk-btn{ position:relative; }
       .hud-ico .ico-c{ position:relative; }
       .auto-btn .auto-state{ position:absolute; left:50%; bottom:3px; transform:translateX(-50%); z-index:2; background:rgba(8,10,8,.62); border-radius:999px; padding:0 5px; white-space:nowrap; }
@@ -837,7 +850,8 @@
         <h4 class="set-h">Khác</h4>
         <div class="set-row"><span>Rung máy khi đánh boss / lên cấp</span><button class="tgl" id="setVib" aria-label="Bật tắt rung máy"></button></div>
         <p class="muted" style="margin:10px 0 0">Cài đặt áp dụng ngay. Mức đồ hoạ Thấp giảm mạnh hạt hiệu ứng để máy yếu chơi mượt.</p>
-        <p class="muted" style="margin:10px 0 0">Phiên bản <b id="gameVersion">v0.7.0</b> — Nhật ký cập nhật:</p>
+        <p class="muted" style="margin:10px 0 0">Phiên bản <b id="gameVersion">v0.7.1</b> — Nhật ký cập nhật:</p>
+        <p class="muted" style="margin:4px 0 0">v0.7.1 — Thống nhất bộ icon phẳng: skill, bị động, map, minimap và báo chiêu boss.</p>
         <p class="muted" style="margin:4px 0 0">v0.7.0 — Kiếm Sĩ Nam có animation riêng cho từng skill; Goblin có animation đánh và trúng đòn.</p>
         <p class="muted" style="margin:4px 0 0">v0.6.2 — Toàn bộ nút skill và icon chức năng có hình vẽ riêng.</p>
         <p class="muted" style="margin:4px 0 0">v0.6.0 — Bố cục mới: skill vòng quanh nút Đánh, cửa sổ mở nhỏ gọn, nhân vật nhỏ lại cho map rộng hơn.</p>
@@ -1095,6 +1109,55 @@ const ASSETS = {
     'nav-skills': __A.k4,
     'nav-settings': __A.k5,
   },
+  /* Bộ ICON PHẲNG của Codex (v0.7.1) — 42 file WebP 96px nền TRONG SUỐT ở
+     assets/icons2/, đặt tên family-id. Đây là hệ icon HIỂN THỊ chính cho
+     nút skill/buff, panel Kỹ năng, danh sách map, marker minimap và nhãn
+     báo chiêu quái/boss; bộ tranh màu v0.6.2 ở trên giữ nguyên làm dự
+     phòng. (minimap-chest / minimap-waypoint chưa dùng đợt này.) */
+  icons2: {
+    'swordsman-slash': __A.k71,
+    'swordsman-whirl': __A.k72,
+    'swordsman-quake': __A.k73,
+    'swordsman-ult': __A.k74,
+    'swordsman-shield': __A.k75,
+    'swordsman-rage': __A.k76,
+    'swordsman-lifesteal': __A.k77,
+    'swordsman-bodysteel': __A.k78,
+    'mage-fireball': __A.k79,
+    'mage-frost': __A.k80,
+    'mage-thunder': __A.k81,
+    'mage-meteor': __A.k82,
+    'mage-manashield': __A.k83,
+    'mage-manaregen': __A.k84,
+    'mage-amplify': __A.k85,
+    'mage-endless': __A.k86,
+    'archer-pierce': __A.k87,
+    'archer-volley': __A.k88,
+    'archer-poisonarrow': __A.k89,
+    'archer-storm': __A.k90,
+    'archer-windstep': __A.k91,
+    'archer-weakmark': __A.k92,
+    'archer-dodgepassive': __A.k93,
+    'archer-eagle': __A.k94,
+    'map-forest': __A.k95,
+    'map-crypt': __A.k96,
+    'map-swamp': __A.k97,
+    'map-desert': __A.k98,
+    'map-volcano': __A.k99,
+    'map-frost': __A.k100,
+    'map-castle': __A.k101,
+    'map-portal': __A.k102,
+    'minimap-boss': __A.k103,
+    'minimap-elite': __A.k104,
+    'monster-charge': __A.k105,
+    'monster-howl': __A.k106,
+    'monster-summon': __A.k107,
+    'monster-nova': __A.k108,
+    'monster-heal': __A.k109,
+    'monster-poison': __A.k110,
+    'monster-ranged': __A.k111,
+    'monster-enrage': __A.k112,
+  },
 };
 /* Danh sách phẳng MỌI file ảnh (toàn literal) — dùng để preload màn chờ */
 const ASSET_FILES = [
@@ -1122,21 +1185,7 @@ const ASSET_FILES = [
   __A.k48,
   __A.k49,
   __A.k50,
-  __A.k51, __A.k52, __A.k71,
-  __A.k72, __A.k73, __A.k74,
-  __A.k75, __A.k76, __A.k77,
-  __A.k78, __A.k79, __A.k80,
-  __A.k81, __A.k82, __A.k83,
-  __A.k84, __A.k85, __A.k86,
-  __A.k87, __A.k88, __A.k89,
-  __A.k90, __A.k91, __A.k92,
-  __A.k93, __A.k94, __A.k95,
-  __A.k96, __A.k97, __A.k98,
-  __A.k99, __A.k100, __A.k101,
-  __A.k102, __A.k103, __A.k104,
-  __A.k105, __A.k106, __A.k107,
-  __A.k108, __A.k109, __A.k110,
-  __A.k111, __A.k112, __A.k113,
+  __A.k51, __A.k52, __A.k113,
   __A.k114, __A.k115, __A.k116,
   __A.k117, __A.k118, __A.k119,
   __A.k120, __A.k121, __A.k122,
@@ -1187,7 +1236,21 @@ const ASSET_FILES = [
   __A.k255, __A.k256, __A.k257,
   __A.k258, __A.k259, __A.k260,
   __A.k261, __A.k262, __A.k263,
-  __A.k264,
+  __A.k264, __A.k265, __A.k266,
+  __A.k267, __A.k268, __A.k269,
+  __A.k270, __A.k271, __A.k272,
+  __A.k273, __A.k274, __A.k275,
+  __A.k276, __A.k277, __A.k278,
+  __A.k279, __A.k280, __A.k281,
+  __A.k282, __A.k283, __A.k284,
+  __A.k285, __A.k286, __A.k287,
+  __A.k288, __A.k289, __A.k290,
+  __A.k291, __A.k292, __A.k293,
+  __A.k294, __A.k295, __A.k296,
+  __A.k297, __A.k298, __A.k299,
+  __A.k300, __A.k301, __A.k302,
+  __A.k303, __A.k304, __A.k305,
+  __A.k306,
   __A.k53, __A.k54, __A.k55, __A.k56,
   __A.k57, __A.k58,
   __A.k59, __A.k60, __A.k61, __A.k62,
@@ -1198,10 +1261,41 @@ const ASSET_FILES = [
   __A.k8,
   __A.k1, __A.k2, __A.k3,
   __A.k4, __A.k5,
+  __A.k71, __A.k72,
+  __A.k73, __A.k74,
+  __A.k75, __A.k76,
+  __A.k77, __A.k78,
+  __A.k79, __A.k80,
+  __A.k81, __A.k82,
+  __A.k83, __A.k84,
+  __A.k85, __A.k86,
+  __A.k87, __A.k88,
+  __A.k89, __A.k90,
+  __A.k91, __A.k92,
+  __A.k93, __A.k94,
+  __A.k95, __A.k96,
+  __A.k97, __A.k98,
+  __A.k99, __A.k100,
+  __A.k101, __A.k102,
+  __A.k103, __A.k104,
+  __A.k105, __A.k106,
+  __A.k107, __A.k108,
+  __A.k109, __A.k110,
+  __A.k111, __A.k112,
 ];
 
+/* v0.7.1 — Cache ảnh icons2 cho lớp VẼ CANVAS (marker minimap / bản đồ
+   lớn + icon cạnh chữ cảnh báo floater): tải lười theo id, vẽ chỉ khi ảnh
+   đã sẵn sàng (complete + có kích thước thật), thiếu thì bỏ qua êm. */
+const ICON2_IMG = {};
+function icon2Img(id) {
+  let im = ICON2_IMG[id];
+  if (!im) { im = new Image(); im.src = ASSETS.icons2[id]; ICON2_IMG[id] = im; }
+  return (im.complete && im.naturalWidth) ? im : null;
+}
+
 /* Phiên bản game hiện tại — hiển thị trong panel Cài đặt */
-const GAME_VERSION = 'v0.7.0';
+const GAME_VERSION = 'v0.7.1';
 
 /* =====================================================================
    VẬT THỂ TÁCH LỚP RỪNG XANH (v0.5.6) — dữ liệu từ layers.json của
@@ -3912,9 +4006,9 @@ function startStage() {
   Save.persist();
 }
 
-function addFloater(x, y, txt, color, big, kind, pop) {
+function addFloater(x, y, txt, color, big, kind, pop, ico) {
   if (kind === 'dmg' && !Roster.settings.dmgNums) return;
-  floaters.push({ x, y, txt, color, t: 0, big: !!big, pop: pop ? 1 : 0 });
+  floaters.push({ x, y, txt, color, t: 0, big: !!big, pop: pop ? 1 : 0, ico: ico || null });
   if (floaters.length > 42) floaters.shift();
 }
 function pushFx(o) { if (Roster.settings.fxSkills) { slashes.push(o); if (slashes.length > 48) slashes.shift(); } }
@@ -4354,7 +4448,7 @@ function updateMonster(m, dt) {
         if (tgt) {
           const amt = Math.round(tgt.maxHp * (m.def.healPct || 0.12));
           tgt.hp = Math.min(tgt.maxHp, tgt.hp + amt); tgt.healGlowT = 0.7; m.healGlowT = 0.7;
-          addFloater(tgt.x, tgt.y - 84, '+' + amt, '#6fbf73');
+          addFloater(tgt.x, tgt.y - 84, '+' + amt, '#6fbf73', false, null, 0, 'monster-heal');
           burst(tgt.x, tgt.y - 30, '#6fbf73', 7, 60);
           m.healCd = 3.6; AudioFX.heal();
         } else m.healCd = 0.8;
@@ -4382,18 +4476,18 @@ function updateMonster(m, dt) {
         m.skillIdx++; m.skillT = sk.cd * rand(0.9, 1.15);
         if (sk.type === 'summon') {
           for (let k = 0; k < sk.count; k++) spawnMonster(sk.use, { summoned: true, near: m });
-          addFloater(m.x, m.y - 120, 'TRIỆU HỒI ĐÀN SÓI!', '#ffb03a', true); AudioFX.skill();
+          addFloater(m.x, m.y - 120, 'TRIỆU HỒI ĐÀN SÓI!', '#ffb03a', true, null, 0, 'monster-summon'); AudioFX.skill();
         } else if (sk.type === 'nova') {
           telegraphs.push({ kind: 'nova', x: m.x, y: m.y, r: sk.radius, t: 0, dur: 0.9, atk: m.atk, mult: sk.mult });
-          addFloater(m.x, m.y - 120, 'VÒNG SÁT THƯƠNG!', '#ff8a70', true); AudioFX.skill();
+          addFloater(m.x, m.y - 120, 'VÒNG SÁT THƯƠNG!', '#ff8a70', true, null, 0, 'monster-nova'); AudioFX.skill();
         } else if (sk.type === 'howl') {
           /* Gầm choáng: vòng cảnh báo hiện 0.9s trước khi nổ */
           telegraphs.push({ kind: 'stun', x: m.x, y: m.y, r: sk.radius || 215, t: 0, dur: 0.9, atk: m.atk * (sk.mult || 0.5), stunDur: sk.stun || 1.6 });
-          addFloater(m.x, m.y - 130, 'GẦM CHOÁNG — TRÁNH VÒNG ĐỎ!', '#c9a0ff', true); AudioFX.skill();
+          addFloater(m.x, m.y - 130, 'GẦM CHOÁNG — TRÁNH VÒNG ĐỎ!', '#c9a0ff', true, null, 0, 'monster-howl'); AudioFX.skill();
         } else if (sk.type === 'charge') {
           /* Lao húc: vệt cảnh báo theo hướng lao hiện 0.7s trước */
           telegraphs.push({ kind: 'line', x: m.x, y: m.y, dirX: dx / dist, dirY: dy / dist, len: 440, w: 62, t: 0, dur: 0.7, boss: m, mult: sk.mult });
-          addFloater(m.x, m.y - 130, 'SẮP LAO HỐC — NÉ SANG BÊN!', '#ff8a70', true); AudioFX.skill();
+          addFloater(m.x, m.y - 130, 'SẮP LAO HỐC — NÉ SANG BÊN!', '#ff8a70', true, null, 0, 'monster-charge'); AudioFX.skill();
         }
       }
     }
@@ -4520,7 +4614,7 @@ function update(dt) {
         if (b && monsters.includes(b) && !b.dead) {
           const ddx = hero.x - b.x, ddy = hero.y - b.y, dl = Math.hypot(ddx, ddy) || 1;
           b.chargeT = 0.55; b.chargeDirX = ddx / dl; b.chargeDirY = ddy / dl; b.chargeHit = false; b.chargeMult = tg.mult;
-          addFloater(b.x, b.y - 130, 'LAO HỐC!', '#ff8a70', true);
+          addFloater(b.x, b.y - 130, 'LAO HỐC!', '#ff8a70', true, null, 0, 'monster-charge');
         }
       } else if (tg.kind === 'stun') {
         burst(tg.x, tg.y - 10, '#c9a0ff', 24, 150);
@@ -4666,7 +4760,7 @@ function draw() {
     ctx.beginPath(); ctx.arc(tg.x, tg.y, tg.r * p, 0, Math.PI * 2); ctx.stroke();
     ctx.strokeStyle = 'rgba(' + col + ',.45)'; ctx.lineWidth = 1.6;
     ctx.beginPath(); ctx.arc(tg.x, tg.y, tg.r, 0, Math.PI * 2); ctx.stroke();
-    if (tg.kind === 'stun') { ctx.fillStyle = 'rgba(201,160,255,.9)'; ctx.font = '900 13px "Be Vietnam Pro"'; ctx.textAlign = 'center'; ctx.fillText('VÙNG GẦM CHOÁNG', tg.x, tg.y - tg.r - 8); }
+    if (tg.kind === 'stun') { ctx.fillStyle = 'rgba(201,160,255,.9)'; ctx.font = '900 13px "Be Vietnam Pro"'; ctx.textAlign = 'center'; ctx.fillText('VÙNG GẦM CHOÁNG', tg.x, tg.y - tg.r - 8); const him = icon2Img('monster-howl'); if (him) { const htw = ctx.measureText('VÙNG GẦM CHOÁNG').width; ctx.drawImage(him, tg.x - htw / 2 - 21, tg.y - tg.r - 8 - 13, 16, 16); } }
   }
   /* Vòng cảnh báo / vòng lóe của skill hero (v0.5.1) — cùng ngôn ngữ thị
      giác với vòng telegraph của boss: 'warn' đầy dần trong lúc niệm,
@@ -4876,6 +4970,16 @@ function draw() {
     ctx.font = (f.big ? '900 ' : '800 ') + fsz.toFixed(1) + 'px "Be Vietnam Pro"';
     ctx.lineWidth = 3.4; ctx.strokeStyle = 'rgba(0,0,0,.55)';
     ctx.strokeText(f.txt, f.x, f.y); ctx.fillStyle = f.color; ctx.fillText(f.txt, f.x, f.y);
+    /* v0.7.1: icon hành vi (bộ phẳng icons2) đứng ngay TRÁI chữ cảnh báo
+       của chiêu quái/boss — lao tới / hú / triệu hồi / nổ / hồi máu /
+       cuồng nộ... Nhãn không gắn icon thì vẽ như cũ. */
+    if (f.ico) {
+      const fim = icon2Img(f.ico);
+      if (fim) {
+        const isz = fsz * 1.25, tw = ctx.measureText(f.txt).width;
+        ctx.drawImage(fim, f.x - tw / 2 - isz - 5, f.y - isz * 0.8, isz, isz);
+      }
+    }
   }
   ctx.globalAlpha = 1;
   ctx.restore();
@@ -4891,7 +4995,7 @@ function draw() {
   if (flash > 0) { ctx.fillStyle = 'rgba(255,240,200,' + (flash * 0.5) + ')'; ctx.fillRect(0, 0, W, H); }
   const boss = monsters.find(m => m.boss);
   const bb = document.getElementById('bossBar');
-  if (boss) { bb.style.display = 'block'; document.getElementById('bossName').textContent = '👑 ' + boss.name + (boss.enraged ? ' — CUỒNG NỘ!' : ''); document.getElementById('bossFill').style.width = Math.max(0, boss.hp / boss.maxHp * 100) + '%'; }
+  if (boss) { bb.style.display = 'block'; const bn = document.getElementById('bossName'); const bTxt = '👑 ' + boss.name + (boss.enraged ? ' — CUỒNG NỘ!' : ''); if (bn._t !== bTxt) { bn._t = bTxt; bn.innerHTML = bTxt + (boss.enraged ? '<img class="bb-enr" src="' + ASSETS.icons2['monster-enrage'] + '" alt="">' : ''); } document.getElementById('bossFill').style.width = Math.max(0, boss.hp / boss.maxHp * 100) + '%'; }
   else bb.style.display = 'none';
 }
 function drawDrop(d) {
@@ -4950,6 +5054,15 @@ const Minimap = {
       c.beginPath(); c.arc(forestEnv.bossArena.x * sx, forestEnv.bossArena.y * sy, forestEnv.bossArena.r * sx, 0, Math.PI * 2); c.stroke();
       c.strokeStyle = 'rgba(245,155,61,.7)';
       c.beginPath(); c.arc(forestEnv.eliteZone.x * sx, forestEnv.eliteZone.y * sy, forestEnv.eliteZone.r * sx, 0, Math.PI * 2); c.stroke();
+      /* v0.7.1: marker ICON PHẲNG tại tâm khu boss (đầu quỷ đỏ) và khu
+         tinh anh (sao tím) — vòng tròn giữ vai trò ranh giới khu vực,
+         icon là điểm đánh dấu chính ở đúng vị trí khu. Cỡ icon tỉ lệ
+         theo bề ngang canvas nên minimap và bản đồ lớn đồng nhất. */
+      const zi = Math.min(46, Math.max(20, w * 0.09));
+      const zb = icon2Img('minimap-boss');
+      if (zb) c.drawImage(zb, forestEnv.bossArena.x * sx - zi / 2, forestEnv.bossArena.y * sy - zi / 2, zi, zi);
+      const ze = icon2Img('minimap-elite');
+      if (ze) c.drawImage(ze, forestEnv.eliteZone.x * sx - zi / 2, forestEnv.eliteZone.y * sy - zi / 2, zi, zi);
     }
     c.fillStyle = 'rgba(0,0,0,.4)';
     for (const o of obstacles) c.fillRect(o.x * sx - 2, o.y * sy - 2, 4, 4);
@@ -5038,7 +5151,7 @@ const Combat = {
     if (m.boss && !m.enraged && m.hp > 0 && m.hp <= m.maxHp * 0.5) {
       m.enraged = true;
       m.atk *= CONFIG.bossEnrage.atkMult; m.speed *= CONFIG.bossEnrage.spdMult;
-      addFloater(m.x, m.y - 130, 'BOSS CUỒNG NỘ!', '#ff5040', true);
+      addFloater(m.x, m.y - 130, 'BOSS CUỒNG NỘ!', '#ff5040', true, null, 0, 'monster-enrage');
       UI.toast('⚠ Boss <b>' + m.name + '</b> xuống dưới 50% HP — chuyển pha cuồng nộ: đánh nhanh và đau hơn!');
       burst(m.x, m.y - 50, '#ff5040', 26, 150); shake = Math.max(shake, 7); vibrate(60);
     }
@@ -5373,9 +5486,26 @@ const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;'
 const icon = (id, cls) => '<svg' + (cls ? ' class="' + cls + '"' : '') + '><use href="#' + id + '"/></svg>';
 /* v0.6.2: ảnh icon nút theo phái — tiền tố file trong ASSETS.icons
    (ks = Kiếm Sĩ, ps = Pháp Sư, ct = Cung Thủ). Ảnh phủ kín nút, glyph
-   cũ giữ ngay dưới ảnh: ảnh lỗi tải thì onerror ẩn ảnh → glyph hiện. */
+   cũ giữ ngay dưới ảnh: ảnh lỗi tải thì onerror ẩn ảnh → glyph hiện.
+   (Từ v0.7.1 nút skill/buff dùng bộ phẳng icons2 qua btnArt2 bên dưới;
+   các nút hệ thống/nav vẫn dùng tranh màu v0.6.2 qua thẻ img tĩnh.) */
 const ICON_PREFIX = { swordsman: 'ks', mage: 'ps', archer: 'ct' };
 const btnArt = key => '<img class="btn-art" src="' + ASSETS.icons[key] + '" alt="" onerror="this.style.display=\'none\'">';
+/* v0.7.1: bộ ICON PHẲNG icons2 tra theo ID SKILL (không theo thứ tự nút)
+   — dùng chung cho nút trận đấu + panel Kỹ năng nên không bao giờ lệch:
+   buff 2 của Cung Thủ (weakmark) đúng icon bia ngắm, mắt ưng (eagle) là
+   bị động. Icon hiện contain ~82% lòng nút (CSS .btn-flat), nền trong
+   suốt để lộ nền nút tối; glyph cũ vẫn nằm dưới làm fallback. */
+const SKILL_ICON2 = {
+  slash: 'swordsman-slash', whirl: 'swordsman-whirl', quake: 'swordsman-quake', ult: 'swordsman-ult',
+  shield: 'swordsman-shield', rage: 'swordsman-rage', lifesteal: 'swordsman-lifesteal', bodysteel: 'swordsman-bodysteel',
+  fireball: 'mage-fireball', frost: 'mage-frost', thunder: 'mage-thunder', meteor: 'mage-meteor',
+  manashield: 'mage-manashield', manaregen: 'mage-manaregen', amplify: 'mage-amplify', endless: 'mage-endless',
+  pierce: 'archer-pierce', volley: 'archer-volley', poisonarrow: 'archer-poisonarrow', storm: 'archer-storm',
+  windstep: 'archer-windstep', weakmark: 'archer-weakmark', dodgepassive: 'archer-dodgepassive', eagle: 'archer-eagle',
+};
+const MAP_ICON2 = { forest: 'map-forest', crypt: 'map-crypt', swamp: 'map-swamp', desert: 'map-desert', volcano: 'map-volcano', frost: 'map-frost', castle: 'map-castle' };
+const btnArt2 = skillId => '<img class="btn-art btn-flat" src="' + ASSETS.icons2[SKILL_ICON2[skillId]] + '" alt="" onerror="this.style.display=\'none\'">';
 function rarityColor(r) { return getComputedStyle(document.documentElement).getPropertyValue('--r-' + CONFIG.rarities[r].css).trim() || '#ffd970'; }
 function resetSkillStates() {
   skillState = cls().skills.map(() => ({ cd: 0 }));
@@ -5461,7 +5591,7 @@ const UI = {
     const box = el('skillBtns'); box.innerHTML = '';
     cls().skills.forEach((sk, i) => {
       const unit = document.createElement('div'); unit.className = 'skill-unit';
-      unit.innerHTML = '<button class="skill-btn" aria-label="' + sk.name + '">' + btnArt(ICON_PREFIX[P.classId] + '-s' + (i + 1)) + icon(sk.icon) +
+      unit.innerHTML = '<button class="skill-btn" aria-label="' + sk.name + '">' + btnArt2(sk.id) + icon(sk.icon) +
         '<span class="cd"></span><span class="cd-num"></span>' +
         '<span class="lv-chip">C' + P.skillLv[i] + '</span><span class="key-hint">' + (i + 1) + '</span>' +
         '<span class="lock-lv" style="display:none">' + icon('i-lock') + 'Lv ' + sk.unlock + '</span></button>' +
@@ -5494,12 +5624,10 @@ const UI = {
      để refresh/cast không lệch khi lọc bỏ bị động. */
   buildSupportBtns() {
     const box = el('supportBtns'); box.innerHTML = '';
-    let shown = 0;   /* v0.6.2: buff CHỦ ĐỘNG thứ mấy đang hiển thị (b1, b2) — bị động bị lọc bỏ nên đếm riêng theo thứ tự hiện nút */
     cls().support.forEach((sp, i) => {
       if (sp.type !== 'active') return;
-      shown++;
       const unit = document.createElement('div'); unit.className = 'sup-unit';
-      unit.innerHTML = '<button class="sup-btn" data-sup="' + i + '" aria-label="' + sp.name + '">' + btnArt(ICON_PREFIX[P.classId] + '-b' + shown) + icon(sp.icon) +
+      unit.innerHTML = '<button class="sup-btn" data-sup="' + i + '" aria-label="' + sp.name + '">' + btnArt2(sp.id) + icon(sp.icon) +
         '<span class="cd"></span><span class="cd-num"></span></button>' +
         '<span class="s-name">' + sp.name + '</span>';
       unit.querySelector('button').addEventListener('pointerdown', e => { e.preventDefault(); AudioFX.ensure(); Skills.castSupport(i); });
@@ -5580,7 +5708,7 @@ const UI = {
       const row = document.createElement('div'); row.className = 'skill-row-item';
       let desc = sk.desc;
       if (!isSup) desc += ' · Hồi chiêu ' + skillCd(i, sk).toFixed(1) + 's · ' + sk.mp + ' mana';
-      row.innerHTML = '<span class="a-ic">' + icon(sk.icon) + '</span><span class="a-main"><b>' + sk.name + ' <span class="chip ' + (locked ? 'todo' : 'doing') + '">' + (locked ? 'Chưa mở khoá' : 'Cấp ' + lv + '/' + CONFIG.skillUpgrade.max) + '</span>' + (isSup ? '<span class="chip todo">' + (sk.type === 'active' ? 'Chủ động' : 'Bị động') + '</span>' : '') + '</b><small>' + (locked ? 'Mở khoá ở Lv ' + sk.unlock + '. ' : '') + desc + '</small></span>';
+      row.innerHTML = '<span class="a-ic"><img src="' + ASSETS.icons2[SKILL_ICON2[sk.id]] + '" alt="" onerror="this.style.display=\'none\'">' + icon(sk.icon) + '</span><span class="a-main"><b>' + sk.name + ' <span class="chip ' + (locked ? 'todo' : 'doing') + '">' + (locked ? 'Chưa mở khoá' : 'Cấp ' + lv + '/' + CONFIG.skillUpgrade.max) + '</span>' + (isSup ? '<span class="chip todo">' + (sk.type === 'active' ? 'Chủ động' : 'Bị động') + '</span>' : '') + '</b><small>' + (locked ? 'Mở khoá ở Lv ' + sk.unlock + '. ' : '') + desc + '</small></span>';
       const btn = document.createElement('button'); btn.className = 'plus-btn'; btn.textContent = '+'; btn.setAttribute('aria-label', 'Nâng cấp ' + sk.name);
       btn.disabled = locked || P.skillPoints <= 0 || lv >= CONFIG.skillUpgrade.max;
       btn.addEventListener('click', () => {
@@ -5726,14 +5854,14 @@ const UI = {
       const block = document.createElement('div');
       block.className = 'map-block' + (locked ? ' locked-map' : '');
       const bossName = CONFIG.bosses[mp.boss].name;
-      block.innerHTML = '<div class="mb-head"><b>' + mp.name + '</b><span>Lv ' + mp.band[0] + (mp.band[1] > 900 ? '+' : '–' + mp.band[1]) + ' · ' + mp.sub + ' · Boss: ' + bossName + (P.bossFirstKills[mp.boss] ? ' ✓ đã hạ' : '') + '</span>' +
+      block.innerHTML = '<div class="mb-head"><img class="mb-ic" src="' + ASSETS.icons2[MAP_ICON2[mp.id]] + '" alt="" onerror="this.style.display=\'none\'"><b>' + mp.name + '</b><span>Lv ' + mp.band[0] + (mp.band[1] > 900 ? '+' : '–' + mp.band[1]) + ' · ' + mp.sub + ' · Boss: ' + bossName + (P.bossFirstKills[mp.boss] ? ' ✓ đã hạ' : '') + '</span>' +
         (locked ? '<span class="chip todo">Khoá — cần Lv ' + mp.band[0] + (P.maxStage < first ? ' & qua boss map trước' : '') + '</span>' : '<span class="chip doing">Đã mở</span>') + '</div>';
       const row = document.createElement('div'); row.className = 'stage-row';
       for (let s = 0; s < CONFIG.stagesPerMap; s++) {
         const stage = first + s, isBoss = s === CONFIG.stagesPerMap - 1;
         const b = document.createElement('button');
         b.className = 'stage-btn' + (isBoss ? ' boss' : '') + (stage === P.stage ? ' current' : '') + (stage > P.maxStage ? ' locked' : stage < P.maxStage ? ' done' : '');
-        b.innerHTML = 'Màn ' + stage + '<small>' + (isBoss ? 'BOSS ' + bossName : 'Quái thường') + '</small>';
+        b.innerHTML = (isBoss ? '<img class="st-ic" src="' + ASSETS.icons2['map-portal'] + '" alt="" onerror="this.style.display=\'none\'">' : '') + 'Màn ' + stage + '<small>' + (isBoss ? 'BOSS ' + bossName : 'Quái thường') + '</small>';
         b.disabled = stage > P.maxStage;
         b.addEventListener('click', () => { if (stage > P.maxStage) return; P.stage = stage; UI.closeSheet(); startStage(); UI.toast('Đến <b>' + mp.name + ' — Màn ' + stage + '</b>'); });
         row.appendChild(b);

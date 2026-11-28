@@ -1,4 +1,8 @@
 
+## v0.7.1 — 2026-11-28 (unified flat icon system by Codex)
+- Codex's 48-icon flat set (art-tests/game-icons-v1, commit 9b3b9b2; Luna judged all 48 passing) is now the game's single icon language; the painted v0.6.2 set stays in assets as backup. Wired by skill ID: combat buttons for all 3 classes (archer buff 2 corrected to weakmark — Dấu Ấn Yếu Điểm), Skills panel incl. all 6 passive icons, map list icons per map + portal, minimap/big-map boss (red demon head) and elite (purple star) markers, boss/monster telegraph labels with behaviour icons (summon/nova/howl/charge/heal/enrage) + enrage icon on the boss HP name while enraged. monster-poison/monster-ranged declared but unused (no matching warning labels in game yet); minimap-chest skipped (no chests), waypoint unused.
+- 42 icons2 files in ASSETS preload; 307 unique assets total; split delivery ~15.1MB.
+
 ## v0.7.0 — 2026-11-28 (per-skill animation strips)
 - New per-action animation path: Kiếm Sĩ Nam plays Claude's key-pose strips per skill (Trảm Kiếm 520ms / Kiếm Vũ 550ms / Địa Chấn 730ms / Thiên Kiếm 900ms, per-frame durations, cell 768×640, feet y=620, draw scale 640/476) + a dedicated idle strip; run/basic attack unchanged. Goblin melee gets idle/attack (640ms)/hit (320ms) strips, procedural motion suppressed while a strip plays. Damage/cooldown logic untouched.
 - Verified by rendered probes (rotated 390×844): skill 1 mid-animation + new idle captured live, goblin strips on screen, AUTO regression 0→7 kills + Lv2, persistence intact, 0 console errors. Skills 2–4 share the verified path (level-locked in a fresh save, source-audited).
