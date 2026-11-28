@@ -1,5 +1,5 @@
 # PROGRESS — FANTASY: HUYỀN THOẠI LỤC ĐỊA
-Cập nhật: 2026-11-28 (sau bản v0.4.1 — gọn cụm skill).
+Cập nhật: 2026-11-28 (sau bản v0.4.2 — Pháp Sư chuyển động, đánh thường không chờ, chọn nhân vật phóng to).
 
 ## Đã xong
 - SPEC.md (yêu cầu gốc, Do phê duyệt dần qua các vòng chốt 2026-11-27) + GDD.md (bản thiết kế v2) + bộ tài liệu Master Instruction: ART_DIRECTION, ARCHITECTURE, BALANCE, ROADMAP, GAP_ANALYSIS, TEST_REPORT, CHANGELOG.
@@ -19,8 +19,12 @@ Cập nhật: 2026-11-28 (sau bản v0.4.1 — gọn cụm skill).
 - v0.4.0 — ĐỢT TÍCH HỢP ASSET (2026-11-28): quái Rừng Xanh + boss bằng ảnh thật, hero bản làm sạch viền, vá lỗi dải Pháp Sư (dùng ảnh tĩnh), nền tile v2b, cổng 2 lớp + prop ellipse theo ENGINE_PROP_LAYER_SPEC. Probe headless của builder PASS (cổng/va chạm/đạn/Pháp Sư/map khác hồi quy), Luna kiểm chứng độc lập bản xuất + live Cloudflare. Chi tiết: CHANGELOG.
 - v0.4.1 — GỌN CỤM SKILL (2026-11-28, theo góp ý test điện thoại của Do): HUD còn 7 nút (Đánh + 4 chính sát nút Đánh + 2 buff hàng trên), bị động chuyển vào bảng Kỹ năng, số đếm hồi chiêu dễ đọc hơn; số liệu hồi chiêu giữ nguyên toàn bộ. Probe 3 phái PASS, đã deploy + đồng bộ GitHub.
 
+- v0.4.2 — PHÁP SƯ CHUYỂN ĐỘNG + ĐÁNH THƯỜNG KHÔNG CHỜ + PHÓNG TO KHI CHỌN (2026-11-28): Pháp Sư tung phép thủ tục (sân khấu + trong trận), đánh thường chạm là ra đòn ngay (không khóa chung sau skill), nhân vật được chọn phóng ×1.40 vào giữa sân khấu và phát đòn liên tục. Probe hành vi PASS, đã deploy + đồng bộ GitHub.
+
 ## Đang chờ Do
-- Do test bản v0.4.1 trên iPhone thật: cảm giác bấm cụm skill mới + nhịp chờ hồi chiêu khi đánh quái/boss (cân bằng hồi chiêu sẽ chốt sau vòng chơi thử này).
+- Do test bản v0.4.2 trên iPhone thật: Pháp Sư tung phép, đánh thường tức thì, màn chọn nhân vật phóng to.
+- Claude làm dải chuyển động Pháp Sư mới (lệnh đã soạn sẵn dạng code block cho Do chuyển) → Luna QC + tích hợp.
+- Đợt tiếp theo (Luna đã chốt phương án): v0.5.0 pilot map_1 (bộ ảnh map của Do, art-tests/maps-anh-do/) làm nền Rừng Xanh nguyên khối + va chạm khai theo ảnh.
 - Chốt có đưa Pháp Sư Goblin vào pool spawn của Rừng Xanh không (hiện đã có ảnh + mapping, chưa spawn).
 
 ## Chưa đạt / tồn đọng (không đánh dấu hoàn thành)

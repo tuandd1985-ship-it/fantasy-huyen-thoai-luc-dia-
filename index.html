@@ -760,7 +760,8 @@
         <h4 class="set-h">Khác</h4>
         <div class="set-row"><span>Rung máy khi đánh boss / lên cấp</span><button class="tgl" id="setVib" aria-label="Bật tắt rung máy"></button></div>
         <p class="muted" style="margin:10px 0 0">Cài đặt áp dụng ngay. Mức đồ hoạ Thấp giảm mạnh hạt hiệu ứng để máy yếu chơi mượt.</p>
-        <p class="muted" style="margin:10px 0 0">Phiên bản <b id="gameVersion">v0.4.1</b> — Nhật ký cập nhật:</p>
+        <p class="muted" style="margin:10px 0 0">Phiên bản <b id="gameVersion">v0.4.2</b> — Nhật ký cập nhật:</p>
+        <p class="muted" style="margin:4px 0 0">v0.4.2 — Pháp Sư có chuyển động tung phép khi chạm chọn và trong trận; đánh thường không còn thời gian chờ, chạm là đánh ngay.</p>
         <p class="muted" style="margin:4px 0 0">v0.4.1 — Gọn cụm skill: skill chính sát nút Đánh, buff chủ động lên hàng trên, skill bị động chuyển vào bảng Kỹ năng; số đếm hồi chiêu dễ đọc hơn.</p>
         <p class="muted" style="margin:4px 0 0">v0.4.0 — Rừng Xanh vẽ quái &amp; boss Chúa Sói bằng ảnh thật, nền cỏ tile liền mạch mới; cổng dịch chuyển tách lớp bệ/vòm có nút tương tác, prop ảnh (sồi, cột đá, tảng đá, bụi cây, khóm hoa) với va chạm ellipse; Pháp Sư tạm dùng ảnh toàn thân tĩnh thay dải chuyển động.</p>
       </div>
@@ -924,7 +925,7 @@ const ASSET_FILES = [
 ];
 
 /* Phiên bản game hiện tại — hiển thị trong panel Cài đặt */
-const GAME_VERSION = 'v0.4.1';
+const GAME_VERSION = 'v0.4.2';
 
 /* =====================================================================
    LỚP DỮ LIỆU · CONFIG
@@ -1186,11 +1187,15 @@ let createSel = { classId: 'swordsman', gender: 'male' };
 /* ===== SÂN KHẤU NHÂN VẬT ĐỘNG (màn tạo nhân vật) =====
    Vẽ lại đúng sprite chibi trong sân (Sprites.hero) cho cả 3 phái đứng
    thành hàng: idle thở/nhún liên tục + lấp lánh ở vũ khí; phái đang chọn
-   có vòng sáng dưới chân; khi được chọn thì nhảy lên + vung vũ khí chào. */
+   có vòng sáng dưới chân; khi được chọn thì nhảy lên + vung vũ khí chào.
+   v0.4.2: phái đang chọn còn PHÓNG TO + TRƯỢT VÀO GIỮA sân khấu (zoom z
+   nội suy ~0.36s) và PHÁT ĐÒN LIÊN TỤC theo nhịp pulseT; hai phái còn
+   lại giữ vị trí, thu nhỏ nhẹ và mờ đi. */
 const StageShow = {
-  running: false, last: 0, cheerT: 0, swingCd: 0,
-  figs: ['swordsman', 'mage', 'archer'].map(cid => ({ cid, x: 0, y: 0, face: 1, moving: false, walkPh: 0, swingT: 0, hurtT: 0, castT: 0, dead: false, deathT: 0, reviveT: 0 })),
+  running: false, last: 0, cheerT: 0, swingCd: 0, pulseT: 0,
+  figs: ['swordsman', 'mage', 'archer'].map(cid => ({ cid, x: 0, y: 0, face: 1, moving: false, walkPh: 0, swingT: 0, hurtT: 0, castT: 0, dead: false, deathT: 0, reviveT: 0, z: 0 })),
   pos: [],
+  renderPos: [],   // vị trí + tỉ lệ VẼ THẬT của từng fig khung hình gần nhất (phục vụ hit-test pick theo hình đã phóng to)
   start() { if (this.running) return; this.running = true; this.last = performance.now(); requestAnimationFrame(t => this.frame(t)); },
   stop() { this.running = false; },
   cheer() { this.cheerT = 0.95; this.swingCd = 0; },
@@ -1305,34 +1310,78 @@ const StageShow = {
       const p = 1 - Math.max(0, this.cheerT) / 0.95;
       jumpY = -Math.sin(Math.min(1, p) * Math.PI) * 30;
       this.swingCd -= dt;
-      if (this.swingCd <= 0) { this.swingCd = 0.26; const f = this.figs.find(f => f.cid === createSel.classId); if (f) f.swingT = 0.22; }
+      if (this.swingCd <= 0) { this.swingCd = 0.26; const f = this.figs.find(f => f.cid === createSel.classId); if (f) { f.swingT = 0.22; if (f.cid === 'mage') f.castT = 0.38; } }
+    }
+    /* ===== PHÁT ĐÒN LIÊN TỤC KHI ĐANG ĐƯỢC CHỌN (v0.4.2): cứ ~0.85s nhân vật
+       chính lại vung vũ khí 1 nhịp — Kiếm Sĩ / Cung Thủ phát khung ra đòn 4-5
+       trong dải chuyển động, Pháp Sư phát động tác tung phép thủ tục
+       (swingT + castT) — giữa các nhịp vẫn đứng thở như thường. ===== */
+    this.pulseT -= dt;
+    if (this.pulseT <= 0) {
+      this.pulseT = 0.85;
+      const f = this.figs.find(f => f.cid === createSel.classId);
+      if (f) { f.swingT = 0.22; if (f.cid === 'mage') f.castT = 0.38; }
+    }
+    /* ===== PHÓNG TO VÀO GIỮA SÂN KHẤU KHI ĐƯỢC CHỌN (v0.4.2): mỗi fig có
+       tiến trình zoom z (0 = đứng ở vị trí rải cảnh, 1 = ở giữa sân khấu với
+       kích thước lớn), đuổi theo trạng thái chọn trong ~0.36s rồi nới mượt
+       bằng smoothstep. Tâm đích nằm giữa VÙNG TRỐNG của sân khấu: ngang =
+       giữa phần sân bên trái panel chi tiết (khung dọc: giữa màn hình),
+       chân đứng thấp hơn hàng đứng thường một chút để nhân vật "tiến lên
+       trước". Hai fig còn lại giữ nguyên vị trí, thu nhỏ nhẹ và mờ đi theo
+       tiến trình zoom của fig chính để nhân vật chính nổi bật. Đổi phái:
+       fig cũ tự thu về, fig mới tự phóng lên; đổi Nam/Nữ: z giữ nguyên nên
+       biến thể mới vẫn ở giữa. ===== */
+    const panelW = L.portrait ? 0 : Math.min(302, W * 0.33) + 26;
+    const cX = L.portrait ? W * 0.5 : (W - panelW) * 0.52;
+    const cY = L.portrait ? H * 0.42 : H * 0.86;
+    const cFs = Math.max(s * 1.09, (L.portrait ? H * 0.32 : H * 0.60) / 148);
+    const ease = z => z * z * (3 - 2 * z);
+    const renders = this.figs.map((f, i) => {
+      const sp = L.spots[i];
+      const sel = f.cid === createSel.classId;
+      const tgt = sel ? 1 : 0, dz = tgt - f.z, stepZ = dt / 0.36;
+      f.z = Math.abs(dz) <= stepZ ? tgt : f.z + Math.sign(dz) * stepZ;
+      if (f.swingT > 0) f.swingT = Math.max(0, f.swingT - dt);
+      if (f.castT > 0) f.castT = Math.max(0, f.castT - dt);
+      return { f, i, sp, sel, e: ease(f.z) };
+    });
+    const selE = (renders.find(r => r.sel) || { e: 0 }).e;
+    for (const r of renders) {
+      const baseFs = s * (r.sel ? 1.09 : 0.95) * (r.sel ? 1 : 1 - 0.12 * selE);
+      r.x = r.sp.fx * W + (cX - r.sp.fx * W) * r.e;
+      r.y = r.sp.gy + (cY - r.sp.gy) * r.e;
+      r.fs = baseFs + (cFs - baseFs) * r.e;
+      r.alpha = r.sel ? 1 : 0.94 - 0.30 * selE;
+      r.f.x = r.x; r.f.y = r.y;
+      this.renderPos[r.i] = { x: r.x, y: r.y, fs: r.fs };
     }
     const savedClass = createSel.classId, savedCreated = P.created;
     P.created = false;   // để Sprites.hero đọc createSel (vẽ đúng phái/giới đang chọn)
     this.pos = [];
-    const order = this.figs.map((f, i) => i).sort((a, b) => L.spots[a].gy - L.spots[b].gy);
-    for (const i of order) {
-      const f = this.figs[i], sp = L.spots[i];
-      f.x = sp.fx * W; f.y = sp.gy;
-      const sel = f.cid === createSel.classId;
-      const fs = s * (sel ? 1.09 : 0.95);
-      if (f.swingT > 0) f.swingT = Math.max(0, f.swingT - dt);
-      /* nhân vật giữa đứng trên TẢNG ĐÁ */
-      if (i === 1) {
-        ctx.fillStyle = '#8d97a3';
-        ctx.beginPath(); ctx.ellipse(f.x, f.y + 7, 30 * fs, 9 * fs, 0, 0, 7); ctx.fill();
-        ctx.fillStyle = '#a9b4bf';
-        ctx.beginPath(); ctx.ellipse(f.x, f.y + 1, 26 * fs, 7 * fs, 0, 0, 7); ctx.fill();
-        ctx.strokeStyle = 'rgba(60,70,80,.4)'; ctx.lineWidth = 1.2;
-        ctx.beginPath(); ctx.moveTo(f.x - 14 * fs, f.y + 5); ctx.lineTo(f.x + 4 * fs, f.y + 8); ctx.stroke();
-      }
+    /* Tảng đá dưới vị trí đứng của nhân vật giữa = PHONG CẢNH cố định ở vị
+       trí rải cảnh (không đi theo nhân vật khi phóng to vào giữa) */
+    {
+      const sp1 = L.spots[1], rockFs = s * 0.95;
+      ctx.fillStyle = '#8d97a3';
+      ctx.beginPath(); ctx.ellipse(sp1.fx * W, sp1.gy + 7, 30 * rockFs, 9 * rockFs, 0, 0, 7); ctx.fill();
+      ctx.fillStyle = '#a9b4bf';
+      ctx.beginPath(); ctx.ellipse(sp1.fx * W, sp1.gy + 1, 26 * rockFs, 7 * rockFs, 0, 0, 7); ctx.fill();
+      ctx.strokeStyle = 'rgba(60,70,80,.4)'; ctx.lineWidth = 1.2;
+      ctx.beginPath(); ctx.moveTo(sp1.fx * W - 14 * rockFs, sp1.gy + 5); ctx.lineTo(sp1.fx * W + 4 * rockFs, sp1.gy + 8); ctx.stroke();
+    }
+    /* Thứ tự vẽ: fig không chọn theo chiều sâu vị trí đứng trước, fig ĐANG
+       CHỌN vẽ SAU CÙNG để luôn nổi lên trên khi ở giữa sân khấu */
+    const order = renders.slice().sort((a, b) => (a.sel - b.sel) || (a.sp.gy - b.sp.gy));
+    for (const r of order) {
+      const f = r.f, i = r.i, sel = r.sel, fs = r.fs;
       /* nhân vật đang chọn: vòng sáng vàng dưới chân + quầng sáng */
       if (sel) {
         const pulse = 0.75 + Math.sin(t * 4) * 0.25;
-        const glow = ctx.createRadialGradient(f.x, f.y + 4, 6, f.x, f.y + 4, 60 * fs);
+        const glow = ctx.createRadialGradient(r.x, r.y + 4, 6, r.x, r.y + 4, 60 * fs);
         glow.addColorStop(0, 'rgba(255,214,90,' + (0.34 * pulse + 0.12) + ')'); glow.addColorStop(1, 'rgba(255,214,90,0)');
-        ctx.fillStyle = glow; ctx.fillRect(f.x - 62 * fs, f.y - 40 * fs, 124 * fs, 62 * fs);
-        ctx.save(); ctx.translate(f.x, f.y + 3);
+        ctx.fillStyle = glow; ctx.fillRect(r.x - 62 * fs, r.y - 40 * fs, 124 * fs, 62 * fs);
+        ctx.save(); ctx.translate(r.x, r.y + 3);
         ctx.strokeStyle = 'rgba(255,217,112,' + (0.9 * pulse) + ')'; ctx.lineWidth = 3;
         ctx.beginPath(); ctx.ellipse(0, 0, 27 * fs, 8.5 * fs, 0, 0, Math.PI * 2); ctx.stroke();
         ctx.fillStyle = 'rgba(255,217,112,' + (0.15 * pulse) + ')';
@@ -1341,8 +1390,8 @@ const StageShow = {
       }
       createSel.classId = f.cid;
       ctx.save();
-      ctx.translate(f.x, f.y + (sel ? jumpY : 0));
-      if (!sel) ctx.globalAlpha = 0.94;
+      ctx.translate(r.x, r.y + (sel ? jumpY : 0));
+      ctx.globalAlpha = r.alpha;
       /* Nhân vật = ẢNH AI toàn thân: nhún thở + nghiêng nhẹ liên tục; được chọn thì
          nhảy (jumpY) + vung vũ khí (swingT) như trước. Ảnh chưa tải xong -> sprite vẽ code. */
       ctx.rotate(Math.sin(t * 1.4 + i * 1.7) * 0.02);
@@ -1355,14 +1404,14 @@ const StageShow = {
       ctx.globalAlpha = 1;
       /* lấp lánh ở đầu vũ khí */
       const wSide = f.cid === 'swordsman' ? -1 : 1;   // kiếm ở phía trái ảnh, trượng/cung ở phía phải
-      const wx = f.x + wSide * 40 * fs, wy = f.y - 122 * fs + (sel ? jumpY : 0) + Math.sin(t * 2.2 + i * 1.7) * 1.2;
+      const wx = r.x + wSide * 40 * fs, wy = r.y - 122 * fs + (sel ? jumpY : 0) + Math.sin(t * 2.2 + i * 1.7) * 1.2;
       const tw = 0.5 + 0.5 * Math.sin(t * 5 + i * 2.3);
       ctx.save(); ctx.translate(wx, wy); ctx.rotate(t * 1.5 + i);
       ctx.fillStyle = 'rgba(255,240,180,' + (0.35 + 0.55 * tw) + ')';
-      const ss = (3 + 3.4 * tw) * Math.min(2, fs);
+      const ss = (3 + 3.4 * tw) * Math.min(2.4, fs);
       ctx.beginPath(); ctx.moveTo(0, -ss); ctx.quadraticCurveTo(1.2, -1.2, ss, 0); ctx.quadraticCurveTo(1.2, 1.2, 0, ss); ctx.quadraticCurveTo(-1.2, 1.2, -ss, 0); ctx.quadraticCurveTo(-1.2, -1.2, 0, -ss); ctx.fill();
       ctx.restore();
-      this.pos[i] = { x: f.x, tagY: f.y + (sel ? jumpY : 0) - 110 * fs - 12 };
+      this.pos[i] = { x: r.x, tagY: r.y + (sel ? jumpY : 0) - 110 * fs - 12 };
     }
     createSel.classId = savedClass; P.created = savedCreated;
     /* cỏ tiền cảnh lay nhẹ */
@@ -1388,6 +1437,19 @@ const StageShow = {
        làm hoán đổi như getBoundingClientRect). */
     const p = localPoint(cv, clientX, clientY);
     const x = p.x, y = p.y, W = cv.clientWidth, H = cv.clientHeight;
+    /* Ưu tiên hit-test theo VỊ TRÍ VẼ THẬT (renderPos): nhân vật đang chọn
+       đã phóng to ở giữa sân khấu — chạm vào hình lớn đó phải chọn đúng
+       nhân vật đó, không suy theo vị trí đứng cũ. Khoảng cách chuẩn hoá
+       theo tỉ lệ vẽ của từng fig nên fig càng lớn vùng chạm càng rộng. */
+    if (this.renderPos && this.renderPos.length) {
+      let best = -1, bd = Infinity;
+      this.renderPos.forEach((rp, i) => {
+        if (!rp || !rp.fs) return;
+        const d = Math.hypot(x - rp.x, (y - (rp.y - 70 * rp.fs)) * 0.8) / rp.fs;
+        if (d < bd) { bd = d; best = i; }
+      });
+      if (best >= 0 && bd < 95) { createSel.classId = this.figs[best].cid; this.cheer(); UI.renderCreate(); return; }
+    }
     const L = this.layout(W, H);
     let best = 0, bd = Infinity;
     L.spots.forEach((sp, i) => {
@@ -2202,20 +2264,59 @@ const Sprites = {
     if (!img) return false;
     const baseA = ctx.globalAlpha;
     const swing = h.swingT > 0 ? 1 - h.swingT / 0.22 : -1;
+    /* PHÁP SƯ (v0.4.2): không có dải khung nên chuyển động TUNG PHÉP làm
+       hoàn toàn bằng thủ tục trên ảnh tĩnh — nhảy lên nhẹ + lao người về
+       trước + nghiêng người khi vung gậy (swingT), giơ thế tụ phép khi
+       thi triển (castT), và quả cầu trên đầu gậy PHÁT SÁNG + tóe tia lửa
+       phép đồng bộ đúng thời điểm ra đòn. Độ mạnh/nghiêng/nhảy ngang với
+       khung ra đòn của Kiếm Sĩ / Cung Thủ. Các phái có dải khung không
+       đi qua nhánh tĩnh này nên không đổi hành vi. */
+    const isMage = viewClassId() === 'mage';
+    let castGlow = 0;   // 0..1 — cường độ phát sáng của quả cầu phép
+    if (isMage && !h.dead) {
+      if (swing >= 0) castGlow = Math.max(castGlow, Math.sin(swing * Math.PI));
+      if (h.castT > 0) castGlow = Math.max(castGlow, 0.62 + 0.38 * Math.sin(t * 26));
+      if (!h.moving) castGlow = Math.max(castGlow, 0.13 + 0.07 * Math.sin(t * 3.2));   // đứng thở: quả cầu vẫn hơi sáng
+    }
     let bob = h.moving ? Math.abs(Math.sin(h.walkPh)) * height * 0.018 : Math.sin(t * 2.2) * height * 0.008;
     if (h.reviveT > 0) bob += h.reviveT * height * 0.3;
+    if (isMage && swing >= 0) bob += Math.sin(swing * Math.PI) * height * 0.085;   // nhảy lên nhẹ khi tung phép
+    if (isMage && h.castT > 0) bob += height * 0.02;                               // lơ lửng nhẹ khi tụ phép
     const w = height * img.naturalWidth / img.naturalHeight;
     ctx.save();
     if (h.dead) { const dp = Math.min(1, (h.deathT || 0) / 0.45); ctx.rotate(-dp * 1.35); ctx.globalAlpha = baseA * (1 - dp * 0.35); }
     ctx.translate(0, -bob);
     if (h.moving) ctx.rotate(Math.sin(h.walkPh) * 0.035);
-    if (swing >= 0) { const lp = Math.sin(swing * Math.PI); ctx.translate((h.face || 1) * lp * height * 0.07, 0); ctx.rotate(-(h.face || 1) * lp * 0.07); }
-    if (h.castT > 0) { const cp = 1 + Math.sin(t * 26) * 0.012; ctx.scale(cp, cp); }
+    if (swing >= 0) { const lp = Math.sin(swing * Math.PI); const lunge = isMage ? 0.11 : 0.07, lean = isMage ? 0.17 : 0.07; ctx.translate((h.face || 1) * lp * height * lunge, 0); ctx.rotate(-(h.face || 1) * lp * lean); }
+    if (h.castT > 0) { const cp = 1 + Math.sin(t * 26) * (isMage ? 0.02 : 0.012); ctx.scale(cp, cp); if (isMage) { ctx.translate((h.face || 1) * height * 0.035, 0); ctx.rotate(-(h.face || 1) * 0.09); } }
     const fxI = h.faceS === undefined ? (h.face || 1) : h.faceS;
     ctx.scale(Math.abs(fxI) < 0.3 ? (fxI < 0 ? -0.3 : 0.3) : fxI, 1);
     ctx.drawImage(img, -w / 2, -height, w, height);
     if (h.poisonT > 0 && this.heroArtTint[k + '-green']) { ctx.globalAlpha = baseA * 0.30; ctx.drawImage(this.heroArtTint[k + '-green'], -w / 2, -height, w, height); ctx.globalAlpha = baseA; }
     if (h.hurtT > 0 && this.heroArtTint[k + '-red']) { ctx.globalAlpha = baseA * Math.min(0.5, h.hurtT * 2.2); ctx.drawImage(this.heroArtTint[k + '-red'], -w / 2, -height, w, height); ctx.globalAlpha = baseA; }
+    /* Quả cầu phép phát sáng + tia lửa quanh đầu gậy (tọa độ theo ảnh:
+       quả cầu nằm ở ~80% chiều rộng, ~29% chiều cao của ảnh toàn thân;
+       hệ vẽ đã lật theo hướng mặt nên tia lửa luôn ở đúng phía gậy). */
+    if (castGlow > 0.02) {
+      const orbRgb = viewGender() === 'female' ? '182,120,232' : '105,183,255';
+      const gx = w * 0.305, gy = -height * 0.705, R = height * (0.085 + 0.05 * castGlow);
+      const og = ctx.createRadialGradient(gx, gy, 1, gx, gy, R * 2.1);
+      og.addColorStop(0, 'rgba(255,255,255,' + (0.7 * castGlow * baseA) + ')');
+      og.addColorStop(0.35, 'rgba(' + orbRgb + ',' + (0.5 * castGlow * baseA) + ')');
+      og.addColorStop(1, 'rgba(' + orbRgb + ',0)');
+      ctx.fillStyle = og; ctx.beginPath(); ctx.arc(gx, gy, R * 2.1, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = 'rgba(255,255,255,' + (0.4 * castGlow * baseA) + ')';
+      ctx.beginPath(); ctx.arc(gx, gy, R * 0.5, 0, Math.PI * 2); ctx.fill();
+      if (castGlow > 0.3) {   // tia lửa phép bay quanh quả cầu khi ra đòn / tụ phép
+        for (let si = 0; si < 6; si++) {
+          const sa = t * 9 + si * (Math.PI / 3), sr = R * (1.05 + 0.3 * Math.sin(t * 13 + si * 1.7));
+          const sx2 = gx + Math.cos(sa) * sr, sy2 = gy + Math.sin(sa) * sr * 0.82;
+          const ss2 = height * 0.016 * (0.6 + 0.4 * Math.sin(t * 17 + si * 2.1)) * castGlow;
+          ctx.fillStyle = 'rgba(255,244,200,' + (0.85 * castGlow * baseA) + ')';
+          ctx.beginPath(); ctx.moveTo(sx2, sy2 - ss2); ctx.quadraticCurveTo(sx2 + ss2 * 0.18, sy2 - ss2 * 0.18, sx2 + ss2, sy2); ctx.quadraticCurveTo(sx2 + ss2 * 0.18, sy2 + ss2 * 0.18, sx2, sy2 + ss2); ctx.quadraticCurveTo(sx2 - ss2 * 0.18, sy2 + ss2 * 0.18, sx2 - ss2, sy2); ctx.quadraticCurveTo(sx2 - ss2 * 0.18, sy2 - ss2 * 0.18, sx2, sy2 - ss2); ctx.fill();
+        }
+      }
+    }
     ctx.restore();
     return true;
   },
@@ -3598,12 +3699,16 @@ const Combat = {
     if (m.hp <= 0) { monsters = monsters.filter(x => x !== m); killMonster(m); }
   },
 
-  basicAttack() {
+  basicAttack(instant) {
     if (hero.dead || hero.stunT > 0 || stageState !== 'fighting') return;
-    /* Đệm lệnh: chạm ngay trước khi hết hồi chiêu một chút thì ghi nhớ,
-       vòng lặp sẽ tự ra đòn ngay lúc hồi chiêu xong — không còn cảm giác
-       bấm mà game "nuốt" mất đòn như trước. */
-    if (hero.atkCd > 0) { if (hero.atkCd <= 0.28) hero._atkBuf = true; return; }
+    /* ĐÁNH THƯỜNG KHÔNG HỒI CHIÊU (v0.4.2): mỗi lần CHẠM MỚI vào nút Đánh
+       (instant = true, từ pointerdown / phím mới nhấn) ra đòn NGAY LẬP
+       TỨC — bỏ qua mọi bộ đếm chờ, kể cả ngay sau khi vừa tung skill
+       (game không có khóa chung nào khác). Nhịp atkRate chỉ còn áp cho
+       GIỮ nút / AUTO / vòng lặp đệm: các đường gọi đó không truyền
+       instant nên vẫn bị chặn bởi atkCd như cũ, và mỗi đòn chạm tay vẫn
+       đặt lại atkCd để nhịp giữ nút tính tiếp từ đòn đó. */
+    if (!instant && hero.atkCd > 0) { if (hero.atkCd <= 0.28) hero._atkBuf = true; return; }
     const c = cls(), st = heroStats();
     hero.atkCd = 1 / st.atkRate;
     hero.swingT = 0.22;
@@ -4477,12 +4582,13 @@ function init() {
   el('bigMapClose').addEventListener('click', () => el('bigMapBack').classList.remove('show'));
 
   /* Nút chiến đấu */
-  /* Nút đánh: phản hồi ngay khi chạm xuống (pointerdown), GIỮ là đánh lặp
-     liên tục theo hồi chiêu — không phải gõ từng nhát và không lo bị nuốt
-     đòn. Theo dõi đúng pointerId của ngón đang giữ: ngón khác bấm skill /
-     bình máu / joystick không làm nhả đòn oan. */
+  /* Nút đánh: phản hồi ngay khi chạm xuống (pointerdown) — v0.4.2: MỖI
+     lần chạm mới ra đòn ngay lập tức, không chờ hồi chiêu nào; GIỮ nút
+     thì đánh lặp theo nhịp tốc đánh của phái. Nút Đánh không có lớp phủ
+     / số đếm hồi chiêu. Theo dõi đúng pointerId của ngón đang giữ: ngón
+     khác bấm skill / bình máu / joystick không làm nhả đòn oan. */
   let atkPointerId = null;
-  el('btnAtk').addEventListener('pointerdown', e => { e.preventDefault(); atkPointerId = e.pointerId; atkHeld = true; AudioFX.ensure(); Combat.basicAttack(); });
+  el('btnAtk').addEventListener('pointerdown', e => { e.preventDefault(); atkPointerId = e.pointerId; atkHeld = true; AudioFX.ensure(); Combat.basicAttack(true); });
   const atkUp = e => { if (atkPointerId !== null && e.pointerId === atkPointerId) { atkPointerId = null; atkHeld = false; } };
   window.addEventListener('pointerup', atkUp);
   window.addEventListener('pointercancel', atkUp);
@@ -4605,7 +4711,7 @@ function init() {
     keys[e.code] = true;
     if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Space'].includes(e.code)) e.preventDefault();
     AudioFX.ensure();
-    if (e.code === 'Space' || e.code === 'KeyJ') Combat.basicAttack();
+    if (e.code === 'Space' || e.code === 'KeyJ') Combat.basicAttack(!e.repeat);
     if (e.code.startsWith('Digit')) { const n = +e.code.slice(5); if (n >= 1 && n <= 4) Skills.cast(n - 1); }
     if (e.code === 'KeyQ') { const i = cls().support.findIndex(s => s.type === 'active'); if (i >= 0) Skills.castSupport(i); }
     if (e.code === 'KeyE') { const act = cls().support.map((s, i) => s.type === 'active' ? i : -1).filter(i => i >= 0); if (act[1] !== undefined) Skills.castSupport(act[1]); }
