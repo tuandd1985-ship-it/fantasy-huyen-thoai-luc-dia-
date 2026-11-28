@@ -1,5 +1,5 @@
 # PROGRESS — FANTASY: HUYỀN THOẠI LỤC ĐỊA
-Cập nhật: 2026-11-28 (LIVE = v0.8.0 + hotfix v0.8.1/v0.8.2; chờ anh Do xác nhận lại sau hotfix 2; còn lại của redesign v0.9.0: màn chọn nhân vật ref-5).
+Cập nhật: 2026-11-29 (LIVE = v0.9.0 — redesign hoàn thiện: màn chọn nhân vật theo ref-5 + rà soát 5 panel theo ảnh mẫu; chờ anh Do test lại trên iPhone. Đang chờ Claude: đòn đánh thường + skill 2–4 + trúng đòn từ bộ phận cho 6 hero để hết cảm giác "2 nhân vật" khi chuyển đi/đánh.)
 
 ## Đã xong
 - SPEC.md (yêu cầu gốc, Do phê duyệt dần qua các vòng chốt 2026-11-27) + GDD.md (bản thiết kế v2) + bộ tài liệu Master Instruction: ART_DIRECTION, ARCHITECTURE, BALANCE, ROADMAP, GAP_ANALYSIS, TEST_REPORT, CHANGELOG.

@@ -780,6 +780,19 @@
       .roster-play:active{ transform:scale(.97); }
       .roster-del{ display:block; margin:9px auto 0; border:1.5px solid rgba(255,122,107,.6); background:transparent; color:#FF9A8A; font-weight:800; font-size:12.5px; border-radius:10px; padding:7px 16px; min-height:38px; }
       .roster-del.armed{ background:#C23B2E; color:#fff; border-color:#C23B2E; }
+      /* Sân khấu giữa: hero chạy DẢI IDLE BỘ PHẬN trên canvas (RosterStage
+         vẽ từ Sprites.partsAnim); ảnh toàn thân tĩnh chỉ là dự phòng khi
+         dải chưa tải xong. Đổi slot → hiệu ứng phóng/trượt vào giữa sân
+         khấu (.enter, 240ms) như sân khấu tạo nhân vật. */
+      .roster-hero-wrap{ position:relative; z-index:1; height:100%; max-width:100%; display:flex; align-items:flex-end; justify-content:center; }
+      .roster-hero-wrap.enter{ animation:rosterIn .24s ease; }
+      @keyframes rosterIn{ from{ opacity:0; transform:translateX(30px) scale(.84);} to{ opacity:1; transform:translateX(0) scale(1);} }
+      @media (prefers-reduced-motion: reduce){ .roster-hero-wrap.enter{ animation:none; } }
+      .roster-stage canvas{ height:100%; max-height:100%; filter:drop-shadow(0 10px 16px rgba(0,0,0,.5)); }
+      /* Nút đóng TRÒN ở các cửa sổ còn lại (Cài đặt / Bản đồ lớn / popup đồ /
+         đóng danh sách nhân vật) — đồng bộ .sheet-x của các panel */
+      #btnSettingsClose, #bigMapClose, #mClose, #btnRosterClose{ border-radius:50%; background:#294C70; border:1.5px solid #D5AC60; color:#F5E8CA; box-shadow:0 3px 10px rgba(0,0,0,.45); }
+      #btnSettingsClose:hover, #bigMapClose:hover, #mClose:hover, #btnRosterClose:hover{ background:#35597F; }
       @media (max-width:700px){
         .roster-main{ flex-wrap:wrap; overflow-y:auto; }
         .roster-list{ flex:1 1 100%; width:auto; flex-direction:row; overflow-x:auto; overflow-y:hidden; }
@@ -1082,7 +1095,10 @@
           <div class="roster-list" id="rosterList"></div>
           <div class="roster-stage" id="rosterStage">
             <span class="pedestal big" aria-hidden="true"></span>
-            <img id="rosterHeroImg" data-akey="k11" alt="Nhân vật đang chọn" />
+            <div class="roster-hero-wrap" id="rosterHeroWrap">
+              <img id="rosterHeroImg" data-akey="k11" alt="Nhân vật đang chọn" />
+              <canvas id="rosterHeroCv" width="620" height="700" style="display:none" aria-hidden="true"></canvas>
+            </div>
           </div>
           <div class="roster-info" id="rosterInfo"></div>
         </div>
@@ -1112,7 +1128,7 @@
         <div class="set-row"><span>Rung máy khi đánh boss / lên cấp</span><button class="tgl" id="setVib" aria-label="Bật tắt rung máy"></button></div>
         <p class="muted" style="margin:10px 0 0">Cài đặt áp dụng ngay. Mức đồ hoạ Thấp giảm mạnh hạt hiệu ứng để máy yếu chơi mượt.</p>
         <p class="muted" style="margin:10px 0 0">Phiên bản <b id="gameVersion">v0.9.0</b> — Nhật ký cập nhật:</p>
-        <p class="muted" style="margin:4px 0 0">v0.9.0 — Giao diện mới phong cách Chibi Fantasy, toàn màn hình thật trên iOS, bỏ xoay giả lập.</p>
+        <p class="muted" style="margin:4px 0 0">v0.9.0 — Giao diện Chibi Fantasy hoàn thiện: màn chọn nhân vật mới, toàn màn hình thật trên iOS.</p>
         <p class="muted" style="margin:4px 0 0">v0.8.0 — Thế giới 17 map liên thông, làng tân thủ có NPC và nhiệm vụ, dịch chuyển tự do giữa các map.</p>
         <p class="muted" style="margin:4px 0 0">v0.7.2 — Cả 6 hero chuyển động bằng animation bộ phận; icon áo/giày theo bậc cấp trong túi đồ.</p>
         <p class="muted" style="margin:4px 0 0">v0.7.1 — Thống nhất bộ icon phẳng: skill, bị động, map, minimap và báo chiêu boss.</p>
@@ -6609,6 +6625,50 @@ function upgradeItem(it) {
   return true;
 }
 
+/* =====================================================================
+   RosterStage — SÂN KHẤU GIỮA của màn Chọn nhân vật: phát DẢI IDLE BỘ
+   PHẬN (Sprites.partsAnim) của hero đang chọn trên canvas, chuẩn hoá cỡ
+   theo khung bao thật của dải (img._box — cùng số đo engine dùng trong
+   trận) và neo chân xuống bệ sáng. Dải chưa tải xong → giữ ảnh toàn thân
+   tĩnh dự phòng; vòng lặp tự dừng khi màn chọn nhân vật đóng.
+   ===================================================================== */
+const RosterStage = {
+  raf: 0, key: null,
+  show(key) {
+    this.key = key;
+    if (this.raf) return;
+    const tick = (t) => {
+      this.raf = 0;
+      if (!el('rosterBack').classList.contains('show') || !this.key) return;
+      this.draw(t);
+      this.raf = requestAnimationFrame(tick);
+    };
+    this.raf = requestAnimationFrame(tick);
+  },
+  stop() { this.key = null; },
+  draw(t) {
+    const cv = el('rosterHeroCv'), img = el('rosterHeroImg');
+    if (!cv || !img) return;
+    const ctx = cv.getContext('2d');
+    const W = cv.width, H = cv.height;
+    ctx.clearRect(0, 0, W, H);
+    let drew = false;
+    const pa = (typeof Sprites !== 'undefined' && Sprites.partsAnim) ? Sprites.partsAnim[this.key] : null;
+    const e = pa && pa.idle;
+    if (e && e.img && e.img.naturalWidth) {
+      const box = e.img._box;
+      const refH = box ? box.refH : 586, feet = box ? box.feet : 620;
+      const k = (H * 0.96) / refH;
+      const dw = 768 * k, cellH = 640 * k;
+      const fi = Sprites.stripFrame(e.dur, t, true);
+      ctx.drawImage(e.img, fi * 768, 0, 768, 640, (W - dw) / 2, (H - 6) - feet * k, dw, cellH);
+      drew = true;
+    }
+    cv.style.display = drew ? 'block' : 'none';
+    img.style.display = drew ? 'none' : '';
+  }
+};
+
 const UI = {
   toast(html) {
     const box = el('toasts'), t = document.createElement('div');
@@ -7287,6 +7347,7 @@ const UI = {
     const ch = Roster.chars[UI.rosterSel];
     if (!ch) {
       stage.style.visibility = 'hidden';
+      RosterStage.stop(); UI._rosterShownKey = null;
       info.innerHTML = '<h3>Chưa có nhân vật</h3><div class="ri-sub">Tạo nhân vật mới để bắt đầu hành trình — tối đa ' + MAX_CHARS + ' nhân vật trên máy này, mỗi nhân vật có tiến trình riêng.</div>';
       const b = document.createElement('button'); b.className = 'roster-play'; b.textContent = 'Tạo nhân vật';
       b.addEventListener('click', () => { el('rosterBack').classList.remove('show'); UI.openCreate(); });
@@ -7294,12 +7355,38 @@ const UI = {
       return;
     }
     stage.style.visibility = '';
-    el('rosterHeroImg').src = ASSETS.hero[ch.classId + '-' + ch.gender];
+    const heroKey = ch.classId + '-' + ch.gender;
+    el('rosterHeroImg').src = ASSETS.hero[heroKey];
+    /* Sân khấu giữa chạy dải idle BỘ PHẬN của đúng hero đang chọn; đổi
+       nhân vật → hiệu ứng phóng/trượt vào giữa sân khấu (.enter) */
+    RosterStage.show(heroKey);
+    if (UI._rosterShownKey !== heroKey) {
+      UI._rosterShownKey = heroKey;
+      const wrap = el('rosterHeroWrap');
+      if (wrap) { wrap.classList.remove('enter'); void wrap.offsetWidth; wrap.classList.add('enter'); }
+    }
     const cc = CONFIG.classes[ch.classId], g = cc.growth, lv = ch.level;
-    /* Chỉ số cơ bản = gốc phái + tăng trưởng theo cấp (đúng công thức gốc
-       của heroStats, chưa tính trang bị/ngọc của nhân vật đó) */
-    const bAtk = Math.round(cc.base.atk + g.atk * (lv - 1)), bDef = Math.round(cc.base.def + g.def * (lv - 1));
-    const bHp = Math.round(cc.base.hp + g.hp * (lv - 1)), bMp = Math.round(cc.base.mp + g.mp * (lv - 1));
+    /* Chỉ số cơ bản lấy từ DỮ LIỆU THẬT của nhân vật: chạy đúng công thức
+       heroStats() của game (gốc + tăng trưởng + điểm thân thể đã cộng +
+       trang bị/ngọc/skill phụ của CHÍNH nhân vật đó) bằng cách tạm hoán
+       P sang nhân vật đang xem và tắt buff chiến đấu — panel tạm dừng
+       game (uiPause) nên hoán đổi đồng bộ này không chạm vòng lặp trận.
+       Lỗi dữ liệu lạ (bản lưu rất cũ) → rơi về gốc + tăng trưởng + điểm
+       cộng như trước. */
+    let st = null;
+    const keepP = P, keepBuffs = hero.buffs;
+    try {
+      P = ch;
+      hero.buffs = { shieldT: 0, shieldVal: 0, manaShieldT: 0, rageT: 0, rageVal: 0, dodgeT: 0, dodgeVal: 0, windT: 0, windVal: 0, markT: 0, markVal: 0 };
+      st = heroStats();
+    } catch (e) { st = null; }
+    finally { P = keepP; hero.buffs = keepBuffs; }
+    const bHp = st ? st.maxHp : Math.round(cc.base.hp + g.hp * (lv - 1) + (ch.alloc ? ch.alloc.hp * 20 : 0));
+    const bMp = st ? st.maxMp : Math.round(cc.base.mp + g.mp * (lv - 1));
+    const bAtk = st ? Math.round(st.atk) : Math.round(cc.base.atk + g.atk * (lv - 1) + (ch.alloc ? ch.alloc.atk * 2 : 0));
+    const bDef = st ? Math.round(st.def) : Math.round(cc.base.def + g.def * (lv - 1) + (ch.alloc ? ch.alloc.def : 0));
+    const bCrit = st ? st.crit : cc.base.crit + (ch.alloc ? ch.alloc.crit : 0);
+    const bSpd = st ? Math.round(st.speed) : Math.round(cc.base.speed + (ch.alloc ? ch.alloc.spd * 4 : 0));
     info.innerHTML = '<h3>' + esc(ch.name) + '</h3>' +
       '<div class="ri-sub">' + cc.name + ' (' + (ch.gender === 'female' ? 'Nữ' : 'Nam') + ') · Lv ' + lv + (Roster.active === UI.rosterSel ? ' · Đang chơi' : '') + '</div>' +
       '<div class="ri-row"><span>Khu vực hiện tại</span><b>' + mapDef(ch.mapId || 'lang').name + '</b></div>' +
@@ -7308,8 +7395,8 @@ const UI = {
       '<div class="ri-row"><span>Mana</span><b>' + fmt(bMp) + '</b></div>' +
       '<div class="ri-row"><span>Tấn công</span><b>' + fmt(bAtk) + '</b></div>' +
       '<div class="ri-row"><span>Phòng thủ</span><b>' + fmt(bDef) + '</b></div>' +
-      '<div class="ri-row"><span>Chí mạng</span><b>' + cc.base.crit.toFixed(1) + '%</b></div>' +
-      '<div class="ri-row"><span>Tốc chạy</span><b>' + fmt(cc.base.speed) + '</b></div>';
+      '<div class="ri-row"><span>Chí mạng</span><b>' + bCrit.toFixed(1) + '%</b></div>' +
+      '<div class="ri-row"><span>Tốc chạy</span><b>' + fmt(bSpd) + '</b></div>';
     const play = document.createElement('button'); play.className = 'roster-play'; play.textContent = 'Vào game';
     const selIdx = UI.rosterSel;
     play.addEventListener('click', () => UI.selectChar(selIdx));

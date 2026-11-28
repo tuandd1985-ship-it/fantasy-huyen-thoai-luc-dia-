@@ -6,9 +6,9 @@
 
 ## 1. Trạng thái hiện tại (sự thật đã kiểm chứng)
 
-- **Bản LIVE: v0.8.0 + 2 đợt sửa lỗi nóng (tối 2026-11-28)** tại https://fantasy-game.tuandd19985.workers.dev — anh Do test trên iPhone qua link này (Safari / icon màn hình chính, KHÔNG qua webview của app Muse).
+- **Bản LIVE: v0.9.0 (2026-11-29)** — v0.8.0 + 2 đợt sửa lỗi nóng + redesign hoàn thiện (màn chọn nhân vật theo ref-5, rà soát 5 panel theo ảnh mẫu) tại https://fantasy-game.tuandd19985.workers.dev — anh Do test trên iPhone qua link này (Safari / icon màn hình chính, KHÔNG qua webview của app Muse).
 - GitHub repo này (`main`) chứa source `index.html` + `assets-data-*.js` tương ứng bản live. Mọi thay đổi phải giữ đồng bộ 2 nơi: Cloudflare (live) ↔ GitHub.
-- Anh Do vừa test bản sửa lỗi cuối và CHƯA xác nhận lại sau đợt sửa thứ hai (hộp thoại NPC kẹt + camera). Nếu anh báo vẫn lỗi, ưu tiên xử lý trước mọi việc khác.
+- Anh Do đã test lại sau đợt sửa thứ hai: các lỗi cũ hết; anh báo một vấn đề mới (2026-11-29): chuyển cảnh đi ↔ đánh thường KHÔNG đồng nhất, cảm giác như 2 nhân vật khác nhau — nguyên nhân: đứng/chạy dùng dải BỘ PHẬN mới còn đánh thường vẫn là dải hình cũ. Cách chữa tận gốc: Claude lắp đòn đánh thường + skill 2–4 + trúng đòn TỪ BỘ PHẬN cho cả 6 hero (lệnh đã giao, ưu tiên đánh thường trước). Nhận lô nào thì QC + tích hợp ngay lô đó.
 
 ## 2. Game là gì
 
@@ -52,7 +52,7 @@ Action RPG chibi fantasy 2.5D cho điện thoại (landscape): joystick 8 hướ
 ## 8. Việc đang dở / tiếp theo (theo thứ tự ưu tiên)
 
 1. **Chờ anh Do xác nhận bản sửa lỗi thứ hai** (mục 7.2). Nếu còn lỗi → sửa tiếp trước mọi việc.
-2. **Hoàn thiện redesign v0.9.0** theo brief của anh Do + 5 ảnh tham chiếu (`docs/art/ui-reference/ref-1..5`): design system navy #14263D / khung #294C70 / viền vàng #D5AC60 / chữ #F5E8CA. ĐÃ VÀO ở đợt sửa lỗi: nền fullscreen thật (đã bỏ CSS rotate — máy dọc hiện nhắc xoay, PWA standalone + orientation landscape khai báo manifest), 5 panel icon (Nhân Vật/Túi Đồ 8×5/Trang Bị 4 slot/Kỹ Năng/Cài Đặt) đúng áo + ✕ + cuộn trong panel. CÒN THIẾU: màn **Chọn nhân vật theo ref-5** (slot trái, hero lớn giữa chạy idle, thông tin phải, nút Vào game nổi bật) và rà soát đối chiếu từng màn hình với ảnh mẫu. BẤT BIẾN: không thêm Lực Chiến/tiền tệ/slot mới (ảnh mẫu có nhưng game không có — dữ liệu game thắng ảnh), không đổi công thức/save.
+2. **Redesign v0.9.0: ĐÃ XONG + LIVE (2026-11-29)** theo brief của anh Do + 5 ảnh tham chiếu (`docs/art/ui-reference/ref-1..5`): design system navy #14263D / khung #294C70 / viền vàng #D5AC60 / chữ #F5E8CA; fullscreen thật (đã bỏ CSS rotate — máy dọc hiện nhắc xoay, PWA standalone + orientation landscape); 5 panel icon đúng áo + ✕ tròn + cuộn trong panel; màn Chọn nhân vật theo ref-5 (slot trái, hero lớn giữa chạy idle bộ phận, panel chỉ số thật bên phải, nút Vào game nổi bật). BẤT BIẾN vẫn giữ cho mọi đợt sau: không thêm Lực Chiến/tiền tệ/slot mới (dữ liệu game thắng ảnh mẫu), không đổi công thức/save.
 3. **Tối ưu tải**: tổng ~57MB nạp lần đầu là nặng. Hướng đã thống nhất: **lazy-load theo map** (chỉ tải asset của map khi vào) — làm cùng đợt rollout map mới.
 4. **Claude còn nợ**: skill 2–4 + đánh thường + trúng đòn cho 6 hero từ bộ phận; **Codex còn nợ**: 2 biến thể tay cầm kiếm + bộ phận nhìn nghiêng của Kiếm Sĩ Nam; tranh **Đầm Lầy Độc** và **Lâu Đài Bóng Đêm** (vẽ xong thì spawn toad/wraith + mở 2 map); map Rừng Xanh "sạch" mới (ít chi tiết vụn, đất trống dễ đọc) thay dần tranh cũ nếu đạt QC.
 5. **Chưa quyết** (đừng tự ý làm): lưu server đa thiết bị — giai đoạn sau, chưa làm.
