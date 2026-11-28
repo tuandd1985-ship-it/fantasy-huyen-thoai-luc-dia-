@@ -38,3 +38,10 @@ Xếp 14 PNG theo `z` ở dáng gốc, so với `assembled.png`:
 `python tools/parts_rig.py .. tools/motions_kiemsi_codex.json <out>` (khoảng 20 giây).
 - File chuyển động là JSON khung khoá: góc từng bộ phận, dịch gốc, thứ tự vẽ theo khung.
 - **Dùng lại được cho nhân vật khác có cùng tên bộ phận.**
+
+
+## Đòn đánh thường (2026-11-29)
+`kiemsi_nam_attack_5f.png`: 5 khung, durations_ms [70, 80, 60, 100, 90] (tổng 400 ms), **hit_frame 2**. chém thường: nâng kiếm lên vai → chém chéo xuống, đẩy người tới 26 px → theo đà → về.
+- QC: mép ô alpha 0.0 %, 1 khối chính mỗi ô, chân y 620–620.
+- Cùng tỉ lệ (0,95 quanh chân), cùng điểm chân và cùng bộ phận với idle/run, nên chuyển từ chạy sang đánh **không đổi người**.
+- Xem: `preview_attack.gif`; so 6 hero: `../../attack_all_heroes.jpg`.

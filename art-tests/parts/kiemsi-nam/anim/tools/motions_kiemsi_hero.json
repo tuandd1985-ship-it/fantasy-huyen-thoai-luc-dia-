@@ -1,0 +1,277 @@
+{
+ "prefix": "kiemsi_nam",
+ "native": true,
+ "actions": {
+  "idle": {
+   "loop": true,
+   "frames_ms": [
+    600,
+    600
+   ],
+   "hit_frame": null,
+   "keys": [
+    {
+     "t": 0,
+     "rot": {}
+    },
+    {
+     "t": 600,
+     "rot": {
+      "head": 1.5,
+      "arm_r_upper": 2.0,
+      "arm_l_upper": -2.5,
+      "arm_l_forearm": -2,
+      "cape": 2.5,
+      "torso": -0.6,
+      "leg_l_thigh": 0.6,
+      "leg_r_thigh": 0.6
+     }
+    }
+   ]
+  },
+  "run": {
+   "loop": true,
+   "frames_ms": [
+    90,
+    90,
+    90,
+    90,
+    90,
+    90
+   ],
+   "hit_frame": null,
+   "keys": [
+    {
+     "t": 0,
+     "rot": {
+      "leg_r_thigh": 24,
+      "leg_r_shin": -10,
+      "leg_l_thigh": -24,
+      "leg_l_shin": 20,
+      "arm_l_upper": -26,
+      "arm_l_forearm": -10,
+      "arm_r_upper": 10,
+      "torso": -3,
+      "head": 2,
+      "cape": -10
+     }
+    },
+    {
+     "t": 270,
+     "rot": {
+      "leg_r_thigh": -24,
+      "leg_r_shin": 20,
+      "leg_l_thigh": 24,
+      "leg_l_shin": -10,
+      "arm_l_upper": 26,
+      "arm_l_forearm": 10,
+      "arm_r_upper": -8,
+      "torso": -3,
+      "head": -2,
+      "cape": -16
+     },
+     "root": [
+      0,
+      -4
+     ]
+    },
+    {
+     "t": 540,
+     "rot": {
+      "leg_r_thigh": 24,
+      "leg_r_shin": -10,
+      "leg_l_thigh": -24,
+      "leg_l_shin": 20,
+      "arm_l_upper": -26,
+      "arm_l_forearm": -10,
+      "arm_r_upper": 10,
+      "torso": -3,
+      "head": 2,
+      "cape": -10
+     }
+    }
+   ]
+  },
+  "tram_kiem": {
+   "loop": false,
+   "frames_ms": [
+    60,
+    90,
+    90,
+    50,
+    110,
+    120,
+    90,
+    90
+   ],
+   "hit_frame": 4,
+   "keys": [
+    {
+     "t": 0,
+     "rot": {}
+    },
+    {
+     "t": 150,
+     "rot": {
+      "arm_r_upper": 34,
+      "arm_r_forearm": 14,
+      "hand_r_sword": 10,
+      "torso": -5,
+      "head": -3,
+      "arm_l_upper": 12,
+      "cape": 5
+     },
+     "z": {
+      "hand_r_sword": 6.5,
+      "arm_r_forearm": 6.4,
+      "arm_r_upper": 6.3
+     }
+    },
+    {
+     "t": 240,
+     "rot": {
+      "arm_r_upper": 42,
+      "arm_r_forearm": 18,
+      "hand_r_sword": 12,
+      "torso": -6,
+      "head": -4,
+      "arm_l_upper": 14,
+      "cape": 7
+     },
+     "z": {
+      "hand_r_sword": 6.5,
+      "arm_r_forearm": 6.4,
+      "arm_r_upper": 6.3
+     }
+    },
+    {
+     "t": 290,
+     "rot": {
+      "arm_r_upper": -40,
+      "arm_r_forearm": -12,
+      "hand_r_sword": -8,
+      "torso": 7,
+      "head": 4,
+      "arm_l_upper": -16,
+      "cape": -12
+     },
+     "root": [
+      46,
+      0
+     ]
+    },
+    {
+     "t": 400,
+     "rot": {
+      "arm_r_upper": -38,
+      "arm_r_forearm": -10,
+      "hand_r_sword": -6,
+      "torso": 6,
+      "head": 3,
+      "arm_l_upper": -14,
+      "cape": -9
+     },
+     "root": [
+      48,
+      0
+     ]
+    },
+    {
+     "t": 610,
+     "rot": {}
+    }
+   ]
+  },
+  "attack": {
+   "loop": false,
+   "frames_ms": [
+    70,
+    80,
+    60,
+    100,
+    90
+   ],
+   "hit_frame": 2,
+   "keys": [
+    {
+     "t": 0,
+     "rot": {}
+    },
+    {
+     "t": 70,
+     "rot": {
+      "arm_r_upper": 18,
+      "arm_r_forearm": 8,
+      "hand_r_sword": 6,
+      "torso": -3,
+      "head": -2,
+      "arm_l_upper": 8
+     },
+     "root": [
+      -4,
+      0
+     ]
+    },
+    {
+     "t": 150,
+     "rot": {
+      "arm_r_upper": -40,
+      "arm_r_forearm": -12,
+      "hand_r_sword": -8,
+      "torso": 6,
+      "head": 3,
+      "arm_l_upper": -14,
+      "cape": -10
+     },
+     "root": [
+      26,
+      0
+     ]
+    },
+    {
+     "t": 210,
+     "rot": {
+      "arm_r_upper": -34,
+      "arm_r_forearm": -8,
+      "hand_r_sword": -6,
+      "torso": 4,
+      "head": 2,
+      "arm_l_upper": -10,
+      "cape": -6
+     },
+     "root": [
+      22,
+      0
+     ]
+    },
+    {
+     "t": 310,
+     "rot": {
+      "arm_r_upper": -12,
+      "torso": 1,
+      "cape": -2
+     },
+     "root": [
+      8,
+      0
+     ]
+    },
+    {
+     "t": 400,
+     "rot": {}
+    }
+   ]
+  }
+ },
+ "ground_parts": [
+  "leg_l_foot",
+  "leg_r_foot",
+  "leg_l_shin",
+  "leg_r_shin",
+  "leg_l_thigh",
+  "leg_r_thigh",
+  "cape",
+  "torso"
+ ],
+ "fit_scale": 0.95
+}

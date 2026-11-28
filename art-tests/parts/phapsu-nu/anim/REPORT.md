@@ -24,3 +24,10 @@ GAME-ART-CORE (Claude), 2026-11-28. Nguồn: `../` (14 bộ phận, commit e804a
 2. Khi giơ trượng cao, viên ngọc tím lên sát mép trên ô (vẫn trong ô, alpha mép 0 %). Codex ghi viên ngọc mẫu lớn hơn ảnh trong game.
 3. Tóc không tách riêng nên không có chuyển động tóc bay; muốn có cần tách tóc sau thành mảnh riêng.
 4. Chỉ có bộ phận nhìn thẳng: chạy ngang trông như chạy tại chỗ; dáng quay lưng hoặc nhìn nghiêng cần thêm bộ phận.
+
+
+## Đòn đánh thường (2026-11-29)
+`phapsu_nu_attack_5f.png`: 5 khung, durations_ms [70, 90, 60, 110, 90] (tổng 420 ms), **hit_frame 2**. tung phép nhỏ: rút trượng về → vung trượng chĩa tới (đầu trượng nghiêng ra ngoài) → giữ → về.
+- QC: mép ô alpha 0.0 %, 1 khối chính mỗi ô, chân y 620–620.
+- Cùng tỉ lệ (0,95 quanh chân), cùng điểm chân và cùng bộ phận với idle/run, nên chuyển từ chạy sang đánh **không đổi người**.
+- Xem: `preview_attack.gif`; so 6 hero: `../../attack_all_heroes.jpg`.

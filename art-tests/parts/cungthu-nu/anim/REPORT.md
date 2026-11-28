@@ -23,3 +23,10 @@ GAME-ART-CORE (Claude), 2026-11-28. Nguồn: `../` (16 bộ phận, commit e804a
 1. Dây cung liền với cung (`hand_l_bow.png`) nên **không căng được khi kéo**, giống bản nam. Cần tách dây cung thành mảnh riêng hoặc thêm ảnh cung căng.
 2. Ở góc nhìn thẳng, động tác kéo dây bị khuất nên biên độ nhìn thấy nhỏ.
 3. Chỉ có bộ phận nhìn thẳng: chạy ngang trông như chạy tại chỗ; dáng quay lưng hoặc nhìn nghiêng cần thêm bộ phận.
+
+
+## Đòn đánh thường (2026-11-29)
+`cungthu_nu_attack_5f.png`: 5 khung, durations_ms [60, 90, 60, 110, 80] (tổng 400 ms), **hit_frame 2**. bắn thường: nâng cung + kéo dây nhanh → buông (tay phải bật ra sau, lùi 10 px) → theo đà → về.
+- QC: mép ô alpha 0.0 %, 1 khối chính mỗi ô, chân y 620–620.
+- Cùng tỉ lệ (0,95 quanh chân), cùng điểm chân và cùng bộ phận với idle/run, nên chuyển từ chạy sang đánh **không đổi người**.
+- Xem: `preview_attack.gif`; so 6 hero: `../../attack_all_heroes.jpg`.

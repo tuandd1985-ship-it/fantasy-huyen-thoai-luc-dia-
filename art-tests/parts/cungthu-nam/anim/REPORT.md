@@ -23,3 +23,10 @@ GAME-ART-CORE (Claude), 2026-11-28. Nguồn: `../` (15 bộ phận, commit 3255c
 2. **Không có mũi tên** trên tay; mũi tên bay ra để game vẽ như hiện tại.
 3. Ở góc nhìn thẳng, động tác kéo cung ngắn và kín (tay phải che sau ngực, đầu); biên độ nhìn thấy nhỏ hơn Kiếm Sĩ hoặc Pháp Sư. Dáng ngắm nghiêng cần bộ phận nhìn nghiêng.
 4. Như REPORT của Codex: tay cầm cung duỗi hơn, mũ và tà áo choàng rộng hơn ảnh trong game.
+
+
+## Đòn đánh thường (2026-11-29)
+`cungthu_nam_attack_5f.png`: 5 khung, durations_ms [60, 90, 60, 110, 80] (tổng 400 ms), **hit_frame 2**. bắn thường: nâng cung + kéo dây nhanh → buông (tay phải bật ra sau, lùi 10 px) → theo đà → về.
+- QC: mép ô alpha 0.0 %, 1 khối chính mỗi ô, chân y 619–620.
+- Cùng tỉ lệ (0,95 quanh chân), cùng điểm chân và cùng bộ phận với idle/run, nên chuyển từ chạy sang đánh **không đổi người**.
+- Xem: `preview_attack.gif`; so 6 hero: `../../attack_all_heroes.jpg`.

@@ -23,3 +23,10 @@ GAME-ART-CORE (Claude), 2026-11-28. Nguồn: `../` (15 bộ phận, commit e804a
 1. Lấy đà Trảm Kiếm: kiếm vòng ra sau đầu bị **đầu và tóc đuôi ngựa che gần hết** (giống bản nam). Cần bàn tay + kiếm ở góc cầm khác nếu muốn thấy rõ kiếm giơ cao.
 2. Như Codex lưu ý: tay cầm kiếm và áo choàng lớn hơn ảnh trong game.
 3. Chỉ có bộ phận nhìn thẳng: chạy ngang trông như chạy tại chỗ; dáng quay lưng hoặc nhìn nghiêng cần thêm bộ phận.
+
+
+## Đòn đánh thường (2026-11-29)
+`kiemsi_nu_attack_5f.png`: 5 khung, durations_ms [70, 80, 60, 100, 90] (tổng 400 ms), **hit_frame 2**. chém thường: nâng kiếm lên vai → chém chéo xuống, đẩy người tới 26 px → theo đà → về.
+- QC: mép ô alpha 0.0 %, 1 khối chính mỗi ô, chân y 620–620.
+- Cùng tỉ lệ (0,95 quanh chân), cùng điểm chân và cùng bộ phận với idle/run, nên chuyển từ chạy sang đánh **không đổi người**.
+- Xem: `preview_attack.gif`; so 6 hero: `../../attack_all_heroes.jpg`.
