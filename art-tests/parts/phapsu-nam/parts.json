@@ -1,0 +1,430 @@
+{
+  "canvas": [
+    768,
+    640
+  ],
+  "baselineY": 620,
+  "origin": "top-left",
+  "rig": {
+    "sides": "anatomical; left is on viewer's right in the rest pose",
+    "coordinates": "integer pixels in the shared 768x640 canvas",
+    "composition": "source-over by ascending z, place every layer at (0,0) in rest pose",
+    "bbox": "half-open [left,top,right,bottom] pixel bounds",
+    "pivotApplication": "rotate around each pivot in rest canvas coordinates; propagate parent transforms down the tree"
+  },
+  "reference": {
+    "path": "assets-data-1.js#__A.k13",
+    "sha256": "5f505fdeaf556212094f2c3e152e7b91aeb994406390a7a8a93b3288d0468774"
+  },
+  "assembled": "assembled.png",
+  "sha256Assembled": "9626f90e66ff0dd9f10e6e635cb8b193064ff87cf37e61c7207d3127942a36f1",
+  "parts": [
+    {
+      "id": "cape",
+      "file": "cape.png",
+      "z": 0,
+      "parent": "torso",
+      "joint": "cape-root",
+      "pivot": {
+        "x": 365,
+        "y": 433
+      },
+      "bbox": [
+        178,
+        411,
+        559,
+        603
+      ]
+    },
+    {
+      "id": "leg_l_thigh",
+      "file": "leg_l_thigh.png",
+      "z": 1,
+      "parent": "torso",
+      "joint": "left-hip",
+      "pivot": {
+        "x": 392,
+        "y": 538
+      },
+      "bbox": [
+        365,
+        517,
+        422,
+        569
+      ]
+    },
+    {
+      "id": "leg_l_shin",
+      "file": "leg_l_shin.png",
+      "z": 2,
+      "parent": "leg_l_thigh",
+      "joint": "left-knee",
+      "pivot": {
+        "x": 390,
+        "y": 559
+      },
+      "bbox": [
+        365,
+        550,
+        421,
+        598
+      ]
+    },
+    {
+      "id": "leg_l_foot",
+      "file": "leg_l_foot.png",
+      "z": 3,
+      "parent": "leg_l_shin",
+      "joint": "left-ankle",
+      "pivot": {
+        "x": 396,
+        "y": 590
+      },
+      "bbox": [
+        370,
+        582,
+        427,
+        621
+      ]
+    },
+    {
+      "id": "leg_r_thigh",
+      "file": "leg_r_thigh.png",
+      "z": 4,
+      "parent": "torso",
+      "joint": "right-hip",
+      "pivot": {
+        "x": 325,
+        "y": 537
+      },
+      "bbox": [
+        298,
+        517,
+        353,
+        569
+      ]
+    },
+    {
+      "id": "leg_r_shin",
+      "file": "leg_r_shin.png",
+      "z": 5,
+      "parent": "leg_r_thigh",
+      "joint": "right-knee",
+      "pivot": {
+        "x": 327,
+        "y": 559
+      },
+      "bbox": [
+        298,
+        550,
+        353,
+        598
+      ]
+    },
+    {
+      "id": "leg_r_foot",
+      "file": "leg_r_foot.png",
+      "z": 6,
+      "parent": "leg_r_shin",
+      "joint": "right-ankle",
+      "pivot": {
+        "x": 325,
+        "y": 590
+      },
+      "bbox": [
+        293,
+        582,
+        353,
+        621
+      ]
+    },
+    {
+      "id": "torso",
+      "file": "torso.png",
+      "z": 7,
+      "parent": null,
+      "joint": "root",
+      "pivot": {
+        "x": 361,
+        "y": 520
+      },
+      "bbox": [
+        246,
+        400,
+        468,
+        604
+      ]
+    },
+    {
+      "id": "arm_l_upper",
+      "file": "arm_l_upper.png",
+      "z": 8,
+      "parent": "torso",
+      "joint": "left-shoulder",
+      "pivot": {
+        "x": 418,
+        "y": 435
+      },
+      "bbox": [
+        403,
+        419,
+        475,
+        476
+      ]
+    },
+    {
+      "id": "arm_l_forearm",
+      "file": "arm_l_forearm.png",
+      "z": 9,
+      "parent": "arm_l_upper",
+      "joint": "left-elbow",
+      "pivot": {
+        "x": 463,
+        "y": 457
+      },
+      "bbox": [
+        455,
+        435,
+        527,
+        484
+      ]
+    },
+    {
+      "id": "arm_r_upper",
+      "file": "arm_r_upper.png",
+      "z": 10,
+      "parent": "torso",
+      "joint": "right-shoulder",
+      "pivot": {
+        "x": 296,
+        "y": 437
+      },
+      "bbox": [
+        230,
+        424,
+        308,
+        500
+      ]
+    },
+    {
+      "id": "arm_r_forearm",
+      "file": "arm_r_forearm.png",
+      "z": 11,
+      "parent": "arm_r_upper",
+      "joint": "right-elbow",
+      "pivot": {
+        "x": 261,
+        "y": 483
+      },
+      "bbox": [
+        201,
+        466,
+        288,
+        546
+      ]
+    },
+    {
+      "id": "head",
+      "file": "head.png",
+      "z": 12,
+      "parent": "torso",
+      "joint": "neck",
+      "pivot": {
+        "x": 358,
+        "y": 421
+      },
+      "bbox": [
+        103,
+        12,
+        557,
+        443
+      ]
+    },
+    {
+      "id": "hand_l_staff",
+      "file": "hand_l_staff.png",
+      "z": 13,
+      "parent": "arm_l_forearm",
+      "joint": "left-wrist",
+      "pivot": {
+        "x": 504,
+        "y": 457
+      },
+      "bbox": [
+        424,
+        105,
+        656,
+        609
+      ]
+    }
+  ],
+  "jointOverlapCheck": {
+    "windowPx": 47,
+    "anglesDeg": [
+      -20,
+      0,
+      20
+    ],
+    "jointOverlapsPx": [
+      {
+        "id": "cape",
+        "rest": 2156,
+        "rotated": {
+          "-20": 2114,
+          "20": 2123
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "leg_l_thigh",
+        "rest": 1867,
+        "rotated": {
+          "-20": 1799,
+          "20": 1891
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "leg_l_shin",
+        "rest": 626,
+        "rotated": {
+          "-20": 654,
+          "20": 643
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "leg_l_foot",
+        "rest": 483,
+        "rotated": {
+          "-20": 537,
+          "20": 452
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "leg_r_thigh",
+        "rest": 1882,
+        "rotated": {
+          "-20": 1897,
+          "20": 1832
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "leg_r_shin",
+        "rest": 632,
+        "rotated": {
+          "-20": 632,
+          "20": 674
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "leg_r_foot",
+        "rest": 426,
+        "rotated": {
+          "-20": 482,
+          "20": 428
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "arm_l_upper",
+        "rest": 391,
+        "rotated": {
+          "-20": 420,
+          "20": 397
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "arm_l_forearm",
+        "rest": 277,
+        "rotated": {
+          "-20": 266,
+          "20": 312
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "arm_r_upper",
+        "rest": 430,
+        "rotated": {
+          "-20": 386,
+          "20": 515
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "arm_r_forearm",
+        "rest": 1059,
+        "rotated": {
+          "-20": 1036,
+          "20": 1111
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "head",
+        "rest": 1952,
+        "rotated": {
+          "-20": 1920,
+          "20": 1969
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "hand_l_staff",
+        "rest": 1879,
+        "rotated": {
+          "-20": 1858,
+          "20": 1871
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      }
+    ]
+  },
+  "imageGen": {
+    "core": {
+      "file": "exec-6e30add7-dbfe-48cc-b82d-304ab80d100d.png",
+      "grid": [
+        2,
+        2
+      ],
+      "prompt": "Use case: stylized-concept. Production art atlas for a 2D cutout-animation rig, exact identity from the attached existing game character. Repaint each piece independently with the same slightly elevated front three-quarter chibi viewpoint and detailed cel shading, ink edges, matching colors and design. Transparent alpha background, isolated opaque art, short concealed overlap stubs at the joints, no shadows, no grid lines or labels, one object per cell, 8% margins inside every cell. Anatomical left is viewer right. Keep the cells rigorously separate. Square invisible 2x2 grid. Top left: head alone from the reference in exact proportions, enormous tilted navy pointed wizard hat with crescent and stars and entire wide brim, tousled navy hair, big blue eyes, white small pointed goatee and white side whiskers, smiling and a short neck -> keep the same face. Top right: flowing dark navy cape fabric open behind body, gold narrow trim, narrow collar start, no hood. Bottom left: torso only, upright blue embroidered gold crescent-and-stars robe long front panel and gold star clasp at black belt, narrow shoulders and collar but no sleeves or arms, dark fabric overlap at shoulders. Bottom right completely empty. No staff or accessories elsewhere.",
+      "sha256": "bf63fa6e9c357a092b5b183423686adbc22c1a5b8929d3c123670ab3c0954315"
+    },
+    "arms": {
+      "file": "exec-ec425859-2769-4370-8551-b135c391b5a0.png",
+      "grid": [
+        3,
+        2
+      ],
+      "prompt": "Use case: stylized-concept. Production art atlas for a 2D cutout-animation rig, exact identity from the attached existing game character. Repaint each piece independently with the same slightly elevated front three-quarter chibi viewpoint and detailed cel shading, ink edges, matching colors and design. Transparent alpha background, isolated opaque art, short concealed overlap stubs at the joints, no shadows, no grid lines or labels, one object per cell, 8% margins inside every cell. Anatomical left is viewer right. Keep the cells rigorously separate. Landscape 3 columns by 2 rows. Row 1: cell 1 anatomical left upper sleeve pointing down-right, dark blue gold-trim wizard fabric; cell 2 left forearm sleeve only, pointing down-right with a fabric cuff and short joint overlap, NO hand; cell 3 right upper sleeve in same fabric pointing down-left. Row 2: cell 1 right forearm flared embroidered sleeve with a small relaxed flesh hand visible at its end, pointing down-left; cell 2 large COMPLETE brown gnarled wizard staff topped by bright round blue sphere held by a single small pale left hand that grips midway down the shaft, staff tilted a little right at top, hand wrist enters from the left edge of fist, no extra hands or sleeve; cell 3 completely transparent. Match existing wizard collar patterns, walnut wood and bright blue orb. Full staff tip and butt entirely in its cell.",
+      "sha256": "5c52afd5fe2606281f159579a3d7a4100117dca0023d23874ffd0e500951be60"
+    },
+    "legs": {
+      "file": "exec-c8bb9a97-dc34-445a-b84f-6a4456b30204.png",
+      "grid": [
+        3,
+        2
+      ],
+      "prompt": "Use case: stylized-concept. Production art atlas for a 2D cutout-animation rig, exact identity from the attached existing game character. Repaint each piece independently with the same slightly elevated front three-quarter chibi viewpoint and detailed cel shading, ink edges, matching colors and design. Transparent alpha background, isolated opaque art, short concealed overlap stubs at the joints, no shadows, no grid lines or labels, one object per cell, 8% margins inside every cell. Anatomical left is viewer right. Keep the cells rigorously separate. Landscape 3 columns x 2 rows. Top row left anatomical leg, bottom row right anatomical leg. Column 1 thigh segment alone short navy fabric leggings, rounded enclosed joints; column 2 shin segment alone, navy fabric and brown boot shaft with smooth ankle connecting stub, no shoe; column 3 low round brown leather foot/boot toe alone with short ankle cuff. Maintain chibi thickness and same scale. Keep six isolated pieces inside cell margins.",
+      "sha256": "c154116d474f55d8f80297cd36b5dcda2ddbb639ed295540d9594851bed1c184"
+    }
+  }
+}
