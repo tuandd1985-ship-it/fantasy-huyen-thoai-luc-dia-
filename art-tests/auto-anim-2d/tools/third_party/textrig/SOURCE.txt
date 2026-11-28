@@ -1,0 +1,1 @@
+Source: https://github.com/blackoutbuild/textrig commit 24de122 (MIT). Only fill_occlusions.py is used.

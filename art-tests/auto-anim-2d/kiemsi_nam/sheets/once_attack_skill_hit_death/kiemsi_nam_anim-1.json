@@ -1,85 +1,85 @@
 {
   "frames": {
-    "death_008": {
+    "death_009": {
       "frame": {
-        "x": 640,
+        "x": 650,
         "y": 2,
-        "w": 318,
-        "h": 228
+        "w": 309,
+        "h": 216
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 44,
-        "y": 166,
-        "w": 318,
-        "h": 228
+        "x": 84,
+        "y": 291,
+        "w": 309,
+        "h": 216
       },
       "sourceSize": {
-        "w": 560,
-        "h": 460
+        "w": 753,
+        "h": 699
       },
       "pivot": {
-        "x": 0.6518,
-        "y": 0.7717
+        "x": 0.5126,
+        "y": 0.6109
       },
       "duration": 83
     },
-    "death_013": {
+    "death_011": {
       "frame": {
-        "x": 2,
+        "x": 329,
         "y": 2,
-        "w": 317,
-        "h": 230
+        "w": 319,
+        "h": 216
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 24,
-        "y": 183,
-        "w": 317,
-        "h": 230
+        "x": 74,
+        "y": 291,
+        "w": 319,
+        "h": 216
       },
       "sourceSize": {
-        "w": 560,
-        "h": 460
+        "w": 753,
+        "h": 699
       },
       "pivot": {
-        "x": 0.6518,
-        "y": 0.7717
+        "x": 0.5126,
+        "y": 0.6109
       },
       "duration": 83
     },
     "death_014": {
       "frame": {
-        "x": 321,
+        "x": 2,
         "y": 2,
-        "w": 317,
-        "h": 230
+        "w": 325,
+        "h": 216
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 24,
-        "y": 183,
-        "w": 317,
-        "h": 230
+        "x": 68,
+        "y": 291,
+        "w": 325,
+        "h": 216
       },
       "sourceSize": {
-        "w": 560,
-        "h": 460
+        "w": 753,
+        "h": 699
       },
       "pivot": {
-        "x": 0.6518,
-        "y": 0.7717
+        "x": 0.5126,
+        "y": 0.6109
       },
       "duration": 83
     }
   },
   "animations": {
     "death": [
-      "death_008",
-      "death_013",
+      "death_009",
+      "death_011",
       "death_014"
     ]
   },
@@ -89,8 +89,8 @@
     "image": "kiemsi_nam_anim-1.png",
     "format": "RGBA8888",
     "size": {
-      "w": 960,
-      "h": 234
+      "w": 961,
+      "h": 220
     },
     "scale": "1",
     "frameTags": [

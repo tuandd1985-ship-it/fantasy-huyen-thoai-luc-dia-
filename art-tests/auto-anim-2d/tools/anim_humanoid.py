@@ -4,9 +4,21 @@
 import rigby
 
 for c in rigby.constraints():
-    c.mix = 0.0          # FK everywhere: predictable, no IK pops
+    if getattr(c, "type", "") == "ik":
+        c.mix = 0.0      # FK everywhere: predictable, no IK pops
 
 B = {b.name: b for b in rigby.bones()}
+
+# secondary motion: cape (AutoRig tail chain) and helmet plume (hair bone) follow through with physics
+PHYS = {"tail1": 0.6, "tail2": 0.8, "tail3": 1.0, "hair": 1.0}
+for bn, amt in PHYS.items():
+    if bn in B and not any(getattr(c, "name", "") == f"phys_{bn}" for c in rigby.constraints()):
+        pc = rigby.add_physics(f"phys_{bn}", bn, rotate=amt, x=0.0, y=0.0)
+        try:
+            pc.set(inertia=0.6, strength=60, damping=0.85)
+        except Exception as e:
+            print("physics set:", e)
+        print("physics", bn, pc.info())
 def has(n): return n in B
 
 def anim(name, dur):

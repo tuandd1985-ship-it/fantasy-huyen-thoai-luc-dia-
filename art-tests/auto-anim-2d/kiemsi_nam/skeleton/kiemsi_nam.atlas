@@ -5,7 +5,7 @@ arm_l
 bounds: 2, 2, 515, 640
 arm_r
 bounds: 519, 2, 515, 640
-cape
+hair_plume
 bounds: 1036, 2, 515, 640
 head
 bounds: 2, 644, 515, 640
@@ -13,5 +13,7 @@ leg_l
 bounds: 519, 644, 515, 640
 leg_r
 bounds: 1036, 644, 515, 640
-torso
+tail_cape
 bounds: 2, 1286, 515, 640
+torso
+bounds: 519, 1286, 515, 640

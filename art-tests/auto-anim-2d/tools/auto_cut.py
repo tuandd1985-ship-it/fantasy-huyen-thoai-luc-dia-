@@ -10,7 +10,8 @@ import numpy as np
 from PIL import Image, ImageDraw
 from scipy import ndimage as ndi
 
-ORDER = ["cape", "leg_r", "leg_l", "torso", "arm_l", "head", "arm_r"]   # back -> front (character sides)
+ORDER = ["cape", "leg_r", "leg_l", "torso", "arm_l", "head", "plume", "arm_r"]
+LAYER_NAME = {"cape": "tail_cape", "plume": "hair_plume"}   # names AutoRig understands   # back -> front (character sides)
 
 
 def poly(shape, pts):
@@ -18,7 +19,28 @@ def poly(shape, pts):
     return np.asarray(m) > 0
 
 
-def fill_hidden(rgba, own, region, sigma=8):
+sys.path.insert(0, str(Path(__file__).parent / "third_party" / "textrig"))
+import fill_occlusions as tr   # TextRig (MIT): extend for shallow seams, harmonic diffusion for deep zones
+
+
+def fill_hidden(rgba, own, region, sigma=3.0):
+    """TextRig fill: per connected component, nearest extension if shallow, coarse-to-fine harmonic diffusion
+    if deeper than DEEP_OCCLUSION_PX, then one masked blur over the filled pixels."""
+    rgb = rgba[..., :3].astype(float).copy()
+    _, (iy, ix) = ndi.distance_transform_edt(~own, return_indices=True)
+    tr._extend_fill(rgb, region, iy, ix)
+    depth = ndi.distance_transform_edt(~own)
+    lab, n = ndi.label(region)
+    for i in range(1, n + 1):
+        mc = lab == i
+        if depth[mc].max() > tr.DEEP_OCCLUSION_PX:
+            tr._diffuse_fill(rgb, mc, own | region)   # support = whole piece footprint (visible + hidden), as TextRig cuts it
+    tr._masked_blur(rgb, region, own | region, sigma)
+    out = rgba.copy(); out[..., :3] = np.clip(rgb, 0, 255).round(); out[region, 3] = 255
+    return out
+
+
+def fill_hidden_old(rgba, own, region, sigma=8):
     """Extend `own` part colours into `region` (pixels hidden by parts in front), soft alpha kept opaque."""
     rgb = rgba[..., :3].astype(float)
     _, (iy, ix) = ndi.distance_transform_edt(~own, return_indices=True)
@@ -49,18 +71,25 @@ def main():
         armr = np.isin(lab, np.unique(lab[armr & (lab > 0)])) & A
     arml = poly(im.shape, tpl["arm_l"]) & A & ~armr
     head = (yy < tpl["neck_y"]) & A & ~armr
+    plume = (red & (yy < tpl.get("plume_max_y", 0))) if "plume_max_y" in tpl else np.zeros_like(A)
+    plume = ndi.binary_dilation(plume, iterations=2) & A & (yy < tpl.get("plume_max_y", 0) + 3)
+    head &= ~plume
     legs_zone = (yy >= tpl["hip_y"]) & (xx >= tpl["legs_x"][0]) & (xx <= tpl["legs_x"][1]) & ~red
     cape = red & (yy > tpl["cape_min_y"]) & A & ~armr & ~arml & ~head
     leg_r = legs_zone & (xx < tpl["legs_split_x"]) & A & ~cape
     leg_l = legs_zone & (xx >= tpl["legs_split_x"]) & A & ~cape
-    torso = A & ~(armr | arml | head | cape | leg_r | leg_l)
-    parts = {"cape": cape, "leg_r": leg_r, "leg_l": leg_l, "torso": torso, "arm_l": arml, "head": head, "arm_r": armr}
-    # clean tiny islands into torso
+    torso = A & ~(armr | arml | head | plume | cape | leg_r | leg_l)
+    parts = {"cape": cape, "leg_r": leg_r, "leg_l": leg_l, "torso": torso, "arm_l": arml, "head": head, "plume": plume, "arm_r": armr}
+    # tiny islands (< 40 px): give them to the neighbouring part they touch most (never stretch the torso upward)
     for k in list(parts):
         lab, n = ndi.label(parts[k])
-        if n > 1:
-            sz = ndi.sum(np.ones((H, W)), lab, range(1, n + 1)); keep = np.isin(lab, 1 + np.nonzero(sz >= 40)[0])
-            parts["torso"] |= parts[k] & ~keep; parts[k] = keep
+        if n <= 1: continue
+        sz = ndi.sum(np.ones((H, W)), lab, range(1, n + 1))
+        for j in np.nonzero(sz < 40)[0] + 1:
+            isl = lab == j; ring = ndi.binary_dilation(isl, iterations=2) & ~isl
+            best = max((k2 for k2 in parts if k2 != k), key=lambda k2: int((parts[k2] & ring).sum()))
+            if (parts[best] & ring).sum() > 0:
+                parts[k] &= ~isl; parts[best] |= isl
     # fills: what each part needs underneath the parts in front of it (underlap zone near its own pixels)
     layers = {}
     for i, k in enumerate(ORDER):
@@ -76,22 +105,22 @@ def main():
         if zone.any() and k not in ("arm_r",):
             a = fill_hidden(a, m, zone)
         layers[k] = a
-        Image.fromarray(a).save(out / f"{k}.png")
+        Image.fromarray(a).save(out / f"{LAYER_NAME.get(k, k)}.png")
     # check sheet: parts tinted + exploded view
     tint = {"cape": (255, 80, 80), "leg_r": (80, 160, 255), "leg_l": (40, 100, 220), "torso": (120, 220, 120),
-            "arm_l": (255, 200, 60), "head": (200, 120, 255), "arm_r": (255, 140, 0)}
+            "arm_l": (255, 200, 60), "head": (200, 120, 255), "plume": (255, 255, 255), "arm_r": (255, 140, 0)}
     ov = Image.new("RGBA", (W, H), (40, 40, 40, 255))
     for k in ORDER:
         m = parts[k]; t = im.copy(); t[..., :3] = (t[..., :3] * 0.45 + np.array(tint[k]) * 0.55).astype(np.uint8); t[~m, 3] = 0
         ov.alpha_composite(Image.fromarray(t))
     ex = Image.new("RGBA", (W * 2, H + 60), (230, 230, 230, 255)); off = {"head": (0, -40), "arm_r": (-60, 0), "arm_l": (60, 0),
-            "leg_r": (-30, 40), "leg_l": (30, 40), "cape": (0, 20), "torso": (0, 0)}
+            "leg_r": (-30, 40), "leg_l": (30, 40), "cape": (0, 20), "torso": (0, 0), "plume": (0, -70)}
     for k in ORDER:
         ex.alpha_composite(Image.fromarray(layers[k]), (W // 2 + off[k][0], 40 + off[k][1]))
     S = Image.new("RGB", (W * 3, H + 60), (230, 230, 230)); S.paste(ov.convert("RGB"), (0, 30)); S.paste(ex.convert("RGB"), (W, 0))
     S.save(out / "_parts_check.jpg", quality=90)
     info = {k: int(parts[k].sum()) for k in ORDER}; info["seconds"] = round(time.time() - t0, 2)
-    (out / "parts.json").write_text(json.dumps({"order": ORDER, "size": [W, H], "px": info}, indent=1))
+    (out / "parts.json").write_text(json.dumps({"order": [LAYER_NAME.get(k, k) for k in ORDER], "size": [W, H], "px": info}, indent=1))
     print(info)
 
 

@@ -93,3 +93,19 @@ Hero thử: **Kiếm Sĩ Nam** (`hero-swordsman-male`, bản đã làm sạch �
 C:\AI\AUTO-ANIM-2D\tools\run_pipeline.sh kiemsi_nam <source.png> tools/templates/kiemsi_nam.json
 ```
 Cần Rigby2D tại `C:\AI\AUTO-ANIM-2D\_vendor\rigby2d` (đã `npm ci --ignore-scripts`) và Node tại `C:\AI\AUTO-ANIM-2D\tools\node`.
+
+## 8. Cải tiến v2 (2026-11-28): lấp vùng của TextRig + physics áo choàng và chùm lông
+1. **Lấp vùng bị che bằng thuật toán của TextRig** (`tools/third_party/textrig/fill_occlusions.py`, MIT, commit 24de122; chỉ dùng file này, chỉ cần numpy/scipy, **không cài TextRig, không tải model, không cần Chromium**).
+   - Vùng nông: kéo dài màu điểm gần nhất.
+   - Vùng sâu: khuếch tán hài hoà nhiều tầng (từ thô đến mịn), rồi làm mờ có mặt nạ.
+   - Kết quả: hết vệt tối hình que lộ ra phía sau kiếm khi chém (`compare_before_after_frames.jpg`, hàng trên là trước, hàng dưới là sau).
+2. **Physics** (Rigby2D physics constraint: inertia 0,6, strength 60, damping 0,85):
+   - Chùm lông mũ tách thành lớp `hair_plume` → AutoRig tạo xương `hair` treo từ đầu.
+   - Áo choàng đặt tên `tail_cape` → AutoRig tạo chuỗi 3 xương `tail1`–`tail3`, kèm mesh có trọng số.
+   - Gắn physics vào cả 4 xương: chùm lông và áo choàng ngả theo quán tính khi vung kiếm, chạy, ngã. Rigby2D chạy physics một vòng trước khi xuất nên vòng lặp nối liền.
+3. AutoRig nhận **8/8 lớp**, dựng 20 xương (thêm `hair`, `tail1`–`tail3`).
+4. Sửa lỗi phát hiện trong lúc làm: các mảnh vụn dưới 40 px của chùm lông/đầu từng bị gộp vào lớp thân, làm lớp thân cao 576 px và AutoRig đặt sai vai (tay và chuôi kiếm tách khỏi lưỡi kiếm). Giờ mảnh vụn được giao cho phần chạm vào nó nhiều nhất; lớp thân về 344×216.
+5. **Thời gian**: tổng **25,1 s/nhân vật** (cắt + lấp vùng 2,7 s). Không dùng VRAM. Mép ô alpha 0 % ở mọi khung.
+6. **Còn lại**: sợi viền tóc dính mép kiếm; kiếm vẽ đè mặt lúc lấy đà; ở cỡ 150 px trong game, độ bay của áo choàng còn nhẹ, có thể tăng `strength`/`inertia` nếu Luna muốn rõ hơn.
+
+`compare_before_after.gif`: chạy, chém, skill; trái là trước, phải là sau.
