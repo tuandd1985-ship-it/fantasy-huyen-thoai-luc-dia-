@@ -45,3 +45,17 @@ Xếp 14 PNG theo `z` ở dáng gốc, so với `assembled.png`:
 - QC: mép ô alpha 0.0 %, 1 khối chính mỗi ô, chân y 620–620.
 - Cùng tỉ lệ (0,95 quanh chân), cùng điểm chân và cùng bộ phận với idle/run, nên chuyển từ chạy sang đánh **không đổi người**.
 - Xem: `preview_attack.gif`; so 6 hero: `../../attack_all_heroes.jpg`.
+
+
+## Skill 2–4 và trúng đòn (2026-11-29)
+| Skill | File | Khung | durations_ms | hit_frame | Alpha mép | Cách dựng |
+|---|---|---:|---|---:|---|---|
+| Kiếm Vũ | `kiemsi_nam_kiem_vu_7f.png` | 7 | [80, 70, 70, 70, 70, 90, 100] (550 ms) | 2 | 0.0 % | quét kiếm ngang trước người 2 vòng, áo choàng tung, đẩy người 10–18 px |
+| Địa Chấn | `kiemsi_nam_dia_chan_7f.png` | 7 | [80, 120, 90, 60, 160, 110, 100] (720 ms) | 3 | 0.0 % | giơ kiếm ra sau đầu, bật lên 26 px, bổ xuống cắm đất (mũi kiếm chạm thấp hơn đường chân ~10 px là cố ý), giữ |
+| Thiên Kiếm | `kiemsi_nam_thien_kiem_7f.png` | 7 | [90, 100, 160, 200, 80, 140, 110] (880 ms) | 4 | 0.0 % | giơ kiếm lên, bay lên 22–24 px, giữ 360 ms (lúc gọi đại kiếm), chém xuống |
+| Trúng đòn | `kiemsi_nam_hurt_3f.png` | 3 | [80, 110, 110] (300 ms) | – | 0.0 % | bật lùi 14 px, đầu ngả, tay văng, rồi hồi |
+
+- Cùng tỉ lệ, điểm chân và bộ phận với idle/run/attack. Mỗi ô 1 khối chính.
+- **Giới hạn (Luna quyết):**
+- Chỉ có bộ phận nhìn thẳng: **Kiếm Vũ không xoay người được**, thể hiện bằng quét kiếm ngang 2 vòng + áo choàng tung. Muốn xoay thật cần bộ phận nhìn nghiêng/sau.
+- **Thiên Kiếm**: kiếm giơ lên chỉ tới góc chéo trước mặt; dựng kiếm thẳng đứng trên đầu cần bàn tay + kiếm ở góc cầm khác (đầu sẽ che nếu vòng ra sau).
