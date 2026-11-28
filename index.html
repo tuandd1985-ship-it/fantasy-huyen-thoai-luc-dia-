@@ -256,7 +256,21 @@
       body.rot .scene-bottom{ flex-wrap:nowrap; }
       body.rot .scene-name-block{ flex-basis:auto; order:0; }
       body.rot .scene-start{ margin:0 0 24px; }
-      body.rot .arena-wrap .fight-pad{ width:auto; }
+      /* Cụm vòng cung v0.6.0 là hộp CỐ ĐỊNH 292×292, mọi nút bên trong đều
+         position:absolute theo tọa độ trong hộp (các hàng bọc display:contents
+         nên hộp không có nội dung in-flow). TUYỆT ĐỐI không để width:auto ở
+         chế độ tự xoay: hộp sẽ co về 0px, neo right đẩy toàn bộ nút Đánh /
+         skill / bình / AUTO ra ngoài mép sân và bị overflow:hidden cắt mất
+         (lỗi "không thấy nút nào" trên iPhone dọc + Safari, bản v0.6.0). */
+      body.rot .arena-wrap .fight-pad{ width:292px; height:292px; }
+      /* Sân tự xoay chỉ cao bằng chiều NGANG vật lý của máy (~390px): hộp
+         cụm 292px gần chạm đỉnh sân, hàng trên của cụm (AUTO + buff 2) đụng
+         đúng chồng minimap + chip màn ở góc phải và bị che mất một phần.
+         Chỉ ở chế độ tự xoay mới dời chip màn sang trái, dưới thanh HP/MP
+         (vùng trống — chip nhiệm vụ ở đó đang ẩn tại khung vật lý ≤560px,
+         và top 140px vẫn chừa đủ chỗ khi nó hiện ở máy lớn hơn) để góc
+         phải trả trọn cho cụm nút. Khung ngang thật giữ nguyên vị trí cũ. */
+      body.rot .arena-wrap .arena-top{ top:calc(140px + env(safe-area-inset-top)); left:calc(10px + env(safe-area-inset-left)); right:auto; justify-content:flex-start; }
       .panel h3{ margin:0 0 10px; font-size:15px; font-weight:800; }
       .panel h4{ margin:16px 0 8px; font-size:13px; font-weight:800; color:var(--gold); text-transform:uppercase; letter-spacing:.04em; }
       .muted{ color:var(--ink-soft); font-size:12.5px; }

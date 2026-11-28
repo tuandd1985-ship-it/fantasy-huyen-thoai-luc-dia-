@@ -1,5 +1,5 @@
 # PROGRESS — FANTASY: HUYỀN THOẠI LỤC ĐỊA
-Cập nhật: 2026-11-28 (sau bản v0.6.0 — bố cục MMO mới: skill vòng cung, cửa sổ nổi, nhân vật nhỏ lại).
+Cập nhật: 2026-11-28 (sau hotfix v0.6.1 — sửa mất cụm nút ở chế độ tự xoay).
 
 ## Đã xong
 - SPEC.md (yêu cầu gốc, Do phê duyệt dần qua các vòng chốt 2026-11-27) + GDD.md (bản thiết kế v2) + bộ tài liệu Master Instruction: ART_DIRECTION, ARCHITECTURE, BALANCE, ROADMAP, GAP_ANALYSIS, TEST_REPORT, CHANGELOG.
