@@ -31,10 +31,10 @@
       body{ font-family:"Be Vietnam Pro",system-ui,sans-serif; color:var(--ink); background:radial-gradient(1200px 500px at 50% -120px, var(--bg2), transparent), var(--bg); min-height:100vh; }
       button{ font-family:inherit; cursor:pointer; }
       button, [role="button"]{ min-height:2.25rem; }
-      .wrap{ max-width:none; margin:0; padding:0; height:100dvh; display:flex; flex-direction:column; }
+      .wrap{ max-width:none; margin:0; padding:0; height:100%; display:flex; flex-direction:column; }
 
       /* ===== HUD PHỦ TRÊN SÂN (sơ đồ GDD): trên trái = chân dung + tên + cấp + HP/mana ===== */
-      .hud-overlay{ position:absolute; top:calc(8px + env(safe-area-inset-top)); left:calc(10px + env(safe-area-inset-left)); z-index:8; display:flex; gap:9px; align-items:center; background:rgba(10,13,9,.60); border:1px solid rgba(238,194,106,.5); border-radius:14px; padding:6px 10px 6px 6px; backdrop-filter:blur(3px); color:#f3e9c8; max-width:min(410px,60%); box-shadow:0 4px 14px rgba(0,0,0,.35); }
+      .hud-overlay{ position:absolute; top:calc(10px + env(safe-area-inset-top)); left:calc(10px + env(safe-area-inset-left)); z-index:8; display:flex; gap:9px; align-items:center; background:rgba(10,13,9,.60); border:1px solid rgba(238,194,106,.5); border-radius:14px; padding:6px 10px 6px 6px; backdrop-filter:blur(3px); color:#f3e9c8; max-width:min(410px,60%); box-shadow:0 4px 14px rgba(0,0,0,.35); }
       .hud-overlay .portrait{ width:50px; height:50px; border-radius:11px; object-fit:cover; flex:0 0 auto; border:2px solid var(--gold2); }
       .hud-overlay .stage-box{ color:#d9c98f; }
       .hud-overlay .icon-btn{ background:rgba(30,34,26,.8); border-color:rgba(238,194,106,.4); color:#f3e9c8; width:30px; height:30px; min-height:30px; }
@@ -60,7 +60,7 @@
       /* ===== ARENA ===== */
       .arena-wrap{ position:relative; flex:1 1 auto; min-height:0; margin-top:0; border-radius:0; overflow:hidden; border:none; box-shadow:none; background:#0a0f14; }
       canvas#game{ display:block; width:100%; touch-action:none; }
-      .arena-top{ position:absolute; top:calc(8px + env(safe-area-inset-top)); left:50%; transform:translateX(-50%); display:flex; justify-content:center; align-items:flex-start; pointer-events:none; z-index:7; }
+      .arena-top{ position:absolute; top:calc(10px + env(safe-area-inset-top)); left:50%; transform:translateX(-50%); display:flex; justify-content:center; align-items:flex-start; pointer-events:none; z-index:7; }
       .quest-chip{ position:absolute; left:calc(10px + env(safe-area-inset-left)); top:104px; z-index:6; display:flex; gap:7px; align-items:center; background:rgba(10,13,9,.55); border:1px solid rgba(238,194,106,.4); color:#f0e8cf; border-radius:999px; padding:5px 11px 5px 6px; font-size:11px; font-weight:600; max-width:250px; backdrop-filter:blur(3px); }
       .quest-chip .q-tag{ background:var(--gold); color:#fff; font-size:9px; font-weight:900; border-radius:999px; padding:2px 7px; letter-spacing:.05em; flex:0 0 auto; }
       /* ===== HUD V2: 5 ICON TRÒN TRÊN PHẢI, NGAY TRÁI MINIMAP (không chữ, vùng chạm 44px) ===== */
@@ -131,6 +131,10 @@
       .skill-btn.ready{ border-color:var(--gold2); }
       .skill-btn.no-mp{ opacity:.6; }
       .atk-btn{ width:70px; height:70px; border-radius:50%; border:2px solid #8c5f14; background:radial-gradient(circle at 35% 30%, #f0b95a, #c07f1d 70%); color:#fff; box-shadow:var(--shadow); display:flex; align-items:center; justify-content:center; padding:0; flex:0 0 auto; }
+      /* v0.5.7: ô chứa nút Đánh phải RỘNG BẰNG nút — trước đây nút 70px
+         nằm trong ô 52px, tràn ~9px sang phải ăn mất lề an toàn của cụm
+         skill (mép phải chỉ còn ~3px). Nay ô theo đúng cỡ nút ở mọi cỡ. */
+      .skill-unit.atk-unit{ width:70px; }
       .atk-btn svg{ width:34px; height:34px; filter:drop-shadow(0 1px 2px rgba(0,0,0,.4)); }
       .atk-btn:active{ transform:scale(.95); }
       /* ===== CHỐNG ZOOM KHI ĐÁNH ===== Gõ liên tục vào nút đánh/skill từng bị
@@ -145,10 +149,10 @@
       .joy::after{ content:'Di chuyển'; position:absolute; left:0; right:0; bottom:-18px; text-align:center; font-size:9.5px; font-weight:700; color:var(--ink-soft); }
       .controls{ padding-bottom:16px; }
       /* ===== ĐIỀU KHIỂN PHỦ TRÊN SÂN (khung ngang, 2 tay) ===== */
-      .arena-wrap .joy{ position:absolute; left:calc(12px + env(safe-area-inset-left)); bottom:22px; z-index:6; background:radial-gradient(circle at 50% 42%, rgba(30,36,28,.55), rgba(12,14,10,.55)); border-color:rgba(238,194,106,.5); }
+      .arena-wrap .joy{ position:absolute; left:calc(12px + env(safe-area-inset-left)); bottom:calc(28px + env(safe-area-inset-bottom)); z-index:6; background:radial-gradient(circle at 50% 42%, rgba(30,36,28,.55), rgba(12,14,10,.55)); border-color:rgba(238,194,106,.5); }
       .arena-wrap .auto-btn{ position:static; height:44px; padding:0 12px; background:rgba(12,14,10,.66); backdrop-filter:blur(3px); color:#f0e8cf; border-color:rgba(238,194,106,.5); }
       .arena-wrap .auto-btn.on{ background:var(--btn); color:#fff; }
-      .arena-wrap .fight-pad{ position:absolute; right:calc(12px + env(safe-area-inset-right)); bottom:22px; z-index:6; }
+      .arena-wrap .fight-pad{ position:absolute; right:calc(12px + env(safe-area-inset-right)); bottom:calc(22px + env(safe-area-inset-bottom)); z-index:6; }
       .arena-wrap .skill-unit .s-name,.arena-wrap .sup-unit .s-name{ color:#f0e8cf; text-shadow:0 1px 3px rgba(0,0,0,.8); }
       .arena-wrap .toasts{ left:50%; transform:translateX(-50%); bottom:18px; align-items:center; max-width:52%; width:max-content; }
       #minimap{ position:absolute; top:calc(10px + env(safe-area-inset-top)); right:calc(10px + env(safe-area-inset-right)); z-index:8; width:148px; height:100px; border-radius:10px; border:1px solid rgba(238,194,106,.55); background:rgba(8,10,8,.55); cursor:pointer; }
@@ -178,7 +182,7 @@
       .sheet-x{ position:absolute; top:10px; right:10px; width:30px; height:30px; min-height:30px; border-radius:50%; border:1px solid var(--line); background:var(--panel2); color:var(--ink); font-size:14px; font-weight:900; display:flex; align-items:center; justify-content:center; padding:0; z-index:2; line-height:1; }
       .sheet-x:active{ transform:scale(.9); }
       /* ===== TOÀN MÀN HÌNH ===== */
-      html:fullscreen .wrap, body.fs-on .wrap{ max-width:none; height:100dvh; display:flex; flex-direction:column; padding:0; }
+      html:fullscreen .wrap, body.fs-on .wrap{ max-width:none; height:100%; display:flex; flex-direction:column; padding:0; }
       html:fullscreen .arena-wrap, body.fs-on .arena-wrap{ flex:1 1 auto; min-height:0; margin-top:0; }
       html:fullscreen body, body.fs-on{ background:#060806; }
       /* ===== MÀN HÌNH VÀO GAME RIÊNG: chưa chọn nhân vật thì ẩn hẳn sân chơi,
@@ -524,7 +528,7 @@
         .auto-btn{ height:52px; padding:0 9px; }
         .skill-btn{ width:47px; height:47px; } .skill-unit{ width:47px; }
         .sup-btn{ width:44px; height:44px; } .sup-unit{ width:44px; }
-        .atk-btn{ width:62px; height:62px; }
+        .atk-btn{ width:62px; height:62px; } .skill-unit.atk-unit{ width:62px; }
         .stat-grid{ grid-template-columns:repeat(2,1fr); }
       }
       @media (max-width:640px){
@@ -617,7 +621,7 @@
           <div class="support-row" id="supportBtns"></div>
           <div class="main-row">
             <div id="skillBtns"></div>
-            <div class="skill-unit">
+            <div class="skill-unit atk-unit">
               <button class="atk-btn" id="btnAtk" aria-label="Đánh thường"><svg><use href="#i-sword"/></svg></button>
               <span class="s-name">Đánh</span>
             </div>
@@ -789,7 +793,8 @@
         <h4 class="set-h">Khác</h4>
         <div class="set-row"><span>Rung máy khi đánh boss / lên cấp</span><button class="tgl" id="setVib" aria-label="Bật tắt rung máy"></button></div>
         <p class="muted" style="margin:10px 0 0">Cài đặt áp dụng ngay. Mức đồ hoạ Thấp giảm mạnh hạt hiệu ứng để máy yếu chơi mượt.</p>
-        <p class="muted" style="margin:10px 0 0">Phiên bản <b id="gameVersion">v0.5.6</b> — Nhật ký cập nhật:</p>
+        <p class="muted" style="margin:10px 0 0">Phiên bản <b id="gameVersion">v0.5.7</b> — Nhật ký cập nhật:</p>
+        <p class="muted" style="margin:4px 0 0">v0.5.7 — Màn hình phủ kín điện thoại, nút bấm không bị cắt; nhân vật quay người mượt hơn.</p>
         <p class="muted" style="margin:4px 0 0">v0.5.6 — Rừng Xanh có chiều sâu thật: đi sau tán cây bị che tự nhiên, tán cây mờ đi khi đứng dưới; Pháp Sư chuyển động phiên bản mới.</p>
         <p class="muted" style="margin:4px 0 0">v0.5.5 — Sửa nhân vật lơ lửng, cân lại tỉ lệ với cây, lưu nhân vật tự động và bàn phím nhập tên trong game.</p>
         <p class="muted" style="margin:4px 0 0">v0.5.4 — Pháp Sư có chuyển động thật; bản đồ Rừng Xanh dùng bản làm nét mới, màu trầm hơn để nhân vật nổi bật.</p>
@@ -871,10 +876,11 @@ const Rot = {
   apply() {
     const on = this.mq.matches;
     const has = document.body.classList.contains('rot');
-    if (on === this.on && on === has) return;
+    if (on === this.on && on === has) { fitStage(); return; }
     this.on = on;
     document.body.classList.toggle('rot', on);
-    if (typeof resize === 'function') setTimeout(resize, 60);
+    fitStage();
+    if (typeof resize === 'function') setTimeout(() => { fitStage(); resize(); }, 60);
   }
 };
 
@@ -889,6 +895,39 @@ function localPoint(elm, clientX, clientY) {
   const r = elm.getBoundingClientRect();
   if (Rot.on) return { x: clientY - r.top, y: r.right - clientX, rect: r };
   return { x: clientX - r.left, y: clientY - r.top, rect: r };
+}
+
+/* ===== KÍCH THƯỚC SÂN KHẤU = VÙNG NHÌN THẤY THẬT (v0.5.7) =====
+   Lỗi anh Do gặp trên iPhone: 100dvh/100dvw trong webview app KHÔNG
+   khớp vùng hiển thị thật (đơn vị vẫn tính cả phần bị thanh công cụ
+   của app che) → sân khấu to hơn khung nhìn: nút skill + minimap ở
+   mép bị cắt, thừa 1 dải lạ dọc mép sân. Nay đo bằng
+   window.visualViewport (vùng nhìn thấy thật của webview), fallback
+   innerWidth/innerHeight khi không có, và gán kích thước pixel tường
+   minh cho #rotRoot: không xoay → đúng vw×vh; tự xoay 90° → hoán đổi
+   vw/vh và neo tâm sân khấu vào đúng tâm vùng nhìn thấy (kể cả offset
+   của visualViewport). fitStage được gọi lại mỗi lần resize /
+   visualViewport thay đổi nên sân luôn phủ kín đúng vùng nhìn. */
+function visibleSize() {
+  const vv = window.visualViewport;
+  if (vv) return { w: vv.width, h: vv.height, ox: vv.offsetLeft || 0, oy: vv.offsetTop || 0 };
+  return { w: window.innerWidth, h: window.innerHeight, ox: 0, oy: 0 };
+}
+function fitStage() {
+  const root = document.getElementById('rotRoot');
+  if (!root) return;
+  const v = visibleSize();
+  if (Rot.on) {
+    root.style.width = Math.round(v.h) + 'px';
+    root.style.height = Math.round(v.w) + 'px';
+    root.style.left = Math.round(v.ox + v.w / 2) + 'px';
+    root.style.top = Math.round(v.oy + v.h / 2) + 'px';
+  } else {
+    root.style.width = Math.round(v.w) + 'px';
+    root.style.height = Math.round(v.h) + 'px';
+    root.style.left = '';
+    root.style.top = '';
+  }
 }
 
 /* =====================================================================
@@ -1051,7 +1090,7 @@ const ASSET_FILES = [
 ];
 
 /* Phiên bản game hiện tại — hiển thị trong panel Cài đặt */
-const GAME_VERSION = 'v0.5.6';
+const GAME_VERSION = 'v0.5.7';
 
 /* =====================================================================
    VẬT THỂ TÁCH LỚP RỪNG XANH (v0.5.6) — dữ liệu từ layers.json của
@@ -2345,7 +2384,9 @@ const Sprites = {
     ctx.fillStyle = ag; ctx.beginPath(); ctx.ellipse(0, 1, 34, 12, 0, 0, Math.PI * 2); ctx.fill();
     ctx.strokeStyle = 'rgba(' + auraCol + ',.65)'; ctx.lineWidth = 1.6;
     ctx.beginPath(); ctx.ellipse(0, 1, 25, 8.5, 0, 0, Math.PI * 2); ctx.stroke();
-    ctx.scale(h.face * 1.52, 1.52); ctx.translate(0, -bob);
+    if (!h.dead && !(h.castT > 0) && h.leanS) ctx.rotate(h.leanS);   /* nghiêng đà chạy ngang (v0.5.7) */
+    const fxL = h.faceS === undefined ? (h.face || 1) : h.faceS;
+    ctx.scale(fxL * 1.52, 1.52 * (1 - 0.04 * (h.turnSq || 0))); ctx.translate(0, -bob);
     const hurt = h.hurtT > 0;
     const step = h.moving ? Math.sin(h.walkPh) * 4.2 : 0;
     let weaponAng = swing >= 0 ? -2.0 + swing * 2.8 : 0.55 + Math.sin(t * 2.2) * 0.05;
@@ -2731,10 +2772,12 @@ const Sprites = {
     ctx.translate(0, -bob);
     if (h.swingT > 0) ctx.translate((h.face || 1) * height * 0.028, 0);
     if (h.castT > 0) { const cp = 1 + Math.sin(t * 26) * 0.012; ctx.scale(cp, cp); }
-    /* Lật mặt mượt: dùng faceS (đang trượt về hướng thật) — thân nén nhẹ
-       trong tích tắc lúc quay đầu thay vì gương lật tức thì */
+    /* Xoay người (v0.5.7): faceS đi 1 → ±0.15 → -1 trong ~120ms theo
+       faceTurnStep + nén dọc turnSq ở giữa cú; nghiêng thân theo đà
+       chạy ngang (leanS) — không nghiêng khi đang ở khung tung phép */
     const fxA = h.faceS === undefined ? (h.face || 1) : h.faceS;
-    ctx.scale(Math.abs(fxA) < 0.3 ? (fxA < 0 ? -0.3 : 0.3) : fxA, 1);
+    if (!h.dead && !(h.castT > 0) && h.leanS) ctx.rotate(h.leanS);
+    ctx.scale(fxA, 1 - 0.04 * (h.turnSq || 0));
     ctx.drawImage(strip, sx, 0, CW, CH, -w / 2, -height, w, hFull);
     if (h.poisonT > 0 && this.heroAnimTint[k + '-green']) { ctx.globalAlpha = baseA * 0.30; ctx.drawImage(this.heroAnimTint[k + '-green'], sx, 0, CW, CH, -w / 2, -height, w, hFull); ctx.globalAlpha = baseA; }
     if (h.hurtT > 0 && this.heroAnimTint[k + '-red']) { ctx.globalAlpha = baseA * Math.min(0.5, h.hurtT * 2.2); ctx.drawImage(this.heroAnimTint[k + '-red'], sx, 0, CW, CH, -w / 2, -height, w, hFull); ctx.globalAlpha = baseA; }
@@ -2769,10 +2812,11 @@ const Sprites = {
     if (h.dead) { const dp = Math.min(1, (h.deathT || 0) / 0.45); ctx.rotate(-dp * 1.35); ctx.globalAlpha = baseA * (1 - dp * 0.35); }
     ctx.translate(0, -bob);
     if (h.moving) ctx.rotate(Math.sin(h.walkPh) * 0.035);
+    if (!h.dead && !(h.castT > 0) && h.leanS) ctx.rotate(h.leanS);   /* nghiêng đà chạy ngang (v0.5.7) */
     if (swing >= 0) { const lp = Math.sin(swing * Math.PI); ctx.translate((h.face || 1) * lp * height * 0.07, 0); ctx.rotate(-(h.face || 1) * lp * 0.07); }
     if (h.castT > 0) { const cp = 1 + Math.sin(t * 26) * 0.012; ctx.scale(cp, cp); }
     const fxI = h.faceS === undefined ? (h.face || 1) : h.faceS;
-    ctx.scale(Math.abs(fxI) < 0.3 ? (fxI < 0 ? -0.3 : 0.3) : fxI, 1);
+    ctx.scale(fxI, 1 - 0.04 * (h.turnSq || 0));   /* cú xoay người v0.5.7: nén ngang qua ±0.15 + nén dọc giữa cú */
     ctx.drawImage(img, -w / 2, -height, w, hFull);
     if (h.poisonT > 0 && this.heroArtTint[k + '-green']) { ctx.globalAlpha = baseA * 0.30; ctx.drawImage(this.heroArtTint[k + '-green'], -w / 2, -height, w, hFull); ctx.globalAlpha = baseA; }
     if (h.hurtT > 0 && this.heroArtTint[k + '-red']) { ctx.globalAlpha = baseA * Math.min(0.5, h.hurtT * 2.2); ctx.drawImage(this.heroArtTint[k + '-red'], -w / 2, -height, w, hFull); ctx.globalAlpha = baseA; }
@@ -3031,7 +3075,10 @@ Sprites.monster = function (ctx, m, t) {
      áp TRƯỚC khi lật mặt để hướng luôn đúng; chân/bóng ở trên không lệch */
   ctx.translate(mo.wx, mo.wy);
   const gs = ghost ? s * (1 + Math.min(0.22, m.deathT * 1.5)) : s;   /* xác phồng nhẹ trước khi vỡ hạt */
-  ctx.scale(m.face * gs, gs);
+  /* v0.5.7: quái cũng xoay người theo faceS/turnSq (faceTurnStep trong
+     updateMonster) thay vì gương lật tức thì theo m.face */
+  const mfx = m.faceS === undefined ? m.face : m.faceS;
+  ctx.scale(mfx * gs, gs * (1 - 0.04 * (m.turnSq || 0)));
   if (m.spawnT > 0) ctx.globalAlpha = Math.max(0.25, 1 - m.spawnT / 0.35);
   if (ghost) ctx.globalAlpha *= Math.max(0, 1 - m.deathT / 0.18);
   /* Biến dạng quanh điểm neo CHÂN: nghiêng → nén/dãn → nhấc thân */
@@ -3408,12 +3455,15 @@ function toggleFullscreen() {
   setTimeout(resize, 120);
 }
 function resize() {
+  /* v0.5.7: ép #rotRoot về đúng vùng nhìn thấy thật TRƯỚC khi đo sân,
+     để canvas + HUD luôn khớp khung hình webview cấp */
+  if (typeof fitStage === 'function') fitStage();
   const wrap = document.getElementById('arenaWrap');
   const w = wrap.clientWidth;
   if (!w) return; /* sân đang ẩn (màn hình vào game riêng) — giữ nguyên kích thước cũ, vào game sẽ resize lại */
   /* Sân phủ kín màn hình theo mặc định: cao = đúng phần khung hiển thị được cấp */
   let h = wrap.clientHeight;
-  if (!h || h < 200) h = Math.max(300, window.innerHeight - 92);
+  if (!h || h < 200) h = Math.max(300, visibleSize().h - 92);
   DPR = Math.min(2, window.devicePixelRatio || 1);
   canvas.width = Math.round(w * DPR); canvas.height = Math.round(h * DPR);
   canvas.style.height = h + 'px';
@@ -3982,7 +4032,47 @@ function steerVelocity(m, tx, ty, dt) {
   const sp = m.speed * (m.slowT > 0 ? 1 - m.slowPct : 1);
   return { vx: vx * sp, vy: vy * sp };
 }
+/* ===== XOAY NGƯỜI KHI ĐỔI HƯỚNG NGANG (v0.5.7) =====
+   Ảnh hero/quái đều nhìn từ trước; lật gương scaleX ±1 tức thì trông
+   như lật tờ giấy. Thay bằng 1 cú "xoay người" ~120ms: scaleX đi từ
+   hướng cũ → nén về đúng ±0.15 ở giữa cú → mở ra hướng mới, kèm nén
+   scaleY xuống ~0.96 ở giữa cú (turnSq = sin của
+   tiến trình, nơi vẽ tự nhân vào). faceTurnStep(e, dt) chạy trong
+   update cho mọi thực thể có .face: e.face = hướng logic (±1, KHÔNG
+   đổi), e.faceS = hệ số scaleX đang vẽ, e.turnSq = phong bì nén dọc
+   0..1. Đổi hướng giữa chừng (người chơi đảo hướng liên tục) thì cú
+   xoay mới bắt đầu từ tư thế hiện tại nên không giật, không nhảy. */
+const TURN_DUR = 0.12;
+function faceTurnStep(e, dt) {
+  if (e.faceS === undefined || e.turnFace === undefined) {
+    e.faceS = e.face; e.turnFace = e.face; e.turnFrom = e.face; e.turnT = TURN_DUR; e.turnSq = 0;
+    return;
+  }
+  if (e.face !== e.turnFace) { e.turnFace = e.face; e.turnFrom = e.faceS; e.turnT = 0; }
+  if (e.turnT < TURN_DUR) {
+    e.turnT = Math.min(TURN_DUR, e.turnT + dt);
+    const p = e.turnT / TURN_DUR;
+    let sx;
+    if (e.turnFrom * e.turnFace < 0) {
+      /* Đổi hẳn phía: nửa đầu nén về đúng ±0.15 (thân "cạnh" nhất ở
+         giữa cú), nửa sau mở ra phía mới — đường cong 1 → 0.15 → -1 */
+      const ezO = q => 1 - Math.pow(1 - q, 3);
+      if (p < 0.5) { const a = Math.abs(e.turnFrom); sx = e.turnFrom * (1 - ezO(p * 2) * (1 - 0.15 / a)); }
+      else sx = e.turnFace * (0.15 + ezO((p - 0.5) * 2) * 0.85);
+    } else {
+      /* Bị đảo lại giữa chừng (chưa qua phía bên kia): trượt mượt về
+         đích bằng smoothstep, giữ sàn |scaleX| ≥ 0.15 */
+      const ez = p * p * (3 - 2 * p);
+      sx = e.turnFrom + (e.turnFace - e.turnFrom) * ez;
+      if (Math.abs(sx) < 0.15) sx = (p < 0.5 ? (e.turnFrom < 0 ? -1 : 1) : e.turnFace) * 0.15;
+    }
+    e.faceS = sx;
+    e.turnSq = Math.sin(p * Math.PI);
+  } else { e.faceS = e.turnFace; e.turnSq = 0; }
+}
+
 function updateMonster(m, dt) {
+  faceTurnStep(m, dt);   /* xoay người mượt khi quái đổi hướng ngang (v0.5.7) */
   m.hitT -= dt; m.spawnT -= dt; m.atkCd -= dt; m.healGlowT -= dt;
   if (m.hitFxT > 0) m.hitFxT -= dt;   /* rung giật khi trúng đòn (v0.5.3) */
   m.movingNow = false;   /* chỉ bật lại khi khung này thật sự dời vị trí */
@@ -4118,11 +4208,15 @@ function update(dt) {
   }
   /* Giữ nút đánh hoặc có đòn đệm → ra đòn ngay khi hồi chiêu vừa xong */
   if ((atkHeld || hero._atkBuf) && hero.atkCd <= 0 && !hero.dead && stageState === 'fighting') { hero._atkBuf = false; Combat.basicAttack(); }
-  /* Hướng mặt hiển thị đuổi theo hướng thật: lật mặt nén giãn nhẹ thay vì
-     gương lật tức thì gây gắt mắt */
-  if (hero.faceS === undefined) hero.faceS = hero.face;
-  hero.faceS += (hero.face - hero.faceS) * Math.min(1, dt * 15);
-  if (Math.abs(hero.faceS - hero.face) < 0.02) hero.faceS = hero.face;
+  /* Xoay người khi đổi hướng ngang (v0.5.7): cú xoay ~120ms qua
+     scaleX ±0.15 + nén dọc, thay cú trượt faceS cũ vẫn còn gắt */
+  faceTurnStep(hero, dt);
+  /* Nghiêng thân theo đà chạy ngang (~0.04 rad về phía đang chạy);
+     đứng yên / tung phép (castT) / chết → về thẳng. leanS đuổi theo
+     đích cho mượt, nơi vẽ chỉ việc rotate theo. */
+  const leanTgt = (!hero.dead && hero.moving && !(hero.castT > 0) && Math.abs(hero.vx || 0) > 30) ? 0.04 * Math.sign(hero.vx) : 0;
+  hero.leanS = (hero.leanS || 0) + (leanTgt - (hero.leanS || 0)) * Math.min(1, dt * 10);
+  if (leanTgt === 0 && Math.abs(hero.leanS) < 0.0015) hero.leanS = 0;
   for (const s of skillState) s.cd = Math.max(0, s.cd - dt);
   for (const s of supState) s.cd = Math.max(0, s.cd - dt);
   shake = Math.max(0, shake - dt * 26); flash = Math.max(0, flash - dt * 2.6);
@@ -5820,6 +5914,14 @@ function init() {
   document.addEventListener('gesturestart', e => e.preventDefault());
   document.addEventListener('gesturechange', e => e.preventDefault());
   window.addEventListener('orientationchange', () => setTimeout(() => Rot.apply(), 120));
+  /* v0.5.7: sân khấu bám vùng nhìn thấy thật — đo lại khi cửa sổ hoặc
+     visualViewport đổi (thanh công cụ app trượt, bàn phím bật/tắt…) */
+  window.addEventListener('resize', () => { fitStage(); setTimeout(resize, 30); });
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', () => { fitStage(); setTimeout(resize, 30); });
+    window.visualViewport.addEventListener('scroll', () => fitStage());
+  }
+  fitStage();
 
   Sprites.loadHeroArt();
   Sprites.loadMonsterArt();
