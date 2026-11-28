@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Phòng thử trang bị · Huyền Thoại Lục Địa</title>
+<link rel="stylesheet" href="preview.css">
+<script defer src="rigs.js"></script>
+<script defer src="preview.js"></script>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Phòng thử trang bị</h1>
+    <p>Chọn nhân vật, đổi áo giáp và giày để xem ngoại hình và chỉ số.</p>
+  </header>
+  <div class="layout">
+    <section class="character" aria-labelledby="character-title">
+      <h2 id="character-title">Nhân vật</h2>
+      <div class="controls">
+        <label for="hero">Nhân vật<select id="hero"></select></label>
+        <label for="level">Cấp thử nghiệm<input id="level" type="number" min="1" max="60" value="1"></label>
+      </div>
+      <div id="rig" role="img" aria-label="Ngoại hình nhân vật"></div>
+      <div class="summary" aria-live="polite">
+        <div><span>Lực chiến trang bị</span><strong id="power">0</strong></div>
+        <div><span>Phòng thủ</span><strong id="def">0</strong></div>
+        <div><span>Sinh lực</span><strong id="hp">0</strong></div>
+      </div>
+    </section>
+    <section class="wardrobe" aria-labelledby="wardrobe-title">
+      <h2 id="wardrobe-title">Trang bị</h2>
+      <div id="slots"></div>
+      <p id="status" role="status"></p>
+    </section>
+  </div>
+</main>
+</body>
+</html>

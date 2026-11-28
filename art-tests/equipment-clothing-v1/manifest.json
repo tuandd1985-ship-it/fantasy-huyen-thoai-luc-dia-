@@ -1,0 +1,423 @@
+{
+  "icons": [
+    {
+      "hero": "swordsman-male",
+      "slot": "armor",
+      "level": 1,
+      "tier": "Khởi Hành",
+      "png": "icons/swordsman-male/armor-lv1.png",
+      "webp": "icons/swordsman-male/armor-lv1.webp"
+    },
+    {
+      "hero": "swordsman-male",
+      "slot": "armor",
+      "level": 20,
+      "tier": "Băng Lam",
+      "png": "icons/swordsman-male/armor-lv20.png",
+      "webp": "icons/swordsman-male/armor-lv20.webp"
+    },
+    {
+      "hero": "swordsman-male",
+      "slot": "armor",
+      "level": 40,
+      "tier": "Hỏa Đồng",
+      "png": "icons/swordsman-male/armor-lv40.png",
+      "webp": "icons/swordsman-male/armor-lv40.webp"
+    },
+    {
+      "hero": "swordsman-male",
+      "slot": "armor",
+      "level": 60,
+      "tier": "Thiên Kim",
+      "png": "icons/swordsman-male/armor-lv60.png",
+      "webp": "icons/swordsman-male/armor-lv60.webp"
+    },
+    {
+      "hero": "swordsman-male",
+      "slot": "boots",
+      "level": 1,
+      "tier": "Khởi Hành",
+      "png": "icons/swordsman-male/boots-lv1.png",
+      "webp": "icons/swordsman-male/boots-lv1.webp"
+    },
+    {
+      "hero": "swordsman-male",
+      "slot": "boots",
+      "level": 20,
+      "tier": "Băng Lam",
+      "png": "icons/swordsman-male/boots-lv20.png",
+      "webp": "icons/swordsman-male/boots-lv20.webp"
+    },
+    {
+      "hero": "swordsman-male",
+      "slot": "boots",
+      "level": 40,
+      "tier": "Hỏa Đồng",
+      "png": "icons/swordsman-male/boots-lv40.png",
+      "webp": "icons/swordsman-male/boots-lv40.webp"
+    },
+    {
+      "hero": "swordsman-male",
+      "slot": "boots",
+      "level": 60,
+      "tier": "Thiên Kim",
+      "png": "icons/swordsman-male/boots-lv60.png",
+      "webp": "icons/swordsman-male/boots-lv60.webp"
+    },
+    {
+      "hero": "swordsman-female",
+      "slot": "armor",
+      "level": 1,
+      "tier": "Khởi Hành",
+      "png": "icons/swordsman-female/armor-lv1.png",
+      "webp": "icons/swordsman-female/armor-lv1.webp"
+    },
+    {
+      "hero": "swordsman-female",
+      "slot": "armor",
+      "level": 20,
+      "tier": "Băng Lam",
+      "png": "icons/swordsman-female/armor-lv20.png",
+      "webp": "icons/swordsman-female/armor-lv20.webp"
+    },
+    {
+      "hero": "swordsman-female",
+      "slot": "armor",
+      "level": 40,
+      "tier": "Hỏa Đồng",
+      "png": "icons/swordsman-female/armor-lv40.png",
+      "webp": "icons/swordsman-female/armor-lv40.webp"
+    },
+    {
+      "hero": "swordsman-female",
+      "slot": "armor",
+      "level": 60,
+      "tier": "Thiên Kim",
+      "png": "icons/swordsman-female/armor-lv60.png",
+      "webp": "icons/swordsman-female/armor-lv60.webp"
+    },
+    {
+      "hero": "swordsman-female",
+      "slot": "boots",
+      "level": 1,
+      "tier": "Khởi Hành",
+      "png": "icons/swordsman-female/boots-lv1.png",
+      "webp": "icons/swordsman-female/boots-lv1.webp"
+    },
+    {
+      "hero": "swordsman-female",
+      "slot": "boots",
+      "level": 20,
+      "tier": "Băng Lam",
+      "png": "icons/swordsman-female/boots-lv20.png",
+      "webp": "icons/swordsman-female/boots-lv20.webp"
+    },
+    {
+      "hero": "swordsman-female",
+      "slot": "boots",
+      "level": 40,
+      "tier": "Hỏa Đồng",
+      "png": "icons/swordsman-female/boots-lv40.png",
+      "webp": "icons/swordsman-female/boots-lv40.webp"
+    },
+    {
+      "hero": "swordsman-female",
+      "slot": "boots",
+      "level": 60,
+      "tier": "Thiên Kim",
+      "png": "icons/swordsman-female/boots-lv60.png",
+      "webp": "icons/swordsman-female/boots-lv60.webp"
+    },
+    {
+      "hero": "mage-male",
+      "slot": "armor",
+      "level": 1,
+      "tier": "Khởi Hành",
+      "png": "icons/mage-male/armor-lv1.png",
+      "webp": "icons/mage-male/armor-lv1.webp"
+    },
+    {
+      "hero": "mage-male",
+      "slot": "armor",
+      "level": 20,
+      "tier": "Băng Lam",
+      "png": "icons/mage-male/armor-lv20.png",
+      "webp": "icons/mage-male/armor-lv20.webp"
+    },
+    {
+      "hero": "mage-male",
+      "slot": "armor",
+      "level": 40,
+      "tier": "Hỏa Đồng",
+      "png": "icons/mage-male/armor-lv40.png",
+      "webp": "icons/mage-male/armor-lv40.webp"
+    },
+    {
+      "hero": "mage-male",
+      "slot": "armor",
+      "level": 60,
+      "tier": "Thiên Kim",
+      "png": "icons/mage-male/armor-lv60.png",
+      "webp": "icons/mage-male/armor-lv60.webp"
+    },
+    {
+      "hero": "mage-male",
+      "slot": "boots",
+      "level": 1,
+      "tier": "Khởi Hành",
+      "png": "icons/mage-male/boots-lv1.png",
+      "webp": "icons/mage-male/boots-lv1.webp"
+    },
+    {
+      "hero": "mage-male",
+      "slot": "boots",
+      "level": 20,
+      "tier": "Băng Lam",
+      "png": "icons/mage-male/boots-lv20.png",
+      "webp": "icons/mage-male/boots-lv20.webp"
+    },
+    {
+      "hero": "mage-male",
+      "slot": "boots",
+      "level": 40,
+      "tier": "Hỏa Đồng",
+      "png": "icons/mage-male/boots-lv40.png",
+      "webp": "icons/mage-male/boots-lv40.webp"
+    },
+    {
+      "hero": "mage-male",
+      "slot": "boots",
+      "level": 60,
+      "tier": "Thiên Kim",
+      "png": "icons/mage-male/boots-lv60.png",
+      "webp": "icons/mage-male/boots-lv60.webp"
+    },
+    {
+      "hero": "mage-female",
+      "slot": "armor",
+      "level": 1,
+      "tier": "Khởi Hành",
+      "png": "icons/mage-female/armor-lv1.png",
+      "webp": "icons/mage-female/armor-lv1.webp"
+    },
+    {
+      "hero": "mage-female",
+      "slot": "armor",
+      "level": 20,
+      "tier": "Băng Lam",
+      "png": "icons/mage-female/armor-lv20.png",
+      "webp": "icons/mage-female/armor-lv20.webp"
+    },
+    {
+      "hero": "mage-female",
+      "slot": "armor",
+      "level": 40,
+      "tier": "Hỏa Đồng",
+      "png": "icons/mage-female/armor-lv40.png",
+      "webp": "icons/mage-female/armor-lv40.webp"
+    },
+    {
+      "hero": "mage-female",
+      "slot": "armor",
+      "level": 60,
+      "tier": "Thiên Kim",
+      "png": "icons/mage-female/armor-lv60.png",
+      "webp": "icons/mage-female/armor-lv60.webp"
+    },
+    {
+      "hero": "mage-female",
+      "slot": "boots",
+      "level": 1,
+      "tier": "Khởi Hành",
+      "png": "icons/mage-female/boots-lv1.png",
+      "webp": "icons/mage-female/boots-lv1.webp"
+    },
+    {
+      "hero": "mage-female",
+      "slot": "boots",
+      "level": 20,
+      "tier": "Băng Lam",
+      "png": "icons/mage-female/boots-lv20.png",
+      "webp": "icons/mage-female/boots-lv20.webp"
+    },
+    {
+      "hero": "mage-female",
+      "slot": "boots",
+      "level": 40,
+      "tier": "Hỏa Đồng",
+      "png": "icons/mage-female/boots-lv40.png",
+      "webp": "icons/mage-female/boots-lv40.webp"
+    },
+    {
+      "hero": "mage-female",
+      "slot": "boots",
+      "level": 60,
+      "tier": "Thiên Kim",
+      "png": "icons/mage-female/boots-lv60.png",
+      "webp": "icons/mage-female/boots-lv60.webp"
+    },
+    {
+      "hero": "archer-male",
+      "slot": "armor",
+      "level": 1,
+      "tier": "Khởi Hành",
+      "png": "icons/archer-male/armor-lv1.png",
+      "webp": "icons/archer-male/armor-lv1.webp"
+    },
+    {
+      "hero": "archer-male",
+      "slot": "armor",
+      "level": 20,
+      "tier": "Băng Lam",
+      "png": "icons/archer-male/armor-lv20.png",
+      "webp": "icons/archer-male/armor-lv20.webp"
+    },
+    {
+      "hero": "archer-male",
+      "slot": "armor",
+      "level": 40,
+      "tier": "Hỏa Đồng",
+      "png": "icons/archer-male/armor-lv40.png",
+      "webp": "icons/archer-male/armor-lv40.webp"
+    },
+    {
+      "hero": "archer-male",
+      "slot": "armor",
+      "level": 60,
+      "tier": "Thiên Kim",
+      "png": "icons/archer-male/armor-lv60.png",
+      "webp": "icons/archer-male/armor-lv60.webp"
+    },
+    {
+      "hero": "archer-male",
+      "slot": "boots",
+      "level": 1,
+      "tier": "Khởi Hành",
+      "png": "icons/archer-male/boots-lv1.png",
+      "webp": "icons/archer-male/boots-lv1.webp"
+    },
+    {
+      "hero": "archer-male",
+      "slot": "boots",
+      "level": 20,
+      "tier": "Băng Lam",
+      "png": "icons/archer-male/boots-lv20.png",
+      "webp": "icons/archer-male/boots-lv20.webp"
+    },
+    {
+      "hero": "archer-male",
+      "slot": "boots",
+      "level": 40,
+      "tier": "Hỏa Đồng",
+      "png": "icons/archer-male/boots-lv40.png",
+      "webp": "icons/archer-male/boots-lv40.webp"
+    },
+    {
+      "hero": "archer-male",
+      "slot": "boots",
+      "level": 60,
+      "tier": "Thiên Kim",
+      "png": "icons/archer-male/boots-lv60.png",
+      "webp": "icons/archer-male/boots-lv60.webp"
+    },
+    {
+      "hero": "archer-female",
+      "slot": "armor",
+      "level": 1,
+      "tier": "Khởi Hành",
+      "png": "icons/archer-female/armor-lv1.png",
+      "webp": "icons/archer-female/armor-lv1.webp"
+    },
+    {
+      "hero": "archer-female",
+      "slot": "armor",
+      "level": 20,
+      "tier": "Băng Lam",
+      "png": "icons/archer-female/armor-lv20.png",
+      "webp": "icons/archer-female/armor-lv20.webp"
+    },
+    {
+      "hero": "archer-female",
+      "slot": "armor",
+      "level": 40,
+      "tier": "Hỏa Đồng",
+      "png": "icons/archer-female/armor-lv40.png",
+      "webp": "icons/archer-female/armor-lv40.webp"
+    },
+    {
+      "hero": "archer-female",
+      "slot": "armor",
+      "level": 60,
+      "tier": "Thiên Kim",
+      "png": "icons/archer-female/armor-lv60.png",
+      "webp": "icons/archer-female/armor-lv60.webp"
+    },
+    {
+      "hero": "archer-female",
+      "slot": "boots",
+      "level": 1,
+      "tier": "Khởi Hành",
+      "png": "icons/archer-female/boots-lv1.png",
+      "webp": "icons/archer-female/boots-lv1.webp"
+    },
+    {
+      "hero": "archer-female",
+      "slot": "boots",
+      "level": 20,
+      "tier": "Băng Lam",
+      "png": "icons/archer-female/boots-lv20.png",
+      "webp": "icons/archer-female/boots-lv20.webp"
+    },
+    {
+      "hero": "archer-female",
+      "slot": "boots",
+      "level": 40,
+      "tier": "Hỏa Đồng",
+      "png": "icons/archer-female/boots-lv40.png",
+      "webp": "icons/archer-female/boots-lv40.webp"
+    },
+    {
+      "hero": "archer-female",
+      "slot": "boots",
+      "level": 60,
+      "tier": "Thiên Kim",
+      "png": "icons/archer-female/boots-lv60.png",
+      "webp": "icons/archer-female/boots-lv60.webp"
+    }
+  ],
+  "sourceAtlases": {
+    "swordsman-male": {
+      "f": "exec-e32a8cb3-1d21-445b-868c-da5789fe8275.png",
+      "p": "Use case: stylized-concept. Production fantasy RPG inventory icon atlas for the attached game character. Outfit design: masculine chibi plate armor, angular silver breastplate and layered faulds, red cape behind torso, matching angular armored boots, use warm golden metal filigree from reference. Keep the original outlined, richly shaded chibi style. Draw exactly eight separate pictograms centered in an invisible regular 4-column × 2-row grid on a fully transparent 2:1 image. Four columns are equipment levels: 1, 20, 40, 60. Top row four full chest garments cut off at thigh, with no wearer, head, hands, weapon or feet. Bottom row corresponding four pairs of boots, isolate boots from clothes. Column one original material palette matching reference, simpler trained recruit. Column two steel blue and bright icy cyan accents with subtle sapphire clasp. Column three dark bronze and fiery ember orange with engraved copper filigree. Column four white-gold, pearl highlights and radiant thin gold celestial trim. Keep outline silhouette and tailoring recognizably the same between grades, vary fabric, metal and embossing. Large single motif per cell, painterly clean silhouette, good readability at 40 px. Artists must put wide 9% transparent gutters between cells, keep every motif away from edges. No text, badges, cards, ground shadow, glow halo, or interface frame. Genuine alpha transparency.",
+      "sha256": "f79c469719ffa71dbd52bc3dd0b5b1a712af98fe1674d9e49d85ac27d5249085"
+    },
+    "swordsman-female": {
+      "f": "exec-01b47043-89bf-4e27-9832-61eb469e48be.png",
+      "p": "Use case: stylized-concept. Production fantasy RPG inventory icon atlas for the attached game character. Outfit design: feminine chibi fitted silver plate cuirass with three overlapping hip plates and red cape, same rose-gold tracery and rounded articulated ankle boots as reference. Keep the original outlined, richly shaded chibi style. Draw exactly eight separate pictograms centered in an invisible regular 4-column × 2-row grid on a fully transparent 2:1 image. Four columns are equipment levels: 1, 20, 40, 60. Top row four full chest garments cut off at thigh, with no wearer, head, hands, weapon or feet. Bottom row corresponding four pairs of boots, isolate boots from clothes. Column one original material palette matching reference, simpler trained recruit. Column two steel blue and bright icy cyan accents with subtle sapphire clasp. Column three dark bronze and fiery ember orange with engraved copper filigree. Column four white-gold, pearl highlights and radiant thin gold celestial trim. Keep outline silhouette and tailoring recognizably the same between grades, vary fabric, metal and embossing. Large single motif per cell, painterly clean silhouette, good readability at 40 px. Artists must put wide 9% transparent gutters between cells, keep every motif away from edges. No text, badges, cards, ground shadow, glow halo, or interface frame. Genuine alpha transparency.",
+      "sha256": "bd2fdb65e0c88af34b09ffdd45c7899f68e759d1d7bf872e7e166d01bd3e4417"
+    },
+    "mage-male": {
+      "f": "exec-685ffa95-e6be-4633-87bf-17f467d93f91.png",
+      "p": "Use case: stylized-concept. Production fantasy RPG inventory icon atlas for the attached game character. Outfit design: masculine navy wizard coat and flared embroidered trim, gold crescents and star clasp, match collar and wide sleeves, modest round wizard boots. Keep the original outlined, richly shaded chibi style. Draw exactly eight separate pictograms centered in an invisible regular 4-column × 2-row grid on a fully transparent 2:1 image. Four columns are equipment levels: 1, 20, 40, 60. Top row four full chest garments cut off at thigh, with no wearer, head, hands, weapon or feet. Bottom row corresponding four pairs of boots, isolate boots from clothes. Column one original material palette matching reference, simpler trained recruit. Column two steel blue and bright icy cyan accents with subtle sapphire clasp. Column three dark bronze and fiery ember orange with engraved copper filigree. Column four white-gold, pearl highlights and radiant thin gold celestial trim. Keep outline silhouette and tailoring recognizably the same between grades, vary fabric, metal and embossing. Large single motif per cell, painterly clean silhouette, good readability at 40 px. Artists must put wide 9% transparent gutters between cells, keep every motif away from edges. No text, badges, cards, ground shadow, glow halo, or interface frame. Genuine alpha transparency.",
+      "sha256": "7169fc2e388460e59cd03d2693ac3a5ad796088611916a2780e6ea3c29bcfd88"
+    },
+    "mage-female": {
+      "f": "exec-0324eb10-cac5-443c-b27e-b6a6adbceb88.png",
+      "p": "Use case: stylized-concept. Production fantasy RPG inventory icon atlas for the attached game character. Outfit design: feminine teal wizard dress with violet center skirt, silver crescent and diamond embroidery, amethyst clasp, matching dainty violet wizard boots. Keep the original outlined, richly shaded chibi style. Draw exactly eight separate pictograms centered in an invisible regular 4-column × 2-row grid on a fully transparent 2:1 image. Four columns are equipment levels: 1, 20, 40, 60. Top row four full chest garments cut off at thigh, with no wearer, head, hands, weapon or feet. Bottom row corresponding four pairs of boots, isolate boots from clothes. Column one original material palette matching reference, simpler trained recruit. Column two steel blue and bright icy cyan accents with subtle sapphire clasp. Column three dark bronze and fiery ember orange with engraved copper filigree. Column four white-gold, pearl highlights and radiant thin gold celestial trim. Keep outline silhouette and tailoring recognizably the same between grades, vary fabric, metal and embossing. Large single motif per cell, painterly clean silhouette, good readability at 40 px. Artists must put wide 9% transparent gutters between cells, keep every motif away from edges. No text, badges, cards, ground shadow, glow halo, or interface frame. Genuine alpha transparency.",
+      "sha256": "69b42cfd249a7cb7974b44eec24b719911a69fb3f7e2b406cf2a304fa4694b25"
+    },
+    "archer-male": {
+      "f": "exec-5d233ee0-3b3b-41a3-bfb3-f979066c10e6.png",
+      "p": "Use case: stylized-concept. Production fantasy RPG inventory icon atlas for the attached game character. Outfit design: masculine forest ranger brown leather torso with diagonal chest strap, short moss green mantle and gold square buckle, chunky brown leather ranger boots. Keep the original outlined, richly shaded chibi style. Draw exactly eight separate pictograms centered in an invisible regular 4-column × 2-row grid on a fully transparent 2:1 image. Four columns are equipment levels: 1, 20, 40, 60. Top row four full chest garments cut off at thigh, with no wearer, head, hands, weapon or feet. Bottom row corresponding four pairs of boots, isolate boots from clothes. Column one original material palette matching reference, simpler trained recruit. Column two steel blue and bright icy cyan accents with subtle sapphire clasp. Column three dark bronze and fiery ember orange with engraved copper filigree. Column four white-gold, pearl highlights and radiant thin gold celestial trim. Keep outline silhouette and tailoring recognizably the same between grades, vary fabric, metal and embossing. Large single motif per cell, painterly clean silhouette, good readability at 40 px. Artists must put wide 9% transparent gutters between cells, keep every motif away from edges. No text, badges, cards, ground shadow, glow halo, or interface frame. Genuine alpha transparency.",
+      "sha256": "78bedd93bdef5b4eea16c065fb61e66abc0d7718d2cacda1e428ab8b26cc25a5"
+    },
+    "archer-female": {
+      "f": "exec-500bc57c-c378-4e5f-8b04-14c04ddc1521.png",
+      "p": "Use case: stylized-concept. Production fantasy RPG inventory icon atlas for the attached game character. Outfit design: feminine brown fitted archer studded leather and green short cloak with diagonal quiver belt, gold square buckle, rounded brown leather lace-up ranger boots. Keep the original outlined, richly shaded chibi style. Draw exactly eight separate pictograms centered in an invisible regular 4-column × 2-row grid on a fully transparent 2:1 image. Four columns are equipment levels: 1, 20, 40, 60. Top row four full chest garments cut off at thigh, with no wearer, head, hands, weapon or feet. Bottom row corresponding four pairs of boots, isolate boots from clothes. Column one original material palette matching reference, simpler trained recruit. Column two steel blue and bright icy cyan accents with subtle sapphire clasp. Column three dark bronze and fiery ember orange with engraved copper filigree. Column four white-gold, pearl highlights and radiant thin gold celestial trim. Keep outline silhouette and tailoring recognizably the same between grades, vary fabric, metal and embossing. Large single motif per cell, painterly clean silhouette, good readability at 40 px. Artists must put wide 9% transparent gutters between cells, keep every motif away from edges. No text, badges, cards, ground shadow, glow halo, or interface frame. Genuine alpha transparency.",
+      "sha256": "267883a7d0837287fc9969928265703040169aa3e6c42d4b3c3e6c5f57c83bf2"
+    }
+  },
+  "source": "ImageGen",
+  "nativeSize": 256,
+  "webSize": 96
+}
