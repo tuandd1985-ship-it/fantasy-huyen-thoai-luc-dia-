@@ -1,5 +1,5 @@
 # PROGRESS — FANTASY: HUYỀN THOẠI LỤC ĐỊA
-Cập nhật: 2026-11-28 (sau bản v0.4.0 — đợt tích hợp asset).
+Cập nhật: 2026-11-28 (sau bản v0.4.1 — gọn cụm skill).
 
 ## Đã xong
 - SPEC.md (yêu cầu gốc, Do phê duyệt dần qua các vòng chốt 2026-11-27) + GDD.md (bản thiết kế v2) + bộ tài liệu Master Instruction: ART_DIRECTION, ARCHITECTURE, BALANCE, ROADMAP, GAP_ANALYSIS, TEST_REPORT, CHANGELOG.
@@ -17,9 +17,10 @@ Cập nhật: 2026-11-28 (sau bản v0.4.0 — đợt tích hợp asset).
 - Do gửi bộ Fantasy RPG V2 lúc 21:54 (reference-zip-v2/): thay đổi duy nhất là HUD V2, đã chốt và triển khai. Bộ Fantasy_RPG_Muse.zip lúc 21:48 (reference-zip/): đã đọc hết + BAO-CAO-DOI-CHIEU-ZIP.md; Do duyệt kế hoạch 5 bước, chỉ bác khóa tính năng theo cấp.
 
 - v0.4.0 — ĐỢT TÍCH HỢP ASSET (2026-11-28): quái Rừng Xanh + boss bằng ảnh thật, hero bản làm sạch viền, vá lỗi dải Pháp Sư (dùng ảnh tĩnh), nền tile v2b, cổng 2 lớp + prop ellipse theo ENGINE_PROP_LAYER_SPEC. Probe headless của builder PASS (cổng/va chạm/đạn/Pháp Sư/map khác hồi quy), Luna kiểm chứng độc lập bản xuất + live Cloudflare. Chi tiết: CHANGELOG.
+- v0.4.1 — GỌN CỤM SKILL (2026-11-28, theo góp ý test điện thoại của Do): HUD còn 7 nút (Đánh + 4 chính sát nút Đánh + 2 buff hàng trên), bị động chuyển vào bảng Kỹ năng, số đếm hồi chiêu dễ đọc hơn; số liệu hồi chiêu giữ nguyên toàn bộ. Probe 3 phái PASS, đã deploy + đồng bộ GitHub.
 
 ## Đang chờ Do
-- Do test bản v0.4.0 trên iPhone thật (quái ảnh thật, cổng tương tác, Pháp Sư tĩnh) và cho ý kiến.
+- Do test bản v0.4.1 trên iPhone thật: cảm giác bấm cụm skill mới + nhịp chờ hồi chiêu khi đánh quái/boss (cân bằng hồi chiêu sẽ chốt sau vòng chơi thử này).
 - Chốt có đưa Pháp Sư Goblin vào pool spawn của Rừng Xanh không (hiện đã có ảnh + mapping, chưa spawn).
 
 ## Chưa đạt / tồn đọng (không đánh dấu hoàn thành)

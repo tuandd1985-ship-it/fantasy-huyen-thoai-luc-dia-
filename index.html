@@ -106,14 +106,14 @@
       .auto-btn{ border-radius:14px; border:1px solid var(--line); background:var(--panel); color:var(--ink-soft); height:58px; padding:0 13px; font-weight:800; font-size:13px; box-shadow:var(--shadow); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1px; line-height:1.1; }
       .auto-btn small{ font-size:9.5px; font-weight:600; }
       .auto-btn.on{ background:var(--btn); color:#fff; border-color:var(--btn); }
-      .fight-pad{ display:flex; flex-direction:column; gap:5px; align-items:flex-end; }
+      .fight-pad{ display:flex; flex-direction:column; gap:9px; align-items:flex-end; }
       .support-row{ display:flex; gap:7px; align-items:flex-start; }
       .sup-unit{ display:flex; flex-direction:column; align-items:center; gap:2px; width:44px; }
       .sup-unit .s-name{ font-size:8.8px; font-weight:700; color:var(--ink-soft); text-align:center; line-height:1.1; }
       .sup-btn{ position:relative; width:44px; height:44px; border-radius:50%; border:2px solid var(--line); background:var(--panel2); color:var(--gold); box-shadow:var(--shadow); padding:0; display:flex; align-items:center; justify-content:center; overflow:visible; }
       .sup-btn svg{ width:21px; height:21px; }
-      .sup-btn .cd{ position:absolute; left:0; right:0; bottom:0; background:rgba(8,10,8,.66); border-radius:0 0 999px 999px; pointer-events:none; }
-      .sup-btn .cd-num{ position:absolute; inset:0; display:none; align-items:center; justify-content:center; color:#fff; font-weight:800; font-size:13px; text-shadow:0 1px 3px #000; }
+      .sup-btn .cd{ position:absolute; left:0; right:0; bottom:0; background:rgba(8,10,8,.42); border-radius:0 0 999px 999px; pointer-events:none; }
+      .sup-btn .cd-num{ position:absolute; inset:0; z-index:2; display:none; align-items:center; justify-content:center; color:#fff; font-weight:800; font-size:13px; text-shadow:0 1px 3px #000, 0 0 6px rgba(0,0,0,.85); }
       .sup-btn.active-buff{ border-color:var(--exp); color:var(--exp); }
       .main-row{ display:flex; gap:7px; align-items:flex-start; }
       .skill-unit{ display:flex; flex-direction:column; align-items:center; gap:3px; width:52px; flex:0 0 auto; }
@@ -121,12 +121,13 @@
       #skillBtns{ display:flex; gap:7px; }
       .skill-btn{ position:relative; width:52px; height:52px; border-radius:50%; border:2px solid var(--line); background:var(--panel); color:var(--ink); box-shadow:var(--shadow); padding:0; display:flex; align-items:center; justify-content:center; }
       .skill-btn svg{ width:25px; height:25px; }
-      .skill-btn .cd{ position:absolute; left:0; right:0; bottom:0; background:rgba(8,10,8,.66); border-radius:0 0 999px 999px; pointer-events:none; }
-      .skill-btn .cd-num{ position:absolute; inset:0; display:none; align-items:center; justify-content:center; color:#fff; font-weight:800; font-size:15px; text-shadow:0 1px 3px #000; }
-      .skill-btn .key-hint{ position:absolute; top:-6px; right:-4px; background:var(--panel2); border:1px solid var(--line); color:var(--ink-soft); font-size:9px; font-weight:800; border-radius:6px; padding:1px 4px; }
-      .skill-btn .lv-chip{ position:absolute; top:-6px; left:-4px; background:var(--btn); color:#fff; font-size:9px; font-weight:800; border-radius:6px; padding:1px 4px; }
-      .skill-btn.locked{ filter:grayscale(1); opacity:.55; }
-      .skill-btn.locked .lock-lv{ position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); background:rgba(20,20,16,.88); color:#ffd970; font-size:9.5px; font-weight:800; border-radius:6px; padding:2px 5px; white-space:nowrap; border:1px solid var(--gold2); }
+      .skill-btn .cd{ position:absolute; left:0; right:0; bottom:0; background:rgba(8,10,8,.42); border-radius:0 0 999px 999px; pointer-events:none; }
+      .skill-btn .cd-num{ position:absolute; inset:0; z-index:2; display:none; align-items:center; justify-content:center; color:#fff; font-weight:800; font-size:15px; text-shadow:0 1px 3px #000, 0 0 6px rgba(0,0,0,.85); }
+      .skill-btn .key-hint{ position:absolute; top:-6px; right:-4px; background:rgba(26,28,22,.5); border:1px solid rgba(238,194,106,.3); color:#d8d2ba; font-size:9px; font-weight:700; border-radius:6px; padding:1px 4px; }
+      .skill-btn .lv-chip{ position:absolute; top:-6px; left:-4px; background:rgba(26,28,22,.62); border:1px solid rgba(238,194,106,.4); color:#efe8cf; font-size:8.5px; font-weight:700; border-radius:6px; padding:1px 4px; }
+      .skill-btn.locked{ filter:grayscale(.5); opacity:.82; }
+      .skill-btn.locked .lock-lv{ position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); display:flex; align-items:center; gap:3px; background:rgba(20,20,16,.5); color:#ffd970; font-size:9.5px; font-weight:800; border-radius:6px; padding:2px 5px; white-space:nowrap; border:1px solid rgba(238,194,106,.55); }
+      .skill-btn.locked .lock-lv svg{ width:9px; height:9px; flex:0 0 auto; }
       .skill-btn.ready{ border-color:var(--gold2); }
       .skill-btn.no-mp{ opacity:.6; }
       .atk-btn{ width:70px; height:70px; border-radius:50%; border:2px solid #8c5f14; background:radial-gradient(circle at 35% 30%, #f0b95a, #c07f1d 70%); color:#fff; box-shadow:var(--shadow); display:flex; align-items:center; justify-content:center; padding:0; flex:0 0 auto; }
@@ -493,7 +494,7 @@
         .ctl-btn{ width:52px; height:52px; }
         .auto-btn{ height:52px; padding:0 9px; }
         .skill-btn{ width:47px; height:47px; } .skill-unit{ width:47px; }
-        .sup-btn{ width:40px; height:40px; } .sup-unit{ width:40px; }
+        .sup-btn{ width:44px; height:44px; } .sup-unit{ width:44px; }
         .atk-btn{ width:62px; height:62px; }
         .stat-grid{ grid-template-columns:repeat(2,1fr); }
       }
@@ -535,6 +536,7 @@
         <symbol id="i-list" viewBox="0 0 24 24"><path fill="currentColor" d="M3.5 5h3v3h-3zM3.5 10.5h3v3h-3zM3.5 16h3v3h-3zM9.5 5.8h11v1.9h-11zM9.5 11.3h11v1.9h-11zM9.5 16.8h11v1.9h-11z"/></symbol>
         <symbol id="i-gear" viewBox="0 0 24 24"><path fill="currentColor" d="M19.14 12.94c.04-.3.06-.61.06-.94s-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.488.488 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6a3.6 3.6 0 1 1 0-7.2 3.6 3.6 0 0 1 0 7.2z"/></symbol>
         <symbol id="i-quill" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" d="M16 8L2 22"/><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" d="M17.5 15H9"/></symbol>
+        <symbol id="i-lock" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a5 5 0 0 1 5 5v3h1.5A1.5 1.5 0 0 1 20 11.5v9A1.5 1.5 0 0 1 18.5 22h-13A1.5 1.5 0 0 1 4 20.5v-9A1.5 1.5 0 0 1 5.5 10H7V7a5 5 0 0 1 5-5zm0 2.5A2.5 2.5 0 0 0 9.5 7v3h5V7A2.5 2.5 0 0 0 12 4.5zM12 13.4a2.1 2.1 0 0 0-1 3.8V19h2v-1.8a2.1 2.1 0 0 0-1-3.8z"/></symbol>
         <symbol id="i-expand" viewBox="0 0 24 24"><path fill="currentColor" d="M4 4h6.5v2.2H6.2v4.3H4V4zm13.8 0H20v6.5h-2.2V6.2h-4.3V4h4.3zM4 13.5h2.2v4.3h4.3V20H4v-6.5zM20 13.5V20h-6.5v-2.2h4.3v-4.3H20z"/></symbol>
       </defs>
     </svg>
@@ -627,6 +629,7 @@
         <h4>Kỹ năng chính — nâng bằng điểm skill</h4>
         <div id="mainSkillRows"></div>
         <h4>Kỹ năng phụ — hỗ trợ</h4>
+        <p class="muted" style="margin:0 0 8px">Skill <b>bị động</b> luôn có hiệu lực trong trận và không có nút bấm trên HUD — nâng bậc ngay tại đây.</p>
         <div id="supSkillRows"></div>
       </section>
 
@@ -757,7 +760,9 @@
         <h4 class="set-h">Khác</h4>
         <div class="set-row"><span>Rung máy khi đánh boss / lên cấp</span><button class="tgl" id="setVib" aria-label="Bật tắt rung máy"></button></div>
         <p class="muted" style="margin:10px 0 0">Cài đặt áp dụng ngay. Mức đồ hoạ Thấp giảm mạnh hạt hiệu ứng để máy yếu chơi mượt.</p>
-        <p class="muted" style="margin:10px 0 0">Phiên bản <b id="gameVersion">v0.4.0</b> — Nhật ký cập nhật: Rừng Xanh vẽ quái &amp; boss Chúa Sói bằng ảnh thật, nền cỏ tile liền mạch mới; cổng dịch chuyển tách lớp bệ/vòm có nút tương tác, prop ảnh (sồi, cột đá, tảng đá, bụi cây, khóm hoa) với va chạm ellipse; Pháp Sư tạm dùng ảnh toàn thân tĩnh thay dải chuyển động.</p>
+        <p class="muted" style="margin:10px 0 0">Phiên bản <b id="gameVersion">v0.4.1</b> — Nhật ký cập nhật:</p>
+        <p class="muted" style="margin:4px 0 0">v0.4.1 — Gọn cụm skill: skill chính sát nút Đánh, buff chủ động lên hàng trên, skill bị động chuyển vào bảng Kỹ năng; số đếm hồi chiêu dễ đọc hơn.</p>
+        <p class="muted" style="margin:4px 0 0">v0.4.0 — Rừng Xanh vẽ quái &amp; boss Chúa Sói bằng ảnh thật, nền cỏ tile liền mạch mới; cổng dịch chuyển tách lớp bệ/vòm có nút tương tác, prop ảnh (sồi, cột đá, tảng đá, bụi cây, khóm hoa) với va chạm ellipse; Pháp Sư tạm dùng ảnh toàn thân tĩnh thay dải chuyển động.</p>
       </div>
     </div>
 
@@ -919,7 +924,7 @@ const ASSET_FILES = [
 ];
 
 /* Phiên bản game hiện tại — hiển thị trong panel Cài đặt */
-const GAME_VERSION = 'v0.4.0';
+const GAME_VERSION = 'v0.4.1';
 
 /* =====================================================================
    LỚP DỮ LIỆU · CONFIG
@@ -3964,7 +3969,7 @@ const UI = {
       unit.innerHTML = '<button class="skill-btn" aria-label="' + sk.name + '">' + icon(sk.icon) +
         '<span class="cd"></span><span class="cd-num"></span>' +
         '<span class="lv-chip">C' + P.skillLv[i] + '</span><span class="key-hint">' + (i + 1) + '</span>' +
-        '<span class="lock-lv" style="display:none">Lv ' + sk.unlock + '</span></button>' +
+        '<span class="lock-lv" style="display:none">' + icon('i-lock') + 'Lv ' + sk.unlock + '</span></button>' +
         '<span class="s-name">' + sk.name + '</span>';
       unit.querySelector('button').addEventListener('pointerdown', e => { e.preventDefault(); AudioFX.ensure(); Skills.cast(i); });
       box.appendChild(unit);
@@ -3988,16 +3993,19 @@ const UI = {
       num.textContent = cd > 0 ? Math.ceil(cd) : '';
     });
   },
+  /* v0.4.1: HUD chỉ còn 2 buff CHỦ ĐỘNG — skill phụ BỊ ĐỘNG không cần bấm nên
+     bỏ hẳn khỏi cụm nút (vẫn tính hiệu lực trong heroStats như cũ, và quản lý
+     nâng bậc trong bảng Kỹ năng). data-sup giữ đúng chỉ số trong cls().support
+     để refresh/cast không lệch khi lọc bỏ bị động. */
   buildSupportBtns() {
     const box = el('supportBtns'); box.innerHTML = '';
     cls().support.forEach((sp, i) => {
+      if (sp.type !== 'active') return;
       const unit = document.createElement('div'); unit.className = 'sup-unit';
-      unit.innerHTML = '<button class="sup-btn" aria-label="' + sp.name + '">' + icon(sp.icon) +
+      unit.innerHTML = '<button class="sup-btn" data-sup="' + i + '" aria-label="' + sp.name + '">' + icon(sp.icon) +
         '<span class="cd"></span><span class="cd-num"></span></button>' +
-        '<span class="s-name">' + sp.name + (sp.type === 'passive' ? ' (bị động)' : '') + '</span>';
-      const b = unit.querySelector('button');
-      if (sp.type === 'active') b.addEventListener('pointerdown', e => { e.preventDefault(); AudioFX.ensure(); Skills.castSupport(i); });
-      else { b.style.opacity = '.75'; }
+        '<span class="s-name">' + sp.name + '</span>';
+      unit.querySelector('button').addEventListener('pointerdown', e => { e.preventDefault(); AudioFX.ensure(); Skills.castSupport(i); });
       box.appendChild(unit);
     });
     this.refreshSupportBtns();
@@ -4005,8 +4013,8 @@ const UI = {
   refreshSupportBtns() {
     const btns = el('supportBtns').querySelectorAll('.sup-btn');
     const buffKey = { shield: 'shieldT', manashield: 'manaShieldT', rage: 'rageT', dodge: 'dodgeT', windstep: 'windT', weakmark: 'markT' };
-    cls().support.forEach((sp, i) => {
-      const b = btns[i]; if (!b) return;
+    btns.forEach(b => {
+      const i = +b.dataset.sup, sp = cls().support[i]; if (!sp) return;
       const cd = supState[i] ? supState[i].cd : 0;
       const full = sp.cd ? sp.cd * (1 - CONFIG.skillUpgrade.cdPerLv * (P.supportLv[i] - 1)) : 1;
       b.querySelector('.cd').style.height = cd > 0 ? clamp(cd / full * 100, 0, 100) + '%' : '0%';
@@ -4075,7 +4083,7 @@ const UI = {
       const row = document.createElement('div'); row.className = 'skill-row-item';
       let desc = sk.desc;
       if (!isSup) desc += ' · Hồi chiêu ' + skillCd(i, sk).toFixed(1) + 's · ' + sk.mp + ' mana';
-      row.innerHTML = '<span class="a-ic">' + icon(sk.icon) + '</span><span class="a-main"><b>' + sk.name + ' <span class="chip ' + (locked ? 'todo' : 'doing') + '">' + (locked ? 'Chưa mở khoá' : 'Cấp ' + lv + '/' + CONFIG.skillUpgrade.max) + '</span></b><small>' + (locked ? 'Mở khoá ở Lv ' + sk.unlock + '. ' : '') + desc + '</small></span>';
+      row.innerHTML = '<span class="a-ic">' + icon(sk.icon) + '</span><span class="a-main"><b>' + sk.name + ' <span class="chip ' + (locked ? 'todo' : 'doing') + '">' + (locked ? 'Chưa mở khoá' : 'Cấp ' + lv + '/' + CONFIG.skillUpgrade.max) + '</span>' + (isSup ? '<span class="chip todo">' + (sk.type === 'active' ? 'Chủ động' : 'Bị động') + '</span>' : '') + '</b><small>' + (locked ? 'Mở khoá ở Lv ' + sk.unlock + '. ' : '') + desc + '</small></span>';
       const btn = document.createElement('button'); btn.className = 'plus-btn'; btn.textContent = '+'; btn.setAttribute('aria-label', 'Nâng cấp ' + sk.name);
       btn.disabled = locked || P.skillPoints <= 0 || lv >= CONFIG.skillUpgrade.max;
       btn.addEventListener('click', () => {
