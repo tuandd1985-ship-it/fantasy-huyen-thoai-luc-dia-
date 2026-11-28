@@ -41,10 +41,10 @@ KS = {
     "kiem_vu": seq([80, 70, 70, 70, 70, 90, 100],
                    [{"arm_r_upper": 14, "torso": -3, "cape": 6},
                     {"arm_r_upper": -42, "arm_r_forearm": -14, "hand_r_sword": -10, "torso": 6, "head": 3, "cape": -14},
-                    {"arm_r_upper": -70, "arm_r_forearm": -24, "hand_r_sword": -18, "torso": 8, "head": 4, "arm_l_upper": -20, "cape": -20},
+                    {"arm_r_upper": -56, "arm_r_forearm": -18, "hand_r_sword": -12, "torso": 8, "head": 4, "arm_l_upper": -20, "cape": -20},
                     {"arm_r_upper": 10, "arm_r_forearm": 6, "torso": -4, "cape": 12},
                     {"arm_r_upper": -42, "arm_r_forearm": -14, "hand_r_sword": -10, "torso": 6, "cape": -14},
-                    {"arm_r_upper": -70, "arm_r_forearm": -24, "hand_r_sword": -18, "torso": 8, "arm_l_upper": -20, "cape": -20},
+                    {"arm_r_upper": -56, "arm_r_forearm": -18, "hand_r_sword": -12, "torso": 8, "arm_l_upper": -20, "cape": -20},
                     {"arm_r_upper": -20, "torso": 2, "cape": -4}],
                    2, [None, [10, 0], [18, 0], [0, 0], [10, 0], [18, 0], [6, 0]]),
     # Địa Chấn: giơ kiếm ra sau đầu, nhún bật lên, bổ xuống cắm đất (thân nén), giữ

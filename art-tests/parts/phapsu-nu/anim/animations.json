@@ -196,7 +196,208 @@
      "feet_y": 620
     }
    ]
+  },
+  "hurt": {
+   "file": "phapsu_nu_hurt_3f.png",
+   "frames": 3,
+   "durations_ms": [
+    80,
+    110,
+    110
+   ],
+   "hit_frame": null,
+   "loop": false,
+   "qc": [
+    {
+     "edge_alpha_pct": 0.0,
+     "opaque_components": 1,
+     "islands_ge30": 0,
+     "feet_y": 620
+    },
+    {
+     "edge_alpha_pct": 0.0,
+     "opaque_components": 1,
+     "islands_ge30": 0,
+     "feet_y": 620
+    },
+    {
+     "edge_alpha_pct": 0.0,
+     "opaque_components": 1,
+     "islands_ge30": 0,
+     "feet_y": 620
+    }
+   ]
+  },
+  "bang_phong": {
+   "file": "phapsu_nu_bang_phong_7f.png",
+   "frames": 7,
+   "durations_ms": [
+    80,
+    90,
+    90,
+    90,
+    90,
+    100,
+    100
+   ],
+   "hit_frame": 2,
+   "loop": false,
+   "qc": [
+    {
+     "edge_alpha_pct": 0.0,
+     "opaque_components": 1,
+     "islands_ge30": 0,
+     "feet_y": 620
+    },
+    {
+     "edge_alpha_pct": 0.0,
+     "opaque_components": 1,
+     "islands_ge30": 0,
+     "feet_y": 620
+    },
+    {
+     "edge_alpha_pct": 0.0,
+     "opaque_components": 3,
+     "islands_ge30": 0,
+     "feet_y": 620
+    },
+    {
+     "edge_alpha_pct": 0.0,
+     "opaque_components": 1,
+     "islands_ge30": 0,
+     "feet_y": 620
+    },
+    {
+     "edge_alpha_pct": 0.0,
+     "opaque_components": 3,
+     "islands_ge30": 0,
+     "feet_y": 620
+    },
+    {
+     "edge_alpha_pct": 0.0,
+     "opaque_components": 1,
+     "islands_ge30": 0,
+     "feet_y": 620
+    },
+    {
+     "edge_alpha_pct": 0.0,
+     "opaque_components": 2,
+     "islands_ge30": 0,
+     "feet_y": 620
+    }
+   ]
+  },
+  "loi_dinh": {
+   "file": "phapsu_nu_loi_dinh_6f.png",
+   "frames": 6,
+   "durations_ms": [
+    80,
+    120,
+    140,
+    180,
+    120,
+    100
+   ],
+   "hit_frame": 3,
+   "loop": false,
+   "qc": [
+    {
+     "edge_alpha_pct": 0.0,
+     "opaque_components": 1,
+     "islands_ge30": 0,
+     "feet_y": 620
+    },
+    {
+     "edge_alpha_pct": 0.0,
+     "opaque_components": 1,
+     "islands_ge30": 0,
+     "feet_y": 614
+    },
+    {
+     "edge_alpha_pct": 0.0,
+     "opaque_components": 1,
+     "islands_ge30": 0,
+     "feet_y": 609
+    },
+    {
+     "edge_alpha_pct": 0.0,
+     "opaque_components": 1,
+     "islands_ge30": 0,
+     "feet_y": 607
+    },
+    {
+     "edge_alpha_pct": 0.0,
+     "opaque_components": 1,
+     "islands_ge30": 0,
+     "feet_y": 616
+    },
+    {
+     "edge_alpha_pct": 0.0,
+     "opaque_components": 1,
+     "islands_ge30": 0,
+     "feet_y": 620
+    }
+   ]
+  },
+  "thien_thach": {
+   "file": "phapsu_nu_thien_thach_7f.png",
+   "frames": 7,
+   "durations_ms": [
+    90,
+    140,
+    180,
+    80,
+    160,
+    120,
+    100
+   ],
+   "hit_frame": 3,
+   "loop": false,
+   "qc": [
+    {
+     "edge_alpha_pct": 0.0,
+     "opaque_components": 1,
+     "islands_ge30": 0,
+     "feet_y": 620
+    },
+    {
+     "edge_alpha_pct": 0.0,
+     "opaque_components": 1,
+     "islands_ge30": 0,
+     "feet_y": 610
+    },
+    {
+     "edge_alpha_pct": 0.0,
+     "opaque_components": 1,
+     "islands_ge30": 0,
+     "feet_y": 603
+    },
+    {
+     "edge_alpha_pct": 0.0,
+     "opaque_components": 1,
+     "islands_ge30": 0,
+     "feet_y": 620
+    },
+    {
+     "edge_alpha_pct": 0.0,
+     "opaque_components": 1,
+     "islands_ge30": 0,
+     "feet_y": 620
+    },
+    {
+     "edge_alpha_pct": 0.0,
+     "opaque_components": 1,
+     "islands_ge30": 0,
+     "feet_y": 620
+    },
+    {
+     "edge_alpha_pct": 0.0,
+     "opaque_components": 1,
+     "islands_ge30": 0,
+     "feet_y": 620
+    }
+   ]
   }
  },
- "seconds": 26.52
+ "seconds": 56.52
 }
