@@ -1,0 +1,484 @@
+{
+  "canvas": [
+    768,
+    640
+  ],
+  "baselineY": 620,
+  "origin": "top-left",
+  "rig": {
+    "sides": "anatomical; left is on viewer's right in the rest pose",
+    "coordinates": "integer pixels in the shared 768x640 canvas",
+    "composition": "source-over by ascending z, place every layer at (0,0) in rest pose",
+    "bbox": "half-open [left,top,right,bottom] pixel bounds",
+    "pivotApplication": "rotate around each pivot in rest canvas coordinates; propagate parent transforms down the tree"
+  },
+  "reference": {
+    "path": "assets-data-1.js#__A.k16",
+    "sha256": "b0d59676f3b5de2033c8058896a5d9ffa3f3a7e4c622c934f5b56ffba12b4e96"
+  },
+  "assembled": "assembled.png",
+  "sha256Assembled": "42800b3258765414e7e870cdc492688211c02331284b68cd76ae128056477d8a",
+  "parts": [
+    {
+      "id": "cape",
+      "file": "cape.png",
+      "z": 0,
+      "parent": "torso",
+      "joint": "cape-root",
+      "pivot": {
+        "x": 347,
+        "y": 364
+      },
+      "bbox": [
+        156,
+        330,
+        539,
+        578
+      ]
+    },
+    {
+      "id": "quiver",
+      "file": "quiver.png",
+      "z": 1,
+      "parent": "torso",
+      "joint": "quiver-strap",
+      "pivot": {
+        "x": 265,
+        "y": 413
+      },
+      "bbox": [
+        101,
+        267,
+        280,
+        453
+      ]
+    },
+    {
+      "id": "leg_l_thigh",
+      "file": "leg_l_thigh.png",
+      "z": 2,
+      "parent": "torso",
+      "joint": "left-hip",
+      "pivot": {
+        "x": 390,
+        "y": 516
+      },
+      "bbox": [
+        357,
+        479,
+        425,
+        554
+      ]
+    },
+    {
+      "id": "leg_l_shin",
+      "file": "leg_l_shin.png",
+      "z": 3,
+      "parent": "leg_l_thigh",
+      "joint": "left-knee",
+      "pivot": {
+        "x": 393,
+        "y": 541
+      },
+      "bbox": [
+        364,
+        528,
+        427,
+        600
+      ]
+    },
+    {
+      "id": "leg_l_foot",
+      "file": "leg_l_foot.png",
+      "z": 4,
+      "parent": "leg_l_shin",
+      "joint": "left-ankle",
+      "pivot": {
+        "x": 396,
+        "y": 586
+      },
+      "bbox": [
+        365,
+        573,
+        443,
+        621
+      ]
+    },
+    {
+      "id": "leg_r_thigh",
+      "file": "leg_r_thigh.png",
+      "z": 5,
+      "parent": "torso",
+      "joint": "right-hip",
+      "pivot": {
+        "x": 282,
+        "y": 516
+      },
+      "bbox": [
+        249,
+        479,
+        319,
+        552
+      ]
+    },
+    {
+      "id": "leg_r_shin",
+      "file": "leg_r_shin.png",
+      "z": 6,
+      "parent": "leg_r_thigh",
+      "joint": "right-knee",
+      "pivot": {
+        "x": 281,
+        "y": 540
+      },
+      "bbox": [
+        251,
+        529,
+        314,
+        600
+      ]
+    },
+    {
+      "id": "leg_r_foot",
+      "file": "leg_r_foot.png",
+      "z": 7,
+      "parent": "leg_r_shin",
+      "joint": "right-ankle",
+      "pivot": {
+        "x": 282,
+        "y": 587
+      },
+      "bbox": [
+        248,
+        574,
+        321,
+        621
+      ]
+    },
+    {
+      "id": "torso",
+      "file": "torso.png",
+      "z": 8,
+      "parent": null,
+      "joint": "root",
+      "pivot": {
+        "x": 348,
+        "y": 509
+      },
+      "bbox": [
+        228,
+        339,
+        465,
+        554
+      ]
+    },
+    {
+      "id": "arm_l_upper",
+      "file": "arm_l_upper.png",
+      "z": 9,
+      "parent": "torso",
+      "joint": "left-shoulder",
+      "pivot": {
+        "x": 434,
+        "y": 387
+      },
+      "bbox": [
+        413,
+        363,
+        493,
+        431
+      ]
+    },
+    {
+      "id": "arm_l_forearm",
+      "file": "arm_l_forearm.png",
+      "z": 10,
+      "parent": "arm_l_upper",
+      "joint": "left-elbow",
+      "pivot": {
+        "x": 473,
+        "y": 413
+      },
+      "bbox": [
+        460,
+        379,
+        535,
+        442
+      ]
+    },
+    {
+      "id": "arm_r_upper",
+      "file": "arm_r_upper.png",
+      "z": 11,
+      "parent": "torso",
+      "joint": "right-shoulder",
+      "pivot": {
+        "x": 270,
+        "y": 396
+      },
+      "bbox": [
+        225,
+        376,
+        298,
+        456
+      ]
+    },
+    {
+      "id": "arm_r_forearm",
+      "file": "arm_r_forearm.png",
+      "z": 12,
+      "parent": "arm_r_upper",
+      "joint": "right-elbow",
+      "pivot": {
+        "x": 260,
+        "y": 425
+      },
+      "bbox": [
+        245,
+        412,
+        370,
+        473
+      ]
+    },
+    {
+      "id": "braid",
+      "file": "braid.png",
+      "z": 13,
+      "parent": "head",
+      "joint": "braid-root",
+      "pivot": {
+        "x": 421,
+        "y": 329
+      },
+      "bbox": [
+        397,
+        303,
+        488,
+        536
+      ]
+    },
+    {
+      "id": "head",
+      "file": "head.png",
+      "z": 14,
+      "parent": "torso",
+      "joint": "neck",
+      "pivot": {
+        "x": 346,
+        "y": 363
+      },
+      "bbox": [
+        132,
+        26,
+        534,
+        395
+      ]
+    },
+    {
+      "id": "hand_l_bow",
+      "file": "hand_l_bow.png",
+      "z": 15,
+      "parent": "arm_l_forearm",
+      "joint": "left-wrist",
+      "pivot": {
+        "x": 507,
+        "y": 408
+      },
+      "bbox": [
+        460,
+        14,
+        624,
+        615
+      ]
+    }
+  ],
+  "jointOverlapCheck": {
+    "windowPx": 47,
+    "anglesDeg": [
+      -20,
+      0,
+      20
+    ],
+    "jointOverlapsPx": [
+      {
+        "id": "cape",
+        "rest": 2209,
+        "rotated": {
+          "-20": 2209,
+          "20": 2209
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "quiver",
+        "rest": 550,
+        "rotated": {
+          "-20": 529,
+          "20": 547
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "leg_l_thigh",
+        "rest": 2209,
+        "rotated": {
+          "-20": 2186,
+          "20": 2209
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "leg_l_shin",
+        "rest": 1022,
+        "rotated": {
+          "-20": 1027,
+          "20": 1070
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "leg_l_foot",
+        "rest": 935,
+        "rotated": {
+          "-20": 984,
+          "20": 938
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "leg_r_thigh",
+        "rest": 2206,
+        "rotated": {
+          "-20": 2209,
+          "20": 2180
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "leg_r_shin",
+        "rest": 923,
+        "rotated": {
+          "-20": 940,
+          "20": 958
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "leg_r_foot",
+        "rest": 866,
+        "rotated": {
+          "-20": 845,
+          "20": 949
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "arm_l_upper",
+        "rest": 1634,
+        "rotated": {
+          "-20": 1653,
+          "20": 1640
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "arm_l_forearm",
+        "rest": 890,
+        "rotated": {
+          "-20": 916,
+          "20": 939
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "arm_r_upper",
+        "rest": 1716,
+        "rotated": {
+          "-20": 1701,
+          "20": 1731
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "arm_r_forearm",
+        "rest": 739,
+        "rotated": {
+          "-20": 748,
+          "20": 778
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "braid",
+        "rest": 1734,
+        "rotated": {
+          "-20": 1725,
+          "20": 1690
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "head",
+        "rest": 2149,
+        "rotated": {
+          "-20": 2195,
+          "20": 2175
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "hand_l_bow",
+        "rest": 452,
+        "rotated": {
+          "-20": 522,
+          "20": 466
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      }
+    ]
+  },
+  "imageGen": {
+    "core": {
+      "file": "exec-1fb3cc29-3a15-4866-bbe9-b659fdc229fe.png",
+      "grid": [
+        2,
+        2
+      ],
+      "prompt": "Use case: stylized-concept. Independent 2D game skeletal sprite pieces on a completely transparent RGBA canvas. Use the attached female game character as exact visual identity reference. Keep the same chibi proportions, saturated color palette, large detailed eyes and facial features, costume fabrics, bold ink contours, fine cel shading, frontal slightly elevated 3/4 view. One standalone painted opaque part centered in each specified invisible cell, generous clear margins. Add short hidden overlaps for sewing the joints, no labels, no grid, no backdrops, no floating border, no shadow. Anatomical left is viewer right. Square 2x2 atlas. Top left head and entire green hood lining exactly matching the character, amber brown eyes, warm auburn hair center part, short face-framing strands only, NO long braid (draw that separately in other sheet), tiny neck stub. Top right independent forest green cape narrow behind neck and flared out. Bottom left torso alone, warm brown leather armor with diagonal chest strap, dark brass rectangular buckle, moss green short tunic and closed shoulder edges. Bottom right independent brown back quiver visibly stuffed with multiple green-fletched arrows, tilted diagonally upper-left with a visible shaft case. No bow.",
+      "sha256": "05799f3999947ade61ba8df581b79a70d4dfaa6c99fb2abcc24bc9c731ed7e14"
+    },
+    "arms": {
+      "file": "exec-d164bb90-330d-45f9-8bbf-178265ea7467.png",
+      "grid": [
+        3,
+        2
+      ],
+      "prompt": "Use case: stylized-concept. Independent 2D game skeletal sprite pieces on a completely transparent RGBA canvas. Use the attached female game character as exact visual identity reference. Keep the same chibi proportions, saturated color palette, large detailed eyes and facial features, costume fabrics, bold ink contours, fine cel shading, frontal slightly elevated 3/4 view. One standalone painted opaque part centered in each specified invisible cell, generous clear margins. Add short hidden overlaps for sewing the joints, no labels, no grid, no backdrops, no floating border, no shadow. Anatomical left is viewer right. Landscape 3x2 atlas. Row1 left anatomical LEFT upper arm bent pointing screen-right, leather and olive cloth. Center LEFT forearm a short articulated horizontal brown forearm bracer pointing screen-right, no hand. Right anatomical RIGHT upper arm slants down-left. Row2 left RIGHT short forearm reaches across chest horizontally viewer-right with a small brown leather cuff and small closed bare hand. Center full elegant wooden tall recurve bow with fine taut continuous tan string attached both ends, close to upright, held by a single small LEFT hand at about two-thirds of its height down from top, short hidden wrist to LEFT of fist; no extra hand or sleeves. Right one auburn braided hair lock only, slightly curving thick long plait from upper left root, golden small clasp and tasselled tip near bottom right. No bow in other cells. Match reference.",
+      "sha256": "e7234344c9dc2d8daa22a986e66f5dc1be662c8893bc33a412315a9d4c6cf61f"
+    },
+    "legs": {
+      "file": "exec-1b38b76d-f629-4340-9b6b-baf144146e88.png",
+      "grid": [
+        3,
+        2
+      ],
+      "prompt": "Use case: stylized-concept. Independent 2D game skeletal sprite pieces on a completely transparent RGBA canvas. Use the attached female game character as exact visual identity reference. Keep the same chibi proportions, saturated color palette, large detailed eyes and facial features, costume fabrics, bold ink contours, fine cel shading, frontal slightly elevated 3/4 view. One standalone painted opaque part centered in each specified invisible cell, generous clear margins. Add short hidden overlaps for sewing the joints, no labels, no grid, no backdrops, no floating border, no shadow. Anatomical left is viewer right. Landscape atlas 3 columns × 2 rows. Top row left leg, bottom row right leg. Each row contains thigh alone medium forest-green cloth, shin alone leather boot shaft with dark brown cord or strap, and foot alone richly painted low brown boot with short ankle overlap. Six complete separate drawings.",
+      "sha256": "0616967d18f884ff881b22cb0ce1d12ba559fba626a8d1f8c9869682654dee1e"
+    }
+  }
+}
