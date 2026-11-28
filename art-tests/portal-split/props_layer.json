@@ -1,0 +1,227 @@
+{
+ "spec": "docs/art/ENGINE_PROP_LAYER_SPEC.md @ 28caab2",
+ "units": "world px at 1x display; anchors from the top-left of the scaled image",
+ "portal_registration": {
+  "source_png": "rung-xanh-map-sample/props_clean/da_cong_dich_chuyen.png",
+  "source_size": [
+   965,
+   994
+  ],
+  "display_scale": 0.219316,
+  "shared_anchor_source_px": [
+   482.5,
+   476.0
+  ],
+  "platform_crop_origin_source_px": [
+   12,
+   472
+  ],
+  "arch_crop_origin_source_px": [
+   42,
+   12
+  ],
+  "rim_ellipse_source_px": {
+   "cx": 476.8,
+   "cy": 655.9,
+   "a": 428.9,
+   "b": 181.3
+  },
+  "rim_fit_columns": 398,
+  "rim_fit_err_px": {
+   "mean": 2.38,
+   "max": 189.88
+  },
+  "rim_margin_px": 3,
+  "recomposite_identical": true
+ },
+ "parts": [
+  {
+   "id": "forest-portal-01-platform",
+   "groupId": "forest-portal-01",
+   "image": "portal_platform.png",
+   "displayWidth": 206.4,
+   "displayHeight": 111.9,
+   "anchorX": 103.2,
+   "anchorY": 0.9,
+   "sortY": 0,
+   "layer": "ground",
+   "collision": [
+    {
+     "type": "none"
+    }
+   ],
+   "interaction": {
+    "type": "ellipse",
+    "offsetX": -1.3,
+    "offsetY": 39.5,
+    "width": 131.7,
+    "height": 55.7
+   },
+   "shadow": {
+    "type": "baked"
+   }
+  },
+  {
+   "id": "forest-portal-01-arch",
+   "groupId": "forest-portal-01",
+   "image": "portal_back.png",
+   "displayWidth": 198.9,
+   "displayHeight": 107.2,
+   "anchorX": 96.6,
+   "anchorY": 101.8,
+   "sortY": 0,
+   "layer": "sorted",
+   "collision": [
+    {
+     "type": "ellipse",
+     "offsetX": -79.0,
+     "offsetY": 0.0,
+     "width": 30.5,
+     "height": 22.9
+    },
+    {
+     "type": "ellipse",
+     "offsetX": 78.7,
+     "offsetY": 0.0,
+     "width": 28.7,
+     "height": 21.5
+    }
+   ],
+   "interaction": {
+    "type": "none"
+   },
+   "shadow": {
+    "type": "baked"
+   }
+  },
+  {
+   "id": "forest-cay_soi-01",
+   "groupId": "forest-cay_soi-01",
+   "image": "../rung-xanh-map-sample/props_clean/cay_soi.png",
+   "displayWidth": 237.8,
+   "displayHeight": 275,
+   "anchorX": 110.4,
+   "anchorY": 267.8,
+   "sortY": 0,
+   "layer": "sorted",
+   "collision": [
+    {
+     "type": "ellipse",
+     "offsetX": 0.0,
+     "offsetY": 0.0,
+     "width": 84,
+     "height": 26
+    }
+   ],
+   "interaction": {
+    "type": "none"
+   },
+   "shadow": {
+    "type": "baked"
+   }
+  },
+  {
+   "id": "forest-cot_da_co-01",
+   "groupId": "forest-cot_da_co-01",
+   "image": "../rung-xanh-map-sample/props_clean/cot_da_co.png",
+   "displayWidth": 145.9,
+   "displayHeight": 215,
+   "anchorX": 73.6,
+   "anchorY": 208.5,
+   "sortY": 0,
+   "layer": "sorted",
+   "collision": [
+    {
+     "type": "ellipse",
+     "offsetX": 0.0,
+     "offsetY": 0.0,
+     "width": 76,
+     "height": 28
+    }
+   ],
+   "interaction": {
+    "type": "none"
+   },
+   "shadow": {
+    "type": "baked"
+   }
+  },
+  {
+   "id": "forest-tang_da_reu-01",
+   "groupId": "forest-tang_da_reu-01",
+   "image": "../rung-xanh-map-sample/props_clean/tang_da_reu.png",
+   "displayWidth": 137.6,
+   "displayHeight": 115,
+   "anchorX": 61.2,
+   "anchorY": 107.7,
+   "sortY": 0,
+   "layer": "sorted",
+   "collision": [
+    {
+     "type": "ellipse",
+     "offsetX": 0.0,
+     "offsetY": 0.0,
+     "width": 100,
+     "height": 32
+    }
+   ],
+   "interaction": {
+    "type": "none"
+   },
+   "shadow": {
+    "type": "baked"
+   }
+  },
+  {
+   "id": "forest-bui_cay-01",
+   "groupId": "forest-bui_cay-01",
+   "image": "../rung-xanh-map-sample/props_clean/bui_cay.png",
+   "displayWidth": 104.2,
+   "displayHeight": 95,
+   "anchorX": 51.1,
+   "anchorY": 88.6,
+   "sortY": 0,
+   "layer": "sorted",
+   "collision": [
+    {
+     "type": "none"
+    }
+   ],
+   "interaction": {
+    "type": "none"
+   },
+   "shadow": {
+    "type": "baked"
+   }
+  },
+  {
+   "id": "forest-khom_hoa-01",
+   "groupId": "forest-khom_hoa-01",
+   "image": "../rung-xanh-map-sample/props_clean/khom_hoa.png",
+   "displayWidth": 57.0,
+   "displayHeight": 60,
+   "anchorX": 27.1,
+   "anchorY": 54.1,
+   "sortY": 0,
+   "layer": "ground",
+   "collision": [
+    {
+     "type": "none"
+    }
+   ],
+   "interaction": {
+    "type": "none"
+   },
+   "shadow": {
+    "type": "baked"
+   }
+  }
+ ],
+ "measured_base_width_display_px": {
+  "forest-cay_soi-01": 200.9,
+  "forest-cot_da_co-01": 138.8,
+  "forest-tang_da_reu-01": 99.2,
+  "forest-bui_cay-01": 64.2,
+  "forest-khom_hoa-01": 35.9
+ }
+}

@@ -1,0 +1,53 @@
+{
+ "source": {
+  "txt2img_seed": 729003,
+  "inpaint_seed": 729503
+ },
+ "post": {
+  "flatten_keep": 0.45,
+  "contrast": 0.95,
+  "saturation": 0.55,
+  "target_rgb": [
+   92.0,
+   112.0,
+   70.0
+  ],
+  "flatten_sigma": 90
+ },
+ "metrics": {
+  "seam_ratio_x": 1.319,
+  "seam_ratio_y": 0.997,
+  "mean_rgb": [
+   91.7,
+   102.7,
+   79.6
+  ],
+  "mean_saturation": 0.225,
+  "luma_std": 3.96,
+  "lowfreq_luma_std": 0.29,
+  "pink_px_pct": 0.0
+ },
+ "hero_vs_tile": {
+  "v1": {
+   "tile_saturation": 0.761,
+   "tile_luma": 80.2,
+   "hero_saturation": 0.288,
+   "hero_luma": 130.7,
+   "saturation_ratio_tile_over_hero": 2.65
+  },
+  "v2": {
+   "tile_saturation": 0.439,
+   "tile_luma": 111.8,
+   "hero_saturation": 0.288,
+   "hero_luma": 130.7,
+   "saturation_ratio_tile_over_hero": 1.53
+  },
+  "v2b": {
+   "tile_saturation": 0.225,
+   "tile_luma": 96.8,
+   "hero_saturation": 0.288,
+   "hero_luma": 130.7,
+   "saturation_ratio_tile_over_hero": 0.78
+  }
+ }
+}
