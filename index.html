@@ -548,10 +548,7 @@
         <canvas id="game"></canvas>
       <!-- Trên trái (GDD): chân dung + tên + cấp + HP/mana -->
       <div class="hud-overlay">
-        <img class="portrait" id="hudPortrait" src="__ASSET_k0__" alt="Chân dung nhân vật" /><script>window.__A={};</script>
-<script src="assets-data-1.js"></script>
-<script src="assets-data-2.js"></script>
-<script>document.getElementById("hudPortrait").src=__A.k0;</script><script>document.getElementById("charPortrait").src=__A.k0;</script>
+        <img class="portrait" id="hudPortrait" data-akey="k0" alt="Chân dung nhân vật" />
         <div class="hud-main">
           <div class="hud-name"><span id="hudName">Kiếm Sĩ</span> <span class="lv-badge" id="hudLv">Lv 1</span></div>
           <div class="bar hp"><i id="barHp" style="width:100%"></i><span id="barHpTxt"></span></div>
@@ -609,7 +606,7 @@
 
       <!-- Panel: Nhân vật -->
       <section class="panel" id="panel-char">
-        <img id="charPortrait" src="__ASSET_k0__" alt="Chân dung nhân vật" style="width:86px;height:86px;border-radius:14px;object-fit:cover;border:2px solid var(--gold2);box-shadow:0 0 0 3px var(--gold-soft);float:left;margin:0 12px 8px 0" />
+        <img id="charPortrait" data-akey="k0" alt="Chân dung nhân vật" style="width:86px;height:86px;border-radius:14px;object-fit:cover;border:2px solid var(--gold2);box-shadow:0 0 0 3px var(--gold-soft);float:left;margin:0 12px 8px 0" />
         <h3 id="charTitle">Nhân vật</h3>
         <div class="points-bar">
           <span class="points-chip">Điểm thân thể: <span id="attrPts">0</span></span>
@@ -715,7 +712,7 @@
 
     <!-- ====== MÀN HÌNH CHỜ LOAD / GIỚI THIỆU ====== -->
     <div class="intro-back" id="introBack" role="status" aria-label="Đang tải game">
-      <img class="intro-art" src="__ASSET_k1__" alt="Ba anh hùng chibi đối đầu quái vật trên thảo nguyên" /><script>document.querySelector(".intro-art").src=__A.k1;</script>
+      <img class="intro-art" data-akey="k1" alt="Ba anh hùng chibi đối đầu quái vật trên thảo nguyên" />
       <div class="intro-shade"></div>
       <div class="intro-box">
         <h1 class="intro-title"><span class="t-main">FANTASY</span><span class="t-sub">HUYỀN THOẠI LỤC ĐỊA</span></h1>
@@ -760,6 +757,7 @@
         <h4 class="set-h">Khác</h4>
         <div class="set-row"><span>Rung máy khi đánh boss / lên cấp</span><button class="tgl" id="setVib" aria-label="Bật tắt rung máy"></button></div>
         <p class="muted" style="margin:10px 0 0">Cài đặt áp dụng ngay. Mức đồ hoạ Thấp giảm mạnh hạt hiệu ứng để máy yếu chơi mượt.</p>
+        <p class="muted" style="margin:10px 0 0">Phiên bản <b id="gameVersion">v0.4.0</b> — Nhật ký cập nhật: Rừng Xanh vẽ quái &amp; boss Chúa Sói bằng ảnh thật, nền cỏ tile liền mạch mới; cổng dịch chuyển tách lớp bệ/vòm có nút tương tác, prop ảnh (sồi, cột đá, tảng đá, bụi cây, khóm hoa) với va chạm ellipse; Pháp Sư tạm dùng ảnh toàn thân tĩnh thay dải chuyển động.</p>
       </div>
     </div>
 
@@ -791,6 +789,9 @@
     </div>
     </div><!-- /#rotRoot -->
 
+<script src="assets-data-1.js"></script>
+<script src="assets-data-2.js"></script>
+<script>document.querySelectorAll('img[data-akey]').forEach(function(im){im.src=__A[im.getAttribute('data-akey')];});</script>
 <script>
 'use strict';
 /* =====================================================================
@@ -865,10 +866,35 @@ const ASSETS = {
   anim: {
     'swordsman-male': __A.k13,
     'swordsman-female': __A.k14,
-    'mage-male': __A.k15,
-    'mage-female': __A.k16,
-    'archer-male': __A.k17,
-    'archer-female': __A.k18,
+    /* Pháp Sư (nam + nữ): dải chuyển động bị lỗi dính hình nhân vật bên cạnh
+       khi cắt khung → NGỪNG DÙNG từ v0.4.0 (file vẫn giữ trong assets/anim/).
+       Thiếu entry ở đây thì heroImage() tự rơi về ảnh toàn thân tĩnh + hiệu
+       ứng chuyển động bằng code cho phái Pháp Sư. */
+    'archer-male': __A.k15,
+    'archer-female': __A.k16,
+  },
+  /* Quái Rừng Xanh vẽ bằng ẢNH THẬT (v0.4.0) — khóa = type quái trong CONFIG */
+  monster: {
+    'slime': __A.k17,
+    'goblin': __A.k18,
+    'wolf': __A.k19,
+    'goblinArcher': __A.k20,
+    'goblinShaman': __A.k21,
+    'wolfLord': __A.k22,
+  },
+  /* Prop Rừng Xanh (v0.4.0) — khóa = PROP_DEFS.image ở lớp engine */
+  prop: {
+    'oak': __A.k23,
+    'pillar': __A.k24,
+    'boulder': __A.k25,
+    'bush': __A.k26,
+    'flowers': __A.k27,
+    'portalPlatform': __A.k28,
+    'portalBack': __A.k29,
+  },
+  /* Tile nền liền mạch riêng cho mặt đất Rừng Xanh (v0.4.0) */
+  ground: {
+    'forestTile': __A.k30,
   },
 };
 /* Danh sách phẳng MỌI file ảnh (toàn literal) — dùng để preload màn chờ */
@@ -883,7 +909,17 @@ const ASSET_FILES = [
   __A.k13, __A.k14,
   __A.k15, __A.k16,
   __A.k17, __A.k18,
+  __A.k19, __A.k20,
+  __A.k21, __A.k22,
+  __A.k23, __A.k24,
+  __A.k25, __A.k26,
+  __A.k27, __A.k28,
+  __A.k29,
+  __A.k30,
 ];
+
+/* Phiên bản game hiện tại — hiển thị trong panel Cài đặt */
+const GAME_VERSION = 'v0.4.0';
 
 /* =====================================================================
    LỚP DỮ LIỆU · CONFIG
@@ -1132,6 +1168,7 @@ const hero = {
   blockT: 0,
 };
 let monsters = [], drops = [], floaters = [], particles = [], slashes = [], projectiles = [], telegraphs = [], obstacles = [];
+let stageProps = [];   // part prop theo lớp của map hiện tại (Rừng Xanh v0.4.0) — nạp lại ở genStageWorld
 let pendingHits = [];   // đòn cận chiến chờ chạm mục tiêu (xử lý theo khung hình, không dùng setTimeout)
 let atkHeld = false;    // đang giữ nút đánh → tự đánh lặp ngay khi hết hồi chiêu
 let stageKills = 0, spawned = 0, spawnTimer = 0, stageState = 'fighting';
@@ -1573,6 +1610,28 @@ const Collision = {
     e.x = Math.max(26, Math.min(WORLD.w - 26, e.x));
     e.y = Math.max(64, Math.min(WORLD.h - 22, e.y));
   },
+  /* Footprint ELLIPSE của prop (v0.4.0): thực thể là hình tròn bán kính r,
+     ellipse được nở thêm ~0.8r rồi kiểm tra trong không gian đã chuẩn hoá;
+     khi lọt vào, đẩy thực thể ra theo tia từ tâm ellipse → trượt mượt dọc
+     cạnh gốc cây / chân vòm như với vật cản tròn. Trả về true nếu bị chặn. */
+  resolveProps(e) {
+    let blocked = false;
+    for (const p of stageProps) {
+      if (!p.collision || !p.collision.length) continue;
+      for (const c of p.collision) {
+        const cx = p.x + c.dx, cy = p.y + c.dy, er = (e.r || 13) * 0.8;
+        const rx = c.rx + er, ry = c.ry + er;
+        const dx = e.x - cx, dy = e.y - cy;
+        const q = (dx * dx) / (rx * rx) + (dy * dy) / (ry * ry);
+        if (q < 1) {
+          if (q < 0.0001) { e.x = cx + rx; e.y = cy; }
+          else { const s = 1 / Math.sqrt(q); e.x = cx + dx * s; e.y = cy + dy * s; }
+          blocked = true;
+        }
+      }
+    }
+    return blocked;
+  },
   /* Đẩy thực thể ra khỏi mọi vật cản (trừ khi bay). Trả về true nếu bị chặn */
   resolve(e) {
     let blocked = false;
@@ -1603,6 +1662,9 @@ const Collision = {
         const d2 = dx * dx + dy * dy;
         if (d2 < rr * rr) { const d = Math.sqrt(d2) || 1; e.x = forestEnv.safe.x + dx / d * rr; e.y = forestEnv.safe.y + dy / d * rr; blocked = true; }
       }
+      /* Footprint ellipse của prop xử lý SAU nước/vòng an toàn: cú đẩy cuối
+         thuộc về prop để thực thể không bị nước đẩy ngược vào gốc cây/chân vòm */
+      if (this.resolveProps(e)) blocked = true;
     }
     const bx = e.x, by = e.y;
     this.clampWorld(e);
@@ -1614,11 +1676,18 @@ const Collision = {
     e.blocked = this.resolve(e);
     return e.blocked;
   },
-  /* Đạn tại (x,y) có chạm vật cản không */
+  /* Đạn tại (x,y) có chạm vật cản không (tròn cũ + footprint ellipse prop) */
   pointBlocked(x, y, rad) {
     for (const o of obstacles) {
       const dx = x - o.x, dy = y - o.y, rr = o.r * 0.8 + (rad || 2);
       if (dx * dx + dy * dy < rr * rr) return o;
+    }
+    for (const p of stageProps) {
+      if (!p.collision || !p.collision.length) continue;
+      for (const c of p.collision) {
+        const dx = (x - (p.x + c.dx)) / (c.rx + (rad || 2)), dy = (y - (p.y + c.dy)) / (c.ry + (rad || 2));
+        if (dx * dx + dy * dy < 1) return p;
+      }
     }
     return null;
   },
@@ -1654,7 +1723,15 @@ const Sprites = {
 
   /* ----- Nền thế giới: đất, điểm trang trí, viền map, cổng ----- */
   background(ctx, map, cam) {
-    ctx.fillStyle = map.ground; ctx.fillRect(0, 0, WORLD.w, WORLD.h);
+    /* Rừng Xanh: mặt đất = pattern tile cỏ liền mạch neo theo tọa độ thế giới
+       (pattern bám hệ tọa độ hiện tại nên trượt đúng theo camera như nền cũ).
+       Tile chưa tải xong → tạm phủ màu đất như trước. Map khác giữ nguyên. */
+    let tiled = false;
+    if (map.id === 'forest' && this.groundTile) {
+      if (!this._tilePat) this._tilePat = ctx.createPattern(this.groundTile, 'repeat');
+      if (this._tilePat) { ctx.fillStyle = this._tilePat; ctx.fillRect(cam.x - 4, cam.y - 4, cam.w + 8, cam.h + 8); tiled = true; }
+    }
+    if (!tiled) { ctx.fillStyle = map.ground; ctx.fillRect(0, 0, WORLD.w, WORLD.h); }
     for (const p of groundDeco) {
       if (p.x < cam.x - 90 || p.x > cam.x + cam.w + 90 || p.y < cam.y - 90 || p.y > cam.y + cam.h + 90) continue;
       if (p.k === 0) { ctx.fillStyle = 'rgba(0,0,0,.10)'; ctx.beginPath(); ctx.ellipse(p.x, p.y, p.r, p.r * 0.55, 0, 0, Math.PI * 2); ctx.fill(); }
@@ -1720,9 +1797,13 @@ const Sprites = {
       ctx.fillStyle = '#7a4b21'; ctx.beginPath(); ctx.moveTo(fe.safe.x + 96, fe.safe.y - 30); ctx.lineTo(fe.safe.x + 122, fe.safe.y - 58); ctx.lineTo(fe.safe.x + 148, fe.safe.y - 30); ctx.closePath(); ctx.fill();
       ctx.fillStyle = '#a03d2a'; ctx.fillRect(fe.safe.x + 104, fe.safe.y - 30, 36, 26);
     }
-    // Cổng vào (dưới) & cổng ra (trên)
-    this.gate(ctx, GATE_IN.x, GATE_IN.y + 16, '#57c9c9');
-    this.gate(ctx, GATE_OUT.x, GATE_OUT.y - 10, '#eec26a');
+    // Cổng vào (dưới) & cổng ra (trên) — Rừng Xanh từ v0.4.0 dùng CỔNG PROP
+    // tách lớp (bệ ground + vòm Y-sort, xem PROP_DEFS/genStageWorld) nên
+    // không vẽ cổng bằng code nữa; các map khác giữ nguyên.
+    if (map.id !== 'forest') {
+      this.gate(ctx, GATE_IN.x, GATE_IN.y + 16, '#57c9c9');
+      this.gate(ctx, GATE_OUT.x, GATE_OUT.y - 10, '#eec26a');
+    }
   },
   borderBit(ctx, x, y, map) {
     ctx.fillStyle = map.far;
@@ -1986,19 +2067,82 @@ const Sprites = {
         }
       };
       img.src = ASSETS.hero[k];
-      const strip = new Image();
-      strip.onload = () => {
-        this.heroAnim[k] = strip;
-        for (const [tn, col] of [['red', '#ff3b2d'], ['green', '#57c96e']]) {
-          const c = document.createElement('canvas'); c.width = strip.naturalWidth; c.height = strip.naturalHeight;
-          const g2 = c.getContext('2d'); g2.drawImage(strip, 0, 0);
-          g2.globalCompositeOperation = 'source-in'; g2.fillStyle = col; g2.fillRect(0, 0, c.width, c.height);
-          this.heroAnimTint[k + '-' + tn] = c;
-        }
-      };
-      strip.src = ASSETS.anim[k];
+      /* Biến thể không có entry trong ASSETS.anim (Pháp Sư từ v0.4.0) thì
+         KHÔNG tải dải — heroImage() tự rơi về ảnh toàn thân tĩnh ở trên. */
+      const animSrc = ASSETS.anim[k];
+      if (animSrc) {
+        const strip = new Image();
+        strip.onload = () => {
+          this.heroAnim[k] = strip;
+          for (const [tn, col] of [['red', '#ff3b2d'], ['green', '#57c96e']]) {
+            const c = document.createElement('canvas'); c.width = strip.naturalWidth; c.height = strip.naturalHeight;
+            const g2 = c.getContext('2d'); g2.drawImage(strip, 0, 0);
+            g2.globalCompositeOperation = 'source-in'; g2.fillStyle = col; g2.fillRect(0, 0, c.width, c.height);
+            this.heroAnimTint[k + '-' + tn] = c;
+          }
+        };
+        strip.src = animSrc;
+      }
     }
   },
+  /* ----- ẢNH QUÁI RỪNG XANH + PROP + TILE NỀN (v0.4.0): tải theo MANIFEST
+     ASSETS.monster / ASSETS.prop / ASSETS.ground. Quái kèm bản nhuộm đỏ/xanh
+     làm sẵn (cùng cơ chế tint canvas như hero) cho chớp đỏ khi trúng đòn và
+     phủ xanh khi trúng độc. Ảnh chưa tải xong → quái rơi về sprite vẽ code. ----- */
+  monsterArt: {},
+  monsterArtTint: {},
+  propArt: {},
+  groundTile: null,
+  _tilePat: null,
+  loadMonsterArt() {
+    for (const k of Object.keys(ASSETS.monster)) {
+      const img = new Image();
+      img.onload = () => {
+        this.monsterArt[k] = img;
+        for (const [tn, col] of [['red', '#ff3b2d'], ['green', '#57c96e']]) {
+          const c = document.createElement('canvas'); c.width = img.naturalWidth; c.height = img.naturalHeight;
+          const g2 = c.getContext('2d'); g2.drawImage(img, 0, 0);
+          g2.globalCompositeOperation = 'source-in'; g2.fillStyle = col; g2.fillRect(0, 0, c.width, c.height);
+          this.monsterArtTint[k + '-' + tn] = c;
+        }
+      };
+      img.src = ASSETS.monster[k];
+    }
+  },
+  loadPropArt() {
+    for (const k of Object.keys(ASSETS.prop)) {
+      const img = new Image();
+      img.onload = () => { this.propArt[k] = img; };
+      img.src = ASSETS.prop[k];
+    }
+    const tile = new Image();
+    tile.onload = () => { this.groundTile = tile; this._tilePat = null; };
+    tile.src = ASSETS.ground.forestTile;
+  },
+  /* Vẽ ẢNH quái neo tại CHÂN trong hệ transform hiện tại của Sprites.monster
+     (đã translate tới chân + scale theo face/size): chiều cao đích = HGT của
+     họ × hệ số scale đang áp — đúng tỉ lệ sprite vẽ code, boss Chúa Sói cao
+     ~2,5 lần Sói thường nhờ HGT 64 × boss 1.5 × sizeMul 1.38. Nhún nhẹ theo
+     nhịp bước (walkPh). Trả về false nếu chưa có ảnh → nơi gọi vẽ code. */
+  monsterImage(ctx, m, t) {
+    const img = this.monsterArt[m.type];
+    if (!img) return false;
+    const baseA = ctx.globalAlpha;
+    const hgt = this.HGT[m.type] || 70;
+    const w = hgt * img.naturalWidth / img.naturalHeight;
+    const bob = m.def.fly ? 0 : Math.abs(Math.sin(m.walkPh)) * hgt * 0.022;
+    ctx.drawImage(img, -w / 2, -hgt - bob, w, hgt);
+    if (m.poisonT > 0 && this.monsterArtTint[m.type + '-green']) { ctx.globalAlpha = baseA * 0.30; ctx.drawImage(this.monsterArtTint[m.type + '-green'], -w / 2, -hgt - bob, w, hgt); ctx.globalAlpha = baseA; }
+    if (m.hitT > 0 && this.monsterArtTint[m.type + '-red']) { ctx.globalAlpha = baseA * Math.min(0.5, m.hitT * 2.2); ctx.drawImage(this.monsterArtTint[m.type + '-red'], -w / 2, -hgt - bob, w, hgt); ctx.globalAlpha = baseA; }
+    return true;
+  },
+  /* Vẽ 1 part prop theo anchor của nó (bóng đã nung sẵn trong ảnh: baked) */
+  propImage(ctx, p) {
+    const img = this.propArt[p.image];
+    if (!img) return;
+    ctx.drawImage(img, p.x - p.anchorX, p.y - p.anchorY, p.displayWidth, p.displayHeight);
+  },
+
   /* Chọn khung hình theo trạng thái: chết -> khung đứng; đang vung vũ khí (swingT)
      -> khung 4 rồi 5 theo tiến trình đòn; đang thi triển (castT) -> khung 5;
      đang chạy -> vòng 4 nhịp [chạy trái, đứng, chạy phải, đứng] theo walkPh;
@@ -2115,7 +2259,12 @@ Sprites.monster = function (ctx, m, t) {
   const flash = m.hitT > 0;
   const C = n => (flash ? '#ffffff' : n);
   const pal = m.def.palette;
-  switch (m.type) {
+  /* Rừng Xanh (forestEnv đang nạp): ưu tiên ẢNH THẬT cho các họ có ảnh trong
+     MANIFEST; ảnh chưa tải xong hoặc họ không có ảnh → sprite vẽ code bên dưới.
+     Mọi hiệu ứng chung (hào quang elite, bóng đổ, quầng cuồng nộ, thanh máu)
+     nằm ngoài switch nên giữ nguyên cho cả hai cách vẽ. */
+  const drewImg = forestEnv ? this.monsterImage(ctx, m, t) : false;
+  if (!drewImg) switch (m.type) {
     case 'slime': {
       const sq = 1 + Math.sin(t * 6 + m.seed) * 0.07;
       ctx.fillStyle = C('#57c96e'); ctx.beginPath();
@@ -2500,9 +2649,45 @@ function currentMap() {
 function stageQuota() { return currentMap().isBoss ? 1 + CONFIG.bossMinions : CONFIG.killsPerStage; }
 function mapLocked(mapIdx) { return P.level < CONFIG.maps[mapIdx].band[0] || P.maxStage <= mapIdx * CONFIG.stagesPerMap; }
 
+/* =====================================================================
+   PROP RỪNG XANH (v0.4.0) — adapter theo ENGINE_PROP_LAYER_SPEC đã duyệt.
+   Mỗi part: {id, groupId, image, displayWidth, displayHeight, anchorX,
+   anchorY, sortY, layer, collision[], interaction, shadow:'baked'} cộng
+   vị trí thế giới (x, y) = điểm anchor của part. Ba lớp vẽ: 'ground' (bệ
+   cổng, khóm hoa — vẽ cùng nền) → Y-sort chung với hero/quái/vật cản (vòm
+   cổng, sồi, cột đá, tảng đá, bụi cây) → 'foreground' (để trống).
+   collision[] là footprint ellipse {dx, dy, rx, ry} theo anchor của part;
+   interaction là ellipse {dx, dy, rx, ry} (chỉ bệ cổng có).
+   Số liệu footprint lấy nguyên từ props_layer.json đã duyệt: tảng đá
+   100×32 (không phải 150×42), vùng tương tác phủ 70% mặt trên của bệ,
+   giữa vòm KHÔNG thêm vật cản — hero đi xuyên và bị vòm che (đúng 2.5D).
+   ===================================================================== */
+const PROP_DEFS = {
+  oak:            { image:'oak',            displayWidth:238, displayHeight:275, anchorX:110, anchorY:268, layer:'sorted', collision:[{ dx:0, dy:0, rx:42, ry:13 }] },
+  pillar:         { image:'pillar',         displayWidth:146, displayHeight:215, anchorX:74,  anchorY:209, layer:'sorted', collision:[{ dx:0, dy:0, rx:38, ry:14 }] },
+  boulder:        { image:'boulder',        displayWidth:138, displayHeight:115, anchorX:61,  anchorY:108, layer:'sorted', collision:[{ dx:0, dy:0, rx:50, ry:16 }] },
+  bush:           { image:'bush',           displayWidth:104, displayHeight:95,  anchorX:51,  anchorY:89,  layer:'sorted', collision:[] },
+  flowers:        { image:'flowers',        displayWidth:57,  displayHeight:60,  anchorX:27,  anchorY:54,  layer:'ground', collision:[] },
+  portalPlatform: { image:'portalPlatform', displayWidth:206, displayHeight:112, anchorX:103, anchorY:1,   layer:'ground', collision:[], interaction:{ dx:-1, dy:40, rx:66, ry:28 } },
+  portalBack:     { image:'portalBack',     displayWidth:199, displayHeight:107, anchorX:97,  anchorY:102, layer:'sorted', sortY:0, collision:[{ dx:-79, dy:0, rx:15.5, ry:11.5 }, { dx:79, dy:0, rx:14.5, ry:11 }] },
+};
+function makeProp(kind, x, y, groupId) {
+  const d = PROP_DEFS[kind];
+  return {
+    id: kind + '@' + Math.round(x) + ',' + Math.round(y), groupId: groupId || null, kind,
+    image: d.image, x, y,
+    displayWidth: d.displayWidth, displayHeight: d.displayHeight,
+    anchorX: d.anchorX, anchorY: d.anchorY, sortY: d.sortY || 0, layer: d.layer,
+    collision: d.collision, interaction: d.interaction || null, shadow: 'baked',
+  };
+}
+/* Trạng thái vùng tương tác cổng: chỉ kích hoạt 1 lần mỗi lần bước vào */
+const portalFx = { inZone: false };
+
 function genStageWorld() {
   const { map } = currentMap();
   groundDeco = []; borderDeco = []; obstacles = []; waterRects = []; forestEnv = null;
+  stageProps = []; portalFx.inZone = false;
   for (let i = 0; i < 190; i++) groundDeco.push({ x: rand(40, WORLD.w - 40), y: rand(50, WORLD.h - 40), r: rand(14, 46), k: Math.floor(rand(0, 5)) });
   const step = 92;
   for (let x = 46; x < WORLD.w; x += step) { if (Math.abs(x - GATE_OUT.x) > 70) borderDeco.push({ x: x + rand(-8, 8), y: 30 }); if (Math.abs(x - GATE_IN.x) > 70) borderDeco.push({ x: x + rand(-8, 8), y: WORLD.h - 30 }); }
@@ -2531,14 +2716,48 @@ function genStageWorld() {
       { x: riverX, y: 34, w: riverW, h: bridgeY - bridgeHalf - 34 },
       { x: riverX, y: bridgeY + bridgeHalf, w: riverW, h: WORLD.h - 34 - (bridgeY + bridgeHalf) },
     ];
-    // Phế tích quanh khu boss: cột đá gãy (va chạm thật)
+    /* Vị trí group cổng forest-portal-01 (khai báo sớm để các prop khác
+       tránh vùng cổng): đặt bên bờ khô phía tây của khu cổng vào GATE_IN,
+       trong vòng an toàn của làng. Không đặt đúng tọa độ GATE_IN/GATE_OUT
+       được vì cả hai nằm giữa lòng sông (x 742–838) — hero đứng vào là bị
+       Collision đẩy ra bờ ngay, không thể đứng trên bệ để tương tác. */
+    const portalPos = { x: GATE_IN.x - 160, y: GATE_IN.y - 60 };
+    forestEnv.portal = portalPos;
+    /* PROP ẢNH thay vật cản vẽ code (v0.4.0): toàn bộ vật cản vòng tròn vừa
+       sinh cho map này (đều là cây) chuyển thành prop sồi/tảng đá có
+       footprint ellipse; mật độ giữ nguyên như mật độ vật cản cũ. Điểm nào
+       rơi sát cổng (<150) thì bỏ — giữ lối đi xuyên giữa vòm luôn thông. */
+    const genericSpots = obstacles.splice(0, obstacles.length)
+      .filter(o => Collision.dist2d(o.x, o.y, portalPos.x, portalPos.y) > 150);
+    genericSpots.forEach((o, i) => stageProps.push(makeProp(i % 4 === 3 ? 'boulder' : 'oak', o.x, o.y)));
+    // Phế tích quanh khu boss: cột đá (va chạm ellipse thật)
     const ruinSpots = [[1086, 150], [1338, 148], [1072, 356], [1352, 352], [1212, 96]];
-    for (const [rx, ry] of ruinSpots) obstacles.push({ x: rx, y: ry, r: 15, kind: 'pillar' });
+    for (const [rx, ry] of ruinSpots) stageProps.push(makeProp('pillar', rx, ry));
     // Hàng cây thưa quanh khu tinh anh + dọc bờ sông (tránh chắn cầu)
     const treeSpots = [[170, 150], [430, 130], [210, 420], [470, 430], [640, 210], [660, 980], [920, 180], [950, 1020], [1400, 620], [180, 900], [1380, 940]];
     for (const [tx, ty] of treeSpots) {
       if (Math.abs(ty - bridgeY) < 90 && tx > riverX - 130 && tx < riverX + riverW + 130) continue;
-      obstacles.push({ x: tx, y: ty, r: 17, kind: 'tree' });
+      stageProps.push(makeProp('oak', tx, ty));
+    }
+    /* CỔNG DỊCH CHUYỂN forest-portal-01 tại portalPos ở trên: bệ ở lớp
+       ground (không va chạm, có ellipse tương tác), vòm ở lớp Y-sort
+       (va chạm chỉ ở 2 chân, giữa vòm đi xuyên được). */
+    stageProps.push(makeProp('portalPlatform', portalPos.x, portalPos.y, 'forest-portal-01'));
+    stageProps.push(makeProp('portalBack', portalPos.x, portalPos.y, 'forest-portal-01'));
+    /* Bụi cây (đi xuyên) + khóm hoa (decal ground): rải thưa tương đương mật
+       độ trang trí cũ, tránh sông/cầu, bệ cổng, vòng làng và khu boss */
+    const scatterOk = (x, y, minPortal) =>
+      !(x > riverX - 46 && x < riverX + riverW + 46) &&
+      Collision.dist2d(x, y, portalPos.x, portalPos.y) > minPortal &&
+      Collision.dist2d(x, y, forestEnv.safe.x, forestEnv.safe.y) > 185 &&
+      Collision.dist2d(x, y, forestEnv.bossArena.x, forestEnv.bossArena.y) > 235;
+    let placedBush = 0, placedFlowers = 0, scatterTries = 0;
+    while ((placedBush < 10 || placedFlowers < 16) && scatterTries < 260) {
+      scatterTries++;
+      const x = rand(70, WORLD.w - 70), y = rand(120, WORLD.h - 70);
+      if (!scatterOk(x, y, 190)) continue;
+      if (placedBush < 10 && (placedFlowers >= 16 || Math.random() < 0.4)) { stageProps.push(makeProp('bush', x, y)); placedBush++; }
+      else if (placedFlowers < 16) { stageProps.push(makeProp('flowers', x, y)); placedFlowers++; }
     }
     // Điểm trang trí mặt đất riêng: bãi hoa + lối mòn đất từ cổng vào → cầu → khu boss
     for (let i = 0; i < 46; i++) groundDeco.push({ x: rand(50, WORLD.w - 50), y: rand(60, WORLD.h - 50), r: rand(3, 7), k: 4 });
@@ -2603,6 +2822,27 @@ function spawnMonster(forceType, opts) {
   monsters.push(m);
   if (!opts.summoned) spawned++;
   return m;
+}
+
+/* Tương tác cổng Rừng Xanh: chân hero lọt vào ellipse tương tác của bệ →
+   hiện nút tương tác (đúng cơ chế msgBtn/startStage sẵn có: bấm nút thì qua
+   cổng — sang màn kế nếu màn đã dọn sạch, không thì vào lại màn hiện tại).
+   Chỉ kích hoạt 1 lần mỗi lần bước vào (cờ portalFx.inZone), rời vùng mới
+   cho kích hoạt lại; TUYỆT ĐỐI không tự chuyển màn khi chỉ đứng lên bệ.
+   Nếu đang có thông báo khác (hoàn thành màn / gục ngã) thì không đè lên. */
+function updatePortal() {
+  if (!forestEnv || !forestEnv.portal) { portalFx.inZone = false; return; }
+  const part = stageProps.find(p => p.interaction);
+  if (!part) { portalFx.inZone = false; return; }
+  const it = part.interaction;
+  const dx = (hero.x - (part.x + it.dx)) / it.rx, dy = (hero.y - (part.y + it.dy)) / it.ry;
+  const inside = !hero.dead && dx * dx + dy * dy <= 1;
+  if (inside && !portalFx.inZone) {
+    portalFx.inZone = true;
+    if (!el('arenaMsg').classList.contains('show')) {
+      UI.showMsg('Cổng Dịch Chuyển', 'Bạn đang đứng trên bệ cổng của Rừng Xanh. Qua cổng để sang màn tiếp theo khi đã dọn sạch quái của màn này (chưa xong thì cổng đưa bạn vào lại màn hiện tại).', 'Qua cổng dịch chuyển');
+    }
+  } else if (!inside) portalFx.inZone = false;
 }
 
 function startStage() {
@@ -3049,6 +3289,7 @@ function update(dt) {
   for (let i = floaters.length - 1; i >= 0; i--) { const f = floaters[i]; f.t += dt; f.y -= 34 * dt; if (f.t > 0.95) floaters.splice(i, 1); }
   for (let i = particles.length - 1; i >= 0; i--) { const p = particles[i]; p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt; p.vy += 240 * dt; if (p.t > p.life) particles.splice(i, 1); }
   for (let i = slashes.length - 1; i >= 0; i--) { slashes[i].t += dt; if (slashes[i].t > slashes[i].dur) slashes.splice(i, 1); }
+  updatePortal();
   updateCamera(dt);
   mmTimer += dt;
   if (mmTimer > 0.14) { mmTimer = 0; Minimap.draw(); }
@@ -3072,6 +3313,12 @@ function draw() {
   if (shake > 0 && Roster.settings.shake) ctx.translate((Math.random() - 0.5) * shake, (Math.random() - 0.5) * shake * 0.6);
   ctx.translate(-cam.x, -cam.y);
   Sprites.background(ctx, map, { x: cam.x, y: cam.y, w: W, h: H });
+  /* Prop lớp GROUND (bệ cổng, khóm hoa): vẽ ngay trên nền, dưới mọi thực thể */
+  for (const p of stageProps) {
+    if (p.layer !== 'ground') continue;
+    if (p.x < cam.x - 160 || p.x > cam.x + W + 160 || p.y < cam.y - 160 || p.y > cam.y + H + 160) continue;
+    Sprites.propImage(ctx, p);
+  }
   for (const tg of telegraphs) {
     const p = tg.t / tg.dur;
     if (tg.kind === 'line') {
@@ -3100,6 +3347,13 @@ function draw() {
   for (const o of obstacles) {
     if (o.x < cam.x - 90 || o.x > cam.x + W + 90 || o.y < cam.y - 130 || o.y > cam.y + H + 60) continue;
     list.push({ y: o.y, f: () => Sprites.obstacle(ctx, o, map) });
+  }
+  /* Prop lớp SORTED (vòm cổng, sồi, cột đá, tảng đá, bụi cây): chung danh
+     sách Y-sort với hero/quái/vật cản, khóa sắp xếp = y anchor + sortY */
+  for (const p of stageProps) {
+    if (p.layer !== 'sorted') continue;
+    if (p.x < cam.x - 180 || p.x > cam.x + W + 180 || p.y < cam.y - 340 || p.y > cam.y + H + 80) continue;
+    list.push({ y: p.y + (p.sortY || 0), f: () => Sprites.propImage(ctx, p) });
   }
   for (const d of drops) {
     list.push({ y: d.y, f: () => drawDrop(d) });
@@ -3265,6 +3519,7 @@ const Minimap = {
     }
     c.fillStyle = 'rgba(0,0,0,.4)';
     for (const o of obstacles) c.fillRect(o.x * sx - 2, o.y * sy - 2, 4, 4);
+    for (const p of stageProps) { if (p.collision && p.collision.length) c.fillRect(p.x * sx - 2, p.y * sy - 2, 4, 4); }
     c.strokeStyle = 'rgba(255,255,255,.45)'; c.lineWidth = 1.4;
     c.strokeRect(cam.x * sx, cam.y * sy, W * sx, H * sy);
     c.fillStyle = '#57c9c9'; c.fillRect(GATE_IN.x * sx - 4, GATE_IN.y * sy - 3, 8, 6);
@@ -4196,6 +4451,7 @@ const PanelManager = {
    ===================================================================== */
 function init() {
   resize();
+  el('gameVersion').textContent = GAME_VERSION;
   UI.renderRoadmap();
   UI.buildSkillBtns(); UI.buildSupportBtns();
 
@@ -4363,6 +4619,8 @@ function init() {
   window.addEventListener('orientationchange', () => setTimeout(() => Rot.apply(), 120));
 
   Sprites.loadHeroArt();
+  Sprites.loadMonsterArt();
+  Sprites.loadPropArt();
   startStage();
   UI.refreshAll();
   /* Mở game: KHÔNG qua bảng danh sách ô nhân vật nữa — vào thẳng sân khấu

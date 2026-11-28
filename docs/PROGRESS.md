@@ -1,5 +1,5 @@
 # PROGRESS — FANTASY: HUYỀN THOẠI LỤC ĐỊA
-Cập nhật: 2026-11-27 (22:49, sau bản v0.3.3).
+Cập nhật: 2026-11-28 (sau bản v0.4.0 — đợt tích hợp asset).
 
 ## Đã xong
 - SPEC.md (yêu cầu gốc, Do phê duyệt dần qua các vòng chốt 2026-11-27) + GDD.md (bản thiết kế v2) + bộ tài liệu Master Instruction: ART_DIRECTION, ARCHITECTURE, BALANCE, ROADMAP, GAP_ANALYSIS, TEST_REPORT, CHANGELOG.
@@ -16,8 +16,11 @@ Cập nhật: 2026-11-27 (22:49, sau bản v0.3.3).
 - Giai đoạn 0: XONG (GAP_ANALYSIS + kế hoạch giai đoạn 1 được Do phê duyệt 21:44). Giai đoạn 1: XONG (22:03).
 - Do gửi bộ Fantasy RPG V2 lúc 21:54 (reference-zip-v2/): thay đổi duy nhất là HUD V2, đã chốt và triển khai. Bộ Fantasy_RPG_Muse.zip lúc 21:48 (reference-zip/): đã đọc hết + BAO-CAO-DOI-CHIEU-ZIP.md; Do duyệt kế hoạch 5 bước, chỉ bác khóa tính năng theo cấp.
 
+- v0.4.0 — ĐỢT TÍCH HỢP ASSET (2026-11-28): quái Rừng Xanh + boss bằng ảnh thật, hero bản làm sạch viền, vá lỗi dải Pháp Sư (dùng ảnh tĩnh), nền tile v2b, cổng 2 lớp + prop ellipse theo ENGINE_PROP_LAYER_SPEC. Probe headless của builder PASS (cổng/va chạm/đạn/Pháp Sư/map khác hồi quy), Luna kiểm chứng độc lập bản xuất + live Cloudflare. Chi tiết: CHANGELOG.
+
 ## Đang chờ Do
-- Do test bản v0.3.3 trên iPhone thật và duyệt phong cách (nhân vật AI chibi + màn chọn nhân vật mới) trước khi nhân rộng sang các map/phái còn lại (bước 2 kế hoạch zip).
+- Do test bản v0.4.0 trên iPhone thật (quái ảnh thật, cổng tương tác, Pháp Sư tĩnh) và cho ý kiến.
+- Chốt có đưa Pháp Sư Goblin vào pool spawn của Rừng Xanh không (hiện đã có ảnh + mapping, chưa spawn).
 
 ## Chưa đạt / tồn đọng (không đánh dấu hoàn thành)
 - Lưu tiến trình thật theo máy (cần Cloudflare, giai đoạn 3).
