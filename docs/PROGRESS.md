@@ -1,5 +1,5 @@
 # PROGRESS — FANTASY: HUYỀN THOẠI LỤC ĐỊA
-Cập nhật: 2026-11-28 (v0.7.2 LIVE — animation bộ phận cho cả 6 hero + icon áo/giày theo bậc trong túi đồ).
+Cập nhật: 2026-11-28 (v0.8.0 LIVE — thế giới 17 map liên thông, làng tân thủ + NPC + nhiệm vụ, dịch chuyển tự do; v0.9.0 redesign UI + true fullscreen đang làm).
 
 ## Đã xong
 - SPEC.md (yêu cầu gốc, Do phê duyệt dần qua các vòng chốt 2026-11-27) + GDD.md (bản thiết kế v2) + bộ tài liệu Master Instruction: ART_DIRECTION, ARCHITECTURE, BALANCE, ROADMAP, GAP_ANALYSIS, TEST_REPORT, CHANGELOG.
