@@ -10,7 +10,8 @@ sys.path.insert(0, str(Path(__file__).parent))
 import comfy_api as c
 import pilot_animagine_openpose as p
 
-W, H = 768, 1024
+import os as _os
+W, H = 768, int(_os.environ.get("MAGE_H", "1024"))
 STEPS, CFG = 30, 5.0
 CHAR = {
     "male": ("1boy, solo, chibi, young wizard, dark blue messy hair, blue eyes, (small white goatee beard:1.3), wide-brimmed pointed dark "
@@ -25,15 +26,16 @@ TAIL = ("full body, face clearly visible, three-quarter view facing right, thick
 NEG = ("closed helmet, visor, face covered, mask, multiple characters, overlapping figures, 2boys, 2girls, multiple views, "
        "reference sheet, cropped, out of frame, lowres, bad anatomy, bad hands, extra arms, extra legs, two staffs, extra staff, "
        "text, watermark, signature, worst quality, low quality, low score, bad score, blurry, scenery, ground, shadow, "
-       "gradient background, dark background, floating orb, detached orb, orb above head, halo, giant orb, floating crystal")
+       "gradient background, dark background, floating orb, detached orb, orb above head, halo, giant orb, floating crystal, magic swirl, swirling ribbon, crescent moon behind head, "
+       "bubble, wind effect, sparkle trail, aura, magic circle behind")
 POSE_TXT = {
     "idle": "standing calmly, holding staff upright beside body, gentle smile",
     "run": "running fast, body leaning forward, cape and robe flowing behind, staff trailing behind in one hand, dynamic motion",
     "run2": "running fast, mid stride, body leaning forward, cape flowing behind, staff trailing behind, dynamic motion",
     "cast1": "winding up a spell, leaning back, staff pulled back behind the body, small glowing orb, focused face",
     "cast2": "thrusting staff forward with arm fully extended, leaning forward, large bright glowing orb, magic burst at the orb",
-    "skill_charge": "charging powerful magic, staff raised high above head with both hands, swirling magic aura, glowing orb, determined",
-    "skill_release": "lunging forward unleashing a big spell, staff pointed forward with extended arms, huge magic blast from the orb, cape flying",
+    "skill_charge": "charging a spell, staff raised high above head with both hands, bright glowing orb on the staff, determined",
+    "skill_release": "lunging forward unleashing a spell, staff pointed forward with extended arms, bright glowing orb on the staff, cape flying",
 }
 # chibi proportions measured on the cleaned reference (feet y ~965, height ~860): eyes 550, nose 590, neck 645,
 # shoulders 665, hips 820. 3/4 view facing right: face shifted right, far ear hidden.
@@ -68,7 +70,8 @@ POSES = {
 }
 import os
 SKEL_SCALE, FEET = float(os.environ.get("MAGE_SKEL", "0.82")), (X, 965)     # shrink around the feet so the big chibi head + hat fit with margin
-POSES = {k: [None if q is None else (FEET[0] + (q[0] - FEET[0]) * SKEL_SCALE + 14, FEET[1] + (q[1] - FEET[1]) * SKEL_SCALE)
+_DY = H - 1024 - (10 if H < 1024 else 0)   # shorter canvas: move the skeleton up so the head sits near the top
+POSES = {k: [None if q is None else (FEET[0] + (q[0] - FEET[0]) * SKEL_SCALE + 14, FEET[1] + (q[1] - FEET[1]) * SKEL_SCALE + _DY)
              for q in v] for k, v in POSES.items()}
 LIMBS, COLORS = p.LIMBS, p.COLORS
 

@@ -146,7 +146,7 @@ def main():
         mats = {k: (Image.open(cache[k]).convert("RGBA") if cache[k].exists() else matte(raw / v)) for k, v in pk.items()}
         for k, v in mats.items():
             if not cache[k].exists(): v.save(cache[k])
-        if gd == "female": mats = {k: remove_pale_aura(cut_above_crown(v)) for k, v in mats.items()}
+        pass  # female v2f: no halo any more, crown cut not needed
         for k, v in mats.items(): v.save(out / f"_matte_{gd}_{k}.png")
         rend = {fr: frame_img(mats[f[0]], gd, f) for fr, f in FRAMES.items()}
         # per-frame size normalisation: same distance feet -> body top (hat brim / hair mass) in every frame,

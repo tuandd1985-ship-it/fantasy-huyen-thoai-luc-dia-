@@ -1,6 +1,6 @@
 # Pháp Sư v2: dải chuyển động sinh bằng IP-Adapter (biên độ dáng lớn)
 
-GAME-ART-CORE (Claude), 2026-11-28. Không sửa source game. **Đợt này có bản NAM**; bản nữ đang làm lại, sẽ đẩy bổ sung (xem cuối file).
+GAME-ART-CORE (Claude), 2026-11-28. Không sửa source game. Đủ cả **Nam** và **Nữ**.
 
 ## Sản phẩm (nam)
 | File | Nội dung |
@@ -50,5 +50,26 @@ GAME-ART-CORE (Claude), 2026-11-28. Không sửa source game. **Đợt này có 
 - Trang trí mũ/áo đổi nhẹ giữa các khung (họa tiết vàng).
 - Ở idle, tay không cầm gậy có một chi tiết vàng nhỏ.
 
-## Bản nữ: chưa đạt, đang làm lại
-Ở 4/7 khung, model vẽ thêm **vệt phép/đĩa trăng/bong bóng sau đầu**, dính liền với tóc. Gỡ tự động thì hoặc còn sót, hoặc ăn mất mặt (da và vệt phép cùng màu nhạt). Đang sinh lại với prompt cấm các hiệu ứng này; sẽ đẩy bổ sung vào thư mục này khi QC đạt.
+## Bản nữ
+File: `mage_nu_strip_2520x500.png`, `mage_nu_skill_charge_420x500.png`, `mage_nu_skill_release_420x500.png`, `mage_nu_contact.jpg`, `mage_nu_preview.gif`. Prompt, seed và model từng khung nằm trong `generation_female.json`.
+
+| Khung | Dáng | Nguồn (seed) |
+|---|---|---|
+| idle1 / idle2 | Đứng, tay cầm pha lê giơ nhẹ, gậy dựng bên người; idle2 thở 1,8 % | `idle` s741012 |
+| run1 / run2 | Lao về trước, gậy kéo ngang người, tóc và áo bay sau | `run` / `run2` s741012 |
+| cast1 | Lấy đà: gậy rút về phía sau, tay kia chụm quả cầu nhỏ | `cast1` s741012 |
+| cast2 | Đâm gậy (đầu vòng) chĩa lên trước, chân dang rộng | `cast2` s741012 |
+| skill tụ phép | Hai tay nắm gậy ngang, ánh sáng tụ ở đầu gậy | `skill_charge` s741011 |
+| skill phóng phép | Lao người, chĩa gậy dài ra trước | `skill_release` s741012 |
+
+**Vì sao bản nữ phải sinh lại:** ở khung 768×1024, nhân vật nữ không đội mũ nên phía trên đầu còn trống khoảng 400 px. Model tự lấp khoảng trống đó bằng vòm, đĩa trăng hoặc xoáy phép dính liền vào tóc, và gỡ tự động không sạch. Cách sửa: sinh trên **khung 768×768**, xương đặt sát mép trên. Hết hẳn vòm; chỉ 1/14 ảnh còn vòng sáng và ảnh đó không được chọn.
+
+**QC nữ:**
+- chân y = 487, 487, 487, 486, 488, 489 (lệch 3 px);
+- dải mép 0 % alpha ở cả 8 ô;
+- mỗi ô 1 khối đặc, 0 mảnh rời.
+
+**Hạn chế riêng của bản nữ:**
+- Gậy và quả cầu khác nhau giữa các khung (gậy gỗ có lúc mũi giáo, có lúc đầu vòng); quả cầu tím không phải lúc nào cũng nằm trên gậy. Vì vậy quầng sáng quả cầu do code chỉ hiện ở một số khung.
+- Khung cast2 có vệt sáng xanh mỏng dưới chân, do model vẽ.
+- Mắt, tóc, kẹp pha lê và áo xanh ngọc giữ đúng tham chiếu.

@@ -144,5 +144,151 @@
    "skill_charge": "raw_male_skill_charge_s741002_ip60.png",
    "skill_release": "raw_male_skill_release_s741002_ip60.png"
   }
+ },
+ "female": {
+  "qc": {
+   "frame_scales": {
+    "idle1": 0.6296,
+    "idle2": 0.6404,
+    "run1": 0.5326,
+    "run2": 0.529,
+    "cast1": 0.6049,
+    "cast2": 0.5326,
+    "skill_charge": 0.5833,
+    "skill_release": 0.5248
+   },
+   "feet_y_strip": [
+    487,
+    487,
+    487,
+    486,
+    488,
+    489
+   ],
+   "feet_y_spread": 3,
+   "cells": {
+    "idle1": {
+     "edge_band_alpha_pct": 0.0,
+     "edge_band_max_alpha": 0,
+     "opaque_components": 1,
+     "stray_opaque_islands_ge30px": 0,
+     "main_component_px": 95015,
+     "bbox": [
+      23,
+      57,
+      381,
+      487
+     ],
+     "feet_y": 487
+    },
+    "idle2": {
+     "edge_band_alpha_pct": 0.0,
+     "edge_band_max_alpha": 0,
+     "opaque_components": 1,
+     "stray_opaque_islands_ge30px": 0,
+     "main_component_px": 97215,
+     "bbox": [
+      18,
+      58,
+      384,
+      487
+     ],
+     "feet_y": 487
+    },
+    "run1": {
+     "edge_band_alpha_pct": 0.0,
+     "edge_band_max_alpha": 0,
+     "opaque_components": 1,
+     "stray_opaque_islands_ge30px": 0,
+     "main_component_px": 81418,
+     "bbox": [
+      14,
+      129,
+      406,
+      487
+     ],
+     "feet_y": 487
+    },
+    "run2": {
+     "edge_band_alpha_pct": 0.0,
+     "edge_band_max_alpha": 0,
+     "opaque_components": 1,
+     "stray_opaque_islands_ge30px": 0,
+     "main_component_px": 77481,
+     "bbox": [
+      14,
+      117,
+      405,
+      486
+     ],
+     "feet_y": 486
+    },
+    "cast1": {
+     "edge_band_alpha_pct": 0.0,
+     "edge_band_max_alpha": 0,
+     "opaque_components": 1,
+     "stray_opaque_islands_ge30px": 0,
+     "main_component_px": 94226,
+     "bbox": [
+      14,
+      69,
+      406,
+      488
+     ],
+     "feet_y": 488
+    },
+    "cast2": {
+     "edge_band_alpha_pct": 0.0,
+     "edge_band_max_alpha": 0,
+     "opaque_components": 1,
+     "stray_opaque_islands_ge30px": 0,
+     "main_component_px": 83964,
+     "bbox": [
+      13,
+      112,
+      405,
+      489
+     ],
+     "feet_y": 489
+    },
+    "skill_charge": {
+     "edge_band_alpha_pct": 0.0,
+     "edge_band_max_alpha": 0,
+     "opaque_components": 1,
+     "stray_opaque_islands_ge30px": 0,
+     "main_component_px": 91799,
+     "bbox": [
+      14,
+      83,
+      406,
+      486
+     ],
+     "feet_y": 486
+    },
+    "skill_release": {
+     "edge_band_alpha_pct": 0.0,
+     "edge_band_max_alpha": 0,
+     "opaque_components": 1,
+     "stray_opaque_islands_ge30px": 0,
+     "main_component_px": 73473,
+     "bbox": [
+      14,
+      149,
+      405,
+      489
+     ],
+     "feet_y": 489
+    }
+   }
+  },
+  "picks": {
+   "idle": "raw_female_idle_s741012_ip60.png",
+   "run": "raw_female_run_s741012_ip60.png",
+   "run2": "raw_female_run2_s741012_ip60.png",
+   "cast1": "raw_female_cast1_s741012_ip60.png",
+   "cast2": "raw_female_cast2_s741012_ip60.png",
+   "skill_charge": "raw_female_skill_charge_s741011_ip60.png",
+   "skill_release": "raw_female_skill_release_s741012_ip60.png"
+  }
  }
 }
