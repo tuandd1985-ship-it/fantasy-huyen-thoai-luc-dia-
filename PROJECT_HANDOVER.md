@@ -1,101 +1,67 @@
 # PROJECT HANDOVER — FANTASY: HUYỀN THOẠI LỤC ĐỊA
 
-Tài liệu bàn giao để ChatGPT / Codex / Claude Code tiếp tục phát triển mà không cần phân tích lại từ đầu.
-Cập nhật: 2026-11-28. Phiên bản game hiện tại: **v0.3.7**. Chủ dự án: Do (Tony Đỗ) — mọi thay đổi lớn phải được anh duyệt.
+**Cập nhật: 2026-11-28 ~23:40 JST, bởi Luna (Muse).** Tài liệu này là điểm bắt đầu cho BẤT KỲ agent nào (Claude, Codex, Luna phiên sau) vào làm tiếp. Đọc hết trước khi sửa code. (Bản bàn giao cũ ở v0.3.7 đã được thay thế hoàn toàn bởi bản này.)
 
-## 1–4. Định danh & trạng thái
+---
 
-- **GitHub:** https://github.com/tuandd1985-ship-it/fantasy-huyen-thoai-luc-dia- (lưu ý: tên repo có dấu `-` thừa ở cuối)
-- **Chế độ:** Public
-- **Branch phát triển:** `main` — commit game mới nhất: `52638110` ("Thêm assets-data-1.js"); trước đó `5065305f` (index.html + assets-data-2.js), `8bb3e49c` (tài liệu).
-- **Link chơi thử (production):** https://fantasy-game.tuandd19985.workers.dev — Cloudflare Worker `fantasy-game` phục vụ bản đóng gói một file từ KV namespace `FANTASY_GAME` (key `index_html`). Đã kiểm chứng live: HTTP 200, đủ 10.164.614 bytes, mọi khối script đạt `node --check`.
-- **Đồng bộ:** toàn bộ source mới nhất (v0.3.7) ĐÃ có trên GitHub — đã đối chiếu mã băm từng file (index.html, assets-data-1.js, assets-data-2.js, README.md khớp 100%). Kèm commit bàn giao này: `PROJECT_HANDOVER.md`, thư mục `cloudflare/` (worker + script triển khai) và `docs/CHANGELOG.md` cập nhật. Không còn thay đổi nào chưa push.
+## 1. Trạng thái hiện tại (sự thật đã kiểm chứng)
 
-## 5. Công nghệ
+- **Bản LIVE: v0.8.0 + 2 đợt sửa lỗi nóng (tối 2026-11-28)** tại https://fantasy-game.tuandd19985.workers.dev — anh Do test trên iPhone qua link này (Safari / icon màn hình chính, KHÔNG qua webview của app Muse).
+- GitHub repo này (`main`) chứa source `index.html` + `assets-data-*.js` tương ứng bản live. Mọi thay đổi phải giữ đồng bộ 2 nơi: Cloudflare (live) ↔ GitHub.
+- Anh Do vừa test bản sửa lỗi cuối và CHƯA xác nhận lại sau đợt sửa thứ hai (hộp thoại NPC kẹt + camera). Nếu anh báo vẫn lỗi, ưu tiên xử lý trước mọi việc khác.
 
-- HTML5 + CSS + **JavaScript thuần (vanilla)** — KHÔNG game engine, KHÔNG thư viện ngoài, KHÔNG bước build.
-- Vẽ game bằng Canvas 2D + DOM cho HUD/panel; vòng lặp delta-time.
-- Hosting: Cloudflare Workers + KV (tài khoản của chủ dự án; thông tin bí mật/token KHÔNG nằm trong repo — tuyệt đối không đưa token vào code/repo).
-- Định hướng tương lai (chỉ là PROPOSED, CHƯA được duyệt chuyển đổi): TypeScript + Phaser 3 + Vite + PWA. **Không tự ý đổi engine/kiến trúc** — xem mục 13.
+## 2. Game là gì
 
-## 6. Cấu trúc repo & module
+Action RPG chibi fantasy 2.5D cho điện thoại (landscape): joystick 8 hướng, camera bám hero, AUTO + đánh tay, 3 phái × nam/nữ (Kiếm Sĩ / Pháp Sư / Cung Thủ), mỗi phái 4 skill chính (mở Lv1/8/15/25) + 2 buff chủ động + 2 bị động. Trang bị 4 slot (Vũ khí, Áo giáp, Giày, Nhẫn), cường hoá +cấp (+8%/cấp), khảm ngọc, ghép 3 ngọc cùng loại+cấp. Tối đa 3 nhân vật/thiết bị, lưu localStorage (autosave). Tài liệu gốc: `docs/` (SPEC.md là luật cao nhất, GDD, ART_DIRECTION, BALANCE, ARCHITECTURE, ROADMAP, PROGRESS, CHANGELOG, GAP_ANALYSIS).
 
-```
-index.html          Toàn bộ game: engine + DATA + UI (giữ cùng thư mục với 2 file dưới)
-assets-data-1.js    Bảng ảnh __A phần 1 (data URI): tranh mở đầu, chân dung, nhân vật
-assets-data-2.js    Bảng ảnh __A phần 2: dải khung hình chuyển động
-docs/               SPEC.md (chuẩn cao nhất), GDD.md, ART_DIRECTION.md, BALANCE.md,
-                    ARCHITECTURE.md, ROADMAP.md, PROGRESS.md, CHANGELOG.md, HUD_V2.md
-cloudflare/         worker.js (phục vụ game từ KV) + deploy_game.py (nạp file game vào KV)
-```
+## 3. Kiến trúc & cách deploy (ĐỌC KỸ — khác thường)
 
-Vì sao tách 3 file: bản đóng gói một file nặng ~10 MB (41 lượt nhúng ảnh, rút gọn còn 19 ảnh duy nhất) vượt giới hạn một lần đẩy GitHub nên tách ảnh thành 2 file JS. Khi chạy, `index.html` nạp 2 file data trước rồi game tra ảnh qua bảng `__A` (khóa k0–k18).
+- Source thật của game là một **Space (web artifact) phía Luna**, không nằm trong repo này. Repo này là bản sao phát hành: `index.html` (bản split) + `assets-data-1..25.js` chứa toàn bộ asset dạng data URI (~57MB tổng). **Đừng sửa tay các file data** — chúng được sinh từ bản export bằng script split (chia để không file nào vượt giới hạn KV 25MB/key và giới hạn đẩy GitHub).
+- Live chạy trên Cloudflare Workers + KV (namespace FANTASY_GAME): Worker phục vụ `/` từ key `index_split`, `/assets-data-N.js` từ key `data_N`, `/health` → ok, `/mono` → redirect `/` (định dạng monolith đã bỏ từ v0.7.0).
+- Quy trình phát hành của Luna: sửa Space → export → `node --check` 7 khối script → split → deploy KV → đối chiếu byte-size từng file data với live → cập nhật docs → push GitHub (so blob trước, chỉ đẩy file đổi; đẩy TỪNG file data một vì đẩy cặp >~6MB bị HTTP 413).
+- Token Cloudflare nằm trong Secure Vault của Luna — **không bao giờ ghi token vào code/frontend/repo**.
 
-Phân lớp trong code (bắt buộc giữ, chi tiết ở `docs/ARCHITECTURE.md`): **DATA** (mọi bảng số: quái/boss/đồ/ngọc/skill/map/EXP/tỉ lệ rơi — không hardcode vào engine) · **ENGINE** (vòng lặp, chiến đấu, va chạm, AI quái, camera, minimap) · **GAME STATE** (theo từng nhân vật) · **UI** (HUD V2, PanelManager, màn chọn/tạo nhân vật) · **ASSETS** (manifest `ASSETS`/`ASSET_FILES` khai báo literal mọi đường dẫn ảnh `assets/...` trong bản gốc — phải giữ literal, không nối chuỗi động, để công cụ đóng gói nhúng đủ ảnh) · **STORAGE** (điểm gắn duy nhất `persist()`).
+## 4. Thế giới game (v0.8.0 — thay thế hẳn cơ chế "màn" cũ)
 
-## 7. Tính năng ĐÃ hoàn thành (đã kiểm thử tự động bằng harness chạy engine thật)
+- **17 map liên thông, KHÔNG khoá màn, KHÔNG điều kiện qua màn** (chỉ đạo của anh Do): đánh quái → làm nhiệm vụ → lên cấp; dải cấp chỉ là gợi ý.
+- Điểm bắt đầu: **Làng Khởi Đầu** (`lang`) — map an toàn, 4 NPC tạm do Luna tạo: Trưởng Làng (3 nhiệm vụ treo thưởng lặp lại), Thương Nhân (mở shop), Thợ Rèn (mở cường hoá), Y Sĩ (hồi đầy HP/MP miễn phí). NPC dùng dải idle bộ phận của hero làm hình tạm.
+- Di chuyển: **15 cặp cổng đá 2 chiều** (Băng 1 ⇄ Băng 2 có 2 cặp bắc/nam) + **bảng Dịch chuyển** trong panel bản đồ lớn (chạm map là tới safe zone, miễn phí).
+- Chuỗi map: Làng → Thảo Nguyên 1 (rung_xanh_v2) → Thảo Nguyên 2 (tranh map_1 cũ) → Thảo Nguyên Băng (map_3) → Băng Nguyên 1 (map_4) ⇄ Băng Nguyên 2 (bang_tuyet) → Sa Mạc Hoang Mạc (hoang_mac_nui_lua) → Núi Lửa (map_5); nhánh: Hang Tối (hang1) → Hang Pha Lê (hang_pha_le), Hang Băng (hang2), Hang Lửa (hang3); 3 Đấu Trường boss (bossxuan/boss_bang/bosslua — boss hồi sinh 5 phút). **Đầm Lầy Độc + Lâu Đài Bóng Đêm: có trong danh sách, trạng thái "Sắp mở"** — chưa có tranh (Codex chưa vẽ).
+- Va chạm: lưới RLE của Claude cho 14 map ở `art-tests/maps-desktop-v2/maps_collision.json` (5 map mới, 100×100, thế giới 2800×2800) và `art-tests/maps-anh-do/collision/maps_collision.json` (9 map cũ, 100×80). Game giải mã 2 JSON này lúc khởi động (chúng nằm trong assets của Space: `assets/maps2/`). Luna đã kiểm: mọi map vùng đi được là 1 vùng liên thông lớn nhất áp đảo; map_3/map_5 có túi nhỏ tách rời → engine có quy tắc **vùng lớn nhất**: mọi điểm spawn/cổng/NPC/đáp dịch chuyển đều bị ép vào vùng liên thông lớn nhất.
+- Quái biome (rig bộ phận Codex + Claude lắp, Luna QC đạt): **bat** (hang, bay bổ nhào), **mummy** (sa mạc, tank chậm), **fireDragon** (núi lửa, đánh xa, ×1.3; bản cỡ boss ở Đấu Trường Lửa), **iceWolf** (map băng, cận chiến nhanh; bản Vương ở Đấu Trường Băng). **toad + wraith đã đăng ký dữ liệu nhưng CHƯA spawn** (chờ tranh Đầm Lầy/Lâu Đài). Quái Rừng Xanh cũ (slime/goblin/wolf/goblinArcher/goblinShaman) giữ nguyên; Goblin Shaman đã có trong vùng elite của Thảo Nguyên 1.
 
-- Mở game: màn hình tải (tranh 3 anh hùng chibi + thanh tiến trình thật) → vào thẳng sân khấu chọn nhân vật (thảo nguyên toàn màn); game tự xoay hình 90° khi khung hiển thị dọc, khóa trải nghiệm ngang.
-- Chọn/tạo nhân vật: 3 phái (Kiếm Sĩ / Pháp Sư / Cung Thủ) × Nam/Nữ — chibi toàn bộ; panel chi tiết có biểu đồ sao chỉ số; ô nhập tên viền vàng Fantasy, nút Vào game khóa tới khi tên hợp lệ (2–14 ký tự, không trùng); tối đa 3 ô nhân vật, tiến trình tách riêng; nút "Nhân vật đã lưu" khi đã có nhân vật.
-- Chiến đấu: đánh tay + AUTO (biết thả diều cho phái xa), phản hồi ngay khi chạm, giữ để đánh liên tục, đệm lệnh trước khi hết hồi chiêu; 4 skill chính/phái mở ở Lv1/8/15/25 + skill phụ; điểm thân thể + điểm skill khi lên cấp.
-- Nhân vật có dải 6 khung hình thật (2 đứng thở, 2 chạy bước chân rõ, 2 vung đòn đồng bộ đòn đánh); chạy có quán tính tăng/giảm tốc; không còn lỗi phóng to/thu nhỏ khi chạm nhanh (đã khóa zoom webview).
-- Map Rừng Xanh chuẩn: sông + cầu (va chạm thật, đạn bị chặn), vùng an toàn, vùng tinh anh, khu boss; camera bám và dừng ở biên; minimap; HUD V2 (5 icon tròn viền vàng trên phải cạnh minimap, panel mở thì tạm dừng chiến đấu/AUTO và khôi phục đúng trạng thái khi đóng).
-- Quái: 4 họ Rừng Xanh (Slime, Goblin, Sói, Goblin bắn cung) khác hành vi; boss Chúa Sói 3 skill có vùng cảnh báo + nổi giận dưới 50% HP. Va chạm trượt theo vật cản, không xuyên, không kẹt.
-- Trang bị/ngọc: rơi đồ tự nhặt, mặc/nâng cấp đồ, khảm ngọc theo bảng 7 cấp (code có, xem mục 9 về kiểm chứng); cài đặt đồ họa/âm lượng nhạc–hiệu ứng riêng, rung.
-- Kiểm thử đã đạt: AUTO qua màn 1 cả 3 phái (12/12 + 30/30 lượt Pháp Sư), boss 4/4, va chạm + PanelManager đạt, 0 lỗi console.
+## 5. Phân vai (anh Do chốt 2026-11-28)
 
-## 8. Đang dở / chưa thực hiện
+- **Codex = vẽ tĩnh**: hero/monster tách bộ phận, tranh map, icon. Vẽ nhân vật chuyển động thì tách sẵn bộ phận (mỗi bộ phận 1 PNG trong suốt trên canvas chung 768×640, chân y=620, `parts.json` có trục + thứ tự lớp, kèm `assembled.png` + `comparison.png`).
+- **Claude = animation & kỹ thuật hình**: lắp ghép chuyển động TỪ bộ phận (chỉ xoay/dịch quanh trục, không tự vẽ), tách lớp map, upscale, lưới va chạm. Đầu ra: dải PNG + `animations.json` (durations_ms + hit_frame) + GIF xem trước + REPORT.md, đẩy vào `art-tests/`.
+- **Luna = game**: hướng đi/spec, bố cục/HUD, tích hợp mọi asset vào engine, QC độc lập mọi lô (tự ghép chồng đo lệch pixel, đo từng ô dải), deploy Cloudflare + đồng bộ GitHub, viết lệnh giao việc cho Codex/Claude (anh Do chuyển tiếp).
+- Anh Do đã **uỷ toàn quyền cho Luna** trong workflow game (tự quyết, không hỏi từng bước) — nhưng thẻ duyệt của nền tảng Muse cho thao tác ghi ra ngoài (push GitHub) là khoá hệ thống, Luna không tắt được; cách giảm: gom việc, đẩy ít lần.
 
-- **Lưu tiến trình bền**: bản hiện tại là bản tĩnh — tải lại trang là mất tiến trình. Cần bản server-backed trên Cloudflare (giai đoạn 3; điểm gắn `persist()` đã chừa sẵn).
-- 6 map còn lại mới có khung dữ liệu; nội dung/đồ họa chuẩn mới hoàn thiện ở Rừng Xanh. Boss các màn sâu + vòng khảm ngọc trọn vẹn chưa kiểm chứng trực tiếp (cần farm dài).
-- Cốt truyện + hệ thống nhiệm vụ (7 viên đá nguyên tố vs Chúa Quỷ), thành phố trung tâm + 9 NPC, kho đồ.
-- Trang bị 10 ô + phát sáng +7/+10/+15 + đổi ngoại hình theo đồ (hiện mới đạt một phần ở nhân vật mẫu Kiếm Sĩ Nam).
-- Màn hình Kết quả boss, Hồi sinh chuẩn; tính năng mở rộng (pet, set đồ, phụ bản, tháp…) theo `docs/ROADMAP.md`.
-- **Chờ chủ dự án duyệt phong cách giai đoạn 1** (nhân vật chibi AI + cơ chế hiện tại) trước khi nhân rộng — và chờ anh test v0.3.7 trên iPhone thật (độ nhạy đòn đánh, chạy mượt).
+## 6. Chuẩn asset đã nghiệm thu (đừng phá)
 
-## 9. Lỗi đã biết / vấn đề mở
+- Hero: cả 6 nhân vật có bộ phận (QC ghép chồng lệch **0px**) + dải idle/run/skill-1 do Claude lắp, đã vào game v0.7.2 (thư mục Space `assets/anim2/`, ô 768×640, chân 620). Kiếm Sĩ Nam thêm bộ skill key-pose đủ 4 skill (v0.7.0, `assets/anim/`).
+- **Chuẩn hoá kích thước hero (bài học đắt giá)**: các dải có chiều cao hình thật KHÁC nhau (bộ phận ~586px, key-pose ~470px, dải cũ ~476px). Engine nay **tự đo khung bao alpha thật của từng dải/từng khung lúc nạp** và chuẩn hoá mọi trạng thái về chiều cao vẽ 105px. TUYỆT ĐỐI không quay lại hằng số tỉ lệ cố định cho mọi dải — đó là nguồn lỗi "đứng một cỡ, đánh một cỡ" anh Do đã báo.
+- Icon: hệ icon phẳng của Codex (48 icon, `assets/icons2/`) là hệ chính từ v0.7.1; bộ icon vẽ tay của Luna (`assets/icons/`) là dự phòng. Icon áo/giày theo bậc (48 icon, `assets/equip/`) hiện trong Túi đồ/Trang bị theo phái+giới+bậc cấp món (1–19→lv1, 20–39→lv20, 40–59→lv40, 60+→lv60) — chỉ hiển thị.
+- HUD: bố cục V3 (cụm skill vòng cung quanh nút đánh thường dưới-phải; hàng icon tròn có nhãn trên-phải cạnh minimap; panel dạng cửa sổ nổi, mở panel = tạm dừng combat/AUTO, đóng khôi phục đúng trạng thái). Cụm fight-pad tự thu nhỏ theo chiều cao khung (×0.82 <540px, ×0.7 <440px).
 
-- Tiến trình mất khi tải lại trang (mục 8) — hạn chế lớn nhất hiện tại.
-- CHƯA test trên iPhone thật; mọi kiểm thử tới nay là trình duyệt/mô phỏng + harness Node. Không tuyên bố "mượt trên iPhone".
-- Khung chạy của Cung Thủ Nữ dùng dáng bước–ngắm (AI sinh lẫn dáng ngắm); vài khung Pháp Sư còn sót mảnh nhỏ của nhân vật bên cạnh ở mép ảnh (nhân vật chính nguyên vẹn).
-- Chuyển động joystick sau khi tự xoay hình mới kiểm chứng bằng hình học, chưa có probe kéo thực tế.
-- File game một file ~10 MB: tải lần đầu chậm trên mạng yếu; bản GitHub phải giữ đủ 3 file cùng thư mục mới chạy.
+## 7. Hai sự cố live ngày 2026-11-28 và cách đã sửa (đọc để không tái phạm)
 
-## 10. Chạy & kiểm thử trên Windows 11
+1. **Vào game chỉ thấy UI, không thấy map/nhân vật**: hero khởi tạo thiếu `y` → khung vẽ đầu tiên gọi gradient với NaN → vòng lặp game chết hẳn (rAF đăng ký ở cuối loop). Đã sửa: hero có toạ độ hợp lệ từ đầu; loop đăng ký rAF NGAY ĐẦU vòng; guard isFinite cho gradient. → Bài học: vòng lặp phải tự cứu; không để 1 lỗi khung hình giết cả game.
+2. **Kẹt hộp thoại NPC + camera phóng to mờ + minimap sai hình** (ảnh iPhone thật của anh Do): hộp tương tác NPC có scrim phủ kín chặn joystick nên không đi ra được để hộp tự đóng → thêm nút ✕ riêng + scrim mềm (pointer-events:none) + không bật lại khi còn đứng cạnh; canvas lệch kích thước khi webview đổi khung không bắn sự kiện → gán style width/height tường minh + watchdog resize trong loop; minimap vẽ trước khi tranh tải xong → chỉ vẽ khi naturalWidth>0 và vẽ lại khi onload. → Bài học: **mọi bản phát hành phải có probe RENDER THẬT vào được gameplay** (v0.8.0 chỉ test logic nên lọt lỗi này tới tay anh Do).
 
-Không cần cài gì ngoài trình duyệt (và Node.js nếu muốn kiểm tra cú pháp):
+## 8. Việc đang dở / tiếp theo (theo thứ tự ưu tiên)
 
-```bat
-git clone https://github.com/tuandd1985-ship-it/fantasy-huyen-thoai-luc-dia-.git
-cd fantasy-huyen-thoai-luc-dia-
-python -m http.server 8000
-:: mở http://localhost:8000 — hoặc mở thẳng index.html bằng trình duyệt
-```
+1. **Chờ anh Do xác nhận bản sửa lỗi thứ hai** (mục 7.2). Nếu còn lỗi → sửa tiếp trước mọi việc.
+2. **Hoàn thiện redesign v0.9.0** theo brief của anh Do + 5 ảnh tham chiếu (`docs/art/ui-reference/ref-1..5`): design system navy #14263D / khung #294C70 / viền vàng #D5AC60 / chữ #F5E8CA. ĐÃ VÀO ở đợt sửa lỗi: nền fullscreen thật (đã bỏ CSS rotate — máy dọc hiện nhắc xoay, PWA standalone + orientation landscape khai báo manifest), 5 panel icon (Nhân Vật/Túi Đồ 8×5/Trang Bị 4 slot/Kỹ Năng/Cài Đặt) đúng áo + ✕ + cuộn trong panel. CÒN THIẾU: màn **Chọn nhân vật theo ref-5** (slot trái, hero lớn giữa chạy idle, thông tin phải, nút Vào game nổi bật) và rà soát đối chiếu từng màn hình với ảnh mẫu. BẤT BIẾN: không thêm Lực Chiến/tiền tệ/slot mới (ảnh mẫu có nhưng game không có — dữ liệu game thắng ảnh), không đổi công thức/save.
+3. **Tối ưu tải**: tổng ~57MB nạp lần đầu là nặng. Hướng đã thống nhất: **lazy-load theo map** (chỉ tải asset của map khi vào) — làm cùng đợt rollout map mới.
+4. **Claude còn nợ**: skill 2–4 + đánh thường + trúng đòn cho 6 hero từ bộ phận; **Codex còn nợ**: 2 biến thể tay cầm kiếm + bộ phận nhìn nghiêng của Kiếm Sĩ Nam; tranh **Đầm Lầy Độc** và **Lâu Đài Bóng Đêm** (vẽ xong thì spawn toad/wraith + mở 2 map); map Rừng Xanh "sạch" mới (ít chi tiết vụn, đất trống dễ đọc) thay dần tranh cũ nếu đạt QC.
+5. **Chưa quyết** (đừng tự ý làm): lưu server đa thiết bị — giai đoạn sau, chưa làm.
+6. **Capacitor**: nếu anh Do muốn khoá fullscreen cứng kiểu app native (iOS không cho web/PWA khoá xoay/fullscreen bằng code), phương án đóng gói Capacitor đã được Luna nêu — chờ anh quyết, chưa triển khai.
 
-- Kiểm tra cú pháp: trích các khối `<script>` trong index.html ra file .js rồi chạy `node --check` từng khối (bản hiện tại: 7/7 đạt ở bản đóng gói, 12/12 đạt ở bản tách file).
-- Kiểm thử gameplay: chơi thử ở khung ngang; bật AUTO để soi kẹt đường/va chạm; mở từng panel kiểm tra tạm dừng–khôi phục.
-- Triển khai Cloudflare (chỉ chủ dự án/người được ủy quyền có token): nạp bản đóng gói một file vào KV bằng `cloudflare/deploy_game.py`, Worker ở `cloudflare/worker.js`. Quy trình phát hành: Preview → Production, có version + CHANGELOG + phương án rollback.
+## 9. Quy tắc làm việc bất biến
 
-## 11. Hình ảnh, nhân vật, chuyển động, hiệu ứng
-
-- Ảnh: WebP nhúng dạng data URI. Nhân vật chibi do AI vẽ từ chân dung tham chiếu, nền magenta được tách (keying) bằng PIL/scipy; dải chuyển động 6 khung cắt từ một dải ngang, mỗi khung đã soi bằng mắt.
-- Chuyển động trong sân: biến đổi (transform) + đổi khung theo quãng đường chạy (sải chân khớp tốc độ từng phái), bob theo nhịp bước, lật hướng mượt; khung vung đòn đồng bộ thời điểm ra đòn/skill.
-- Hiệu ứng chiến đấu: hạt (particle) có trần số lượng, quái ở xa "ngủ" để không lag; vòng cảnh báo vùng nguy hiểm cho skill boss; vũ khí nhân vật mẫu đổi hình theo trang bị.
-- Quy ước bắt buộc khi thêm ảnh: khai báo đường dẫn literal trong manifest `ASSETS`/`ASSET_FILES`; giữ phong cách: nhân vật = chibi dễ thương, quái/boss/map = fantasy theo ảnh mẫu `Concept.png` (xem `docs/ART_DIRECTION.md`).
-
-## 12. Tích hợp ảnh từ ComfyUI + SDXL (đang triển khai trên PC của chủ dự án)
-
-- Máy: Windows, RTX 2070 Super; Codex đang cài ComfyUI (thư mục dự kiến `K:\AI\ComfyUI-Local` nếu ổ K là SSD) + kiểm thử 4 ảnh mẫu, ghi thông số (thời gian/VRAM/RAM/nhiệt GPU) vào `test-images/INFO.md`, thông tin môi trường vào `ENV.md`, lưu workflow mẫu `game_asset_basic.json`, có script start/stop và API cục bộ `http://127.0.0.1:8188` (POST `/prompt`). Chưa cài thêm LoRA/plugin ngoài phạm vi đã duyệt.
-- Quy ước ảnh cho game: toàn thân, căn giữa, nền phẳng **magenta #FF00FF** để tách nền tự động, xuất PNG, đặt tên `hero_<phai>_<gioi>.png`, `monster_<ten>.png`, `icon_<ten>.png`.
-- Luồng tích hợp: ComfyUI sinh ảnh → tách nền/cắt khung (PIL) → khai báo vào manifest ASSETS → đóng gói lại → đẩy GitHub + triển khai Cloudflare → kiểm chứng trên link thật.
-- Ưu tiên sản xuất đầu tiên: bộ quái + boss thay cho quái vẽ bằng code; lưu ý bài toán khó nhất là giữ nhân vật nhất quán giữa các khung hình (dùng ảnh tham chiếu + cùng seed/workflow).
-
-## 13. Tài liệu thiết kế & quy tắc đã thống nhất (BẮT BUỘC tuân thủ)
-
-Đọc theo thứ tự: `docs/SPEC.md` (chuẩn cao nhất — toàn bộ yêu cầu đã chốt: 3 phái × Nam/Nữ, skill Lv1/8/15/25, 7 map, nâng cấp + khảm ngọc theo một công thức %, không khóa tính năng theo cấp, HUD V2, chibi toàn bộ, ngang tự xoay, 3 ô nhân vật…) → `docs/GDD.md` (bảng số thiết kế) → `docs/BALANCE.md` (cân bằng) → `docs/ART_DIRECTION.md` → `docs/ARCHITECTURE.md` → `docs/ROADMAP.md` → `docs/PROGRESS.md` / `docs/CHANGELOG.md` / `docs/HUD_V2.md`.
-
-Quy tắc làm việc của chủ dự án:
-- Đề xuất chưa được duyệt phải ghi rõ **PROPOSED**, không tự ghi đè SPEC; không thay đổi kiến trúc lớn/viết lại toàn bộ khi chưa có báo cáo gap + duyệt + kế hoạch bảo toàn dữ liệu.
-- Không đánh dấu tính năng là hoàn thành khi chưa kiểm thử; không tuyên bố mượt trên iPhone khi chưa test máy thật.
-- Sau mỗi thay đổi: thêm dòng vào `docs/CHANGELOG.md`, kiểm tra cú pháp JS, nói rõ đã kiểm chứng gì / chưa kiểm chứng gì.
-- Không công khai thông tin bảo mật; token API không bao giờ vào frontend/repo.
+- SPEC.md là luật cao nhất; đề xuất chưa duyệt ghi PROPOSED, không ghi đè SPEC; thay đổi lớn phải có gap report + anh Do duyệt + kế hoạch bảo toàn dữ liệu.
+- Không bao giờ tuyên bố "mượt trên iPhone" từ test desktop; FPS 60 phải đo trên máy thật (game có đồng hồ FPS bật trong Cài đặt).
+- Báo cáo với anh Do: NGẮN, tiếng Việt, chỉ nói đã xong gì + anh cần xem gì. Bảng thông số dài để trong tài liệu như file này.
+- Lệnh giao cho Claude/Codex: để TOÀN BỘ trong MỘT code block để anh Do chạm copy 1 lần.
+- Khi Luna đọc code trên GitHub phải nói rõ repo/branch/đường dẫn file.

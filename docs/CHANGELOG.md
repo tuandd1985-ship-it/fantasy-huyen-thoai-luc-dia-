@@ -1,4 +1,14 @@
 
+## v0.8.1 / v0.8.2 — 2026-11-28 (hotfixes from Do's iPhone playtest + partial v0.9.0 UI)
+- FIX 1 (invisible world): hero init lacked `y` → first-frame gradient NaN killed the game loop (rAF registered at loop end). Fixed: valid hero coords at init, rAF registered first, isFinite guard on the hero glow gradient. Verified by rendered probe entering the village (map + hero + 4 NPCs + portal + minimap, 0 console errors).
+- FIX 2 (hero size): animation strips have different true heights (parts ~586px, key-pose ~470px, legacy ~476px) but the draw code forced one 476 constant → idle/run drew ~129px vs basic attack 105px. Engine now measures each strip/frame's real alpha bbox at load and normalises every state to 105px draw height with per-strip feet rows.
+- FIX 3 (stuck NPC dialog, from Do's screenshot): the interact box's scrim covered the stage and blocked the joystick, so the player could not walk away to dismiss it. Added a dedicated round ✕ close button, soft (pointer-events:none) scrim, and no re-pop while standing next to the same NPC.
+- FIX 4 (zoomed/blurry map): canvas backing store diverged from CSS size when the webview resized silently → explicit style width/height + a watchdog in the loop that re-resizes on >2px divergence.
+- FIX 5 (minimap showed a hero portrait): minimap drew before the map image loaded → draw only when naturalWidth>0 and redraw on image load.
+- FIX 6 (skill cluster overlap on short landscape screens): fight-pad scales by viewport height (×0.82 <540px, ×0.7 <440px), arc geometry unchanged.
+- UI (partial v0.9.0, folded into the fix round at Do's request): CSS fake rotation removed (real landscape; portrait shows a rotate notice), safe-area/fullscreen foundation, and all 5 HUD-icon panels (Character / Bag 8×5 with tabs + right detail / Equipment 4 slots / Skills with locks / Settings) restyled to the approved design system (navy #14263D, frame #294C70, gold #D5AC60, text #F5E8CA) with round ✕ buttons and inside-scroll — verified by rendered probes opening each panel. STILL OPEN for v0.9.0: character-select screen per ref-5 and a full screen-by-screen pass against the reference images (docs/art/ui-reference/).
+- PROJECT_HANDOVER.md fully rewritten (2026-11-28) — start there.
+
 ## v0.8.0 — 2026-11-28 (17-map connected world, starter village + NPCs, free teleport)
 - World structure replaces stage progression: 17 maps (15 playable; Đầm Lầy Độc + Lâu Đài Bóng Đêm show "Sắp mở" — paintings not drawn yet). No stage-clear gating anywhere; monsters respawn continuously; travel is free.
 - Làng Khởi Đầu (new lang_khoi_dau painting, 2800×2800) is the spawn hub with 4 NPCs: Trưởng Làng (3 repeatable bounty quests), Thương Nhân (shop), Thợ Rèn (forge), Y Sĩ (free full heal). New characters start here; old saves migrate to the village keeping level/gear/skills/gold.
