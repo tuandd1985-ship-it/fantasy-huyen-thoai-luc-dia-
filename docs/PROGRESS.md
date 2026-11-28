@@ -38,7 +38,7 @@ Cập nhật: 2026-11-28 (sau bản v0.5.6 — Rừng Xanh 2 lớp Y-sort + Phá
 
 ## Đang chờ Do
 - Do test trên iPhone thật: đi sau/dưới tán cây ở Rừng Xanh (che + mờ có mượt không), Pháp Sư v2 (dáng mới có hợp không), và các mục v0.5.5 (chân dính đất, lưu nhân vật vào lại không hỏi tên, bàn phím ngang, tỉ lệ với cây); cộng mục cũ (hào quang boss cuồng nộ, skill cấp cao).
-- Việc kỹ thuật tồn: file game 21.7MB đang gần trần KV 25MB — cần đợt tối ưu dung lượng (khử nhúng trùng ảnh map trong bản export) trước khi rollout thêm map.
+- Dung lượng: ĐÃ xử lý 2026-11-28 — bản live chuyển sang dạng tách file (tải thực tế 21.7MB → ~11.3MB, trần tổng ~1GB theo anh Do; bản một-file giữ ở /mono làm dự phòng). Còn lại cho đợt rollout map: nạp asset theo từng map (lazy) để tải lần đầu nhẹ hơn.
 - Tiếp theo sau khi Do duyệt pilot lớp map: rollout 14 map còn lại của Claude (đã upscale sẵn): mỗi map dựng lưới va chạm theo tranh (quy trình Luna đã làm cho map_1) + giao Claude tách lớp tương tự; Làng Tân Thủ (tanthu) làm hub riêng theo Design V2.
 - Chốt có đưa Pháp Sư Goblin vào pool spawn của Rừng Xanh không (hiện đã có ảnh + mapping, chưa spawn).
 
