@@ -2,7 +2,7 @@
 
 Chuẩn bị UTC: 2026-11-27T17:25:44.376211+00:00
 
-Phạm vi chủ dự án đã duyệt: 5 loại quái, mỗi loại 2 seed; SDXL 1024×1024 nền trắng + rembg BiRefNet; không LoRA/plugin mới; không sửa source game hoặc deploy. Bộ này gồm đúng **10 raw PNG + 10 cut PNG RGBA**, là ảnh tĩnh để nghiệm thu, chưa có animation và chưa tích hợp vào runtime game.
+Phạm vi chủ dự án đã duyệt: 5 loại quái, mỗi loại 2 seed; SDXL 1024×1024 nền trắng + rembg BiRefNet; không LoRA/plugin mới; không sửa source game hoặc deploy. Đợt đầu gồm **10 raw PNG + 10 cut PNG RGBA**, là ảnh tĩnh để nghiệm thu, chưa có animation và chưa tích hợp vào runtime game.
 
 ## Bảng thiết kế gốc được lưu làm khuôn cho các map sau
 
@@ -1034,3 +1034,216 @@ Prompt ID `30fab842-f6ae-4ac6-a65c-6bf4ab55bf16`.
 ## Ghi chú nghiệm thu bắt buộc
 
 Bộ này CHƯA đạt100% bảng thiết kế: cả hai Goblin vẫn sai dạng chùy gỗ có đinh; Slime s1 lá quá lớn; mũ Cung thủ chưa đúng nâu; rune/sẹo Boss cần duyệt. Có25lượt sinh SDXL gồm ứng viên bị loại để chọn10file cuối, không phải chỉ10request. Không đánh dấu là bộ production-ready và không tích hợp khi chưa được chủ dự án duyệt. Bảng thiết kế chuẩn do Muse lưu: [MONSTER_DESIGN_RUNG_XANH.md](../../docs/MONSTER_DESIGN_RUNG_XANH.md).
+
+## Bổ sung Pháp Sư Goblin
+
+Thêm hai biến thể Pháp Sư Goblin theo [mục 6 của bảng thiết kế](../../docs/MONSTER_DESIGN_RUNG_XANH.md). Thư mục hiện có **12 ảnh raw và 12 ảnh cut** cho 6 loại. Các số đo ở trên thuộc đợt đầu.
+
+SDXL Base 1.0, 1024×1024, batch 1, 25 bước, Euler/normal, CFG 6.5, denoise 1. Phần mô tả Pháp Sư Goblin được gửi nguyên văn, ghép sau prompt phong cách chung có nền trắng. Negative lấy từ bảng thiết kế.
+
+Tách nền bằng rembg 2.0.88, birefnet-general, ONNX Runtime 1.32.0 trên CPU. Giữ thành phần liên thông lớn nhất ở alpha >16 và chừa mép mềm 2 px. SHA-256 model: `58f621f00f5d756097615970a88a791584600dcf7c45b18a0a6267535a1ebd3c`.
+
+| Biến thể | Seed | Sinh qua API | Tách nền CPU |
+|---|---:|---:|---:|
+| [monster_goblin_shaman_raw.png](monster_goblin_shaman_raw.png) · [monster_goblin_shaman_cut.png](monster_goblin_shaman_cut.png) | 628401 | 17.25 s | 33.60 s |
+| [monster_goblin_shaman_s2_raw.png](monster_goblin_shaman_s2_raw.png) · [monster_goblin_shaman_s2_cut.png](monster_goblin_shaman_s2_cut.png) | 628402 | 16.49 s | 42.51 s |
+
+Thời gian tách gồm mở ảnh, suy luận và lưu PNG. Nạp session một lần, ngoài số đo từng ảnh. Cả hai cut đã kiểm tra kích thước, alpha và hash.
+
+**Kiểm tra hình ảnh cho Luna.** Seed 628401 có nền xám chuyển sắc, khăn xanh và đầu trượng gắn lông cam. Seed 628402 có nền gần trắng và khăn cam, nhưng bản cut còn mảng xám dưới chân và lá quanh nhân vật. Cả hai dùng mặt nạ che mặt và đều thiếu đầu lâu xanh phát sáng trên trượng. Hai biến thể là mẫu chờ duyệt.
+
+Luna duyệt nhận diện và viền trước khi chọn biến thể.
+
+### monster_goblin_shaman
+
+Prompt ID: `5e1fbc11-d8bf-49bd-81d8-3ec812d3a94e`.
+
+- Raw SHA-256: `e639081f99ad3f033fdbc69452559df302bb020ab39e6fa4bf2aeed670fa89a7`.
+- Cut SHA-256: `f0bed2b0cc877394835e9b65a4c25aa2ba9e3589cc5b91e169172fb723d08e3e`.
+- PNG RGBA 1024×1024, 534,113 pixel trong suốt và 494,510 pixel alpha mềm.
+
+```json
+{
+  "1": {
+    "class_type": "CheckpointLoaderSimple",
+    "inputs": {
+      "ckpt_name": "sd_xl_base_1.0.safetensors"
+    }
+  },
+  "2": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "2D chibi game art, thick bold outlines, cel shading, vibrant colors, full body, three-quarter view, single character, plain solid white background, chibi goblin shaman, dark green skin, long pointy ears, bone mask on forehead, feather headdress, tattered purple-brown robe, orange neck scarf, holding a wooden staff topped with a small green glowing skull",
+      "clip": [
+        "1",
+        1
+      ]
+    }
+  },
+  "3": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "frame, border, emblem, multiple characters, other objects, text, watermark, gradient background, shadow, realistic, 3D render",
+      "clip": [
+        "1",
+        1
+      ]
+    }
+  },
+  "4": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "width": 1024,
+      "height": 1024,
+      "batch_size": 1
+    }
+  },
+  "5": {
+    "class_type": "KSampler",
+    "inputs": {
+      "seed": 628401,
+      "steps": 25,
+      "cfg": 6.5,
+      "sampler_name": "euler",
+      "scheduler": "normal",
+      "denoise": 1.0,
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "2",
+        0
+      ],
+      "negative": [
+        "3",
+        0
+      ],
+      "latent_image": [
+        "4",
+        0
+      ]
+    }
+  },
+  "6": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "5",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    }
+  },
+  "7": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "monsters_monster_goblin_shaman_sdxl_s628401_20261128T012906804305Z",
+      "images": [
+        "6",
+        0
+      ]
+    }
+  }
+}
+```
+
+### monster_goblin_shaman_s2
+
+Prompt ID: `1616cf38-d1f6-49db-8bb9-ec3955fc1f18`.
+
+- Raw SHA-256: `4b1217602bb9f839e631710e70013463ee0d50fa5e209abc9822294b65d84b03`.
+- Cut SHA-256: `7a1c7e101423f1bcc9ce169b3ce08e72ca061812187146bc5eb753197564161c`.
+- PNG RGBA 1024×1024, 499,360 pixel trong suốt và 505,035 pixel alpha mềm.
+
+```json
+{
+  "1": {
+    "class_type": "CheckpointLoaderSimple",
+    "inputs": {
+      "ckpt_name": "sd_xl_base_1.0.safetensors"
+    }
+  },
+  "2": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "2D chibi game art, thick bold outlines, cel shading, vibrant colors, full body, three-quarter view, single character, plain solid white background, chibi goblin shaman, dark green skin, long pointy ears, bone mask on forehead, feather headdress, tattered purple-brown robe, orange neck scarf, holding a wooden staff topped with a small green glowing skull",
+      "clip": [
+        "1",
+        1
+      ]
+    }
+  },
+  "3": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "frame, border, emblem, multiple characters, other objects, text, watermark, gradient background, shadow, realistic, 3D render",
+      "clip": [
+        "1",
+        1
+      ]
+    }
+  },
+  "4": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "width": 1024,
+      "height": 1024,
+      "batch_size": 1
+    }
+  },
+  "5": {
+    "class_type": "KSampler",
+    "inputs": {
+      "seed": 628402,
+      "steps": 25,
+      "cfg": 6.5,
+      "sampler_name": "euler",
+      "scheduler": "normal",
+      "denoise": 1.0,
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "2",
+        0
+      ],
+      "negative": [
+        "3",
+        0
+      ],
+      "latent_image": [
+        "4",
+        0
+      ]
+    }
+  },
+  "6": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "5",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    }
+  },
+  "7": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "monsters_monster_goblin_shaman_s2_sdxl_s628402_20261128T012925454674Z",
+      "images": [
+        "6",
+        0
+      ]
+    }
+  }
+}
+```
