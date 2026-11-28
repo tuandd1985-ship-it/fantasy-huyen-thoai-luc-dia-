@@ -1,5 +1,5 @@
 # PROGRESS — FANTASY: HUYỀN THOẠI LỤC ĐỊA
-Cập nhật: 2026-11-28 (sau bản v0.5.4 — Pháp Sư có dải thật + map mới của Claude).
+Cập nhật: 2026-11-28 (sau bản v0.5.5 — sửa lơ lửng/tỉ lệ/lưu nhân vật/bàn phím ngang).
 
 ## Đã xong
 - SPEC.md (yêu cầu gốc, Do phê duyệt dần qua các vòng chốt 2026-11-27) + GDD.md (bản thiết kế v2) + bộ tài liệu Master Instruction: ART_DIRECTION, ARCHITECTURE, BALANCE, ROADMAP, GAP_ANALYSIS, TEST_REPORT, CHANGELOG.
@@ -32,9 +32,11 @@ Cập nhật: 2026-11-28 (sau bản v0.5.4 — Pháp Sư có dải thật + map 
 
 - v0.5.4 — PHÁP SƯ DẢI THẬT + MAP CLAUDE (2026-11-28): Pháp Sư chạy/tung phép bằng khung hình thật; Rừng Xanh dùng map_1_x2 trầm màu của Claude. Đã deploy + đồng bộ GitHub. Chi tiết: CHANGELOG.
 
+- v0.5.5 — SỬA 4 LỖI TEST THỰC TẾ (2026-11-28): neo chân dính đất theo đệm alpha đo thật, tỉ lệ ×0.92, lưu nhân vật localStorage (vào lại không hỏi tên), bàn phím nhập tên trong game nằm ngang. Đã deploy + đồng bộ GitHub. Chi tiết: CHANGELOG.
+
 ## Đang chờ Do
-- Do test trên iPhone thật: Pháp Sư chuyển động thật, map mới (màu/độ nét), quái di chuyển v0.5.3 (đặc biệt hào quang boss khi cuồng nộ — probe chưa ép máu boss được), hiệu ứng skill v0.5.1 ở cấp cao.
-- Claude đang làm (lệnh Luna đã soạn, Do chuyển): Nhiệm vụ A tách 2 lớp map pilot map_1 (nền + từng tán cây PNG + layers.json baseY + mặt nạ làm mờ) → Luna tích hợp v0.5.5 (Y-sort + fade mượt khi đi dưới tán); Nhiệm vụ B làm lại dải Pháp Sư bằng IP-Adapter dáng biên độ lớn → Luna QC mới thay.
+- Do test lại trên iPhone thật bản v0.5.5: chân dính đất chưa, tỉ lệ với cây, tạo nhân vật → thoát ra vào lại còn nguyên và không hỏi tên, bàn phím ngang gõ tên; cộng các mục cũ (hào quang boss cuồng nộ, skill cấp cao).
+- Claude đang làm (lệnh Luna đã soạn, Do chuyển): Nhiệm vụ A tách 2 lớp map pilot map_1 (nền + từng tán cây PNG + layers.json baseY + mặt nạ làm mờ) → Luna tích hợp v0.5.6 (Y-sort + fade mượt khi đi dưới tán); Nhiệm vụ B làm lại dải Pháp Sư bằng IP-Adapter dáng biên độ lớn → Luna QC mới thay.
 - Sau pilot: rollout 14 map còn lại của Claude (đã upscale sẵn) theo cùng quy trình: dựng lưới va chạm theo tranh + tách lớp.
 - Chốt có đưa Pháp Sư Goblin vào pool spawn của Rừng Xanh không (hiện đã có ảnh + mapping, chưa spawn).
 

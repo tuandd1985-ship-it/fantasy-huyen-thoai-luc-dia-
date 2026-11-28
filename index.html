@@ -451,6 +451,35 @@
       .name-hint{ font-size:12.5px; font-weight:700; color:var(--ink-soft); min-height:17px; margin:2px 0 4px; }
       .name-hint.ok{ color:var(--exp); }
       .name-hint.bad{ color:var(--bad); }
+      /* v0.5.5 — ô tên KHÔNG còn là input hệ thống: là khung hiển thị gõ bằng
+         bàn phím trong game (chạm để mở bàn phím), giữ nguyên diện mạo cũ */
+      .name-display{ display:flex; align-items:center; gap:2px; font-size:17px; font-weight:800; padding:13px 14px 13px 44px; min-height:52px; color:#f7ecd0; cursor:pointer; -webkit-tap-highlight-color:transparent;
+        border:2px solid #a4761b; border-radius:14px;
+        background:linear-gradient(180deg, rgba(43,38,26,.94), rgba(24,22,16,.96));
+        box-shadow:inset 0 2px 8px rgba(0,0,0,.65), inset 0 0 0 1px rgba(238,194,106,.22), 0 3px 10px rgba(60,45,10,.28); }
+      .name-display .ph{ color:rgba(243,233,200,.48); font-weight:600; font-style:italic; letter-spacing:.01em; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+      .name-display.err{ border-color:#e0483e; box-shadow:inset 0 2px 8px rgba(0,0,0,.65), 0 0 0 3px rgba(224,72,62,.30); }
+      .name-caret{ flex:0 0 auto; width:2.5px; height:22px; margin-left:2px; border-radius:2px; background:#ffd970; box-shadow:0 0 6px rgba(255,217,112,.8); animation:caretBlink 1.05s steps(1) infinite; }
+      @keyframes caretBlink{ 0%,55%{ opacity:1; } 56%,100%{ opacity:0; } }
+      /* ===== BÀN PHÍM TRONG GAME (v0.5.5) — trượt từ đáy sân khấu ngang ===== */
+      .name-kb{ position:absolute; z-index:7; left:0; right:0; bottom:0; padding:8px calc(10px + env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom)) calc(10px + env(safe-area-inset-left));
+        background:linear-gradient(180deg, rgba(26,24,18,.97), rgba(14,13,10,.99)); border-top:2px solid rgba(238,194,106,.55); box-shadow:0 -12px 34px rgba(0,0,0,.5);
+        transform:translateY(106%); transition:transform .26s ease; }
+      .name-kb.show{ transform:translateY(0); }
+      .kb-head{ display:flex; align-items:center; gap:10px; margin-bottom:7px; }
+      .kb-name{ flex:1 1 auto; display:flex; align-items:center; min-height:40px; padding:7px 12px; border-radius:10px; border:1.5px solid rgba(238,194,106,.5); background:rgba(255,255,255,.05); color:#f7ecd0; font-size:16px; font-weight:800; overflow:hidden; }
+      .kb-name .ph{ color:rgba(243,233,200,.45); font-weight:600; font-style:italic; font-size:14.5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+      .kb-hint{ flex:0 1 auto; max-width:38%; font-size:12px; font-weight:700; color:#d8cba0; text-align:right; }
+      .kb-hint.ok{ color:#b9ffb0; } .kb-hint.bad{ color:#ffb3ab; }
+      .kb-close{ flex:0 0 auto; width:44px; height:44px; border-radius:11px; border:1.5px solid rgba(238,194,106,.45); background:rgba(255,255,255,.07); color:#f5edd2; font-size:16px; font-weight:900; cursor:pointer; }
+      .kb-rows{ display:flex; flex-direction:column; gap:5px; max-width:860px; margin:0 auto; }
+      .kb-row{ display:flex; gap:5px; justify-content:center; }
+      .kb-key{ flex:1 1 0; min-width:0; height:46px; min-height:44px; border-radius:10px; border:1.5px solid rgba(238,194,106,.35); cursor:pointer; user-select:none; -webkit-user-select:none; touch-action:manipulation; -webkit-tap-highlight-color:transparent;
+        background:linear-gradient(180deg, rgba(74,66,44,.95), rgba(46,41,28,.97)); color:#f7ecd0; font-size:16.5px; font-weight:800; font-family:inherit; box-shadow:0 2px 0 rgba(0,0,0,.45); }
+      .kb-key.press{ background:linear-gradient(180deg, #ffe9a8, var(--gold2)); color:#4a3205; border-color:#ffe9a8; box-shadow:0 0 14px rgba(238,194,106,.65); }
+      .kb-key.fn{ font-size:14.5px; background:linear-gradient(180deg, rgba(52,58,70,.95), rgba(32,36,46,.97)); }
+      .kb-key.back{ flex-grow:1.7; } .kb-key.space{ flex-grow:4.6; } .kb-key.ok{ flex-grow:2.2; background:linear-gradient(180deg, var(--gold2), var(--gold)); color:#fff; border-color:#ffe9a8; }
+      .kb-key.ok.press{ filter:brightness(1.15); }
       /* ===== SÂN KHẤU NHÂN VẬT ĐỘNG (màn tạo nhân vật) ===== */
       .stage-wrap{ border-radius:16px; overflow:hidden; border:1.5px solid var(--line); background:linear-gradient(180deg,#79bde8 0%,#bfe6f7 45%,#86cc62 100%); box-shadow:inset 0 0 0 1px rgba(255,255,255,.25), var(--shadow); }
       .stage-names{ background:rgba(24,52,26,.55) !important; }
@@ -760,7 +789,8 @@
         <h4 class="set-h">Khác</h4>
         <div class="set-row"><span>Rung máy khi đánh boss / lên cấp</span><button class="tgl" id="setVib" aria-label="Bật tắt rung máy"></button></div>
         <p class="muted" style="margin:10px 0 0">Cài đặt áp dụng ngay. Mức đồ hoạ Thấp giảm mạnh hạt hiệu ứng để máy yếu chơi mượt.</p>
-        <p class="muted" style="margin:10px 0 0">Phiên bản <b id="gameVersion">v0.5.4</b> — Nhật ký cập nhật:</p>
+        <p class="muted" style="margin:10px 0 0">Phiên bản <b id="gameVersion">v0.5.5</b> — Nhật ký cập nhật:</p>
+        <p class="muted" style="margin:4px 0 0">v0.5.5 — Sửa nhân vật lơ lửng, cân lại tỉ lệ với cây, lưu nhân vật tự động và bàn phím nhập tên trong game.</p>
         <p class="muted" style="margin:4px 0 0">v0.5.4 — Pháp Sư có chuyển động thật; bản đồ Rừng Xanh dùng bản làm nét mới, màu trầm hơn để nhân vật nổi bật.</p>
         <p class="muted" style="margin:4px 0 0">v0.5.3 — Quái di chuyển linh hoạt: Slime nảy thạch, sói phi, goblin nhịp bước, boss uy nghi.</p>
         <p class="muted" style="margin:4px 0 0">v0.5.2 — Bản đồ Rừng Xanh nét hơn với ảnh độ phân giải cao.</p>
@@ -791,11 +821,21 @@
       </aside>
       <div class="scene-bottom">
         <div class="scene-name-block">
-          <label class="fld fld-name"><span>Tên nhân vật</span><svg class="name-quill" aria-hidden="true"><use href="#i-quill"/></svg><input id="charName" type="text" maxlength="14" placeholder="Đặt tên cho anh hùng của bạn..." autocomplete="off"></label>
+          <div class="fld fld-name"><span>Tên nhân vật</span><svg class="name-quill" aria-hidden="true"><use href="#i-quill"/></svg><div id="charName" class="name-display" role="button" aria-label="Tên nhân vật — chạm để mở bàn phím trong game"><span id="charNameText" class="ph">Đặt tên cho anh hùng của bạn...</span><span class="name-caret" aria-hidden="true"></span></div></div>
           <div class="name-hint" id="nameHint">Hãy nhập tên nhân vật</div>
           <div class="create-err" id="createErr" role="alert"></div>
         </div>
         <button class="create-start scene-start" id="createStart" disabled>Vào game</button>
+      </div>
+      <!-- v0.5.5 — BÀN PHÍM TRONG GAME: vẽ ngay trong sân khấu đã xoay
+           ngang, KHÔNG gọi bàn phím hệ thống (vốn bật theo chiều dọc máy) -->
+      <div class="name-kb" id="nameKb" aria-label="Bàn phím nhập tên trong game">
+        <div class="kb-head">
+          <div class="kb-name"><span id="kbNameText" class="ph">Đặt tên cho anh hùng của bạn...</span><span class="name-caret" aria-hidden="true"></span></div>
+          <div class="kb-hint" id="kbHint">Hãy nhập tên nhân vật</div>
+          <button class="kb-close" id="kbClose" aria-label="Đóng bàn phím">✕</button>
+        </div>
+        <div class="kb-rows" id="kbRows"></div>
       </div>
     </div>
     </div><!-- /#rotRoot -->
@@ -937,7 +977,7 @@ const ASSET_FILES = [
 ];
 
 /* Phiên bản game hiện tại — hiển thị trong panel Cài đặt */
-const GAME_VERSION = 'v0.5.4';
+const GAME_VERSION = 'v0.5.5';
 
 /* =====================================================================
    LƯỚI VA CHẠM RỪNG XANH (v0.5.0) — suy từ chính tranh nguyên khối:
@@ -1248,6 +1288,7 @@ const CONFIG = {
    LỚP ENGINE · MODULE SAVE — TRẠNG THÁI NGƯỜI CHƠI
    (Điểm nối lưu trữ duy nhất: thay thân persist() để lưu máy chủ sau.)
    ===================================================================== */
+const SAVE_KEY = 'fantasy-huyen-thoai-luc-dia-save-v1';
 const Save = {
   data: null,
   fresh() {
@@ -1266,7 +1307,32 @@ const Save = {
     };
   },
   load() { this.data = this.fresh(); return this.data; },
-  persist() { /* điểm nối lưu trữ: bản mẫu giữ trong phiên chơi */ },
+  /* v0.5.5 — LƯU THẬT XUỐNG MÁY NGƯỜI CHƠI (localStorage): tối đa 3 nhân
+     vật + cài đặt + bộ đếm id vật phẩm. persist() được gọi sẵn ở mọi điểm
+     cũ (tạo nhân vật, lên cấp, qua màn, đổi đồ, đóng panel…) và thêm lưu
+     định kỳ khi đang chơi — từ giờ tải lại trang KHÔNG mất nhân vật. */
+  persist() {
+    try {
+      localStorage.setItem(SAVE_KEY, JSON.stringify({
+        chars: Roster.chars, active: Roster.active,
+        settings: Roster.settings, itemSeq: (typeof itemSeq === 'number' ? itemSeq : 1),
+      }));
+    } catch (e) { /* chế độ riêng tư / hết quota: bỏ qua, game vẫn chạy trong phiên */ }
+  },
+  /* Khôi phục lúc mở game. Trả về true nếu có ít nhất 1 nhân vật đã lưu. */
+  restore() {
+    try {
+      const raw = localStorage.getItem(SAVE_KEY);
+      if (!raw) return false;
+      const d = JSON.parse(raw);
+      if (!d || !Array.isArray(d.chars)) return false;
+      Roster.chars = d.chars.filter(ch => ch && ch.created && typeof ch.name === 'string').slice(0, MAX_CHARS);
+      if (d.settings) Object.assign(Roster.settings, d.settings);
+      if (typeof d.itemSeq === 'number' && typeof itemSeq === 'number' && d.itemSeq > itemSeq) itemSeq = d.itemSeq;
+      Roster.active = -1;
+      return Roster.chars.length > 0;
+    } catch (e) { return false; }
+  },
 };
 let P = Save.load();
 /* Danh sách nhân vật + cài đặt theo máy — dữ liệu tách từng nhân vật ngay
@@ -1299,6 +1365,33 @@ let skillState = CONFIG.classes.swordsman.skills.map(() => ({ cd: 0 }));
 let supState = CONFIG.classes.swordsman.support.map(() => ({ cd: 0 }));
 const input = { jx: 0, jy: 0 };
 let createSel = { classId: 'swordsman', gender: 'male' };
+
+/* =====================================================================
+   v0.5.5 — BÀN PHÍM NHẬP TÊN TRONG GAME (NamePad)
+   Ô tên KHÔNG dùng <input> hệ thống nữa: bàn phím hệ thống bật theo chiều
+   DỌC của máy trong khi game tự xoay NGANG nên rất khó gõ. Tên được giữ
+   trong NamePad.value, gõ bằng bàn phím vẽ ngay trong sân khấu ngang
+   (A–Z, 0–9, dấu cách, xoá lùi, xác nhận — phím ≥44px, bấm sáng lên).
+   Luật tên giữ nguyên: 2–14 ký tự, không trùng (UI.nameCheck/createChar).
+   ===================================================================== */
+const NamePad = {
+  value: '',
+  set(v) { this.value = (v || '').slice(0, 14); this.render(); },
+  add(ch) { if (this.value.length >= 14) return; this.value += ch; this.render(); },
+  back() { if (!this.value) return; this.value = this.value.slice(0, -1); this.render(); },
+  render() {
+    const ph = 'Đặt tên cho anh hùng của bạn...';
+    for (const id of ['charNameText', 'kbNameText']) {
+      const n = el(id); if (!n) continue;
+      n.textContent = this.value || ph;
+      n.classList.toggle('ph', !this.value);
+    }
+    el('createErr').textContent = ''; el('charName').classList.remove('err');
+    UI.updateStartState();
+  },
+  open() { const kb = el('nameKb'); if (kb) kb.classList.add('show'); },
+  close() { const kb = el('nameKb'); if (kb) kb.classList.remove('show'); },
+};
 
 /* ===== SÂN KHẤU NHÂN VẬT ĐỘNG (màn tạo nhân vật) =====
    Vẽ lại đúng sprite chibi trong sân (Sprites.hero) cho cả 3 phái đứng
@@ -2267,6 +2360,44 @@ const Sprites = {
   heroAnim: {},
   heroAnimTint: {},
   ANIM_CELL_W: 420, ANIM_CELL_H: 500,
+  /* v0.5.5 — NEO CHÂN DÍNH ĐẤT: mỗi ảnh có vài px TRONG SUỐT dưới hàng
+     chân thật (dải anim đệm 8–13px, ảnh tĩnh hero đệm 5–6px, quái ~0–1px).
+     Trước đây vẽ neo theo cạnh dưới của TOÀN BỘ ảnh nên chân lơ lửng đúng
+     bằng phần đệm đó. Giờ đo "đệm chân" (feetPad) từ chính dữ liệu alpha
+     lúc nạp ảnh và khi vẽ sẽ phóng ảnh lên đúng tỉ lệ để HÀNG CHÂN THẬT
+     trùng điểm đất logic (0,0). Số đo đối chiếu bản kiểm của Luna:
+     anim Kiếm Sĩ/Cung Thủ chân y=487/500, Pháp Sư 490–492/500, hero tĩnh
+     633–634/640, quái chạm cạnh dưới. */
+  heroFeet: {},    /* key -> đệm px của ảnh tĩnh (theo chiều cao gốc) */
+  animFeet: {},    /* key -> mảng đệm px theo từng ô 420×500 */
+  monFeet: {},     /* type -> đệm px của ảnh quái */
+  _feetCv: null,
+  measureFeet(img, cellW) {
+    try {
+      const W = img.naturalWidth, H = img.naturalHeight;
+      if (!W || !H) return null;
+      const c = this._feetCv || (this._feetCv = document.createElement('canvas'));
+      c.width = W; c.height = H;
+      const g = c.getContext('2d', { willReadFrequently: true });
+      g.clearRect(0, 0, W, H); g.drawImage(img, 0, 0);
+      const data = g.getImageData(0, 0, W, H).data;
+      const cells = cellW ? Math.max(1, Math.round(W / cellW)) : 1;
+      const pads = [];
+      for (let ci = 0; ci < cells; ci++) {
+        const x0 = ci * (cellW || W), x1 = Math.min(W, x0 + (cellW || W));
+        let feet = -1;
+        for (let y = H - 1; y >= 0 && feet < 0; y--) {
+          let cnt = 0;
+          for (let x = x0; x < x1; x += 2) {
+            if (data[(y * W + x) * 4 + 3] > 40) { cnt++; if (cnt >= 3) break; }
+          }
+          if (cnt >= 3) feet = y;
+        }
+        pads.push(feet < 0 ? 0 : (H - 1 - feet));
+      }
+      return pads;
+    } catch (e) { return null; }
+  },
   loadHeroArt() {
     /* Duyệt theo MANIFEST ASSETS: đường dẫn lấy nguyên literal từ bảng
        khai báo, không còn ghép chuỗi tiền tố + tên như trước */
@@ -2274,6 +2405,7 @@ const Sprites = {
       const img = new Image();
       img.onload = () => {
         this.heroArt[k] = img;
+        const hf = this.measureFeet(img, 0); if (hf) this.heroFeet[k] = hf[0];
         for (const [tn, col] of [['red', '#ff3b2d'], ['green', '#57c96e']]) {
           const c = document.createElement('canvas'); c.width = img.naturalWidth; c.height = img.naturalHeight;
           const g2 = c.getContext('2d'); g2.drawImage(img, 0, 0);
@@ -2290,6 +2422,7 @@ const Sprites = {
         const strip = new Image();
         strip.onload = () => {
           this.heroAnim[k] = strip;
+          const af = this.measureFeet(strip, this.ANIM_CELL_W); if (af) this.animFeet[k] = af;
           for (const [tn, col] of [['red', '#ff3b2d'], ['green', '#57c96e']]) {
             const c = document.createElement('canvas'); c.width = strip.naturalWidth; c.height = strip.naturalHeight;
             const g2 = c.getContext('2d'); g2.drawImage(strip, 0, 0);
@@ -2316,6 +2449,7 @@ const Sprites = {
       const img = new Image();
       img.onload = () => {
         this.monsterArt[k] = img;
+        const mf = this.measureFeet(img, 0); if (mf) this.monFeet[k] = mf[0];
         for (const [tn, col] of [['red', '#ff3b2d'], ['green', '#57c96e']]) {
           const c = document.createElement('canvas'); c.width = img.naturalWidth; c.height = img.naturalHeight;
           const g2 = c.getContext('2d'); g2.drawImage(img, 0, 0);
@@ -2350,12 +2484,16 @@ const Sprites = {
     if (!img) return false;
     const baseA = ctx.globalAlpha;
     const hgt = this.HGT[m.type] || 70;
-    const w = hgt * img.naturalWidth / img.naturalHeight;
+    /* v0.5.5: phóng chiều cao vẽ theo đệm chân đã đo — cạnh trên vẫn neo
+       tại -hgt nhưng HÀNG CHÂN THẬT của ảnh chạm đúng y=0 (điểm đất) */
+    const padM = this.monFeet[m.type] || 0;
+    const hFull = hgt * img.naturalHeight / Math.max(1, img.naturalHeight - padM);
+    const w = hFull * img.naturalWidth / img.naturalHeight;
     /* Nhún/nảy thân do lớp bọc Sprites.monster lo (v0.5.3: transform quanh
        chân theo hồ sơ họ quái) — ở đây chỉ vẽ ảnh đúng khung neo chân */
-    ctx.drawImage(img, -w / 2, -hgt, w, hgt);
-    if (m.poisonT > 0 && this.monsterArtTint[m.type + '-green']) { ctx.globalAlpha = baseA * 0.30; ctx.drawImage(this.monsterArtTint[m.type + '-green'], -w / 2, -hgt, w, hgt); ctx.globalAlpha = baseA; }
-    if (m.hitT > 0 && this.monsterArtTint[m.type + '-red']) { ctx.globalAlpha = baseA * Math.min(0.5, m.hitT * 2.2); ctx.drawImage(this.monsterArtTint[m.type + '-red'], -w / 2, -hgt, w, hgt); ctx.globalAlpha = baseA; }
+    ctx.drawImage(img, -w / 2, -hgt, w, hFull);
+    if (m.poisonT > 0 && this.monsterArtTint[m.type + '-green']) { ctx.globalAlpha = baseA * 0.30; ctx.drawImage(this.monsterArtTint[m.type + '-green'], -w / 2, -hgt, w, hFull); ctx.globalAlpha = baseA; }
+    if (m.hitT > 0 && this.monsterArtTint[m.type + '-red']) { ctx.globalAlpha = baseA * Math.min(0.5, m.hitT * 2.2); ctx.drawImage(this.monsterArtTint[m.type + '-red'], -w / 2, -hgt, w, hFull); ctx.globalAlpha = baseA; }
     return true;
   },
   /* Vẽ 1 part prop theo anchor của nó (bóng đã nung sẵn trong ảnh: baked) */
@@ -2385,7 +2523,11 @@ const Sprites = {
     const baseA = ctx.globalAlpha;
     const CW = this.ANIM_CELL_W, CH = this.ANIM_CELL_H;
     const fi = this.animFrame(h, t), sx = fi * CW;
-    const w = height * CW / CH;
+    /* v0.5.5: đệm chân RIÊNG TỪNG KHUNG — hàng chân thật của khung đang
+       vẽ chạm đúng điểm đất, chuyển khung không còn nhấp nhô/lơ lửng */
+    const padA = (this.animFeet[k] && this.animFeet[k][fi]) || 0;
+    const hFull = height * CH / Math.max(1, CH - padA);
+    const w = hFull * CW / CH;
     let bob = 0;
     if (h.reviveT > 0) bob += h.reviveT * height * 0.3;
     /* Nhún thân khi chạy: đều và nhẹ, cùng pha với nhịp bước theo quãng
@@ -2400,9 +2542,9 @@ const Sprites = {
        trong tích tắc lúc quay đầu thay vì gương lật tức thì */
     const fxA = h.faceS === undefined ? (h.face || 1) : h.faceS;
     ctx.scale(Math.abs(fxA) < 0.3 ? (fxA < 0 ? -0.3 : 0.3) : fxA, 1);
-    ctx.drawImage(strip, sx, 0, CW, CH, -w / 2, -height, w, height);
-    if (h.poisonT > 0 && this.heroAnimTint[k + '-green']) { ctx.globalAlpha = baseA * 0.30; ctx.drawImage(this.heroAnimTint[k + '-green'], sx, 0, CW, CH, -w / 2, -height, w, height); ctx.globalAlpha = baseA; }
-    if (h.hurtT > 0 && this.heroAnimTint[k + '-red']) { ctx.globalAlpha = baseA * Math.min(0.5, h.hurtT * 2.2); ctx.drawImage(this.heroAnimTint[k + '-red'], sx, 0, CW, CH, -w / 2, -height, w, height); ctx.globalAlpha = baseA; }
+    ctx.drawImage(strip, sx, 0, CW, CH, -w / 2, -height, w, hFull);
+    if (h.poisonT > 0 && this.heroAnimTint[k + '-green']) { ctx.globalAlpha = baseA * 0.30; ctx.drawImage(this.heroAnimTint[k + '-green'], sx, 0, CW, CH, -w / 2, -height, w, hFull); ctx.globalAlpha = baseA; }
+    if (h.hurtT > 0 && this.heroAnimTint[k + '-red']) { ctx.globalAlpha = baseA * Math.min(0.5, h.hurtT * 2.2); ctx.drawImage(this.heroAnimTint[k + '-red'], sx, 0, CW, CH, -w / 2, -height, w, hFull); ctx.globalAlpha = baseA; }
     ctx.restore();
     return true;
   },
@@ -2426,7 +2568,10 @@ const Sprites = {
        TẮT hẳn — không còn lớp chuyển động nào chồng lên dải khung. */
     let bob = h.moving ? Math.abs(Math.sin(h.walkPh)) * height * 0.018 : Math.sin(t * 2.2) * height * 0.008;
     if (h.reviveT > 0) bob += h.reviveT * height * 0.3;
-    const w = height * img.naturalWidth / img.naturalHeight;
+    /* v0.5.5: neo theo hàng chân thật của ảnh tĩnh (đệm 5–6px/640) */
+    const padH = this.heroFeet[k] || 0;
+    const hFull = height * img.naturalHeight / Math.max(1, img.naturalHeight - padH);
+    const w = hFull * img.naturalWidth / img.naturalHeight;
     ctx.save();
     if (h.dead) { const dp = Math.min(1, (h.deathT || 0) / 0.45); ctx.rotate(-dp * 1.35); ctx.globalAlpha = baseA * (1 - dp * 0.35); }
     ctx.translate(0, -bob);
@@ -2435,9 +2580,9 @@ const Sprites = {
     if (h.castT > 0) { const cp = 1 + Math.sin(t * 26) * 0.012; ctx.scale(cp, cp); }
     const fxI = h.faceS === undefined ? (h.face || 1) : h.faceS;
     ctx.scale(Math.abs(fxI) < 0.3 ? (fxI < 0 ? -0.3 : 0.3) : fxI, 1);
-    ctx.drawImage(img, -w / 2, -height, w, height);
-    if (h.poisonT > 0 && this.heroArtTint[k + '-green']) { ctx.globalAlpha = baseA * 0.30; ctx.drawImage(this.heroArtTint[k + '-green'], -w / 2, -height, w, height); ctx.globalAlpha = baseA; }
-    if (h.hurtT > 0 && this.heroArtTint[k + '-red']) { ctx.globalAlpha = baseA * Math.min(0.5, h.hurtT * 2.2); ctx.drawImage(this.heroArtTint[k + '-red'], -w / 2, -height, w, height); ctx.globalAlpha = baseA; }
+    ctx.drawImage(img, -w / 2, -height, w, hFull);
+    if (h.poisonT > 0 && this.heroArtTint[k + '-green']) { ctx.globalAlpha = baseA * 0.30; ctx.drawImage(this.heroArtTint[k + '-green'], -w / 2, -height, w, hFull); ctx.globalAlpha = baseA; }
+    if (h.hurtT > 0 && this.heroArtTint[k + '-red']) { ctx.globalAlpha = baseA * Math.min(0.5, h.hurtT * 2.2); ctx.drawImage(this.heroArtTint[k + '-red'], -w / 2, -height, w, hFull); ctx.globalAlpha = baseA; }
     ctx.restore();
     return true;
   },
@@ -2451,14 +2596,16 @@ const Sprites = {
       rg.addColorStop(0, 'rgba(255,233,168,0)'); rg.addColorStop(1, 'rgba(255,233,168,' + (0.5 * h.reviveT) + ')');
       ctx.fillStyle = rg; ctx.fillRect(-17, -190, 34, 190);
     }
-    this.shadow(ctx, 0, 2, 23);
+    this.shadow(ctx, 0, 2, 21);
     const auraCol = cid === 'mage' ? '105,183,255' : cid === 'archer' ? '140,230,170' : '238,194,106';
-    const ag = ctx.createRadialGradient(0, 0, 4, 0, 0, 36);
+    const ag = ctx.createRadialGradient(0, 0, 4, 0, 0, 33);
     ag.addColorStop(0, 'rgba(' + auraCol + ',' + (0.34 + Math.sin(t * 3) * 0.07) + ')'); ag.addColorStop(1, 'rgba(' + auraCol + ',0)');
-    ctx.fillStyle = ag; ctx.beginPath(); ctx.ellipse(0, 1, 36, 13, 0, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = ag; ctx.beginPath(); ctx.ellipse(0, 1, 33, 12, 0, 0, Math.PI * 2); ctx.fill();
     ctx.strokeStyle = 'rgba(' + auraCol + ',.65)'; ctx.lineWidth = 1.6;
-    ctx.beginPath(); ctx.ellipse(0, 1, 27, 9, 0, 0, Math.PI * 2); ctx.stroke();
-    const drawn = this.heroImage(ctx, h, t, 152);
+    ctx.beginPath(); ctx.ellipse(0, 1, 25, 8, 0, 0, Math.PI * 2); ctx.stroke();
+    /* v0.5.5: hero trong thế giới thu xuống ×0.92 (152 → 140px) cho đồng
+       nhất tỉ lệ với cây trong tranh; hitbox/tầm đánh/tốc độ KHÔNG đổi */
+    const drawn = this.heroImage(ctx, h, t, 140);
     ctx.restore();
     if (!drawn) { this.heroLegacy(ctx, h, t); return; }
     if (h.buffs && (h.buffs.shieldT > 0 || h.buffs.manaShieldT > 0)) {
@@ -2466,7 +2613,7 @@ const Sprites = {
          thép, Lá Chắn Mana tím mana — viền sáng, vệt highlight, đốm sáng quay quanh */
       const mana = h.buffs.manaShieldT > 0;
       const bc = mana ? '182,120,232' : '150,185,225';
-      const bx = h.x, by = h.y - 58, brx = 40 + Math.sin(t * 2.6) * 1.2, bry = 55 + Math.cos(t * 2.2) * 1.4;
+      const bx = h.x, by = h.y - 53, brx = 37 + Math.sin(t * 2.6) * 1.2, bry = 51 + Math.cos(t * 2.2) * 1.4;
       const bg2 = ctx.createRadialGradient(bx - brx * 0.3, by - bry * 0.4, 4, bx, by, bry);
       bg2.addColorStop(0, 'rgba(255,255,255,.16)'); bg2.addColorStop(0.55, 'rgba(' + bc + ',.10)'); bg2.addColorStop(1, 'rgba(' + bc + ',.22)');
       ctx.fillStyle = bg2; ctx.beginPath(); ctx.ellipse(bx, by, brx, bry, 0, 0, Math.PI * 2); ctx.fill();
@@ -2661,7 +2808,11 @@ function drawWolfRunes(ctx, m, t, s) {
 }
 Sprites.monster = function (ctx, m, t) {
   const hover = m.def.fly ? 52 + Math.sin(t * 5 + m.seed) * 5 : 0;
-  const s = (m.boss ? 1.5 : 1) * (m.elite ? 1.28 : 1) * (m.sizeMul || 1);
+  /* v0.5.5: MỌI quái/boss thu kích thước VẼ xuống ×0.92 đồng loạt (cùng
+     hệ số với hero) — tỉ lệ tương đối thường : tinh anh : boss giữ nguyên,
+     hitbox/tầm đánh/tốc độ/va chạm KHÔNG đổi; thanh máu + vòng tinh anh +
+     bóng dùng chung hệ số s này nên tự khớp theo */
+  const s = (m.boss ? 1.5 : 1) * (m.elite ? 1.28 : 1) * (m.sizeMul || 1) * 0.92;
   const ghost = m.deathT !== undefined;
   /* Chuyển động thủ tục v0.5.3: quái ngoài khung hình (vẫn trong lề culling
      của vòng vẽ) → amp 0, vẽ tĩnh giữ hiệu năng */
@@ -5078,16 +5229,19 @@ const UI = {
     /* Vào thẳng sân khấu tạo nhân vật = đang ở cổng vào game (ẩn hẳn sân chơi) */
     document.body.classList.toggle('in-gate', !P.created);
     el('createBack').classList.add('show'); uiPause = true;
-    el('charName').value = ''; el('createErr').textContent = ''; el('charName').classList.remove('err');
+    NamePad.set(''); el('createErr').textContent = ''; el('charName').classList.remove('err');
     this.syncSavedBtn();
     this.renderCreate();
     this.updateStartState();
+    /* Mở sẵn bàn phím trong game: nhập tên ngay bằng phím ngang, không
+       bật bàn phím hệ thống theo chiều dọc nữa */
+    NamePad.open();
     StageShow.cheer(); StageShow.start();
   },
   /* Kiểm tra tên theo đúng quy tắc tạo nhân vật: 2–14 ký tự, chữ/số/khoảng
      trắng, không trùng nhân vật đã lưu, còn ô trống. */
   nameCheck() {
-    const name = el('charName').value.trim();
+    const name = NamePad.value.trim();
     if (!name) return { ok: false, hint: 'Hãy nhập tên nhân vật', cls: '' };
     if (name.length < 2 || name.length > 14) return { ok: false, hint: 'Tên phải từ 2 đến 14 ký tự (đang nhập ' + name.length + ').', cls: 'bad' };
     if (!/^[\p{L}\p{N} ]+$/u.test(name)) return { ok: false, hint: 'Tên chỉ gồm chữ cái, số và khoảng trắng — không dùng ký tự đặc biệt.', cls: 'bad' };
@@ -5102,8 +5256,11 @@ const UI = {
     const h = el('nameHint');
     h.textContent = r.hint;
     h.className = 'name-hint' + (r.cls ? ' ' + r.cls : '');
+    /* Gợi ý cũng hiện ngay trên đầu bàn phím trong game (nơi mắt đang nhìn) */
+    const kh = el('kbHint');
+    if (kh) { kh.textContent = r.hint; kh.className = 'kb-hint' + (r.cls ? ' ' + r.cls : ''); }
   },
-  closeCreate() { el('createBack').classList.remove('show'); StageShow.stop(); if (!el('rosterBack').classList.contains('show') && !el('settingsBack').classList.contains('show')) uiPause = false; },
+  closeCreate() { el('createBack').classList.remove('show'); NamePad.close(); StageShow.stop(); if (!el('rosterBack').classList.contains('show') && !el('settingsBack').classList.contains('show')) uiPause = false; },
   renderCreate() {
     /* icon tròn + tên phái nổi trên đầu từng nhân vật trong cảnh (vị trí do StageShow ghim theo đầu nhân vật) */
     const tags = el('sceneTags'); tags.innerHTML = '';
@@ -5144,8 +5301,12 @@ const UI = {
   },
   createChar() {
     const nameEl = el('charName'), err = el('createErr');
-    const name = nameEl.value.trim();
-    const fail = msg => { err.textContent = msg; nameEl.classList.add('err'); nameEl.focus(); };
+    const name = NamePad.value.trim();
+    const fail = msg => {
+      err.textContent = msg;
+      const kh = el('kbHint'); if (kh) { kh.textContent = msg; kh.className = 'kb-hint bad'; }
+      nameEl.classList.add('err'); NamePad.open();
+    };
     if (name.length < 2 || name.length > 14) return fail('Tên phải từ 2 đến 14 ký tự (đang nhập ' + name.length + ').');
     if (!/^[\p{L}\p{N} ]+$/u.test(name)) return fail('Tên chỉ gồm chữ cái, số và khoảng trắng — không dùng ký tự đặc biệt.');
     if (Roster.chars.some(ch => ch.name.toLowerCase() === name.toLowerCase())) return fail('Tên "' + name + '" đã có nhân vật khác dùng — chọn tên khác nhé.');
@@ -5310,7 +5471,48 @@ function init() {
   el('gMale').addEventListener('click', () => { createSel.gender = 'male'; UI.renderCreate(); });
   el('gFemale').addEventListener('click', () => { createSel.gender = 'female'; UI.renderCreate(); });
   el('stageCanvas').addEventListener('pointerdown', e => { AudioFX.ensure(); StageShow.pick(e.clientX, e.clientY); });
-  el('charName').addEventListener('input', () => { el('createErr').textContent = ''; el('charName').classList.remove('err'); UI.updateStartState(); });
+  /* v0.5.5: ô tên là khung hiển thị — chạm để mở BÀN PHÍM TRONG GAME.
+     Dựng phím: số 0–9 · chữ A–Z · xoá lùi · dấu cách · xác nhận (tạo
+     nhân vật luôn nếu tên hợp lệ, lỗi thì báo ngay trên đầu bàn phím). */
+  el('charName').addEventListener('click', () => NamePad.open());
+  el('kbClose').addEventListener('click', () => NamePad.close());
+  (function buildNameKb() {
+    const rows = [
+      ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'],
+      ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
+      ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'],
+      ['Z', 'X', 'C', 'V', 'B', 'N', 'M', { k: 'back', label: '⌫ Xoá', cls: 'fn back' }],
+      [{ k: 'space', label: 'Dấu cách', cls: 'fn space' }, { k: 'ok', label: '✓ Xác nhận', cls: 'ok' }],
+    ];
+    const box = el('kbRows');
+    for (const row of rows) {
+      const r = document.createElement('div'); r.className = 'kb-row';
+      for (const kd of row) {
+        const d = typeof kd === 'string' ? { k: kd, label: kd } : kd;
+        const b = document.createElement('button');
+        b.type = 'button'; b.className = 'kb-key' + (d.cls ? ' ' + d.cls : '');
+        b.textContent = d.label; b.setAttribute('aria-label', 'Phím ' + d.label);
+        b.addEventListener('pointerdown', e => {
+          e.preventDefault();
+          b.classList.add('press'); setTimeout(() => b.classList.remove('press'), 130);
+          AudioFX.ensure();
+          if (d.k === 'back') NamePad.back();
+          else if (d.k === 'space') NamePad.add(' ');
+          else if (d.k === 'ok') UI.createChar();
+          else NamePad.add(d.k);
+        });
+        r.appendChild(b);
+      }
+      box.appendChild(r);
+    }
+  })();
+  /* Máy tính vẫn gõ được bằng phím cứng khi đang ở màn tạo nhân vật */
+  document.addEventListener('keydown', e => {
+    if (!el('createBack').classList.contains('show') || el('rosterBack').classList.contains('show')) return;
+    if (e.key === 'Backspace') { NamePad.back(); e.preventDefault(); }
+    else if (e.key === 'Enter') UI.createChar();
+    else if (/^[\p{L}\p{N} ]$/u.test(e.key)) NamePad.add(e.key);
+  });
   el('createStart').addEventListener('click', () => { AudioFX.ensure(); UI.createChar(); });
   /* Nút "Nhân vật đã lưu" trên sân khấu → mở danh sách ô đã lưu đè lên sân khấu */
   el('createCancel').addEventListener('click', () => UI.openRoster());
@@ -5383,12 +5585,17 @@ function init() {
   Sprites.loadHeroArt();
   Sprites.loadMonsterArt();
   Sprites.loadPropArt();
+  /* v0.5.5: khôi phục nhân vật đã lưu trên máy TRƯỚC khi dựng sân */
+  const hasSavedChars = Save.restore();
   startStage();
   UI.refreshAll();
-  /* Mở game: KHÔNG qua bảng danh sách ô nhân vật nữa — vào thẳng sân khấu
-     thảo nguyên 3 nhân vật để chọn phái / giới tính / nhập tên rồi Vào game.
-     Nhân vật đã lưu (nếu có) mở qua nút "Nhân vật đã lưu" trên sân khấu. */
-  UI.openCreate();
+  /* Tự lưu định kỳ khi đang chơi (cộng với các điểm persist sẵn có ở
+     tạo nhân vật / lên cấp / qua màn / đổi đồ…) */
+  setInterval(() => { if (P && P.created) Save.persist(); }, 5000);
+  /* Mở game: ĐÃ CÓ nhân vật lưu → hiện danh sách nhân vật, bấm "Chơi tiếp"
+     là vào thẳng, KHÔNG hỏi tên lại. CHƯA CÓ → vào thẳng sân khấu thảo
+     nguyên 3 nhân vật để chọn phái / giới tính / nhập tên rồi Vào game. */
+  if (hasSavedChars) UI.openRoster(); else UI.openCreate();
   runIntro();
   requestAnimationFrame(loop);
 }
