@@ -33,3 +33,11 @@ Mỗi ảnh có 3 hàng: **cũ (IP-Adapter 0,6)** / **chỉ LoRA** / **LoRA + IP
 
 ## Đề xuất bước tiếp (LoRA v2)
 Dùng chính LoRA v1 + IP-Adapter để sinh thêm khoảng 30 ảnh dáng động (chạy, tung phép, skill), chọn ảnh đúng gậy có cầu. Sau đó huấn luyện lại với bộ dữ liệu cân bằng dáng (đứng ≤ 25 %), dự kiến khoảng 1 giờ. Khi LoRA đủ tốt, mỗi nhân vật mới chỉ mất khoảng 5 phút chuẩn bị ảnh + khoảng 47 phút máy tự huấn luyện.
+
+## LoRA v2 (2026-11-28)
+- **Dữ liệu**: 34 ảnh = 2 ảnh tham chiếu + 3 khung v1 + 12 khung v2 + 18 ảnh dáng động do chính LoRA v1 + IP-Adapter sinh ra (chọn tay từ 36 ảnh, bỏ 3 ảnh lỗi). Dáng đứng còn khoảng 1/4. Xem `dataset_v2_37_minus3.jpg`.
+- **Huấn luyện**: 1600 bước, khoảng 1,4 s/bước, khoảng 37 phút, loss 0,053. File `pspnam_v2.safetensors` (SHA-256 `fa1ee6d8…`) ở `ComfyUI/models/loras/`.
+- **So sánh** (`ab_v2_1024x1024_strength070.jpg`, cùng xương và seed như v1):
+  - **LoRA v2 + IP-Adapter 0,35 (hàng 3)**: **gậy đồng nhất ở 5/5 ảnh** (gậy gỗ xoắn đầu móc, đính pha lê xanh); mặt, râu và mũ đều; nền trắng, đủ người. Dáng ở mức trung bình (chạy, giơ tay, chĩa gậy), chưa bám khung xương mạnh bằng cách chỉ dùng IP-Adapter.
+  - Chỉ LoRA (hàng 2) vẫn phóng to nhân vật và có hiệu ứng nền xanh, nên không dùng riêng.
+- **Kết luận**: v2 tốt hơn v1 về độ nhất quán của gậy. Cách dùng đề xuất: **LoRA v2 0,7 + IP-Adapter 0,35, khung 1024²**.
