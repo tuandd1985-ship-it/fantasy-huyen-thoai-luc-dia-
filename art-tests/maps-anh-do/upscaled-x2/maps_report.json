@@ -1,0 +1,272 @@
+{
+ "upscaler": "Upscayl upscayl-bin, model digital-art-4x, x4",
+ "world_scale": 2,
+ "grade": {
+  "ground_chroma": 0.62,
+  "other_chroma": 0.8,
+  "emissive_chroma": 0.92,
+  "luma_gain": 0.93,
+  "luma_contrast": 0.92
+ },
+ "hero_ref": {
+  "saturation": 0.288,
+  "luma": 130.7
+ },
+ "maps": {
+  "boss_bang": {
+   "source": [
+    1402,
+    1122
+   ],
+   "game_size": [
+    2804,
+    2244
+   ],
+   "upscale_seconds": 0.0,
+   "saturation_before": 0.676,
+   "saturation_after": 0.619,
+   "luma_before": 88.9,
+   "luma_after": 80.8,
+   "sat_ratio_map_over_hero_after": 2.15,
+   "webp_bytes": 1405478
+  },
+  "bosslua": {
+   "source": [
+    1402,
+    1122
+   ],
+   "game_size": [
+    2804,
+    2244
+   ],
+   "upscale_seconds": 0.0,
+   "saturation_before": 0.485,
+   "saturation_after": 0.424,
+   "luma_before": 41.9,
+   "luma_after": 36.0,
+   "sat_ratio_map_over_hero_after": 1.47,
+   "webp_bytes": 1020318
+  },
+  "bossxuan": {
+   "source": [
+    1402,
+    1122
+   ],
+   "game_size": [
+    2804,
+    2244
+   ],
+   "upscale_seconds": 0.0,
+   "saturation_before": 0.229,
+   "saturation_after": 0.194,
+   "luma_before": 148.0,
+   "luma_after": 135.6,
+   "sat_ratio_map_over_hero_after": 0.67,
+   "webp_bytes": 1586382
+  },
+  "hang1": {
+   "source": [
+    1402,
+    1122
+   ],
+   "game_size": [
+    2804,
+    2244
+   ],
+   "upscale_seconds": 0.0,
+   "saturation_before": 0.52,
+   "saturation_after": 0.395,
+   "luma_before": 85.5,
+   "luma_after": 77.7,
+   "sat_ratio_map_over_hero_after": 1.37,
+   "webp_bytes": 1388218
+  },
+  "hang2": {
+   "source": [
+    1402,
+    1122
+   ],
+   "game_size": [
+    2804,
+    2244
+   ],
+   "upscale_seconds": 0.0,
+   "saturation_before": 0.625,
+   "saturation_after": 0.562,
+   "luma_before": 117.9,
+   "luma_after": 109.4,
+   "sat_ratio_map_over_hero_after": 1.95,
+   "webp_bytes": 1739690
+  },
+  "hang3": {
+   "source": [
+    1402,
+    1122
+   ],
+   "game_size": [
+    2804,
+    2244
+   ],
+   "upscale_seconds": 0.0,
+   "saturation_before": 0.705,
+   "saturation_after": 0.622,
+   "luma_before": 53.5,
+   "luma_after": 47.8,
+   "sat_ratio_map_over_hero_after": 2.16,
+   "webp_bytes": 1279310
+  },
+  "hang4": {
+   "source": [
+    1536,
+    1024
+   ],
+   "game_size": [
+    3072,
+    2048
+   ],
+   "upscale_seconds": 0.0,
+   "saturation_before": 0.587,
+   "saturation_after": 0.53,
+   "luma_before": 44.7,
+   "luma_after": 39.3,
+   "sat_ratio_map_over_hero_after": 1.84,
+   "webp_bytes": 917146
+  },
+  "hang5": {
+   "source": [
+    1535,
+    1024
+   ],
+   "game_size": [
+    3070,
+    2048
+   ],
+   "upscale_seconds": 0.0,
+   "saturation_before": 0.727,
+   "saturation_after": 0.662,
+   "luma_before": 86.4,
+   "luma_after": 79.0,
+   "sat_ratio_map_over_hero_after": 2.3,
+   "webp_bytes": 1460306
+  },
+  "hang6": {
+   "source": [
+    1536,
+    1024
+   ],
+   "game_size": [
+    3072,
+    2048
+   ],
+   "upscale_seconds": 0.0,
+   "saturation_before": 0.869,
+   "saturation_after": 0.826,
+   "luma_before": 40.3,
+   "luma_after": 36.2,
+   "sat_ratio_map_over_hero_after": 2.87,
+   "webp_bytes": 1228636
+  },
+  "map_1": {
+   "source": [
+    1402,
+    1122
+   ],
+   "game_size": [
+    2804,
+    2244
+   ],
+   "upscale_seconds": 0.0,
+   "saturation_before": 0.663,
+   "saturation_after": 0.464,
+   "luma_before": 158.7,
+   "luma_after": 135.0,
+   "sat_ratio_map_over_hero_after": 1.61,
+   "webp_bytes": 1599502
+  },
+  "map_2": {
+   "source": [
+    1402,
+    1122
+   ],
+   "game_size": [
+    2804,
+    2244
+   ],
+   "upscale_seconds": 0.0,
+   "saturation_before": 0.693,
+   "saturation_after": 0.444,
+   "luma_before": 152.2,
+   "luma_after": 136.4,
+   "sat_ratio_map_over_hero_after": 1.54,
+   "webp_bytes": 1642692
+  },
+  "map_3": {
+   "source": [
+    1402,
+    1122
+   ],
+   "game_size": [
+    2804,
+    2244
+   ],
+   "upscale_seconds": 0.0,
+   "saturation_before": 0.557,
+   "saturation_after": 0.407,
+   "luma_before": 162.2,
+   "luma_after": 134.3,
+   "sat_ratio_map_over_hero_after": 1.42,
+   "webp_bytes": 1648148
+  },
+  "map_4": {
+   "source": [
+    1402,
+    1122
+   ],
+   "game_size": [
+    2804,
+    2244
+   ],
+   "upscale_seconds": 0.0,
+   "saturation_before": 0.258,
+   "saturation_after": 0.26,
+   "luma_before": 193.2,
+   "luma_after": 154.0,
+   "sat_ratio_map_over_hero_after": 0.9,
+   "webp_bytes": 1424090
+  },
+  "map_5": {
+   "source": [
+    1402,
+    1122
+   ],
+   "game_size": [
+    2804,
+    2244
+   ],
+   "upscale_seconds": 0.0,
+   "saturation_before": 0.637,
+   "saturation_after": 0.551,
+   "luma_before": 77.0,
+   "luma_after": 69.5,
+   "sat_ratio_map_over_hero_after": 1.92,
+   "webp_bytes": 1508756
+  },
+  "tanthu": {
+   "source": [
+    1536,
+    1024
+   ],
+   "game_size": [
+    3072,
+    2048
+   ],
+   "upscale_seconds": 0.0,
+   "saturation_before": 0.638,
+   "saturation_after": 0.432,
+   "luma_before": 129.4,
+   "luma_after": 120.4,
+   "sat_ratio_map_over_hero_after": 1.5,
+   "webp_bytes": 2134164
+  }
+ }
+}
