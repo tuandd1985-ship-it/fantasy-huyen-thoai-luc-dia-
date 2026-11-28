@@ -21,7 +21,7 @@ Không sửa source game. Không sinh ảnh mới: cổng tách từ `props_clea
 
 | File | Layer | Kích thước hiển thị | anchorX, anchorY |
 |---|---|---|---|
-| `portal_platform.png` (953×511 nguồn) | ground | 206,4 × 111,9 | 103,2 ; 0,9 |
+| `portal_platform.png` (941×510 nguồn) | ground | 206,4 × 111,9 | 103,2 ; 0,9 |
 | `portal_back.png` (907×489 nguồn) | sorted, `sortY = 0` | 198,9 × 107,2 | 96,6 ; 101,8 |
 
 - **Anchor chung** của group `forest-portal-01`:
@@ -61,7 +61,7 @@ Tile v2 chưa được duyệt nên em gửi thêm **1 biến thể v2b** để 
 | Bão hòa TB của tile | 0,76 | 0,44 | **0,22** |
 | Tỉ lệ bão hòa tile ÷ hero (Kiếm Sĩ Nam, TB 0,29) | 2,65 | 1,53 | **0,78** |
 | Độ sáng TB của tile (hero: 130,7) | 80,2 | 111,8 | **≈ 98** |
-| Màu TB RGB | 53 / 104 / 32 | 115 / 119 / 67 | ≈ 92 / 106 / 77 |
+| Màu TB RGB | 53 / 104 / 32 | 115 / 119 / 67 | 92 / 103 / 80 |
 | Seam ngang / dọc | 1,12 / 1,40 | 1,33 / 1,02 | 1,32 / 1,00 |
 
 - **v2b là bản duy nhất có nền kém bão hòa và tối hơn hero**, đúng ART_DIRECTION: nền map trầm, nhân vật nổi bật hơn nền.
