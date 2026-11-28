@@ -1,0 +1,236 @@
+{
+ "male": {
+  "strip_scale": 0.6282,
+  "cells": {
+   "idle1": {
+    "edge_band_alpha_pct": 0.0,
+    "edge_band_max_alpha": 0,
+    "opaque_components": 1,
+    "stray_opaque_islands_ge30px": 0,
+    "main_component_px": 75276,
+    "bbox": [
+     21,
+     96,
+     361,
+     489
+    ],
+    "feet_y": 489
+   },
+   "idle2": {
+    "edge_band_alpha_pct": 0.0,
+    "edge_band_max_alpha": 0,
+    "opaque_components": 1,
+    "stray_opaque_islands_ge30px": 0,
+    "main_component_px": 74766,
+    "bbox": [
+     19,
+     103,
+     367,
+     489
+    ],
+    "feet_y": 489
+   },
+   "run1": {
+    "edge_band_alpha_pct": 0.0,
+    "edge_band_max_alpha": 0,
+    "opaque_components": 1,
+    "stray_opaque_islands_ge30px": 0,
+    "main_component_px": 74047,
+    "bbox": [
+     29,
+     99,
+     374,
+     489
+    ],
+    "feet_y": 489
+   },
+   "run2": {
+    "edge_band_alpha_pct": 0.0,
+    "edge_band_max_alpha": 0,
+    "opaque_components": 1,
+    "stray_opaque_islands_ge30px": 0,
+    "main_component_px": 75052,
+    "bbox": [
+     31,
+     82,
+     373,
+     487
+    ],
+    "feet_y": 487
+   },
+   "cast1": {
+    "edge_band_alpha_pct": 0.0,
+    "edge_band_max_alpha": 0,
+    "opaque_components": 1,
+    "stray_opaque_islands_ge30px": 0,
+    "main_component_px": 74119,
+    "bbox": [
+     14,
+     93,
+     352,
+     486
+    ],
+    "feet_y": 486
+   },
+   "cast2": {
+    "edge_band_alpha_pct": 0.0,
+    "edge_band_max_alpha": 0,
+    "opaque_components": 1,
+    "stray_opaque_islands_ge30px": 0,
+    "main_component_px": 79541,
+    "bbox": [
+     30,
+     97,
+     409,
+     489
+    ],
+    "feet_y": 489
+   },
+   "skill_charge": {
+    "edge_band_alpha_pct": 0.0,
+    "edge_band_max_alpha": 0,
+    "opaque_components": 1,
+    "stray_opaque_islands_ge30px": 0,
+    "main_component_px": 104618,
+    "bbox": [
+     19,
+     45,
+     404,
+     487
+    ],
+    "feet_y": 487
+   },
+   "skill_release": {
+    "edge_band_alpha_pct": 0.0,
+    "edge_band_max_alpha": 0,
+    "opaque_components": 1,
+    "stray_opaque_islands_ge30px": 0,
+    "main_component_px": 70983,
+    "bbox": [
+     13,
+     131,
+     409,
+     489
+    ],
+    "feet_y": 489
+   }
+  }
+ },
+ "female": {
+  "strip_scale": 0.6135,
+  "cells": {
+   "idle1": {
+    "edge_band_alpha_pct": 0.0,
+    "edge_band_max_alpha": 0,
+    "opaque_components": 1,
+    "stray_opaque_islands_ge30px": 0,
+    "main_component_px": 90444,
+    "bbox": [
+     19,
+     105,
+     360,
+     489
+    ],
+    "feet_y": 489
+   },
+   "idle2": {
+    "edge_band_alpha_pct": 0.0,
+    "edge_band_max_alpha": 0,
+    "opaque_components": 1,
+    "stray_opaque_islands_ge30px": 0,
+    "main_component_px": 89766,
+    "bbox": [
+     18,
+     112,
+     365,
+     489
+    ],
+    "feet_y": 489
+   },
+   "run1": {
+    "edge_band_alpha_pct": 0.0,
+    "edge_band_max_alpha": 0,
+    "opaque_components": 1,
+    "stray_opaque_islands_ge30px": 0,
+    "main_component_px": 88080,
+    "bbox": [
+     27,
+     111,
+     359,
+     489
+    ],
+    "feet_y": 489
+   },
+   "run2": {
+    "edge_band_alpha_pct": 0.0,
+    "edge_band_max_alpha": 0,
+    "opaque_components": 1,
+    "stray_opaque_islands_ge30px": 0,
+    "main_component_px": 88152,
+    "bbox": [
+     29,
+     94,
+     347,
+     483
+    ],
+    "feet_y": 483
+   },
+   "cast1": {
+    "edge_band_alpha_pct": 0.0,
+    "edge_band_max_alpha": 0,
+    "opaque_components": 1,
+    "stray_opaque_islands_ge30px": 0,
+    "main_component_px": 86176,
+    "bbox": [
+     13,
+     101,
+     325,
+     485
+    ],
+    "feet_y": 485
+   },
+   "cast2": {
+    "edge_band_alpha_pct": 0.0,
+    "edge_band_max_alpha": 0,
+    "opaque_components": 1,
+    "stray_opaque_islands_ge30px": 0,
+    "main_component_px": 91789,
+    "bbox": [
+     27,
+     109,
+     409,
+     489
+    ],
+    "feet_y": 489
+   },
+   "skill_charge": {
+    "edge_band_alpha_pct": 0.0,
+    "edge_band_max_alpha": 0,
+    "opaque_components": 1,
+    "stray_opaque_islands_ge30px": 0,
+    "main_component_px": 126914,
+    "bbox": [
+     29,
+     34,
+     401,
+     487
+    ],
+    "feet_y": 487
+   },
+   "skill_release": {
+    "edge_band_alpha_pct": 0.0,
+    "edge_band_max_alpha": 0,
+    "opaque_components": 1,
+    "stray_opaque_islands_ge30px": 0,
+    "main_component_px": 73207,
+    "bbox": [
+     13,
+     155,
+     409,
+     489
+    ],
+    "feet_y": 489
+   }
+  }
+ }
+}

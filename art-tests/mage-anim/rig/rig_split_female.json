@@ -1,0 +1,77 @@
+{
+ "female": {
+  "staff_px": 36072,
+  "inpaint_seconds": 18.0,
+  "seed": 732002,
+  "prompt": "1girl, solo, chibi, long wavy lavender purple hair, purple eyes, teal and blue wizard robe with silver trim, purple dress, purple boots, standing, empty hands, no staff, full body, white background, simple background, thick clean outline, cel shading, masterpiece, high score",
+  "negative": "staff, stick, wand, weapon, orb, holding, holding object, black hat lining, multiple characters, text, watermark, lowres, worst quality, low quality, blurry",
+  "model": "animagine-xl-4.0-opt.safetensors",
+  "rig": {
+   "orb": [
+    496,
+    140,
+    62
+   ],
+   "hand": [
+    405,
+    425,
+    30
+   ],
+   "seed": 732002
+  },
+  "poly": [
+   [
+    415,
+    80
+   ],
+   [
+    520,
+    60
+   ],
+   [
+    565,
+    175
+   ],
+   [
+    560,
+    240
+   ],
+   [
+    480,
+    260
+   ],
+   [
+    470,
+    345
+   ],
+   [
+    440,
+    470
+   ],
+   [
+    385,
+    625
+   ],
+   [
+    300,
+    625
+   ],
+   [
+    300,
+    560
+   ],
+   [
+    360,
+    470
+   ],
+   [
+    400,
+    330
+   ],
+   [
+    395,
+    200
+   ]
+  ]
+ }
+}
