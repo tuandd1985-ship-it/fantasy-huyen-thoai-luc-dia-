@@ -1,4 +1,9 @@
 
+## v0.7.2 — 2026-11-28 (parts animation for all 6 heroes + wardrobe tier icons)
+- All 6 heroes now idle/run on Codex-parts strips assembled by Claude (assets/anim2, 768×640 cells, feet y=620): idle [600,600], run 6×90ms. Skill 1 also parts-based for Kiếm Sĩ Nữ (Trảm Kiếm 8f), Pháp Sư Nam/Nữ (Hỏa Cầu cast 7f), Cung Thủ Nam/Nữ (Xuyên Tiễn 7f). Kiếm Sĩ Nam keeps the v0.7.0 key-pose skill set; other skills/basic attacks unchanged. Luna's QC: all 6 part sets stack to their assembled.png with 0px diff; all strips pass cell QC (three 1px specks found and cleaned during her WebP conversion).
+- Wardrobe: bag/equipment/item-popup show Codex's 48 armor/boots icons (art-tests/equipment-clothing-v1) by the current character's class+gender and item-level tier (1–19→lv1, 20–39→lv20, 40–59→lv40, 60+→lv60). Display only; saves untouched. In-motion outfit rendering stays a later phase (needs per-outfit assembled strips).
+- Delivery: 372 unique assets, split now 9 data files (~25.9MB served). Per-map lazy loading is becoming necessary — queued with the map rollout.
+
 ## v0.7.1 — 2026-11-28 (unified flat icon system by Codex)
 - Codex's 48-icon flat set (art-tests/game-icons-v1, commit 9b3b9b2; Luna judged all 48 passing) is now the game's single icon language; the painted v0.6.2 set stays in assets as backup. Wired by skill ID: combat buttons for all 3 classes (archer buff 2 corrected to weakmark — Dấu Ấn Yếu Điểm), Skills panel incl. all 6 passive icons, map list icons per map + portal, minimap/big-map boss (red demon head) and elite (purple star) markers, boss/monster telegraph labels with behaviour icons (summon/nova/howl/charge/heal/enrage) + enrage icon on the boss HP name while enraged. monster-poison/monster-ranged declared but unused (no matching warning labels in game yet); minimap-chest skipped (no chests), waypoint unused.
 - 42 icons2 files in ASSETS preload; 307 unique assets total; split delivery ~15.1MB.

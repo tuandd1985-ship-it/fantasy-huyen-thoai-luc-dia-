@@ -174,6 +174,12 @@
       /* Panel Kỹ năng: icon phẳng nằm trong ô .a-ic, đè lên glyph fallback */
       .skill-row-item .a-ic{ position:relative; }
       .skill-row-item .a-ic img{ position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:27px; height:27px; object-fit:contain; pointer-events:none; }
+      /* v0.7.2: icon ẢNH trang bị (armor/boots theo phái/giới/bậc) đè lên glyph dự phòng trong ô túi đồ / ô đang mặc / popup món */
+      .ia-wrap{ position:relative; display:inline-flex; align-items:center; justify-content:center; }
+      .ia-wrap .item-art{ position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); object-fit:contain; pointer-events:none; }
+      .item-cell .item-art{ width:28px; height:28px; }
+      .slot-box .item-art{ width:29px; height:29px; }
+      .modal-icon .item-art{ width:42px; height:42px; }
       /* Danh sách map: icon phẳng cạnh tên map + icon cổng ở nút màn BOSS */
       .map-block .mb-ic{ width:22px; height:22px; object-fit:contain; flex:0 0 auto; align-self:center; }
       .stage-btn .st-ic{ width:16px; height:16px; object-fit:contain; }
@@ -850,7 +856,8 @@
         <h4 class="set-h">Khác</h4>
         <div class="set-row"><span>Rung máy khi đánh boss / lên cấp</span><button class="tgl" id="setVib" aria-label="Bật tắt rung máy"></button></div>
         <p class="muted" style="margin:10px 0 0">Cài đặt áp dụng ngay. Mức đồ hoạ Thấp giảm mạnh hạt hiệu ứng để máy yếu chơi mượt.</p>
-        <p class="muted" style="margin:10px 0 0">Phiên bản <b id="gameVersion">v0.7.1</b> — Nhật ký cập nhật:</p>
+        <p class="muted" style="margin:10px 0 0">Phiên bản <b id="gameVersion">v0.7.2</b> — Nhật ký cập nhật:</p>
+        <p class="muted" style="margin:4px 0 0">v0.7.2 — Cả 6 hero chuyển động bằng animation bộ phận; icon áo/giày theo bậc cấp trong túi đồ.</p>
         <p class="muted" style="margin:4px 0 0">v0.7.1 — Thống nhất bộ icon phẳng: skill, bị động, map, minimap và báo chiêu boss.</p>
         <p class="muted" style="margin:4px 0 0">v0.7.0 — Kiếm Sĩ Nam có animation riêng cho từng skill; Goblin có animation đánh và trúng đòn.</p>
         <p class="muted" style="margin:4px 0 0">v0.6.2 — Toàn bộ nút skill và icon chức năng có hình vẽ riêng.</p>
@@ -913,6 +920,9 @@
 <script src="assets-data-4.js"></script>
 <script src="assets-data-5.js"></script>
 <script src="assets-data-6.js"></script>
+<script src="assets-data-7.js"></script>
+<script src="assets-data-8.js"></script>
+<script src="assets-data-9.js"></script>
 <script>document.querySelectorAll('img[data-akey]').forEach(function(im){im.src=__A[im.getAttribute('data-akey')];});</script>
 <script>
 'use strict';
@@ -1048,57 +1058,149 @@ const ASSETS = {
       idle: { src: __A.k32, dur: [600, 600] },
     },
   },
+  /* v0.7.2 — DẢI ANIMATION BỘ PHẬN (assets/anim2/) cho CẢ 6 HERO: cùng
+     chuẩn ô 768×640, chân y=620, tỉ lệ 640/476 và cơ chế phát dải như
+     skillAnim ở trên. idle phát lặp [600,600]; run phát lặp 6×90ms —
+     thay idle/run của dải cũ cho mọi hero. skill1 = dải bộ phận của
+     SKILL 1 (chỉ 5 hero có; Kiếm Sĩ Nam giữ nguyên bộ key-pose 4 skill
+     v0.7.0, KHÔNG có skill1 ở đây). Skill 2–4 của 5 hero còn lại và đòn
+     đánh thường của tất cả giữ đường vẽ cũ. */
+  partsAnim: {
+    'swordsman-male': {
+      idle: { src: __A.k33, dur: [600, 600] },
+      run: { src: __A.k34, dur: [90, 90, 90, 90, 90, 90] },
+    },
+    'swordsman-female': {
+      idle: { src: __A.k35, dur: [600, 600] },
+      run: { src: __A.k36, dur: [90, 90, 90, 90, 90, 90] },
+      skill1: { src: __A.k37, dur: [60, 90, 90, 50, 110, 120, 90, 90] },
+    },
+    'mage-male': {
+      idle: { src: __A.k38, dur: [600, 600] },
+      run: { src: __A.k39, dur: [90, 90, 90, 90, 90, 90] },
+      skill1: { src: __A.k40, dur: [70, 110, 130, 60, 140, 120, 100] },
+    },
+    'mage-female': {
+      idle: { src: __A.k41, dur: [600, 600] },
+      run: { src: __A.k42, dur: [90, 90, 90, 90, 90, 90] },
+      skill1: { src: __A.k43, dur: [70, 110, 130, 60, 140, 120, 100] },
+    },
+    'archer-male': {
+      idle: { src: __A.k44, dur: [600, 600] },
+      run: { src: __A.k45, dur: [90, 90, 90, 90, 90, 90] },
+      skill1: { src: __A.k46, dur: [70, 120, 140, 160, 50, 120, 100] },
+    },
+    'archer-female': {
+      idle: { src: __A.k47, dur: [600, 600] },
+      run: { src: __A.k48, dur: [90, 90, 90, 90, 90, 90] },
+      skill1: { src: __A.k49, dur: [70, 120, 140, 160, 50, 120, 100] },
+    },
+  },
+  /* v0.7.2 — ICON TRANG BỊ THEO BẬC (assets/equip/): 48 file 96px, khóa
+     <classId>-<gender>-<slot>-lv<bậc>; chỉ 2 ô armor + boots dùng, tra
+     theo NHÂN VẬT ĐANG CHƠI và bậc cấp món (1–19→lv1, 20–39→lv20,
+     40–59→lv40, 60+→lv60). Thuần hiển thị — không đổi dữ liệu/chỉ số. */
+  equip: {
+    'swordsman-male-armor-lv1': __A.k50,
+    'swordsman-male-armor-lv20': __A.k51,
+    'swordsman-male-armor-lv40': __A.k52,
+    'swordsman-male-armor-lv60': __A.k53,
+    'swordsman-male-boots-lv1': __A.k54,
+    'swordsman-male-boots-lv20': __A.k55,
+    'swordsman-male-boots-lv40': __A.k56,
+    'swordsman-male-boots-lv60': __A.k57,
+    'swordsman-female-armor-lv1': __A.k58,
+    'swordsman-female-armor-lv20': __A.k59,
+    'swordsman-female-armor-lv40': __A.k60,
+    'swordsman-female-armor-lv60': __A.k61,
+    'swordsman-female-boots-lv1': __A.k62,
+    'swordsman-female-boots-lv20': __A.k63,
+    'swordsman-female-boots-lv40': __A.k64,
+    'swordsman-female-boots-lv60': __A.k65,
+    'mage-male-armor-lv1': __A.k66,
+    'mage-male-armor-lv20': __A.k67,
+    'mage-male-armor-lv40': __A.k68,
+    'mage-male-armor-lv60': __A.k69,
+    'mage-male-boots-lv1': __A.k70,
+    'mage-male-boots-lv20': __A.k71,
+    'mage-male-boots-lv40': __A.k72,
+    'mage-male-boots-lv60': __A.k73,
+    'mage-female-armor-lv1': __A.k74,
+    'mage-female-armor-lv20': __A.k75,
+    'mage-female-armor-lv40': __A.k76,
+    'mage-female-armor-lv60': __A.k77,
+    'mage-female-boots-lv1': __A.k78,
+    'mage-female-boots-lv20': __A.k79,
+    'mage-female-boots-lv40': __A.k80,
+    'mage-female-boots-lv60': __A.k81,
+    'archer-male-armor-lv1': __A.k82,
+    'archer-male-armor-lv20': __A.k83,
+    'archer-male-armor-lv40': __A.k84,
+    'archer-male-armor-lv60': __A.k85,
+    'archer-male-boots-lv1': __A.k86,
+    'archer-male-boots-lv20': __A.k87,
+    'archer-male-boots-lv40': __A.k88,
+    'archer-male-boots-lv60': __A.k89,
+    'archer-female-armor-lv1': __A.k90,
+    'archer-female-armor-lv20': __A.k91,
+    'archer-female-armor-lv40': __A.k92,
+    'archer-female-armor-lv60': __A.k93,
+    'archer-female-boots-lv1': __A.k94,
+    'archer-female-boots-lv20': __A.k95,
+    'archer-female-boots-lv40': __A.k96,
+    'archer-female-boots-lv60': __A.k97,
+  },
   /* v0.7.0 — DẢI GOBLIN CẬN CHIẾN (cùng lô Claude): ô 768×640, chân
      y=620; nhân vật trong ô cao 500px. idle lặp, attack phát từ lúc ra
      đòn, hit phát khi trúng đòn (nếu không giữa đòn của chính nó). */
   gobAnim: {
-    idle: { src: __A.k33, dur: [500, 500] },
-    attack: { src: __A.k34, dur: [80, 120, 140, 60, 140, 100] },
-    hit: { src: __A.k35, dur: [90, 110, 120] },
+    idle: { src: __A.k98, dur: [500, 500] },
+    attack: { src: __A.k99, dur: [80, 120, 140, 60, 140, 100] },
+    hit: { src: __A.k100, dur: [90, 110, 120] },
   },
   /* Quái Rừng Xanh vẽ bằng ẢNH THẬT (v0.4.0) — khóa = type quái trong CONFIG */
   monster: {
-    'slime': __A.k36,
-    'goblin': __A.k37,
-    'wolf': __A.k38,
-    'goblinArcher': __A.k39,
-    'goblinShaman': __A.k40,
-    'wolfLord': __A.k41,
+    'slime': __A.k101,
+    'goblin': __A.k102,
+    'wolf': __A.k103,
+    'goblinArcher': __A.k104,
+    'goblinShaman': __A.k105,
+    'wolfLord': __A.k106,
   },
   /* Prop Rừng Xanh (v0.4.0) — khóa = PROP_DEFS.image ở lớp engine */
   prop: {
-    'oak': __A.k42,
-    'pillar': __A.k43,
-    'boulder': __A.k44,
-    'bush': __A.k45,
-    'flowers': __A.k46,
-    'portalPlatform': __A.k47,
-    'portalBack': __A.k48,
+    'oak': __A.k107,
+    'pillar': __A.k108,
+    'boulder': __A.k109,
+    'bush': __A.k110,
+    'flowers': __A.k111,
+    'portalPlatform': __A.k112,
+    'portalBack': __A.k113,
   },
   /* Tile nền liền mạch riêng cho mặt đất Rừng Xanh (v0.4.0) */
   ground: {
-    'forestTile': __A.k49,
+    'forestTile': __A.k114,
     /* Rừng Xanh vẽ 2 lớp (v0.5.6): map-rung-xanh.webp = LỚP NỀN ĐÃ GỠ TÁN
        (vẽ làm nền thế giới); bản ĐẦY ĐỦ chỉ dùng cho minimap / bản đồ lớn;
        mask thang xám (trắng = vùng bị tán che) phục vụ làm mờ tán cây. */
-    'forestMap': __A.k50,
-    'forestMapFull': __A.k51,
-    'forestMask': __A.k52,
+    'forestMap': __A.k115,
+    'forestMapFull': __A.k116,
+    'forestMask': __A.k117,
   },
   /* Icon VẼ RIÊNG cho mọi nút bấm (v0.6.2) — 27 ảnh 256×256 ở assets/icons/:
      skill chính + buff chủ động theo phái (ks = Kiếm Sĩ, ps = Pháp Sư,
      ct = Cung Thủ; s1–s4 đúng thứ tự skill, b1–b2 đúng thứ tự buff hiển
      thị), nút hệ thống (đánh thường / bình / AUTO) và hàng icon chức năng. */
   icons: {
-    'ks-s1': __A.k53, 'ks-s2': __A.k54,
-    'ks-s3': __A.k55, 'ks-s4': __A.k56,
-    'ks-b1': __A.k57, 'ks-b2': __A.k58,
-    'ps-s1': __A.k59, 'ps-s2': __A.k60,
-    'ps-s3': __A.k61, 'ps-s4': __A.k62,
-    'ps-b1': __A.k63, 'ps-b2': __A.k64,
-    'ct-s1': __A.k65, 'ct-s2': __A.k66,
-    'ct-s3': __A.k67, 'ct-s4': __A.k68,
-    'ct-b1': __A.k69, 'ct-b2': __A.k70,
+    'ks-s1': __A.k118, 'ks-s2': __A.k119,
+    'ks-s3': __A.k120, 'ks-s4': __A.k121,
+    'ks-b1': __A.k122, 'ks-b2': __A.k123,
+    'ps-s1': __A.k124, 'ps-s2': __A.k125,
+    'ps-s3': __A.k126, 'ps-s4': __A.k127,
+    'ps-b1': __A.k128, 'ps-b2': __A.k129,
+    'ct-s1': __A.k130, 'ct-s2': __A.k131,
+    'ct-s3': __A.k132, 'ct-s4': __A.k133,
+    'ct-b1': __A.k134, 'ct-b2': __A.k135,
     'sys-attack': __A.k9,
     'sys-potion-hp': __A.k6,
     'sys-potion-mp': __A.k7,
@@ -1115,48 +1217,48 @@ const ASSETS = {
      báo chiêu quái/boss; bộ tranh màu v0.6.2 ở trên giữ nguyên làm dự
      phòng. (minimap-chest / minimap-waypoint chưa dùng đợt này.) */
   icons2: {
-    'swordsman-slash': __A.k71,
-    'swordsman-whirl': __A.k72,
-    'swordsman-quake': __A.k73,
-    'swordsman-ult': __A.k74,
-    'swordsman-shield': __A.k75,
-    'swordsman-rage': __A.k76,
-    'swordsman-lifesteal': __A.k77,
-    'swordsman-bodysteel': __A.k78,
-    'mage-fireball': __A.k79,
-    'mage-frost': __A.k80,
-    'mage-thunder': __A.k81,
-    'mage-meteor': __A.k82,
-    'mage-manashield': __A.k83,
-    'mage-manaregen': __A.k84,
-    'mage-amplify': __A.k85,
-    'mage-endless': __A.k86,
-    'archer-pierce': __A.k87,
-    'archer-volley': __A.k88,
-    'archer-poisonarrow': __A.k89,
-    'archer-storm': __A.k90,
-    'archer-windstep': __A.k91,
-    'archer-weakmark': __A.k92,
-    'archer-dodgepassive': __A.k93,
-    'archer-eagle': __A.k94,
-    'map-forest': __A.k95,
-    'map-crypt': __A.k96,
-    'map-swamp': __A.k97,
-    'map-desert': __A.k98,
-    'map-volcano': __A.k99,
-    'map-frost': __A.k100,
-    'map-castle': __A.k101,
-    'map-portal': __A.k102,
-    'minimap-boss': __A.k103,
-    'minimap-elite': __A.k104,
-    'monster-charge': __A.k105,
-    'monster-howl': __A.k106,
-    'monster-summon': __A.k107,
-    'monster-nova': __A.k108,
-    'monster-heal': __A.k109,
-    'monster-poison': __A.k110,
-    'monster-ranged': __A.k111,
-    'monster-enrage': __A.k112,
+    'swordsman-slash': __A.k136,
+    'swordsman-whirl': __A.k137,
+    'swordsman-quake': __A.k138,
+    'swordsman-ult': __A.k139,
+    'swordsman-shield': __A.k140,
+    'swordsman-rage': __A.k141,
+    'swordsman-lifesteal': __A.k142,
+    'swordsman-bodysteel': __A.k143,
+    'mage-fireball': __A.k144,
+    'mage-frost': __A.k145,
+    'mage-thunder': __A.k146,
+    'mage-meteor': __A.k147,
+    'mage-manashield': __A.k148,
+    'mage-manaregen': __A.k149,
+    'mage-amplify': __A.k150,
+    'mage-endless': __A.k151,
+    'archer-pierce': __A.k152,
+    'archer-volley': __A.k153,
+    'archer-poisonarrow': __A.k154,
+    'archer-storm': __A.k155,
+    'archer-windstep': __A.k156,
+    'archer-weakmark': __A.k157,
+    'archer-dodgepassive': __A.k158,
+    'archer-eagle': __A.k159,
+    'map-forest': __A.k160,
+    'map-crypt': __A.k161,
+    'map-swamp': __A.k162,
+    'map-desert': __A.k163,
+    'map-volcano': __A.k164,
+    'map-frost': __A.k165,
+    'map-castle': __A.k166,
+    'map-portal': __A.k167,
+    'minimap-boss': __A.k168,
+    'minimap-elite': __A.k169,
+    'monster-charge': __A.k170,
+    'monster-howl': __A.k171,
+    'monster-summon': __A.k172,
+    'monster-nova': __A.k173,
+    'monster-heal': __A.k174,
+    'monster-poison': __A.k175,
+    'monster-ranged': __A.k176,
+    'monster-enrage': __A.k177,
   },
 };
 /* Danh sách phẳng MỌI file ảnh (toàn literal) — dùng để preload màn chờ */
@@ -1174,114 +1276,149 @@ const ASSET_FILES = [
   __A.k32, __A.k28,
   __A.k29, __A.k30,
   __A.k31,
+  __A.k98, __A.k99,
+  __A.k100,
   __A.k33, __A.k34,
-  __A.k35,
-  __A.k36, __A.k37,
+  __A.k35, __A.k36,
+  __A.k37,
   __A.k38, __A.k39,
-  __A.k40, __A.k41,
-  __A.k42, __A.k43,
+  __A.k40,
+  __A.k41, __A.k42,
+  __A.k43,
   __A.k44, __A.k45,
-  __A.k46, __A.k47,
-  __A.k48,
+  __A.k46,
+  __A.k47, __A.k48,
   __A.k49,
-  __A.k50,
-  __A.k51, __A.k52, __A.k113,
-  __A.k114, __A.k115, __A.k116,
-  __A.k117, __A.k118, __A.k119,
-  __A.k120, __A.k121, __A.k122,
-  __A.k123, __A.k124, __A.k125,
-  __A.k126, __A.k127, __A.k128,
-  __A.k129, __A.k130, __A.k131,
-  __A.k132, __A.k133, __A.k134,
-  __A.k135, __A.k136, __A.k137,
-  __A.k138, __A.k139, __A.k140,
-  __A.k141, __A.k142, __A.k143,
-  __A.k144, __A.k145, __A.k146,
-  __A.k147, __A.k148, __A.k149,
-  __A.k150, __A.k151, __A.k152,
-  __A.k153, __A.k154, __A.k155,
-  __A.k156, __A.k157, __A.k158,
-  __A.k159, __A.k160, __A.k161,
-  __A.k162, __A.k163, __A.k164,
-  __A.k165, __A.k166, __A.k167,
-  __A.k168, __A.k169, __A.k170,
-  __A.k171, __A.k172, __A.k173,
-  __A.k174, __A.k175, __A.k176,
-  __A.k177, __A.k178, __A.k179,
-  __A.k180, __A.k181, __A.k182,
-  __A.k183, __A.k184, __A.k185,
-  __A.k186, __A.k187, __A.k188,
-  __A.k189, __A.k190, __A.k191,
-  __A.k192, __A.k193, __A.k194,
-  __A.k195, __A.k196, __A.k197,
-  __A.k198, __A.k199, __A.k200,
-  __A.k201, __A.k202, __A.k203,
-  __A.k204, __A.k205, __A.k206,
-  __A.k207, __A.k208, __A.k209,
-  __A.k210, __A.k211, __A.k212,
-  __A.k213, __A.k214, __A.k215,
-  __A.k216, __A.k217, __A.k218,
-  __A.k219, __A.k220, __A.k221,
-  __A.k222, __A.k223, __A.k224,
-  __A.k225, __A.k226, __A.k227,
-  __A.k228, __A.k229, __A.k230,
-  __A.k231, __A.k232, __A.k233,
-  __A.k234, __A.k235, __A.k236,
-  __A.k237, __A.k238, __A.k239,
-  __A.k240, __A.k241, __A.k242,
-  __A.k243, __A.k244, __A.k245,
-  __A.k246, __A.k247, __A.k248,
-  __A.k249, __A.k250, __A.k251,
-  __A.k252, __A.k253, __A.k254,
-  __A.k255, __A.k256, __A.k257,
-  __A.k258, __A.k259, __A.k260,
-  __A.k261, __A.k262, __A.k263,
-  __A.k264, __A.k265, __A.k266,
-  __A.k267, __A.k268, __A.k269,
-  __A.k270, __A.k271, __A.k272,
-  __A.k273, __A.k274, __A.k275,
-  __A.k276, __A.k277, __A.k278,
-  __A.k279, __A.k280, __A.k281,
-  __A.k282, __A.k283, __A.k284,
-  __A.k285, __A.k286, __A.k287,
-  __A.k288, __A.k289, __A.k290,
-  __A.k291, __A.k292, __A.k293,
-  __A.k294, __A.k295, __A.k296,
-  __A.k297, __A.k298, __A.k299,
-  __A.k300, __A.k301, __A.k302,
-  __A.k303, __A.k304, __A.k305,
-  __A.k306,
-  __A.k53, __A.k54, __A.k55, __A.k56,
-  __A.k57, __A.k58,
-  __A.k59, __A.k60, __A.k61, __A.k62,
-  __A.k63, __A.k64,
-  __A.k65, __A.k66, __A.k67, __A.k68,
-  __A.k69, __A.k70,
-  __A.k9, __A.k6, __A.k7,
-  __A.k8,
-  __A.k1, __A.k2, __A.k3,
-  __A.k4, __A.k5,
-  __A.k71, __A.k72,
-  __A.k73, __A.k74,
-  __A.k75, __A.k76,
-  __A.k77, __A.k78,
-  __A.k79, __A.k80,
-  __A.k81, __A.k82,
-  __A.k83, __A.k84,
-  __A.k85, __A.k86,
-  __A.k87, __A.k88,
-  __A.k89, __A.k90,
-  __A.k91, __A.k92,
-  __A.k93, __A.k94,
-  __A.k95, __A.k96,
-  __A.k97, __A.k98,
-  __A.k99, __A.k100,
+  __A.k50, __A.k51,
+  __A.k52, __A.k53,
+  __A.k54, __A.k55,
+  __A.k56, __A.k57,
+  __A.k58, __A.k59,
+  __A.k60, __A.k61,
+  __A.k62, __A.k63,
+  __A.k64, __A.k65,
+  __A.k66, __A.k67,
+  __A.k68, __A.k69,
+  __A.k70, __A.k71,
+  __A.k72, __A.k73,
+  __A.k74, __A.k75,
+  __A.k76, __A.k77,
+  __A.k78, __A.k79,
+  __A.k80, __A.k81,
+  __A.k82, __A.k83,
+  __A.k84, __A.k85,
+  __A.k86, __A.k87,
+  __A.k88, __A.k89,
+  __A.k90, __A.k91,
+  __A.k92, __A.k93,
+  __A.k94, __A.k95,
+  __A.k96, __A.k97,
   __A.k101, __A.k102,
   __A.k103, __A.k104,
   __A.k105, __A.k106,
   __A.k107, __A.k108,
   __A.k109, __A.k110,
   __A.k111, __A.k112,
+  __A.k113,
+  __A.k114,
+  __A.k115,
+  __A.k116, __A.k117, __A.k178,
+  __A.k179, __A.k180, __A.k181,
+  __A.k182, __A.k183, __A.k184,
+  __A.k185, __A.k186, __A.k187,
+  __A.k188, __A.k189, __A.k190,
+  __A.k191, __A.k192, __A.k193,
+  __A.k194, __A.k195, __A.k196,
+  __A.k197, __A.k198, __A.k199,
+  __A.k200, __A.k201, __A.k202,
+  __A.k203, __A.k204, __A.k205,
+  __A.k206, __A.k207, __A.k208,
+  __A.k209, __A.k210, __A.k211,
+  __A.k212, __A.k213, __A.k214,
+  __A.k215, __A.k216, __A.k217,
+  __A.k218, __A.k219, __A.k220,
+  __A.k221, __A.k222, __A.k223,
+  __A.k224, __A.k225, __A.k226,
+  __A.k227, __A.k228, __A.k229,
+  __A.k230, __A.k231, __A.k232,
+  __A.k233, __A.k234, __A.k235,
+  __A.k236, __A.k237, __A.k238,
+  __A.k239, __A.k240, __A.k241,
+  __A.k242, __A.k243, __A.k244,
+  __A.k245, __A.k246, __A.k247,
+  __A.k248, __A.k249, __A.k250,
+  __A.k251, __A.k252, __A.k253,
+  __A.k254, __A.k255, __A.k256,
+  __A.k257, __A.k258, __A.k259,
+  __A.k260, __A.k261, __A.k262,
+  __A.k263, __A.k264, __A.k265,
+  __A.k266, __A.k267, __A.k268,
+  __A.k269, __A.k270, __A.k271,
+  __A.k272, __A.k273, __A.k274,
+  __A.k275, __A.k276, __A.k277,
+  __A.k278, __A.k279, __A.k280,
+  __A.k281, __A.k282, __A.k283,
+  __A.k284, __A.k285, __A.k286,
+  __A.k287, __A.k288, __A.k289,
+  __A.k290, __A.k291, __A.k292,
+  __A.k293, __A.k294, __A.k295,
+  __A.k296, __A.k297, __A.k298,
+  __A.k299, __A.k300, __A.k301,
+  __A.k302, __A.k303, __A.k304,
+  __A.k305, __A.k306, __A.k307,
+  __A.k308, __A.k309, __A.k310,
+  __A.k311, __A.k312, __A.k313,
+  __A.k314, __A.k315, __A.k316,
+  __A.k317, __A.k318, __A.k319,
+  __A.k320, __A.k321, __A.k322,
+  __A.k323, __A.k324, __A.k325,
+  __A.k326, __A.k327, __A.k328,
+  __A.k329, __A.k330, __A.k331,
+  __A.k332, __A.k333, __A.k334,
+  __A.k335, __A.k336, __A.k337,
+  __A.k338, __A.k339, __A.k340,
+  __A.k341, __A.k342, __A.k343,
+  __A.k344, __A.k345, __A.k346,
+  __A.k347, __A.k348, __A.k349,
+  __A.k350, __A.k351, __A.k352,
+  __A.k353, __A.k354, __A.k355,
+  __A.k356, __A.k357, __A.k358,
+  __A.k359, __A.k360, __A.k361,
+  __A.k362, __A.k363, __A.k364,
+  __A.k365, __A.k366, __A.k367,
+  __A.k368, __A.k369, __A.k370,
+  __A.k371,
+  __A.k118, __A.k119, __A.k120, __A.k121,
+  __A.k122, __A.k123,
+  __A.k124, __A.k125, __A.k126, __A.k127,
+  __A.k128, __A.k129,
+  __A.k130, __A.k131, __A.k132, __A.k133,
+  __A.k134, __A.k135,
+  __A.k9, __A.k6, __A.k7,
+  __A.k8,
+  __A.k1, __A.k2, __A.k3,
+  __A.k4, __A.k5,
+  __A.k136, __A.k137,
+  __A.k138, __A.k139,
+  __A.k140, __A.k141,
+  __A.k142, __A.k143,
+  __A.k144, __A.k145,
+  __A.k146, __A.k147,
+  __A.k148, __A.k149,
+  __A.k150, __A.k151,
+  __A.k152, __A.k153,
+  __A.k154, __A.k155,
+  __A.k156, __A.k157,
+  __A.k158, __A.k159,
+  __A.k160, __A.k161,
+  __A.k162, __A.k163,
+  __A.k164, __A.k165,
+  __A.k166, __A.k167,
+  __A.k168, __A.k169,
+  __A.k170, __A.k171,
+  __A.k172, __A.k173,
+  __A.k174, __A.k175,
+  __A.k176, __A.k177,
 ];
 
 /* v0.7.1 — Cache ảnh icons2 cho lớp VẼ CANVAS (marker minimap / bản đồ
@@ -1295,7 +1432,7 @@ function icon2Img(id) {
 }
 
 /* Phiên bản game hiện tại — hiển thị trong panel Cài đặt */
-const GAME_VERSION = 'v0.7.1';
+const GAME_VERSION = 'v0.7.2';
 
 /* =====================================================================
    VẬT THỂ TÁCH LỚP RỪNG XANH (v0.5.6) — dữ liệu từ layers.json của
@@ -2951,6 +3088,11 @@ const Sprites = {
   ksAnimTint: {},
   gobAnim: null,
   gobAnimTint: {},
+  /* v0.7.2: dải BỘ PHẬN cả 6 hero — partsAnim[k] = { idle, run, skill1? },
+     mỗi entry {img, dur, total} như ksAnim; bản nhuộm riêng partsAnimTint
+     khóa '<heroKey>-idle' / '-run' / '-skill1' */
+  partsAnim: null,
+  partsAnimTint: {},
   _loadStrip(src, tintStore, prefix) {
     const img = new Image();
     img.onload = () => {
@@ -2976,6 +3118,17 @@ const Sprites = {
       attack: mk(GB.attack, this.gobAnimTint, 'attack'),
       hit: mk(GB.hit, this.gobAnimTint, 'hit'),
     };
+    /* v0.7.2: nạp dải bộ phận cả 6 hero (idle/run + skill1 nếu có) */
+    this.partsAnim = {};
+    for (const hk of Object.keys(ASSETS.partsAnim)) {
+      const def = ASSETS.partsAnim[hk];
+      const o = {
+        idle: mk(def.idle, this.partsAnimTint, hk + '-idle'),
+        run: mk(def.run, this.partsAnimTint, hk + '-run'),
+      };
+      if (def.skill1) o.skill1 = mk(def.skill1, this.partsAnimTint, hk + '-skill1');
+      this.partsAnim[hk] = o;
+    }
   },
   /* Khung thứ mấy của 1 dải tại thời điểm elMs theo thời lượng từng khung;
      loop = true thì quay vòng, không loop thì giữ khung cuối khi quá giờ */
@@ -2994,7 +3147,8 @@ const Sprites = {
      neo theo đường chân y=620 của ô nên chân chạm đúng mặt đất. Lật ngang
      theo hướng mặt (faceS) như đường vẽ cũ; KHÔNG áp nhún chạy / lao đòn /
      rung tung phép của đường cũ để chân không trượt đất trong lúc diễn. */
-  heroStripDraw(ctx, h, height, entry, fi, tintPrefix) {
+  heroStripDraw(ctx, h, height, entry, fi, tintPrefix, tintStore) {
+    const TS = tintStore || this.ksAnimTint;
     const baseA = ctx.globalAlpha;
     const CW = 768, CH = 640;
     const cellH = height * CH / 476;
@@ -3009,8 +3163,8 @@ const Sprites = {
     const fxA = h.faceS === undefined ? (h.face || 1) : h.faceS;
     ctx.scale(fxA, 1 - 0.04 * (h.turnSq || 0));
     ctx.drawImage(entry.img, sx, 0, CW, CH, -dw / 2, dy, dw, cellH);
-    if (h.poisonT > 0 && this.ksAnimTint[tintPrefix + '-green']) { ctx.globalAlpha = baseA * 0.30; ctx.drawImage(this.ksAnimTint[tintPrefix + '-green'], sx, 0, CW, CH, -dw / 2, dy, dw, cellH); ctx.globalAlpha = baseA; }
-    if (h.hurtT > 0 && this.ksAnimTint[tintPrefix + '-red']) { ctx.globalAlpha = baseA * Math.min(0.5, h.hurtT * 2.2); ctx.drawImage(this.ksAnimTint[tintPrefix + '-red'], sx, 0, CW, CH, -dw / 2, dy, dw, cellH); ctx.globalAlpha = baseA; }
+    if (h.poisonT > 0 && TS[tintPrefix + '-green']) { ctx.globalAlpha = baseA * 0.30; ctx.drawImage(TS[tintPrefix + '-green'], sx, 0, CW, CH, -dw / 2, dy, dw, cellH); ctx.globalAlpha = baseA; }
+    if (h.hurtT > 0 && TS[tintPrefix + '-red']) { ctx.globalAlpha = baseA * Math.min(0.5, h.hurtT * 2.2); ctx.drawImage(TS[tintPrefix + '-red'], sx, 0, CW, CH, -dw / 2, dy, dw, cellH); ctx.globalAlpha = baseA; }
     ctx.restore();
     return true;
   },
@@ -3056,11 +3210,33 @@ const Sprites = {
      mặt khi ra đòn. Tay chân đã cử động trong khung nên không còn nhún/nghiêng
      bằng transform như ảnh tĩnh. */
   heroAnimDraw(ctx, h, t, height, k, strip) {
+    /* v0.7.2 — DẢI BỘ PHẬN (anim2) cho CẢ 6 HERO, ưu tiên theo thứ tự:
+       1) SKILL 1 của 5 hero có dải bộ phận (Kiếm Sĩ Nữ / Pháp Sư Nam+Nữ /
+          Cung Thủ Nam+Nữ) khi h.skillAnim đang chạy ở skill 0;
+       2) Kiếm Sĩ Nam đang tung skill → bộ key-pose v0.7.0 (khối dưới);
+       3) còn lại khi không chết / không vung đòn / không tung phép:
+          DI CHUYỂN phát lặp dải run bộ phận, ĐỨNG YÊN phát lặp idle bộ
+          phận — thay idle/run của dải cũ cho mọi hero.
+       Đánh thường + skill 2–4 của 5 hero kia giữ đường vẽ cũ bên dưới.
+       Ảnh dải chưa tải xong → rơi về đường cũ như chưa có gì thay đổi. */
+    const PA = this.partsAnim && this.partsAnim[k];
+    if (PA && !h.dead) {
+      const sa = h.skillAnim;
+      if (sa && sa.i === 0 && PA.skill1 && sa.el * 1000 < PA.skill1.total) {
+        if (PA.skill1.img.naturalWidth) return this.heroStripDraw(ctx, h, height, PA.skill1, this.stripFrame(PA.skill1.dur, sa.el * 1000, false), k + '-skill1', this.partsAnimTint);
+      } else if (!(h.swingT > 0) && !(h.castT > 0) &&
+        !(k === 'swordsman-male' && sa && this.ksAnim && this.ksAnim.skills[sa.i] && sa.el * 1000 < this.ksAnim.skills[sa.i].total)) {
+        const e = h.moving ? PA.run : PA.idle;
+        if (e && e.img.naturalWidth) return this.heroStripDraw(ctx, h, height, e, this.stripFrame(e.dur, t * 1000, true), k + (h.moving ? '-run' : '-idle'), this.partsAnimTint);
+      }
+    }
     /* v0.7.0 — Kiếm Sĩ Nam: đang tung skill (h.skillAnim do Skills.cast
        ghi) thì phát DẢI RIÊNG của skill đó thay cho chuyển động thường;
        đứng yên (không di chuyển / không đánh / không tung phép) thì phát
        lặp dải idle riêng. Chạy + đánh thường giữ nguyên dải cũ bên dưới.
-       Ảnh dải chưa tải xong → rơi về đường cũ như chưa có gì thay đổi. */
+       Ảnh dải chưa tải xong → rơi về đường cũ như chưa có gì thay đổi.
+       (v0.7.2: idle của Kiếm Sĩ Nam đã do dải bộ phận ở trên lo khi ảnh
+       sẵn sàng; khối idle key-pose này chỉ còn là dự phòng.) */
     if (k === 'swordsman-male' && this.ksAnim) {
       const sa = h.skillAnim;
       if (sa && this.ksAnim.skills[sa.i] && sa.el * 1000 < this.ksAnim.skills[sa.i].total) {
@@ -4519,10 +4695,16 @@ function update(dt) {
   if (hero.stunT > 0) hero.stunT -= dt;
   if (hero.castT > 0) hero.castT -= dt;
   /* v0.7.0: đồng hồ dải skill Kiếm Sĩ Nam — chạy hết tổng thời lượng
-     khung của dải thì tự tắt, hình quay về chuyển động thường */
+     khung của dải thì tự tắt, hình quay về chuyển động thường.
+     v0.7.2: tra dải theo hero hiện tại — Kiếm Sĩ Nam: bộ key-pose
+     skillAnim; hero khác ở skill 1: dải bộ phận partsAnim; không có dải
+     tương ứng thì tắt ngay (hình đang ở đường vẽ cũ, không đổi gì). */
   if (hero.skillAnim) {
     hero.skillAnim.el += dt;
-    const _saE = Sprites.ksAnim && Sprites.ksAnim.skills[hero.skillAnim.i];
+    const _hk = P.classId + '-' + P.gender;
+    let _saE = null;
+    if (_hk === 'swordsman-male') _saE = Sprites.ksAnim && Sprites.ksAnim.skills[hero.skillAnim.i];
+    else if (hero.skillAnim.i === 0) _saE = Sprites.partsAnim && Sprites.partsAnim[_hk] && Sprites.partsAnim[_hk].skill1;
     if (!_saE || hero.skillAnim.el * 1000 >= _saE.total) hero.skillAnim = null;
   }
   if (hero.potCd > 0) hero.potCd -= dt;
@@ -5319,8 +5501,11 @@ const Skills = {
     skillState[i].cd = skillCd(i, sk);
     hero.swingT = 0.22; hero.castT = 0.38;
     /* v0.7.0: Kiếm Sĩ Nam phát dải animation riêng của skill vừa tung
-       (chỉ là lớp hình — sát thương / hồi chiêu giữ nguyên như cũ) */
-    if (P.classId === 'swordsman' && P.gender === 'male') hero.skillAnim = { i, el: 0 };
+       (chỉ là lớp hình — sát thương / hồi chiêu giữ nguyên như cũ).
+       v0.7.2: ghi cho MỌI hero — lớp vẽ tự tra dải: Kiếm Sĩ Nam dùng bộ
+       key-pose 4 skill, 5 hero còn lại chỉ skill 1 có dải bộ phận, các
+       skill khác không có dải thì hình giữ nguyên đường vẽ cũ. */
+    hero.skillAnim = { i, el: 0 };
     if (near) hero.face = near.m.x >= hero.x ? 1 : -1;
     AudioFX.skill();
     VFX.castFlash(i);   /* lớp 1 của mọi skill: lóe sáng tại hero theo màu phái */
@@ -5484,6 +5669,20 @@ const keys = {};
 const fmt = n => Math.round(n).toLocaleString('vi-VN');
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const icon = (id, cls) => '<svg' + (cls ? ' class="' + cls + '"' : '') + '><use href="#' + id + '"/></svg>';
+/* v0.7.2: HTML icon HIỂN THỊ của 1 món đồ — riêng 2 ô armor + boots dùng
+   ẢNH trang bị theo phái + giới tính của NHÂN VẬT ĐANG CHƠI và bậc theo
+   cấp món (it.il: 1–19 → lv1, 20–39 → lv20, 40–59 → lv40, 60+ → lv60),
+   ảnh đè lên glyph cũ làm dự phòng (lỗi tải thì onerror ẩn ảnh). Các ô
+   khác giữ glyph SVG hiện tại. Thuần hiển thị, không đổi dữ liệu món. */
+function itemIconHTML(it) {
+  const meta = CONFIG.itemSlots[it.slot];
+  if (it.slot === 'armor' || it.slot === 'boots') {
+    const tier = it.il >= 60 ? 'lv60' : it.il >= 40 ? 'lv40' : it.il >= 20 ? 'lv20' : 'lv1';
+    const src = ASSETS.equip[P.classId + '-' + P.gender + '-' + it.slot + '-' + tier];
+    if (src) return '<span class="ia-wrap">' + icon(meta.icon) + '<img class="item-art" src="' + src + '" alt="" onerror="this.style.display=\'none\'"></span>';
+  }
+  return icon(meta.icon);
+}
 /* v0.6.2: ảnh icon nút theo phái — tiền tố file trong ASSETS.icons
    (ks = Kiếm Sĩ, ps = Pháp Sư, ct = Cung Thủ). Ảnh phủ kín nút, glyph
    cũ giữ ngay dưới ảnh: ảnh lỗi tải thì onerror ẩn ảnh → glyph hiện.
@@ -5693,7 +5892,7 @@ const UI = {
       b.className = 'slot-box' + (it ? ' filled r-' + CONFIG.rarities[it.rarity].css : '');
       if (it) {
         const dots = Array.from({ length: it.sockets }, (_, gi) => '<span style="color:' + (it.gems[gi] ? CONFIG.gems.types[it.gems[gi].type].color : 'var(--ink-soft)') + '">●</span>').join(' ');
-        b.innerHTML = '<span style="color:' + rarityColor(it.rarity) + '">' + icon(meta.icon) + '</span><span class="s-name">' + it.name + '</span>' +
+        b.innerHTML = '<span style="color:' + rarityColor(it.rarity) + '">' + itemIconHTML(it) + '</span><span class="s-name">' + it.name + '</span>' +
           '<span class="s-up">' + (it.up > 0 ? '+' + it.up + ' · ' : '') + meta.label + '</span>' + (it.sockets ? '<span class="s-slot">' + dots + '</span>' : '');
         b.addEventListener('click', () => UI.openItem(it, 'equip'));
       } else {
@@ -5735,7 +5934,7 @@ const UI = {
       const meta = CONFIG.itemSlots[it.slot];
       const b = document.createElement('button');
       b.className = 'item-cell r-' + CONFIG.rarities[it.rarity].css + (it.isNew ? ' new-drop' : '');
-      b.innerHTML = '<span style="color:' + rarityColor(it.rarity) + '">' + icon(meta.icon) + '</span><span class="i-name">' + it.name + '</span>' +
+      b.innerHTML = '<span style="color:' + rarityColor(it.rarity) + '">' + itemIconHTML(it) + '</span><span class="i-name">' + it.name + '</span>' +
         '<span class="i-up">' + (it.up > 0 ? '+' + it.up : 'Mới') + '</span>';
       b.addEventListener('click', () => UI.openItem(it, 'bag'));
       grid.appendChild(b);
@@ -5766,7 +5965,7 @@ const UI = {
     const it = this.modalItem; if (!it) return;
     const r = CONFIG.rarities[it.rarity], meta = CONFIG.itemSlots[it.slot];
     const eq = P.equipped[it.slot];
-    el('mIcon').innerHTML = icon(meta.icon);
+    el('mIcon').innerHTML = itemIconHTML(it);
     el('mIcon').style.color = rarityColor(it.rarity);
     el('mIcon').style.borderColor = rarityColor(it.rarity);
     el('mName').innerHTML = it.name + (it.up > 0 ? ' <span style="color:var(--gold)">+' + it.up + '</span>' : '');
