@@ -1,4 +1,11 @@
 
+## v0.9.1 — 2026-11-29 (bug-fix round from Codex's independent code review, LIVE)
+- FIX mana shield: damage is now clamped to ≥0 after defense/steel-shield and BEFORE mana-shield absorption in heroTakeDamage — being hit can no longer GAIN mana (verified numerically: atk 5 vs def 100, mana stays, HP −1; normal absorption unchanged). The minimum 1 HP chip damage is unchanged.
+- FIX boss respawn: bossRespawnAt now persists inside the save (shared per-map timestamps, loaded at startup, expired entries cleaned) — reloading the page no longer revives arena bosses instantly; the 5-minute rule holds.
+- FIX loot spam/pile-up: "bag full" toast throttled to once per 3s; ground drops (items/gems/potions, incl. boss first-kill drops) expire after 120s, fading over the last 10s.
+- Save hardening: schema version field added; every successful persist also writes a backup copy that auto-restores if the main save is unreadable; a failed persist now warns the player (once per session) instead of failing silently. Pre-v0.9.1 saves load unchanged.
+- DESIGN DECISION (Do, re-confirmed 2026-11-29 after Codex flagged it): basic attack stays ZERO-WAIT for fresh taps — tap faster, hit faster; the attack-speed stat governs held/AUTO attacks. This is intentional, not a bug; do not "fix" it.
+
 ## v0.9.0 — 2026-11-29 (redesign complete, LIVE)
 - Character-select screen rebuilt per ref-5: full-screen village painting background; left column up to 3 character slots (round gold avatar, name/class/level, selected slot glows, empty slot has a Create button); centre stage shows the selected hero LARGE on a glowing pedestal running its real parts idle strip (switching slots switches hero + idle, with the 240ms zoom/glide); right panel shows real computed stats (name, class/gender, level, current map, HP/MP/ATK/DEF/Crit/Move speed via the game's own heroStats); big VÀO GAME button; small delete with two-tap confirmation. No invented power score/server/currency.
 - Screen-by-screen pass against the 5 reference images: round gold ✕ close buttons added to the remaining windows (Settings, big map, equipment popup, list close); equipment stays exactly 4 slots; skills keep Lv1/8/15/25 locks and all numbers; bag keeps 8×5 grid + tabs + right detail.

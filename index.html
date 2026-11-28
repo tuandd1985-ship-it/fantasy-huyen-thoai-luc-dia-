@@ -1127,7 +1127,8 @@
         <h4 class="set-h">Khác</h4>
         <div class="set-row"><span>Rung máy khi đánh boss / lên cấp</span><button class="tgl" id="setVib" aria-label="Bật tắt rung máy"></button></div>
         <p class="muted" style="margin:10px 0 0">Cài đặt áp dụng ngay. Mức đồ hoạ Thấp giảm mạnh hạt hiệu ứng để máy yếu chơi mượt.</p>
-        <p class="muted" style="margin:10px 0 0">Phiên bản <b id="gameVersion">v0.9.0</b> — Nhật ký cập nhật:</p>
+        <p class="muted" style="margin:10px 0 0">Phiên bản <b id="gameVersion">v0.9.1</b> — Nhật ký cập nhật:</p>
+        <p class="muted" style="margin:4px 0 0">v0.9.1 — Sửa lỗi khiên mana, lưu mốc hồi sinh boss, chống spam túi đầy và gia cố bản lưu.</p>
         <p class="muted" style="margin:4px 0 0">v0.9.0 — Giao diện Chibi Fantasy hoàn thiện: màn chọn nhân vật mới, toàn màn hình thật trên iOS.</p>
         <p class="muted" style="margin:4px 0 0">v0.8.0 — Thế giới 17 map liên thông, làng tân thủ có NPC và nhiệm vụ, dịch chuyển tự do giữa các map.</p>
         <p class="muted" style="margin:4px 0 0">v0.7.2 — Cả 6 hero chuyển động bằng animation bộ phận; icon áo/giày theo bậc cấp trong túi đồ.</p>
@@ -1786,7 +1787,7 @@ function icon2Img(id) {
 }
 
 /* Phiên bản game hiện tại — hiển thị trong panel Cài đặt */
-const GAME_VERSION = 'v0.9.0';
+const GAME_VERSION = 'v0.9.1';
 
 /* =====================================================================
    VẬT THỂ TÁCH LỚP RỪNG XANH (v0.5.6) — dữ liệu từ layers.json của
@@ -2165,6 +2166,19 @@ const CONFIG = {
    (Điểm nối lưu trữ duy nhất: thay thân persist() để lưu máy chủ sau.)
    ===================================================================== */
 const SAVE_KEY = 'fantasy-huyen-thoai-luc-dia-save-v1';
+/* v0.9.1 — GIA CỐ SAVE: (a) SAVE_SCHEMA là phiên bản cấu trúc dữ liệu lưu,
+   ghi kèm mỗi bản lưu — bản lưu cũ KHÔNG có trường này vẫn nạp bình thường
+   (tương thích ngược); (b) SAVE_BACKUP_KEY giữ MỘT bản sao dự phòng của
+   bản lưu tốt gần nhất, dùng để tự khôi phục khi bản chính lỗi. */
+const SAVE_BACKUP_KEY = SAVE_KEY + '-backup';
+const SAVE_SCHEMA = 1;
+let saveFailWarned = false;   // v0.9.1: cảnh báo lưu thất bại tối đa 1 lần mỗi phiên chơi
+/* v0.9.1 — Mốc hồi sinh boss theo mapId (Date.now() boss được hồi sinh,
+   sau khi bị hạ 5 phút). Khai báo SỚM tại đây để Save.persist/restore đọc
+   ghi được: mốc này NẰM TRONG BẢN LƯU (dữ liệu chung, không theo từng
+   nhân vật) — trước đây chỉ là biến trong bộ nhớ nên tải lại trang là
+   boss đấu trường xuất hiện lại ngay, phá quy tắc hồi sinh 5 phút. */
+const bossRespawnAt = {};
 const Save = {
   data: null,
   fresh() {
@@ -2193,25 +2207,56 @@ const Save = {
      định kỳ khi đang chơi — từ giờ tải lại trang KHÔNG mất nhân vật. */
   persist() {
     try {
-      localStorage.setItem(SAVE_KEY, JSON.stringify({
+      const payload = JSON.stringify({
+        schema: SAVE_SCHEMA,
         chars: Roster.chars, active: Roster.active,
         settings: Roster.settings, itemSeq: (typeof itemSeq === 'number' ? itemSeq : 1),
-      }));
-    } catch (e) { /* chế độ riêng tư / hết quota: bỏ qua, game vẫn chạy trong phiên */ }
+        bossRespawn: bossRespawnAt,
+      });
+      localStorage.setItem(SAVE_KEY, payload);
+      /* v0.9.1: lưu chính thành công → cập nhật bản sao dự phòng bằng
+         chính bản lưu tốt vừa ghi. Ghi bản sao lỗi thì bỏ qua lặng lẽ
+         (không tính là lưu thất bại — bản chính đã an toàn). */
+      try { localStorage.setItem(SAVE_BACKUP_KEY, payload); } catch (e2) { /* bỏ qua */ }
+    } catch (e) {
+      /* v0.9.1: lưu THẤT BẠI (hết dung lượng localStorage / chế độ riêng
+         tư…) → CẢNH BÁO người chơi thay vì im lặng bỏ qua, tối đa 1 lần
+         mỗi phiên chơi. Game vẫn chạy tiếp trong phiên như trước. */
+      if (!saveFailWarned) {
+        saveFailWarned = true;
+        try { UI.toast('⚠ <b>Không lưu được tiến trình!</b> Bộ nhớ lưu trữ của trình duyệt đã đầy hoặc bị chặn — hãy giải phóng dung lượng để không mất nhân vật khi thoát game.'); } catch (e3) { /* UI chưa sẵn sàng: bỏ qua */ }
+      }
+    }
   },
-  /* Khôi phục lúc mở game. Trả về true nếu có ít nhất 1 nhân vật đã lưu. */
+  /* Khôi phục lúc mở game. Trả về true nếu có ít nhất 1 nhân vật đã lưu.
+     v0.9.1: bản chính lỗi/không đọc được → tự khôi phục từ bản dự phòng.
+     Bản lưu cũ (thiếu trường schema / bossRespawn) nạp bình thường. */
   restore() {
-    try {
-      const raw = localStorage.getItem(SAVE_KEY);
-      if (!raw) return false;
-      const d = JSON.parse(raw);
-      if (!d || !Array.isArray(d.chars)) return false;
-      Roster.chars = d.chars.filter(ch => ch && ch.created && typeof ch.name === 'string').slice(0, MAX_CHARS);
-      if (d.settings) Object.assign(Roster.settings, d.settings);
-      if (typeof d.itemSeq === 'number' && typeof itemSeq === 'number' && d.itemSeq > itemSeq) itemSeq = d.itemSeq;
-      Roster.active = -1;
-      return Roster.chars.length > 0;
-    } catch (e) { return false; }
+    const parseSave = (raw) => {
+      if (!raw) return null;
+      try { const d = JSON.parse(raw); return (d && Array.isArray(d.chars)) ? d : null; } catch (e) { return null; }
+    };
+    let d = null, fromBackup = false;
+    try { d = parseSave(localStorage.getItem(SAVE_KEY)); } catch (e) { d = null; }
+    if (!d) {
+      try { d = parseSave(localStorage.getItem(SAVE_BACKUP_KEY)); fromBackup = !!d; } catch (e) { d = null; }
+    }
+    if (!d) return false;
+    Roster.chars = d.chars.filter(ch => ch && ch.created && typeof ch.name === 'string').slice(0, MAX_CHARS);
+    if (d.settings) Object.assign(Roster.settings, d.settings);
+    if (typeof d.itemSeq === 'number' && typeof itemSeq === 'number' && d.itemSeq > itemSeq) itemSeq = d.itemSeq;
+    /* v0.9.1: nạp lại mốc hồi sinh boss theo map, DỌN các mốc đã hết hạn */
+    for (const k of Object.keys(bossRespawnAt)) delete bossRespawnAt[k];
+    if (d.bossRespawn && typeof d.bossRespawn === 'object') {
+      const now = Date.now();
+      for (const k of Object.keys(d.bossRespawn)) {
+        const t = d.bossRespawn[k];
+        if (typeof t === 'number' && t > now) bossRespawnAt[k] = t;
+      }
+    }
+    Roster.active = -1;
+    if (fromBackup) { try { UI.toast('Bản lưu chính bị lỗi — đã tự khôi phục từ <b>bản lưu dự phòng</b>.'); } catch (e) { /* bỏ qua */ } }
+    return Roster.chars.length > 0;
   },
 };
 let P = Save.load();
@@ -4671,7 +4716,8 @@ let curMap = null;              // MAPS17 def của map đang chơi
 let curZones = null;            // { safe, elite, boss } theo tọa độ thế giới (đã snap vùng lớn nhất)
 let curPortals = [];            // [{ link, to, name, x, y }] của map hiện tại
 let curNpcs = [];               // NPC của Làng Khởi Đầu (chỉ map lang)
-const bossRespawnAt = {};       // mapId → mốc Date.now() boss được hồi sinh (sau khi bị hạ 5 phút)
+/* bossRespawnAt: đã khai báo ở module Save phía trên (v0.9.1 — mốc hồi
+   sinh boss được lưu kèm bản lưu, tải lại trang không mất) */
 
 /* Nạp 2 file lưới va chạm: fetch đường dẫn tương đối — nếu bản xuất bản
    thay đường dẫn bằng data URI thì fetch vẫn đọc được nguyên văn JSON. */
@@ -5201,7 +5247,7 @@ function killMonster(m) {
   const cm = currentMap();
   if (m.boss) {
     /* Boss Đấu Trường: hồi sinh sau 5 phút, quay lại đánh tiếp được */
-    if (curMap && curMap.bossMap) { bossRespawnAt[curMap.id] = Date.now() + 5 * 60 * 1000; UI.toast('Boss <b>' + m.name + '</b> sẽ hồi sinh sau 5 phút.'); }
+    if (curMap && curMap.bossMap) { bossRespawnAt[curMap.id] = Date.now() + 5 * 60 * 1000; Save.persist(); UI.toast('Boss <b>' + m.name + '</b> sẽ hồi sinh sau 5 phút.'); }
     const tbl = CONFIG.bossDrops[(curMap && curMap.bossTier ? curMap.bossTier : 1) - 1];
     dropItemAt(m.x, m.y, tbl.weights);
     if (Math.random() < tbl.extraChance) dropItemAt(m.x, m.y, tbl.weights);
@@ -5225,9 +5271,16 @@ function killMonster(m) {
   UI.refreshHUD(); UI.updateKillInfo(); UI.renderChar();
 }
 
+/* v0.9.1: mốc lần gần nhất đã báo "Túi đã đầy" — chống spam thông báo
+   khi đứng cạnh món đồ mà túi đầy (trước đây báo lặp theo từng khung hình) */
+let bagFullToastAt = 0;
 function collectDrop(d) {
   if (d.kind === 'item') {
-    if (P.bag.length >= CONFIG.bagCap) { UI.toast('Túi đã đầy (' + CONFIG.bagCap + ' món) — bán bớt đồ nhé!'); return false; }
+    if (P.bag.length >= CONFIG.bagCap) {
+      const now = Date.now();
+      if (now - bagFullToastAt >= 3000) { bagFullToastAt = now; UI.toast('Túi đã đầy (' + CONFIG.bagCap + ' món) — bán bớt đồ nhé!'); }
+      return false;
+    }
     P.bag.push(d.item); AudioFX.loot();
     const r = CONFIG.rarities[d.item.rarity];
     UI.toast('Nhặt được: <b class="rc-' + r.css + '">' + d.item.name + '</b> [' + r.name + ']');
@@ -5277,6 +5330,11 @@ function heroTakeDamage(rawAtk) {
   if (Math.random() < dodgeCh) { addFloater(hero.x, hero.y - 92, 'NÉ!', '#8ce6aa', true); return 0; }
   let dmg = rawAtk * (0.9 + Math.random() * 0.2) - st.def * 0.55;
   if (B.shieldT > 0) dmg *= (1 - B.shieldVal);
+  /* v0.9.1 — KẸP dmg >= 0 TRƯỚC khiên mana: khi phòng thủ cao hơn đòn
+     đánh, dmg âm từng khiến lượng hấp thụ của khiên mana thành số âm →
+     bị đánh lại được CỘNG mana. Sau kẹp này, lượng hấp thụ và mana tiêu
+     hao không bao giờ âm; sàn mất tối thiểu 1 HP ở cuối hàm giữ nguyên. */
+  dmg = Math.max(0, dmg);
   if (B.manaShieldT > 0) {
     const absorbed = dmg * 0.6, costMp = absorbed * 0.5;
     if (hero.mp >= costMp) { hero.mp -= costMp; dmg -= absorbed; }
@@ -5653,9 +5711,12 @@ function update(dt) {
     }
   }
   updateProjectiles(dt);
-  /* Nhặt đồ */
+  /* Nhặt đồ — v0.9.1: đồ rơi (item/ngọc/bình, kể cả đồ boss first-kill)
+     TỰ BIẾN MẤT sau 120 giây để không tồn đọng khi farm lâu; 10 giây cuối
+     mờ dần ở drawDrop để người chơi kịp thấy */
   for (let i = drops.length - 1; i >= 0; i--) {
     const d = drops[i]; d.t += dt;
+    if (d.t >= 120) { drops.splice(i, 1); continue; }
     if (!hero.dead && Collision.dist2d(hero.x, hero.y, d.x, d.y) < 40) { if (collectDrop(d)) drops.splice(i, 1); }
   }
   for (let i = floaters.length - 1; i >= 0; i--) { const f = floaters[i]; f.t += dt; f.y -= 34 * dt; if (f.t > 0.95) floaters.splice(i, 1); }
@@ -6046,17 +6107,21 @@ function draw() {
 }
 function drawDrop(d) {
   const bobY = Math.sin(timeNow * 3.4 + d.x) * 2.5;
+  /* v0.9.1: mờ dần trong 10 giây cuối của vòng đời 120 giây (d.t chạy ở
+     vòng update nhặt đồ) — nhân vào mọi globalAlpha của món đồ này */
+  const fadeA = d.t > 110 ? Math.max(0, 1 - (d.t - 110) / 10) : 1;
   if (d.kind === 'item') {
     const r = CONFIG.rarities[d.item.rarity];
     const col = getComputedStyle(document.documentElement).getPropertyValue('--r-' + r.css).trim() || '#ffd970';
-    ctx.fillStyle = col; ctx.globalAlpha = 0.20 + Math.sin(timeNow * 4) * 0.06;
+    ctx.fillStyle = col; ctx.globalAlpha = fadeA * (0.20 + Math.sin(timeNow * 4) * 0.06);
     ctx.fillRect(d.x - 2.5, d.y - 56 + bobY, 5, 52);
-    ctx.globalAlpha = 1;
+    ctx.globalAlpha = fadeA;
     ctx.fillStyle = 'rgba(10,12,10,.8)'; Sprites.rr(ctx, d.x - 15, d.y - 32 + bobY, 30, 30, 8); ctx.fill();
     ctx.strokeStyle = col; ctx.lineWidth = 2; Sprites.rr(ctx, d.x - 15, d.y - 32 + bobY, 30, 30, 8); ctx.stroke();
     ctx.fillStyle = col; ctx.font = 'bold 15px "Be Vietnam Pro"'; ctx.textAlign = 'center';
     ctx.fillText({ weapon: '⚔', armor: '🛡', boots: '🥾', ring: '💍' }[d.item.slot] || '?', d.x, d.y - 11 + bobY);
   } else if (d.kind === 'gem') {
+    ctx.globalAlpha = fadeA;
     const gt = CONFIG.gems.types[d.gem.type];
     ctx.save(); ctx.translate(d.x, d.y - 16 + bobY); ctx.rotate(Math.PI / 4);
     ctx.fillStyle = gt.color; ctx.fillRect(-8, -8, 16, 16);
@@ -6065,11 +6130,13 @@ function drawDrop(d) {
     ctx.fillStyle = '#fff'; ctx.font = '900 10px "Be Vietnam Pro"'; ctx.textAlign = 'center';
     ctx.fillText(d.gem.tier, d.x, d.y - 12 + bobY);
   } else {
+    ctx.globalAlpha = fadeA;
     ctx.fillStyle = 'rgba(10,12,10,.8)'; Sprites.rr(ctx, d.x - 13, d.y - 30 + bobY, 26, 26, 8); ctx.fill();
     ctx.strokeStyle = '#e5484d'; ctx.lineWidth = 2; Sprites.rr(ctx, d.x - 13, d.y - 30 + bobY, 26, 26, 8); ctx.stroke();
     ctx.fillStyle = '#ff7a6b'; ctx.font = 'bold 14px "Be Vietnam Pro"'; ctx.textAlign = 'center';
     ctx.fillText('✚', d.x, d.y - 11 + bobY);
   }
+  ctx.globalAlpha = 1;   /* v0.9.1: trả alpha về mặc định cho phần vẽ sau */
 }
 
 let lastTs = 0;
