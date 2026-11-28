@@ -1,0 +1,201 @@
+{
+  "canvas": [
+    768,
+    640
+  ],
+  "baselineY": 620,
+  "groundTouch": [
+    "leg_l",
+    "leg_r"
+  ],
+  "artBottomY": 620,
+  "origin": "top-left",
+  "rig": {
+    "sides": "anatomical; left is on viewer's right in the rest pose",
+    "coordinates": "integer pixels in the shared 768x640 canvas",
+    "composition": "source-over by ascending z, place every layer at (0,0) in rest pose",
+    "bbox": "half-open [left,top,right,bottom] pixel bounds",
+    "pivotApplication": "rotate around each pivot in rest canvas coordinates; propagate parent transforms down the tree"
+  },
+  "reference": {
+    "path": "reference.png",
+    "sha256": "ad649f978116d27a70d8b7e4ef95c6605f7de1349839ef509d85d14fa410dc23"
+  },
+  "assembled": "assembled.png",
+  "sha256Assembled": "d7d212224f117476c10557ef85065825e5f150d630b2f8871edfe66993f8961b",
+  "parts": [
+    {
+      "id": "leg_r",
+      "file": "leg_r.png",
+      "z": 0,
+      "parent": "body",
+      "joint": "right-hip",
+      "pivot": {
+        "x": 297,
+        "y": 463
+      },
+      "bbox": [
+        186,
+        407,
+        375,
+        621
+      ]
+    },
+    {
+      "id": "leg_l",
+      "file": "leg_l.png",
+      "z": 1,
+      "parent": "body",
+      "joint": "left-hip",
+      "pivot": {
+        "x": 472,
+        "y": 460
+      },
+      "bbox": [
+        388,
+        408,
+        581,
+        621
+      ]
+    },
+    {
+      "id": "body",
+      "file": "body.png",
+      "z": 2,
+      "parent": null,
+      "joint": "root",
+      "pivot": {
+        "x": 381,
+        "y": 407
+      },
+      "bbox": [
+        200,
+        208,
+        572,
+        530
+      ]
+    },
+    {
+      "id": "arm_r",
+      "file": "arm_r.png",
+      "z": 3,
+      "parent": "body",
+      "joint": "right-shoulder",
+      "pivot": {
+        "x": 276,
+        "y": 356
+      },
+      "bbox": [
+        71,
+        278,
+        365,
+        592
+      ]
+    },
+    {
+      "id": "arm_l",
+      "file": "arm_l.png",
+      "z": 4,
+      "parent": "body",
+      "joint": "left-shoulder",
+      "pivot": {
+        "x": 492,
+        "y": 356
+      },
+      "bbox": [
+        419,
+        276,
+        710,
+        591
+      ]
+    },
+    {
+      "id": "head",
+      "file": "head.png",
+      "z": 5,
+      "parent": "body",
+      "joint": "neck",
+      "pivot": {
+        "x": 381,
+        "y": 277
+      },
+      "bbox": [
+        224,
+        60,
+        545,
+        325
+      ]
+    }
+  ],
+  "jointOverlapCheck": {
+    "windowPx": 47,
+    "anglesDeg": [
+      -20,
+      0,
+      20
+    ],
+    "jointOverlapsPx": [
+      {
+        "id": "leg_r",
+        "rest": 2137,
+        "rotated": {
+          "-20": 2107,
+          "20": 2201
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "leg_l",
+        "rest": 2209,
+        "rotated": {
+          "-20": 2209,
+          "20": 2209
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "arm_r",
+        "rest": 2209,
+        "rotated": {
+          "-20": 2209,
+          "20": 2209
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "arm_l",
+        "rest": 2209,
+        "rotated": {
+          "-20": 2209,
+          "20": 2209
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "head",
+        "rest": 2209,
+        "rotated": {
+          "-20": 2209,
+          "20": 2209
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      }
+    ]
+  },
+  "imageGen": {
+    "atlas": {
+      "file": "exec-8fd061a9-f2aa-4207-8603-7bd304fe7ef5.png",
+      "grid": [
+        3,
+        2
+      ],
+      "prompt": "Use case: stylized-concept. Independent cutout game art pieces of the exact supplied original chibi 2D fantasy monster. Match colors, face, outfit, bold outline, detail, slightly elevated frontal three-quarter game camera. Draw one complete separate part per cell with short hidden overlap stubs. Exact invisible 3 column by 2 row grid. Each piece entirely inside its equal-sized cell, with generous transparent margins and no touching. Genuine RGBA transparent background, opaque clean parts, no shadow, no text, no full character. Anatomical left is on viewer-right.\nIn reading order:\n1. white-furred chibi yeti head, two navy horns, blue muzzle and dark angry eyes, short neck.\n2. large cream-fur torso with light blue highlights and navy edge, no limbs.\n3. left whole thick long arm and blocky dark navy fist, extends down-right.\n4. right whole thick arm and dark navy fist, extends down-left.\n5. left thick furry leg with dark navy foot.\n6. right thick furry leg with dark navy foot.\nUnlisted cells fully transparent.",
+      "sha256": "fe76d1a8a3e13f96ba43d9bf43bf95e40ead984cb2a67f7ee9d04f44636736d8"
+    }
+  }
+}

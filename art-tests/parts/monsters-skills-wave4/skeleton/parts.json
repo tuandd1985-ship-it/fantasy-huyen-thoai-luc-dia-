@@ -1,0 +1,255 @@
+{
+  "canvas": [
+    768,
+    640
+  ],
+  "baselineY": 620,
+  "groundTouch": [
+    "leg_l",
+    "leg_r"
+  ],
+  "artBottomY": 620,
+  "origin": "top-left",
+  "rig": {
+    "sides": "anatomical; left is on viewer's right in the rest pose",
+    "coordinates": "integer pixels in the shared 768x640 canvas",
+    "composition": "source-over by ascending z, place every layer at (0,0) in rest pose",
+    "bbox": "half-open [left,top,right,bottom] pixel bounds",
+    "pivotApplication": "rotate around each pivot in rest canvas coordinates; propagate parent transforms down the tree"
+  },
+  "reference": {
+    "path": "reference.png",
+    "sha256": "b4bbc7e62ffb41a94ba20d5738a614b33e89666499bd15fabb827cb504413a55"
+  },
+  "assembled": "assembled.png",
+  "sha256Assembled": "e30b220a605815b7f10f67bf9a8f322870094648c233378f7c55634b99d87a2c",
+  "parts": [
+    {
+      "id": "leg_r",
+      "file": "leg_r.png",
+      "z": 0,
+      "parent": "body",
+      "joint": "right-hip",
+      "pivot": {
+        "x": 305,
+        "y": 500
+      },
+      "bbox": [
+        245,
+        458,
+        373,
+        621
+      ]
+    },
+    {
+      "id": "leg_l",
+      "file": "leg_l.png",
+      "z": 1,
+      "parent": "body",
+      "joint": "left-hip",
+      "pivot": {
+        "x": 459,
+        "y": 492
+      },
+      "bbox": [
+        389,
+        458,
+        516,
+        621
+      ]
+    },
+    {
+      "id": "arm_r_upper",
+      "file": "arm_r_upper.png",
+      "z": 2,
+      "parent": "body",
+      "joint": "right-shoulder",
+      "pivot": {
+        "x": 289,
+        "y": 369
+      },
+      "bbox": [
+        174,
+        328,
+        332,
+        459
+      ]
+    },
+    {
+      "id": "arm_l_upper",
+      "file": "arm_l_upper.png",
+      "z": 3,
+      "parent": "body",
+      "joint": "left-shoulder",
+      "pivot": {
+        "x": 481,
+        "y": 371
+      },
+      "bbox": [
+        452,
+        329,
+        599,
+        470
+      ]
+    },
+    {
+      "id": "body",
+      "file": "body.png",
+      "z": 4,
+      "parent": null,
+      "joint": "root",
+      "pivot": {
+        "x": 379,
+        "y": 451
+      },
+      "bbox": [
+        233,
+        312,
+        521,
+        536
+      ]
+    },
+    {
+      "id": "arm_l_forearm",
+      "file": "arm_l_forearm.png",
+      "z": 5,
+      "parent": "arm_l_upper",
+      "joint": "left-elbow",
+      "pivot": {
+        "x": 526,
+        "y": 458
+      },
+      "bbox": [
+        474,
+        426,
+        624,
+        568
+      ]
+    },
+    {
+      "id": "head",
+      "file": "head.png",
+      "z": 6,
+      "parent": "body",
+      "joint": "neck",
+      "pivot": {
+        "x": 378,
+        "y": 336
+      },
+      "bbox": [
+        217,
+        53,
+        542,
+        366
+      ]
+    },
+    {
+      "id": "arm_r_sword",
+      "file": "arm_r_sword.png",
+      "z": 7,
+      "parent": "arm_r_upper",
+      "joint": "right-elbow",
+      "pivot": {
+        "x": 277,
+        "y": 411
+      },
+      "bbox": [
+        61,
+        106,
+        320,
+        550
+      ]
+    }
+  ],
+  "jointOverlapCheck": {
+    "windowPx": 47,
+    "anglesDeg": [
+      -20,
+      0,
+      20
+    ],
+    "jointOverlapsPx": [
+      {
+        "id": "leg_r",
+        "rest": 900,
+        "rotated": {
+          "-20": 904,
+          "20": 897
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "leg_l",
+        "rest": 234,
+        "rotated": {
+          "-20": 219,
+          "20": 321
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "arm_r_upper",
+        "rest": 2172,
+        "rotated": {
+          "-20": 2137,
+          "20": 2204
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "arm_l_upper",
+        "rest": 1693,
+        "rotated": {
+          "-20": 1686,
+          "20": 1647
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "arm_l_forearm",
+        "rest": 873,
+        "rotated": {
+          "-20": 748,
+          "20": 956
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "head",
+        "rest": 2078,
+        "rotated": {
+          "-20": 2116,
+          "20": 2057
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "arm_r_sword",
+        "rest": 1068,
+        "rotated": {
+          "-20": 1068,
+          "20": 1068
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      }
+    ]
+  },
+  "imageGen": {
+    "atlas": {
+      "file": "exec-d2050eb2-ac63-4493-9e68-9eaee66e7494.png",
+      "grid": [
+        3,
+        3
+      ],
+      "prompt": "Use case: stylized-concept. Independent cutout game art pieces of the exact supplied original chibi 2D fantasy monster. Match colors, face, outfit, bold outline, detail, slightly elevated frontal three-quarter game camera. Draw one complete separate part per cell with short hidden overlap stubs. Exact invisible 3 column by 3 row grid. Each piece entirely inside its equal-sized cell, with generous transparent margins and no touching. Genuine RGBA transparent background, opaque clean parts, no shadow, no text, no full character. Anatomical left is on viewer-right.\nIn reading order:\n1. ivory cracked skull, one purple eye, whole head only.\n2. woodland skeleton torso with purple neck scarf, chest straps and belt, no limbs.\n3. anatomical left upper arm bony leather wraps.\n4. right upper arm.\n5. left forearm and empty hand.\n6. right forearm and hand holding the entire battered iron sword pointed diagonally up-left, weapon attached to grip.\n7. left bare-bone shod leg.\n8. right bare-bone shod leg.\nUnlisted cells fully transparent.",
+      "sha256": "907b123ba98e92fe09915828cbd5262da32b80317ebd520b2879f6f944c7a7f0"
+    }
+  }
+}

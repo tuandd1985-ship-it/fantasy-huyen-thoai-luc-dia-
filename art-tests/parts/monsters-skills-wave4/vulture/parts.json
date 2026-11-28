@@ -1,0 +1,171 @@
+{
+  "canvas": [
+    768,
+    640
+  ],
+  "baselineY": 620,
+  "groundTouch": [],
+  "artBottomY": 507,
+  "origin": "top-left",
+  "rig": {
+    "sides": "anatomical; left is on viewer's right in the rest pose",
+    "coordinates": "integer pixels in the shared 768x640 canvas",
+    "composition": "source-over by ascending z, place every layer at (0,0) in rest pose",
+    "bbox": "half-open [left,top,right,bottom] pixel bounds",
+    "pivotApplication": "rotate around each pivot in rest canvas coordinates; propagate parent transforms down the tree"
+  },
+  "reference": {
+    "path": "reference.png",
+    "sha256": "cdd388c0c2be3f421e7eb392841cdf9b3d642be5f25bdaca97959fb6dc00434e"
+  },
+  "assembled": "assembled.png",
+  "sha256Assembled": "82b0f09357bb706a1542618e646b636d7a2fecbc15b1b7249e9b3306f57aba0e",
+  "parts": [
+    {
+      "id": "tail",
+      "file": "tail.png",
+      "z": 0,
+      "parent": "body",
+      "joint": "tail-root",
+      "pivot": {
+        "x": 353,
+        "y": 370
+      },
+      "bbox": [
+        151,
+        331,
+        399,
+        508
+      ]
+    },
+    {
+      "id": "wing_r",
+      "file": "wing_r.png",
+      "z": 1,
+      "parent": "body",
+      "joint": "right-wing-root",
+      "pivot": {
+        "x": 358,
+        "y": 328
+      },
+      "bbox": [
+        26,
+        126,
+        401,
+        453
+      ]
+    },
+    {
+      "id": "wing_l",
+      "file": "wing_l.png",
+      "z": 2,
+      "parent": "body",
+      "joint": "left-wing-root",
+      "pivot": {
+        "x": 430,
+        "y": 327
+      },
+      "bbox": [
+        350,
+        119,
+        743,
+        447
+      ]
+    },
+    {
+      "id": "body",
+      "file": "body.png",
+      "z": 3,
+      "parent": null,
+      "joint": "root",
+      "pivot": {
+        "x": 412,
+        "y": 380
+      },
+      "bbox": [
+        278,
+        230,
+        536,
+        505
+      ]
+    },
+    {
+      "id": "head",
+      "file": "head.png",
+      "z": 4,
+      "parent": "body",
+      "joint": "neck",
+      "pivot": {
+        "x": 466,
+        "y": 330
+      },
+      "bbox": [
+        392,
+        161,
+        652,
+        398
+      ]
+    }
+  ],
+  "jointOverlapCheck": {
+    "windowPx": 47,
+    "anglesDeg": [
+      -20,
+      0,
+      20
+    ],
+    "jointOverlapsPx": [
+      {
+        "id": "tail",
+        "rest": 2209,
+        "rotated": {
+          "-20": 2209,
+          "20": 2184
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "wing_r",
+        "rest": 2029,
+        "rotated": {
+          "-20": 2009,
+          "20": 2070
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "wing_l",
+        "rest": 2209,
+        "rotated": {
+          "-20": 2209,
+          "20": 2209
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "head",
+        "rest": 2209,
+        "rotated": {
+          "-20": 2209,
+          "20": 2209
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      }
+    ]
+  },
+  "imageGen": {
+    "atlas": {
+      "file": "exec-a65f19c4-348f-454e-ad34-2c773df5e26a.png",
+      "grid": [
+        3,
+        2
+      ],
+      "prompt": "Use case: stylized-concept. Independent cutout game art pieces of the exact supplied original chibi 2D fantasy monster. Match colors, face, outfit, bold outline, detail, slightly elevated frontal three-quarter game camera. Draw one complete separate part per cell with short hidden overlap stubs. Exact invisible 3 column by 2 row grid. Each piece entirely inside its equal-sized cell, with generous transparent margins and no touching. Genuine RGBA transparent background, opaque clean parts, no shadow, no text, no full character. Anatomical left is on viewer-right.\nIn reading order:\n1. crimson vulture head with pale hooked beak, white ruff, looking right.\n2. plump cream and rust vulture chest/body with both small talons as same cutout, no head, wings or tail.\n3. one complete long russet and charcoal anatomical left wing extending towards screen right, root on left.\n4. right wing extending toward screen left, root on right.\n5. short rust and charcoal feather tail as one cutout, root on right, extends to left.\nUnlisted cells fully transparent.",
+      "sha256": "66556000ece5de71e04cfa9da037337d6adf5bf86806229d81a5458b888a62a4"
+    }
+  }
+}

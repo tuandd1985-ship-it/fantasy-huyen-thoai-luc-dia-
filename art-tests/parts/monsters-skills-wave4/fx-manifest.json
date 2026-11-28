@@ -1,0 +1,173 @@
+{
+  "effects": [
+    {
+      "id": "poison",
+      "name": "Đạn độc",
+      "group": "projectiles",
+      "sourceCrop": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "png": "fx/poison.png",
+      "webp": "fx/poison.webp"
+    },
+    {
+      "id": "fire",
+      "name": "Cầu lửa",
+      "group": "projectiles",
+      "sourceCrop": [
+        512,
+        0,
+        1024,
+        512
+      ],
+      "png": "fx/fire.png",
+      "webp": "fx/fire.webp"
+    },
+    {
+      "id": "frost",
+      "name": "Đạn băng",
+      "group": "projectiles",
+      "sourceCrop": [
+        1024,
+        0,
+        1536,
+        512
+      ],
+      "png": "fx/frost.png",
+      "webp": "fx/frost.webp"
+    },
+    {
+      "id": "blood",
+      "name": "Huyết cầu",
+      "group": "projectiles",
+      "sourceCrop": [
+        0,
+        512,
+        512,
+        1024
+      ],
+      "png": "fx/blood.png",
+      "webp": "fx/blood.webp"
+    },
+    {
+      "id": "magic",
+      "name": "Đạn bóng",
+      "group": "projectiles",
+      "sourceCrop": [
+        512,
+        512,
+        1024,
+        1024
+      ],
+      "png": "fx/magic.png",
+      "webp": "fx/magic.webp"
+    },
+    {
+      "id": "arrow",
+      "name": "Mũi tên",
+      "group": "projectiles",
+      "sourceCrop": [
+        1024,
+        512,
+        1536,
+        1024
+      ],
+      "png": "fx/arrow.png",
+      "webp": "fx/arrow.webp"
+    },
+    {
+      "id": "heal",
+      "name": "Vòng hồi máu",
+      "group": "bursts",
+      "sourceCrop": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "png": "fx/heal.png",
+      "webp": "fx/heal.webp"
+    },
+    {
+      "id": "warn-ring",
+      "name": "Vòng báo đòn",
+      "group": "bursts",
+      "sourceCrop": [
+        512,
+        0,
+        1024,
+        512
+      ],
+      "png": "fx/warn-ring.png",
+      "webp": "fx/warn-ring.webp"
+    },
+    {
+      "id": "nova",
+      "name": "Nổ lửa",
+      "group": "bursts",
+      "sourceCrop": [
+        1024,
+        0,
+        1536,
+        512
+      ],
+      "png": "fx/nova.png",
+      "webp": "fx/nova.webp"
+    },
+    {
+      "id": "slash",
+      "name": "Vệt chém",
+      "group": "bursts",
+      "sourceCrop": [
+        0,
+        512,
+        512,
+        1024
+      ],
+      "png": "fx/slash.png",
+      "webp": "fx/slash.webp"
+    },
+    {
+      "id": "summon",
+      "name": "Ấn triệu hồi",
+      "group": "bursts",
+      "sourceCrop": [
+        512,
+        512,
+        1024,
+        1024
+      ],
+      "png": "fx/summon.png",
+      "webp": "fx/summon.webp"
+    },
+    {
+      "id": "ice-hit",
+      "name": "Băng vỡ",
+      "group": "bursts",
+      "sourceCrop": [
+        1024,
+        512,
+        1536,
+        1024
+      ],
+      "png": "fx/ice-hit.png",
+      "webp": "fx/ice-hit.webp"
+    }
+  ],
+  "sourceAtlases": {
+    "projectiles": {
+      "file": "exec-80dfbae9-221e-40cb-9415-a774d377970c.png",
+      "prompt": "Use case: stylized-concept. Game-ready 2D chibi fantasy combat VFX atlas. Render six discrete full color hand-drawn game effects centered in a strictly regular invisible 3-column by 2-row grid, each fits completely inside its own cell with generous 10% transparent gutters. True RGBA transparency and luminous accents isolated from the canvas, dark saturated contrast at small size, simple large silhouettes no background shadows, no text, no characters, no marks or frames, no UI. Slightly elevated game camera.\nIn reading order:\n1. one lime-green and purple poison glob with broad damp taper, points to screen-right, a few attached droplets, no bottle.\n2. one amber and crimson flame orb with compact hot-white center and attached long fire trail to left, points right.\n3. one cyan frost icicle shard with short wispy trail to left, sharp readable silhouette, points right.\n4. one blood-red ruby projectile like a compact red liquid sphere with one comet tail to left, points to right.\n5. one glowing violet and off-white shadow magic bolt with compact irregular shard and trail to left, points right.\n6. one straight wooden brown fletched arrow with pale steel point to the right.\nUnlisted cells fully transparent.",
+      "sha256": "cdf31c47d671247ed186558c6d35efc942066e586c3e5d7ca27ce60bbb9a68a7"
+    },
+    "bursts": {
+      "file": "exec-130ed423-6406-4a80-9009-4fef9b9552d7.png",
+      "prompt": "Use case: stylized-concept. Game-ready 2D chibi fantasy combat VFX atlas. Render six discrete full color hand-drawn game effects centered in a strictly regular invisible 3-column by 2-row grid, each fits completely inside its own cell with generous 10% transparent gutters. True RGBA transparency and luminous accents isolated from the canvas, dark saturated contrast at small size, simple large silhouettes no background shadows, no text, no characters, no marks or frames, no UI. Slightly elevated game camera.\nIn reading order:\n1. one readable low flat top-down oval ring of saturated mint-green light with two leaf-like wisps, softly luminous center clean alpha hole, for a heal cast.\n2. a low flat oval of warm translucent orange telegraph edge with light tick spikes and empty center readable on dark map, screen horizontal.\n3. a thick fiery amber orange impact ring throwing out five short warm tongues from an oval impact center.\n4. one claw impact with three curved pale ivory slash streaks, warm bright core, compact sideways movement.\n5. a violet and magenta purple summoning sigil ring with 3 small wisps pointing upwards, transparent interior.\n6. spiky cyan and white frost contact splash made of several sharp ice fragments at ground level, compact.\nUnlisted cells fully transparent.",
+      "sha256": "ad8111592b2ec5cde93c4d8c4cb7a11adb67e99df791e86150151ccdcfb2b290"
+    }
+  },
+  "source": "ImageGen"
+}

@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Thử kỹ năng quái · Huyền Thoại Lục Địa</title>
+<link rel="stylesheet" href="preview.css">
+<script defer src="skill-data.js"></script>
+<script defer src="rig-data.js"></script>
+<script defer src="preview.js"></script>
+</head>
+<body>
+<main>
+  <h1>Thử kỹ năng quái</h1>
+  <div class="controls">
+    <label>Kỹ năng <select id="skill"></select></label>
+    <button type="button" id="cast" disabled>Thử đòn</button>
+    <label class="loop"><input type="checkbox" id="loop"> Tự phát lại</label>
+  </div>
+  <canvas id="scene" width="960" height="540" role="img" aria-label="Cảnh thử kỹ năng quái"></canvas>
+  <p id="phase" role="status">Đang nạp ảnh…</p>
+  <p id="detail"></p>
+</main>
+</body>
+</html>

@@ -1,0 +1,363 @@
+{
+  "canvas": [
+    768,
+    640
+  ],
+  "baselineY": 620,
+  "groundTouch": [
+    "leg_r_1",
+    "leg_l_1"
+  ],
+  "artBottomY": 620,
+  "origin": "top-left",
+  "rig": {
+    "sides": "anatomical; left is on viewer's right in the rest pose",
+    "coordinates": "integer pixels in the shared 768x640 canvas",
+    "composition": "source-over by ascending z, place every layer at (0,0) in rest pose",
+    "bbox": "half-open [left,top,right,bottom] pixel bounds",
+    "pivotApplication": "rotate around each pivot in rest canvas coordinates; propagate parent transforms down the tree"
+  },
+  "reference": {
+    "path": "reference.png",
+    "sha256": "cf13e836259dde38fb2fe4b74030eaa024cf33e32c4691eb7b8e03d7efc9b546"
+  },
+  "assembled": "assembled.png",
+  "sha256Assembled": "939ce4722b76e253cf0f8036759e1f72e36d4a86a2066029f7cad6fcaabe5fad",
+  "parts": [
+    {
+      "id": "tail",
+      "file": "tail.png",
+      "z": 0,
+      "parent": "body",
+      "joint": "tail-root",
+      "pivot": {
+        "x": 363,
+        "y": 351
+      },
+      "bbox": [
+        262,
+        31,
+        551,
+        389
+      ]
+    },
+    {
+      "id": "leg_r_4",
+      "file": "leg_r_4.png",
+      "z": 1,
+      "parent": "body",
+      "joint": "leg_r_4",
+      "pivot": {
+        "x": 349,
+        "y": 340
+      },
+      "bbox": [
+        41,
+        264,
+        431,
+        493
+      ]
+    },
+    {
+      "id": "leg_l_4",
+      "file": "leg_l_4.png",
+      "z": 2,
+      "parent": "body",
+      "joint": "leg_l_4",
+      "pivot": {
+        "x": 407,
+        "y": 340
+      },
+      "bbox": [
+        335,
+        264,
+        725,
+        493
+      ]
+    },
+    {
+      "id": "leg_r_3",
+      "file": "leg_r_3.png",
+      "z": 3,
+      "parent": "body",
+      "joint": "leg_r_3",
+      "pivot": {
+        "x": 355,
+        "y": 373
+      },
+      "bbox": [
+        53,
+        302,
+        437,
+        538
+      ]
+    },
+    {
+      "id": "leg_l_3",
+      "file": "leg_l_3.png",
+      "z": 4,
+      "parent": "body",
+      "joint": "leg_l_3",
+      "pivot": {
+        "x": 412,
+        "y": 375
+      },
+      "bbox": [
+        329,
+        305,
+        713,
+        538
+      ]
+    },
+    {
+      "id": "leg_r_2",
+      "file": "leg_r_2.png",
+      "z": 5,
+      "parent": "body",
+      "joint": "leg_r_2",
+      "pivot": {
+        "x": 360,
+        "y": 402
+      },
+      "bbox": [
+        63,
+        338,
+        435,
+        583
+      ]
+    },
+    {
+      "id": "leg_l_2",
+      "file": "leg_l_2.png",
+      "z": 6,
+      "parent": "body",
+      "joint": "leg_l_2",
+      "pivot": {
+        "x": 409,
+        "y": 402
+      },
+      "bbox": [
+        329,
+        338,
+        700,
+        584
+      ]
+    },
+    {
+      "id": "leg_r_1",
+      "file": "leg_r_1.png",
+      "z": 7,
+      "parent": "body",
+      "joint": "leg_r_1",
+      "pivot": {
+        "x": 371,
+        "y": 425
+      },
+      "bbox": [
+        91,
+        370,
+        440,
+        621
+      ]
+    },
+    {
+      "id": "leg_l_1",
+      "file": "leg_l_1.png",
+      "z": 8,
+      "parent": "body",
+      "joint": "leg_l_1",
+      "pivot": {
+        "x": 404,
+        "y": 425
+      },
+      "bbox": [
+        329,
+        370,
+        677,
+        621
+      ]
+    },
+    {
+      "id": "body",
+      "file": "body.png",
+      "z": 9,
+      "parent": null,
+      "joint": "root",
+      "pivot": {
+        "x": 384,
+        "y": 428
+      },
+      "bbox": [
+        216,
+        248,
+        556,
+        554
+      ]
+    },
+    {
+      "id": "claw_r",
+      "file": "claw_r.png",
+      "z": 10,
+      "parent": "body",
+      "joint": "right-claw",
+      "pivot": {
+        "x": 271,
+        "y": 480
+      },
+      "bbox": [
+        70,
+        421,
+        342,
+        614
+      ]
+    },
+    {
+      "id": "claw_l",
+      "file": "claw_l.png",
+      "z": 11,
+      "parent": "body",
+      "joint": "left-claw",
+      "pivot": {
+        "x": 486,
+        "y": 474
+      },
+      "bbox": [
+        426,
+        422,
+        696,
+        615
+      ]
+    }
+  ],
+  "jointOverlapCheck": {
+    "windowPx": 47,
+    "anglesDeg": [
+      -20,
+      0,
+      20
+    ],
+    "jointOverlapsPx": [
+      {
+        "id": "tail",
+        "rest": 2209,
+        "rotated": {
+          "-20": 2208,
+          "20": 2209
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "leg_r_4",
+        "rest": 2209,
+        "rotated": {
+          "-20": 2209,
+          "20": 2209
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "leg_l_4",
+        "rest": 2209,
+        "rotated": {
+          "-20": 2209,
+          "20": 2209
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "leg_r_3",
+        "rest": 2209,
+        "rotated": {
+          "-20": 2209,
+          "20": 2209
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "leg_l_3",
+        "rest": 2209,
+        "rotated": {
+          "-20": 2209,
+          "20": 2209
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "leg_r_2",
+        "rest": 2209,
+        "rotated": {
+          "-20": 2209,
+          "20": 2209
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "leg_l_2",
+        "rest": 2209,
+        "rotated": {
+          "-20": 2209,
+          "20": 2209
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "leg_r_1",
+        "rest": 2209,
+        "rotated": {
+          "-20": 2209,
+          "20": 2209
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "leg_l_1",
+        "rest": 2209,
+        "rotated": {
+          "-20": 2209,
+          "20": 2209
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "claw_r",
+        "rest": 1722,
+        "rotated": {
+          "-20": 1654,
+          "20": 1735
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "claw_l",
+        "rest": 303,
+        "rotated": {
+          "-20": 287,
+          "20": 438
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      }
+    ]
+  },
+  "imageGen": {
+    "atlas": {
+      "file": "exec-1cca3d6e-01cb-4f72-b978-84057c934926.png",
+      "grid": [
+        3,
+        2
+      ],
+      "prompt": "Use case: stylized-concept. Independent cutout game art pieces of the exact supplied original chibi 2D fantasy monster. Match colors, face, outfit, bold outline, detail, slightly elevated frontal three-quarter game camera. Draw one complete separate part per cell with short hidden overlap stubs. Exact invisible 3 column by 2 row grid. Each piece entirely inside its equal-sized cell, with generous transparent margins and no touching. Genuine RGBA transparent background, opaque clean parts, no shadow, no text, no full character. Anatomical left is on viewer-right.\nIn reading order:\n1. broad low chibi amber scorpion central carapace and face, two black eyes, no claws, legs or tail.\n2. anatomical left whole gold pincer and short arm extending down-right, joint root at screen left.\n3. right whole pincer and short arm extending down-left, joint root at screen right.\n4. isolated whole curled segmented amber tail rising with iridescent opal sharp stinger, thick root at bottom.\n5. single left gold-brown articulated walking leg extending to screen right.\n6. single right gold-brown articulated walking leg extending to screen left.\nUnlisted cells fully transparent.",
+      "sha256": "fbfe6bb3ee988df9aab9befd37ce9d26fd7add17c827600929d7dd4dd0490846"
+    }
+  }
+}

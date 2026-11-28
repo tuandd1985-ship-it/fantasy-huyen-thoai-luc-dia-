@@ -1,0 +1,228 @@
+{
+  "canvas": [
+    768,
+    640
+  ],
+  "baselineY": 620,
+  "groundTouch": [
+    "leg_l",
+    "leg_r"
+  ],
+  "artBottomY": 620,
+  "origin": "top-left",
+  "rig": {
+    "sides": "anatomical; left is on viewer's right in the rest pose",
+    "coordinates": "integer pixels in the shared 768x640 canvas",
+    "composition": "source-over by ascending z, place every layer at (0,0) in rest pose",
+    "bbox": "half-open [left,top,right,bottom] pixel bounds",
+    "pivotApplication": "rotate around each pivot in rest canvas coordinates; propagate parent transforms down the tree"
+  },
+  "reference": {
+    "path": "reference.png",
+    "sha256": "bd0b4dce06cdef47786bf5ae0028aca36d72d104a5d2b5fbf654e7ace91c3e65"
+  },
+  "assembled": "assembled.png",
+  "sha256Assembled": "4997ea9a186ef6e7041ddf1e42f5608a440344df6df61aa51356182b31d4f967",
+  "parts": [
+    {
+      "id": "tail",
+      "file": "tail.png",
+      "z": 0,
+      "parent": "body",
+      "joint": "tail-root",
+      "pivot": {
+        "x": 301,
+        "y": 481
+      },
+      "bbox": [
+        44,
+        276,
+        354,
+        541
+      ]
+    },
+    {
+      "id": "leg_r",
+      "file": "leg_r.png",
+      "z": 1,
+      "parent": "body",
+      "joint": "right-hip",
+      "pivot": {
+        "x": 314,
+        "y": 465
+      },
+      "bbox": [
+        191,
+        405,
+        371,
+        621
+      ]
+    },
+    {
+      "id": "leg_l",
+      "file": "leg_l.png",
+      "z": 2,
+      "parent": "body",
+      "joint": "left-hip",
+      "pivot": {
+        "x": 462,
+        "y": 458
+      },
+      "bbox": [
+        428,
+        406,
+        607,
+        621
+      ]
+    },
+    {
+      "id": "body",
+      "file": "body.png",
+      "z": 3,
+      "parent": null,
+      "joint": "root",
+      "pivot": {
+        "x": 389,
+        "y": 436
+      },
+      "bbox": [
+        232,
+        269,
+        527,
+        521
+      ]
+    },
+    {
+      "id": "arm_r",
+      "file": "arm_r.png",
+      "z": 4,
+      "parent": "body",
+      "joint": "right-shoulder",
+      "pivot": {
+        "x": 310,
+        "y": 357
+      },
+      "bbox": [
+        154,
+        324,
+        382,
+        514
+      ]
+    },
+    {
+      "id": "arm_l",
+      "file": "arm_l.png",
+      "z": 5,
+      "parent": "body",
+      "joint": "left-shoulder",
+      "pivot": {
+        "x": 469,
+        "y": 362
+      },
+      "bbox": [
+        430,
+        321,
+        647,
+        509
+      ]
+    },
+    {
+      "id": "head",
+      "file": "head.png",
+      "z": 6,
+      "parent": "body",
+      "joint": "neck",
+      "pivot": {
+        "x": 423,
+        "y": 331
+      },
+      "bbox": [
+        267,
+        103,
+        595,
+        386
+      ]
+    }
+  ],
+  "jointOverlapCheck": {
+    "windowPx": 47,
+    "anglesDeg": [
+      -20,
+      0,
+      20
+    ],
+    "jointOverlapsPx": [
+      {
+        "id": "tail",
+        "rest": 1917,
+        "rotated": {
+          "-20": 1911,
+          "20": 1902
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "leg_r",
+        "rest": 2184,
+        "rotated": {
+          "-20": 2192,
+          "20": 2207
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "leg_l",
+        "rest": 1810,
+        "rotated": {
+          "-20": 1834,
+          "20": 1797
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "arm_r",
+        "rest": 1610,
+        "rotated": {
+          "-20": 1654,
+          "20": 1595
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "arm_l",
+        "rest": 2203,
+        "rotated": {
+          "-20": 2209,
+          "20": 2186
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      },
+      {
+        "id": "head",
+        "rest": 2209,
+        "rotated": {
+          "-20": 2209,
+          "20": 2209
+        },
+        "pivotInChild": true,
+        "pivotInParent": true
+      }
+    ]
+  },
+  "imageGen": {
+    "atlas": {
+      "file": "exec-a8d4aa07-665f-4b9a-831a-8684fce7c51b.png",
+      "grid": [
+        3,
+        3
+      ],
+      "prompt": "Use case: stylized-concept. Independent cutout game art pieces of the exact supplied original chibi 2D fantasy monster. Match colors, face, outfit, bold outline, detail, slightly elevated frontal three-quarter game camera. Draw one complete separate part per cell with short hidden overlap stubs. Exact invisible 3 column by 3 row grid. Each piece entirely inside its equal-sized cell, with generous transparent margins and no touching. Genuine RGBA transparent background, opaque clean parts, no shadow, no text, no full character. Anatomical left is on viewer-right.\nIn reading order:\n1. green-teal lizard head with golden dorsal frill, golden throat and teeth, facing three-quarter right.\n2. reptile torso with ochre front, no limbs or tail.\n3. long curving teal tail isolated, attach at its right root.\n4. left clawed front arm extending down-right.\n5. right clawed front arm extending down-left.\n6. left reptile leg and foot bent.\n7. right reptile leg and foot bent.\nUnlisted cells fully transparent.",
+      "sha256": "e9bd851e7c6e5a155933d487d70ed91e86a7c330f60cae87e25e6a0092461c7c"
+    }
+  }
+}
