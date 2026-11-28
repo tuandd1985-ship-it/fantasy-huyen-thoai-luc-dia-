@@ -1,0 +1,274 @@
+{
+ "prefix": "fireDragon",
+ "native": true,
+ "fit_scale": 0.95,
+ "actions": {
+  "idle": {
+   "loop": true,
+   "frames_ms": [
+    260,
+    260,
+    260,
+    260
+   ],
+   "hit_frame": null,
+   "keys": [
+    {
+     "t": 0,
+     "rot": {
+      "wing_r": 22,
+      "wing_l": -22,
+      "tail": 6,
+      "head": -2
+     },
+     "root": [
+      0,
+      0
+     ]
+    },
+    {
+     "t": 260,
+     "rot": {
+      "tail": 0
+     },
+     "root": [
+      0,
+      -3
+     ]
+    },
+    {
+     "t": 520,
+     "rot": {
+      "wing_r": -14,
+      "wing_l": 14,
+      "tail": -6,
+      "head": 2
+     },
+     "root": [
+      0,
+      0
+     ]
+    },
+    {
+     "t": 780,
+     "rot": {
+      "tail": 0
+     },
+     "root": [
+      0,
+      -3
+     ]
+    },
+    {
+     "t": 1040,
+     "rot": {
+      "wing_r": 22,
+      "wing_l": -22,
+      "tail": 6,
+      "head": -2
+     },
+     "root": [
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  "move": {
+   "loop": true,
+   "frames_ms": [
+    110,
+    110,
+    110,
+    110
+   ],
+   "hit_frame": null,
+   "keys": [
+    {
+     "t": 0,
+     "rot": {
+      "wing_r": 22,
+      "wing_l": -22,
+      "foreleg_r": 14,
+      "foreleg_l": -14,
+      "hindleg_r": -12,
+      "hindleg_l": 12,
+      "tail": 10
+     },
+     "root": [
+      0,
+      0
+     ]
+    },
+    {
+     "t": 110,
+     "rot": {
+      "tail": 0
+     },
+     "root": [
+      0,
+      -6
+     ]
+    },
+    {
+     "t": 220,
+     "rot": {
+      "wing_r": -14,
+      "wing_l": 14,
+      "foreleg_r": -14,
+      "foreleg_l": 14,
+      "hindleg_r": 12,
+      "hindleg_l": -12,
+      "tail": -10
+     },
+     "root": [
+      0,
+      0
+     ]
+    },
+    {
+     "t": 330,
+     "rot": {
+      "tail": 0
+     },
+     "root": [
+      0,
+      -6
+     ]
+    },
+    {
+     "t": 440,
+     "rot": {
+      "wing_r": 22,
+      "wing_l": -22,
+      "foreleg_r": 14,
+      "foreleg_l": -14,
+      "hindleg_r": -12,
+      "hindleg_l": 12,
+      "tail": 10
+     },
+     "root": [
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  "attack": {
+   "loop": false,
+   "frames_ms": [
+    100,
+    110,
+    70,
+    160,
+    140,
+    120
+   ],
+   "hit_frame": 3,
+   "keys": [
+    {
+     "t": 0,
+     "rot": {}
+    },
+    {
+     "t": 200,
+     "rot": {
+      "wing_r": 34,
+      "wing_l": -34,
+      "head": -12,
+      "tail": 14,
+      "body": -3
+     },
+     "root": [
+      -8,
+      -10
+     ]
+    },
+    {
+     "t": 330,
+     "rot": {
+      "wing_r": -18,
+      "wing_l": 18,
+      "head": 14,
+      "tail": -10,
+      "body": 4,
+      "foreleg_r": -10,
+      "foreleg_l": 10
+     },
+     "root": [
+      14,
+      6
+     ]
+    },
+    {
+     "t": 520,
+     "rot": {
+      "wing_r": -10,
+      "wing_l": 10,
+      "head": 10,
+      "body": 3
+     },
+     "root": [
+      12,
+      4
+     ]
+    },
+    {
+     "t": 700,
+     "rot": {}
+    }
+   ]
+  },
+  "hurt": {
+   "loop": false,
+   "frames_ms": [
+    80,
+    120,
+    120
+   ],
+   "hit_frame": null,
+   "keys": [
+    {
+     "t": 0,
+     "rot": {}
+    },
+    {
+     "t": 80,
+     "rot": {
+      "head": -14,
+      "wing_r": 24,
+      "wing_l": -24,
+      "tail": 12
+     },
+     "root": [
+      -14,
+      -4
+     ]
+    },
+    {
+     "t": 200,
+     "rot": {
+      "head": -5.6000000000000005,
+      "wing_r": 9.600000000000001,
+      "wing_l": -9.600000000000001,
+      "tail": 4.800000000000001
+     },
+     "root": [
+      -6,
+      0
+     ]
+    },
+    {
+     "t": 320,
+     "rot": {}
+    }
+   ]
+  }
+ },
+ "ground_parts": [
+  "foreleg_l",
+  "foreleg_r",
+  "hindleg_l",
+  "hindleg_r"
+ ]
+}
